@@ -131,18 +131,22 @@
         <meta-data
             android:name="EGLS_APP_ID"
             android:value="\00MY_APP_ID" />
+
         <!-- 替换"MY_SERVER_TYPE"字样为对应的服务类别码 -->
         <meta-data
             android:name="EGLS_SERVER_TYPE"
             android:value="MY_SERVER_TYPE" />
+
         <!-- 替换"MY_PAY_CHANNEL"字样为对应的支付渠道码 -->
         <meta-data
             android:name="EGLS_PAY_CHANNEL"
             android:value="MY_PAY_CHANNEL" />
+
         <!-- 当没有特殊要求时，“EGLS_PAY_IS_SANDBOX”的参数值为"false"即可 -->
         <meta-data
             android:name="EGLS_PAY_IS_SANDBOX"
             android:value="false" />
+
         <!-- 当没有特殊要求时，“EGLS_PAY_OTHER_PARAM”的参数值为""即可 -->
         <meta-data
             android:name="EGLS_PAY_OTHER_PARAM"
@@ -254,6 +258,16 @@
             android:value="MY_PUBLIC_KEY" />
         -->
         <!-- Google Play end -->
+
+
+        <!-- Facebook begin -->
+           <!--如果游戏需要开启Facebook的“USER_FRIEND”权限，请打开以下配置 -->
+        <!--
+        <meta-data
+                android:name="CNANNEL_PERMISSION_USER_FRIEND"
+                android:value="true"/>
+        -->
+        <!-- Facebook end  -->
 
 
         <!-- Mycard begin -->
