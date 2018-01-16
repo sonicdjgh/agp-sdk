@@ -36,8 +36,8 @@ dependencies {
 
 
     // kr begin
-    compile files('libs/kr/IgawAdbrix_v4.4.0a.jar');
-    compile files('libs/kr/IgawCommon_v4.4.0a.jar');
-    compile files('libs/kr/IgawLiveOps_v1.3.6a_thirdparty.jar');
+    // compile files('libs/kr/IgawAdbrix_v4.4.0a.jar');
+    // compile files('libs/kr/IgawCommon_v4.4.0a.jar');
+    // compile files('libs/kr/IgawLiveOps_v1.3.6a_thirdparty.jar');
     // kr end
 }
