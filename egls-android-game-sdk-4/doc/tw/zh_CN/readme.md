@@ -46,7 +46,7 @@ minSdkVersion = 14，targetSdkVersion >= 23
 ### 4. AndroidManifest.xml文件配置
 #### 4.1 AGP Permission 配置
 ```Xml
-<!-- EGLS Android Game Platform SDK begin -->
+<!-- AGP begin -->
 <!-- AppsFlyer begin -->
 <!-- AppsFlyer为港台地区所使用的内嵌统计功能 -->
 <uses-permission android:name="android.permission.INTERNET" />
@@ -54,11 +54,11 @@ minSdkVersion = 14，targetSdkVersion >= 23
 <!-- 如果现在接入的安卓包是针对除Google Play以外的其他应用商店，那么此权限一定需要声明，否则要删除该权限声明 -->
 <!-- <uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
 <!-- AppsFlyer end -->
-<!-- EGLS Android Game Platform SDK end -->
+<!-- AGP end -->
 ```
 #### 4.2 AGS Permission 配置
 ```Xml
-<!-- EGLS Android Game Socialization SDK begin -->
+<!-- AGS begin -->
 <!-- Google Play begin -->
 <!-- 如果使用Google Play支付功能，请打开以下配置 -->
 <!--
@@ -99,7 +99,7 @@ minSdkVersion = 14，targetSdkVersion >= 23
 <uses-feature android:name="android.hardware.camera.autofocus" />
 -->
 <!-- Mycard end -->
-<!-- EGLS Android Game Socialization SDK end -->
+<!-- AGS end -->
 ```
 请注意：以上 Permission 配置中只打开了SDK基础功能相关的配置，如果使用到其他功能，请打开对应的 Permission 配置！
 #### 4.3 Application相关配置
