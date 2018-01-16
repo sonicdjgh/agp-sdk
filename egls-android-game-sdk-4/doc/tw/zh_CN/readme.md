@@ -13,8 +13,19 @@
 在Facebook后台生成的应用id。
 ### 3. 环境搭建
 #### 3.1 依赖关系
-![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-eclipse/blob/master/res/tw/S4TW000.png)<br/>
-如上图所示：假设Demo为SDK对接完毕的安卓游戏工程，那么Demo引入“egls-agp-sdk-release”（以下简称AGP）；而AGP引入“egls-ags-sdk-release”（以下简称为AGS）；而AGS要引入“google-android-gms-sdk-release-11.0.1”。
+![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/tw/S4TW000.png)<br/>
+如上图所示：假设Demo为SDK对接完毕的安卓游戏工程，那么Demo引入Module“AGP”，则需要在Demo中的“build.gradle”里添加如下配置：
+```gradle
+repositories {
+    flatDir {
+        dirs project(':AGS').file('libs/kr')
+    }
+}
+
+dependencies {
+    compile project(':AGP')
+}
+```
 #### 3.2 AGP lib 选择
 针对于在港台地区发行的游戏，我们只需要如下图红框所示的lib文件：<br/>
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-eclipse/blob/master/res/tw/S4TW001.png)
