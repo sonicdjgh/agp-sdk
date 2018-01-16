@@ -5,7 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/AGP/AGP.iml" filepath="$PROJECT_DIR$/AGP/AGP.iml" />
       <module fileurl="file://$PROJECT_DIR$/AGS/AGS.iml" filepath="$PROJECT_DIR$/AGS/AGS.iml" />
       <module fileurl="file://$PROJECT_DIR$/EglsSdkDemo/EglsSdkDemo.iml" filepath="$PROJECT_DIR$/EglsSdkDemo/EglsSdkDemo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/egls-android-game-sdk-4.iml" filepath="$PROJECT_DIR$/egls-android-game-sdk-4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sdk.iml" filepath="$PROJECT_DIR$/sdk.iml" />
     </modules>
   </component>
 </project>
