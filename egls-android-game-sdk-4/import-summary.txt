@@ -1,0 +1,129 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Manifest Merging:
+-----------------
+Your project uses libraries that provide manifests, and your Eclipse
+project did not explicitly turn on manifest merging. In Android Gradle
+projects, manifests are always merged (meaning that contents from your
+libraries' manifests will be merged into the app manifest. If you had
+manually copied contents from library manifests into your app manifest
+you may need to remove these for the app to build correctly.
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+From egls-agp-sdk-demo-4.x.x:
+* ic_launcher-web.png
+* proguard-project.txt
+From egls-agp-sdk-release-4.x.x:
+* build.gradle
+* libs-kr\
+* libs-kr\IgawAdbrix_v4.4.0a.jar
+* libs-kr\IgawCommon_v4.4.0a.jar
+* libs-kr\IgawLiveOps_v1.3.6a_thirdparty.jar
+* libs-tw\
+* libs-tw\AF-Android-SDK-4.6.0.jar
+* libs-us\
+* libs-us\AF-Android-SDK-4.6.0.jar
+* proguard-project.txt
+From egls-ags-sdk-release-4.x.x:
+* libs-cn\
+* libs-cn\MobileSecSdk.jar
+* libs-cn\alipaysdk.jar
+* libs-cn\egls-ags-support-3.7.5.jar
+* libs-cn\open_sdk_r5781_lite.jar
+* libs-cn\org.apache.http.legacy.jar
+* libs-cn\utdid4all-1.0.3.jar
+* libs-cn\wechat-sdk-android-with-mta.jar
+* libs-kr\
+* libs-kr\gson-2.8.0.jar
+* libs-kr\iap_plugin_v16.03.00_20161123.jar
+* libs-tw\
+* libs-tw\MyCardPaySDK.jar
+* libs-tw\clientsdk_product_v2.jar
+* libs-xx\
+* libs-xx\egls-twitter-android-sdk-4.0.4.8.jar
+* libs-xx\twitter4j-core-4.0.4.jar
+* proguard-project.txt
+From naver-android-cafe-sdk-release-2.4.3:
+* .gitignore
+
+Replaced Libraries with Dependencies:
+-------------------------------------
+The importer recognized the following library projects as third party
+libraries and replaced them with Gradle dependencies instead. This has
+the advantage that more explicit version information is known, and the
+libraries can be updated automatically. However, it is possible that
+the source files in your project were of an older version than the
+dependency we picked, which could render the project not compileable.
+You can disable the library replacement in the import wizard and try
+again:
+
+google-android-gms-sdk-release-11.0.1 => [com.google.android.gms:play-services:+]
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+In naver-android-cafe-sdk-release-2.4.3:
+* AndroidManifest.xml => naverandroidcafesdkrelease243\src\main\AndroidManifest.xml
+* assets\ => naverandroidcafesdkrelease243\src\main\assets
+* libs\3rdparty_login_library_android_4.1.4.jar => naverandroidcafesdkrelease243\libs\3rdparty_login_library_android_4.1.4.jar
+* libs\api-gateway-hmac-2.3.1.jar => naverandroidcafesdkrelease243\libs\api-gateway-hmac-2.3.1.jar
+* libs\cafeSdk-2.4.3.jar => naverandroidcafesdkrelease243\libs\cafeSdk-2.4.3.jar
+* libs\customtabs-23.1.0.jar => naverandroidcafesdkrelease243\libs\customtabs-23.1.0.jar
+* libs\glide-3.7.0.jar => naverandroidcafesdkrelease243\libs\glide-3.7.0.jar
+* libs\library-1.0.0.jar => naverandroidcafesdkrelease243\libs\library-1.0.0.jar
+* libs\otto-1.3.8.jar => naverandroidcafesdkrelease243\libs\otto-1.3.8.jar
+* libs\volleyer-2.0.1.jar => naverandroidcafesdkrelease243\libs\volleyer-2.0.1.jar
+* lint.xml => naverandroidcafesdkrelease243\lint.xml
+* res\ => naverandroidcafesdkrelease243\src\main\res\
+* src\ => naverandroidcafesdkrelease243\src\main\java
+In egls-ags-sdk-release-4.x.x:
+* AndroidManifest.xml => eglsagssdkrelease4xx\src\main\AndroidManifest.xml
+* assets\ => eglsagssdkrelease4xx\src\main\assets
+* libs\android-support-v4-v21.jar => eglsagssdkrelease4xx\libs\android-support-v4-v21.jar
+* libs\armeabi-v7a\libweibosdkcore.so => eglsagssdkrelease4xx\src\main\jniLibs\armeabi-v7a\libweibosdkcore.so
+* libs\bolts-android-1.1.2.jar => eglsagssdkrelease4xx\libs\bolts-android-1.1.2.jar
+* libs\egls-ags-sdk-4.1.0.jar => eglsagssdkrelease4xx\libs\egls-ags-sdk-4.1.0.jar
+* libs\facebook-android-sdk-4.5.0.jar => eglsagssdkrelease4xx\libs\facebook-android-sdk-4.5.0.jar
+* libs\openDefault-1.0.0-openDefaultRelease.jar => eglsagssdkrelease4xx\libs\openDefault-1.0.0-openDefaultRelease.jar
+* libs\x86\libweibosdkcore.so => eglsagssdkrelease4xx\src\main\jniLibs\x86\libweibosdkcore.so
+* lint.xml => eglsagssdkrelease4xx\lint.xml
+* res\ => eglsagssdkrelease4xx\src\main\res\
+* src\ => eglsagssdkrelease4xx\src\main\java
+* src\com\android\vending\billing\IInAppBillingService.aidl => eglsagssdkrelease4xx\src\main\aidl\com\android\vending\billing\IInAppBillingService.aidl
+In egls-agp-sdk-release-4.x.x:
+* AndroidManifest.xml => eglsagpsdkrelease4xx\src\main\AndroidManifest.xml
+* assets\ => eglsagpsdkrelease4xx\src\main\assets
+* libs\armeabi-v7a\libeglssdk.so => eglsagpsdkrelease4xx\src\main\jniLibs\armeabi-v7a\libeglssdk.so
+* libs\egls-agp-sdk-4.1.0.jar => eglsagpsdkrelease4xx\libs\egls-agp-sdk-4.1.0.jar
+* libs\x86\libeglssdk.so => eglsagpsdkrelease4xx\src\main\jniLibs\x86\libeglssdk.so
+* lint.xml => eglsagpsdkrelease4xx\lint.xml
+* res\ => eglsagpsdkrelease4xx\src\main\res\
+* src\ => eglsagpsdkrelease4xx\src\main\java
+In egls-agp-sdk-demo-4.x.x:
+* AndroidManifest.xml => eglsagpsdkdemo4xx\src\main\AndroidManifest.xml
+* assets\ => eglsagpsdkdemo4xx\src\main\assets
+* res\ => eglsagpsdkdemo4xx\src\main\res\
+* src\ => eglsagpsdkdemo4xx\src\main\java
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)

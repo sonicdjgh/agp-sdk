@@ -1,0 +1,179 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.eglssdk.agp.lib">
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="23" />
+
+    <supports-screens
+    android:anyDensity="true"
+    android:largeScreens="true"
+    android:normalScreens="true"
+    android:resizeable="false"
+    android:smallScreens="true"
+    android:xlargeScreens="true" />
+
+    <!-- EGLS Android Game Platform SDK begin -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <!-- EGLS Android Game Platform SDK end -->
+
+    <application>
+        <!-- EGLS Android Game Platform SDK begin -->
+		<activity
+            android:name="com.egls.platform.account.AGPIndexActivity"
+            android:configChanges="locale|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
+            android:windowBackground="@null"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.egls.platform.account.AGPAlreadyLoginActivity"
+            android:configChanges="locale|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
+            android:windowBackground="@null"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.egls.platform.account.AGPAgreementActivity"
+            android:configChanges="locale|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
+            android:windowBackground="@null"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.egls.platform.account.AGPIntelligenceActivity"
+            android:configChanges="locale|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
+            android:windowBackground="@null"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.egls.platform.account.AGPNewAccountActivity"
+            android:configChanges="locale|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
+            android:windowBackground="@null"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.egls.platform.account.AGPAccountLoginActivity"
+            android:configChanges="locale|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
+            android:windowBackground="@null"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.egls.platform.account.AGPForgetActivity"
+            android:configChanges="locale|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
+            android:windowBackground="@null"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.egls.platform.account.AGPFindActivity"
+            android:configChanges="locale|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
+            android:windowBackground="@null"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.egls.platform.usercenter.AGPUserCenterActivity"
+            android:configChanges="locale|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
+            android:windowBackground="@null"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.egls.platform.usercenter.AGPAuthenticationActivity"
+            android:configChanges="locale|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
+            android:windowBackground="@null"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.egls.platform.usercenter.AGPModifyActivity"
+            android:configChanges="locale|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
+            android:windowBackground="@null"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.egls.platform.usercenter.AGPBindAccountActivity"
+            android:configChanges="locale|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
+            android:windowBackground="@null"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.egls.platform.usercenter.AGPBindMobileActivity"
+            android:configChanges="locale|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
+            android:windowBackground="@null"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.egls.platform.usercenter.AGPBindEmailActivity"
+            android:configChanges="locale|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
+            android:windowBackground="@null"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.egls.platform.payment.AGPPaymentActivity"
+            android:configChanges="locale|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
+            android:windowBackground="@null"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.egls.platform.payment.AGPPaymentCardActivity"
+            android:configChanges="locale|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
+            android:windowBackground="@null"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <!-- 4.1.1 新增 end -->
+        <activity
+            android:name="com.egls.platform.account.AGPPermissionActivity"
+            android:configChanges="locale|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
+            android:windowBackground="@null"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <!-- 4.1.1 新增 end -->
+        <activity
+            android:name="com.egls.platform.net.AGPBrowserAcitivity"
+            android:configChanges="locale|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:windowBackground="@null"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+
+        <service android:name="com.egls.platform.backend.AGPNetworkCommunicationService" >
+        </service>
+        <!-- EGLS Android Game Platform SDK end -->
+    </application>
+
+</manifest>

@@ -1,0 +1,3 @@
+include ':EglsSdkDemo'
+include ':AGS'
+include ':AGP'
