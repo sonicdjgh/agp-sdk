@@ -14,41 +14,39 @@ Facebook앱 아이디입니다.
 ### 3. 개발환경
 #### 3.1 관계도
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/tw/S4TW000.png)<br/>
-Demo 가 SDK 연동을 완료한 프로젝트라면,Demo를egls-agp-sdk-release로 복사합니다（이하AGP）.AGP를egls-ags-sdk-release에복사합니다（이하AGS）.而AGS要引入“google-android-gms-sdk-release-11.0.1”.
+如上图所示：假设Demo为SDK对接完毕的安卓游戏工程，那么Demo引入Module“AGP”，则需要在Demo中的“build.gradle”里添加如下配置：
+```gradle
+repositories {
+    flatDir {
+        dirs project(':AGS').file('libs/kr')
+    }
+}
+
+dependencies {
+    compile project(':AGP')
+}
+```
 #### 3.2 AGP lib 선택
-대만/홍콩 에서 퍼블리싱 하는 게임은,아래 빨간색 표식한Lib파일만 필요합니다.<br/>
+针对于在港台地区发行的游戏，请在Module“AGP”的“build.gradle”文件里打开如下图所示的配置：<br/>
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/tw/S4TW001.png)
 #### 3.3 AGS lib 선택
-대만/홍콩 에서 퍼블리싱 하는 게임은,아래 빨간색 표식한Lib파일만 필요합니다.<br/>
+针对于在港台地区发行的游戏，请在Module“AGS”的“build.gradle”文件里打开如下图所示的配置：<br/>
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/tw/S4TW002.png)<br/>
-MyCardPaySDK.jar ->Mycard결제용<br/>
-clientsdk_product_v2.jar -> Gash결제용<br/>
 #### 3.4 UnitySDK연동
-a. 먼저Android IDE Tool를사용하여 안드로이드 프로젝트를 세팅후SDK 연동을 합니다<br/><br/>
+a. 먼저Android Studio를사용하여 안드로이드 프로젝트를 세팅후SDK 연동을 합니다<br/><br/>
 b. 주의사항:게임 MainActivity 는 Unity 와 UnityPlayerActivity 를 사용합니다<br/><br/>
-c. 如果您是使用Unity生成安卓游戏包的操作方式，请完成下面的操作：<br/><br/>
-(c1)다음,게임 MainActivity 를 jar 패키지 형식으로 Unity 프로젝트에 복사합니다<br/><br/>
-(c2)对于“google-android-gms-sdk-11.0.1”lib工程的资源引用，需要打一个对应R的jar文件：将自建安卓项目工程的package包名修改为“com.google.android.gms”，刷新后将该项目对应的“R.java”文件打成“jar”文件并加入到Unity项目工程中；<br/><br/>
-(c3)请单独为AGS中的“com.android.vending.billing”打一个jar包加入到Unity项目工程中；<br/><br/>
-(c4)다음,AGP、AGS중 퍼블리싱에 필요한 lib 파일과 res 파일을정리후 Unity 프로젝트로 복사합니다<br/><br/>
-d. Google推荐对危险权限的使用有一定要求，需要加入申请权限的逻辑。但由于Unity会自动申请“AndroidManifest.xml”文件中所配置的危险权限，不便于逻辑控制。如果有需要，请在“AndroidManifest.xml”文件中的“application”标签内加入如下配置：<br/>
+c. Google推荐对危险权限的使用有一定要求，需要加入申请权限的逻辑。但由于Unity会自动申请“AndroidManifest.xml”文件中所配置的危险权限，不便于逻辑控制。如果有需要，请在“AndroidManifest.xml”文件中的“application”标签内加入如下配置：<br/>
 ```Xml
 <meta-data
     android:name="unityplayer.SkipPermissionsDialog"
     android:value="true" />
 ```
 #### 3.5 기타
-minSdkVersion = 14，targetSdkVersion >= 23
+minSdkVersion = 16，targetSdkVersion >= 23
 ### 4. AndroidManifest.xml설정
 #### 4.1 AGP Permission 설정
 ```Xml
-<!-- EGLS Android Game Platform SDK begin -->
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-
+<!-- AGP begin -->
 <!-- AppsFlyer begin -->
 <!-- AppsFlyer홍콩,대만에서 사용하는 통계삽입 기능 -->
 <uses-permission android:name="android.permission.INTERNET" />
@@ -56,14 +54,15 @@ minSdkVersion = 14，targetSdkVersion >= 23
 <!-- 현재 연동하는 안드로이드패키지가 Google Play외의 기타 엡스토어에 사용하면,이 권한에 대해 반드시 설명해야 합니다,아니면 이 설명권한을 삭제해야 합니다 -->
 <!-- <uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
 <!-- AppsFlyer end -->
-<!-- EGLS Android Game Platform SDK end -->
+<!-- AGP end -->
 ```
 #### 4.2 AGS Permission 설정
 ```Xml
-<!-- EGLS Android Game Socialization SDK begin -->
+<!-- AGS begin -->
 <!-- Google  begin -->
+<!-- 如果使用Google Play支付功能，请打开以下配置 -->
 <uses-permission android:name="com.android.vending.BILLING" />
-<!-- 일부 디바이스가google play에 앱 다운로드안되는 문제 해결,필수 사용이 아니라는것을 설명해야 합니다 -->
+<!--
 <uses-feature
     android:name="android.hardware.camera"
     android:required="false" />
@@ -76,16 +75,12 @@ minSdkVersion = 14，targetSdkVersion >= 23
 <uses-feature
     android:name="android.hardware.microphone"
     android:required="false" />
+-->
 <!-- Google  end -->
 
 
-<!-- FaceBook begin -->
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-<!-- FaceBook end -->
-
-
 <!-- Mycard begin -->
+<!-- 如果使用Mycard支付，请打开以下配置 -->
 <!--
 <uses-permission android:name="android.permission.CAMERA" />
 <uses-permission android:name="android.permission.VIBRATE" />
@@ -104,7 +99,7 @@ minSdkVersion = 14，targetSdkVersion >= 23
 <uses-feature android:name="android.hardware.camera.autofocus" />
 -->
 <!-- Mycard end -->
-<!-- EGLS Android Game Socialization SDK end -->
+<!-- AGS end -->
 ```
 주의사항：이상 Permission 설정중SDK의 기본기능만 오픈합니다,만약 기타 기능이필요하면,관련된 Permission 설정을 해주세요.
 #### 4.3 Application설정
@@ -116,7 +111,7 @@ minSdkVersion = 14，targetSdkVersion >= 23
     android:label="AGSDK Demo"
     android:theme="@style/AppTheme" >
     <activity
-        android:name="com.egls.platform.test.GameActivity"
+        android:name="com.egls.sdk.demo.MainActivity"
         android:configChanges="fontScale|orientation|keyboardHidden|locale|navigation|screenSize|uiMode"
         android:screenOrientation="landscape"
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
@@ -140,158 +135,50 @@ minSdkVersion = 14，targetSdkVersion >= 23
         </intent-filter>
         <!-- DeepLink end -->
     </activity>
-        
-    <!-- EGLS Android Game Platform SDK begin -->
-    <activity
-        android:name="com.egls.platform.account.AGPIndexActivity"
-        android:configChanges="locale|keyboardHidden|orientation|screenSize"
-        android:screenOrientation="landscape"
-        android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
-        android:windowBackground="@null"
-        android:windowSoftInputMode="adjustPan" >
-    </activity>
-    <activity
-        android:name="com.egls.platform.account.AGPAlreadyLoginActivity"
-        android:configChanges="locale|keyboardHidden|orientation|screenSize"
-        android:screenOrientation="landscape"
-        android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
-        android:windowBackground="@null"
-        android:windowSoftInputMode="adjustPan" >
-    </activity>
-    <activity
-        android:name="com.egls.platform.account.AGPAgreementActivity"
-        android:configChanges="locale|keyboardHidden|orientation|screenSize"
-        android:screenOrientation="landscape"
-        android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
-        android:windowBackground="@null"
-        android:windowSoftInputMode="adjustPan" >
-    </activity>
-    <activity
-        android:name="com.egls.platform.account.AGPIntelligenceActivity"
-        android:configChanges="locale|keyboardHidden|orientation|screenSize"
-        android:screenOrientation="landscape"
-        android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
-        android:windowBackground="@null"
-        android:windowSoftInputMode="adjustPan" >
-    </activity>
-    <activity
-        android:name="com.egls.platform.account.AGPNewAccountActivity"
-        android:configChanges="locale|keyboardHidden|orientation|screenSize"
-        android:screenOrientation="landscape"
-        android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
-        android:windowBackground="@null"
-        android:windowSoftInputMode="adjustPan" >
-    </activity>
-    <activity
-        android:name="com.egls.platform.account.AGPAccountLoginActivity"
-        android:configChanges="locale|keyboardHidden|orientation|screenSize"
-        android:screenOrientation="landscape"
-        android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
-        android:windowBackground="@null"
-        android:windowSoftInputMode="adjustPan" >
-    </activity>
-    <activity
-        android:name="com.egls.platform.account.AGPForgetActivity"
-        android:configChanges="locale|keyboardHidden|orientation|screenSize"
-        android:screenOrientation="landscape"
-        android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
-        android:windowBackground="@null"
-        android:windowSoftInputMode="adjustPan" >
-    </activity>
-    <activity
-        android:name="com.egls.platform.account.AGPFindActivity"
-        android:configChanges="locale|keyboardHidden|orientation|screenSize"
-        android:screenOrientation="landscape"
-        android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
-        android:windowBackground="@null"
-        android:windowSoftInputMode="adjustPan" >
-    </activity>
-    <activity
-        android:name="com.egls.platform.usercenter.AGPUserCenterActivity"
-        android:configChanges="locale|keyboardHidden|orientation|screenSize"
-        android:screenOrientation="landscape"
-        android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
-        android:windowBackground="@null"
-        android:windowSoftInputMode="adjustPan" >
-    </activity>
-    <activity
-        android:name="com.egls.platform.usercenter.AGPAuthenticationActivity"
-        android:configChanges="locale|keyboardHidden|orientation|screenSize"
-        android:screenOrientation="landscape"
-        android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
-        android:windowBackground="@null"
-        android:windowSoftInputMode="adjustPan" >
-    </activity>
-    <activity
-        android:name="com.egls.platform.usercenter.AGPModifyActivity"
-        android:configChanges="locale|keyboardHidden|orientation|screenSize"
-        android:screenOrientation="landscape"
-        android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
-        android:windowBackground="@null"
-        android:windowSoftInputMode="adjustPan" >
-    </activity>
-    <activity
-        android:name="com.egls.platform.usercenter.AGPBindAccountActivity"
-        android:configChanges="locale|keyboardHidden|orientation|screenSize"
-        android:screenOrientation="landscape"
-        android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
-        android:windowBackground="@null"
-        android:windowSoftInputMode="adjustPan" >
-    </activity>
-    <activity
-        android:name="com.egls.platform.usercenter.AGPBindMobileActivity"
-        android:configChanges="locale|keyboardHidden|orientation|screenSize"
-        android:screenOrientation="landscape"
-        android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
-        android:windowBackground="@null"
-        android:windowSoftInputMode="adjustPan" >
-    </activity>
-    <activity
-        android:name="com.egls.platform.usercenter.AGPBindEmailActivity"
-        android:configChanges="locale|keyboardHidden|orientation|screenSize"
-        android:screenOrientation="landscape"
-        android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
-        android:windowBackground="@null"
-        android:windowSoftInputMode="adjustPan" >
-    </activity>
-    <activity
-        android:name="com.egls.platform.payment.AGPPaymentActivity"
-        android:configChanges="locale|keyboardHidden|orientation|screenSize"
-        android:screenOrientation="landscape"
-        android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
-        android:windowBackground="@null"
-        android:windowSoftInputMode="adjustPan" >
-    </activity>
-    <activity
-        android:name="com.egls.platform.payment.AGPPaymentCardActivity"
-        android:configChanges="locale|keyboardHidden|orientation|screenSize"
-        android:screenOrientation="landscape"
-        android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
-        android:windowBackground="@null"
-        android:windowSoftInputMode="adjustPan" >
-    </activity>
-    <!-- 4.1.1 新增 begin -->
-    <activity
-        android:name="com.egls.platform.account.AGPPermissionActivity"
-        android:configChanges="locale|keyboardHidden|orientation|screenSize"
-        android:screenOrientation="landscape"
-        android:theme="@style/AGPTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation"
-        android:windowBackground="@null"
-        android:windowSoftInputMode="adjustPan" >
-    </activity>
-    <!-- 4.1.1 新增 end -->
-    <activity
-        android:name="com.egls.platform.net.AGPBrowserAcitivity"
-        android:configChanges="locale|keyboardHidden|orientation|screenSize"
-        android:screenOrientation="portrait"
-        android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-        android:windowBackground="@null"
-        android:windowSoftInputMode="adjustPan" >
-    </activity>
 	
-    <service android:name="com.egls.platform.backend.AGPNetworkCommunicationService" >
-    </service>	
+    <!-- Base begin -->
+    <!-- 替换"MY_APP_ID"字样为SDK初始化所需的eglsAppId -->
+    <meta-data
+        android:name="EGLS_APP_ID"
+        android:value="\00MY_APP_ID" />
+	
+    <!-- 替换"MY_SERVER_TYPE"字样为对应的服务类别码 -->
+    <meta-data
+        android:name="EGLS_SERVER_TYPE"
+        android:value="MY_SERVER_TYPE" />
+	
+    <!-- 替换"MY_PAY_CHANNEL"字样为对应的支付渠道码 -->
+    <meta-data
+        android:name="EGLS_PAY_CHANNEL"
+        android:value="MY_PAY_CHANNEL" />
+	
+    <!-- 当没有特殊要求时，“EGLS_PAY_IS_SANDBOX”的参数值为"false"即可 -->
+    <meta-data
+        android:name="EGLS_PAY_IS_SANDBOX"
+        android:value="false" />
+	
+    <!-- 当没有特殊要求时，“EGLS_PAY_OTHER_PARAM”的参数值为""即可 -->
+    <meta-data
+        android:name="EGLS_PAY_OTHER_PARAM"
+        android:value="" />
 
+    <!-- 替换“MY_SERVER_CLIENT_ID”字样为在Google API后台“OAuth 2.0 客户端 ID”配置的列表中，关于“Web Client”项对应的“Client ID”参数值 -->
+    <meta-data
+        android:name="CHANNEL_SERVER_CLIENT_ID"
+        android:value="MY_SERVER_CLIENT_ID"/>
+
+    <!-- 替换“MY_APPLICATION_ID”字样为Facebook后台配置的applicationId -->
+    <provider
+        android:name="com.facebook.FacebookContentProvider"
+        android:authorities="com.facebook.app.FacebookContentProviderMY_APPLICATION_ID"
+        android:exported="true" />
+    <meta-data
+        android:name="com.facebook.sdk.ApplicationId"
+        android:value="\0MY_APPLICATION_ID" />
+    <!-- Base end -->
+	
+        
+    <!-- AGP begin -->
     <!-- AppsFlyer begin -->
     <!-- AppsFlyer홍콩,대만지역에서 사용하는 통계 기능 -->
     <!-- 모든Install Referrer이 시스템에서 플레이하는referrer내용을 인지하기 위해서,AndroidManifest.xml에서 AppsFlyer기능이 반드시첫번째 순위에 있어야 하며,receiver tag가application tag에 있어야 합니다 -->
@@ -303,66 +190,10 @@ minSdkVersion = 14，targetSdkVersion >= 23
         </intent-filter>
     </receiver>
     <!-- AppsFlyer end -->
-	
-    <!-- 替换"MY_APP_ID"字样为SDK初始化所需的eglsAppId -->
-    <meta-data 
-        android:name="EGLS_APP_ID"
-        android:value="\0MY_APP_ID"/>
-    <!-- 替换"MY_SERVER_TYPE"字样为对应的服务类别码，详见"附表 - serverType" -->
-    <meta-data 
-        android:name="EGLS_SERVER_TYPE"
-        android:value="MY_SERVER_TYPE"/>
-    <!-- 替换"MY_PAY_CHANNEL"字样为对应的支付渠道码，详见"附表 - payChannel" -->
-    <meta-data 
-        android:name="EGLS_PAY_CHANNEL"
-        android:value="MY_PAY_CHANNEL"/>
-    <!-- 当没有特殊要求时，“EGLS_PAY_IS_SANDBOX”的参数值为"false"即可 -->	
-    <meta-data 
-        android:name="EGLS_PAY_IS_SANDBOX"
-        android:value="false"/>
-    <!-- 当没有特殊要求时，“EGLS_PAY_OTHER_PARAM”的参数值为""即可 -->
-    <meta-data 
-        android:name="EGLS_PAY_OTHER_PARAM"
-        android:value=""/>
-    <!-- EGLS Android Game Platform SDK end -->
+    <!-- AGP end -->
 
 
-    <!-- EGLS Android Game Socialization SDK begin -->
-    <activity
-        android:name="com.egls.socialization.performance.AGSShareActivity"
-        android:screenOrientation="landscape"
-        android:theme="@style/AGSTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation" >
-    </activity>
-    <activity android:name="com.android.browser.BrowserActivity" >
-    </activity>
-
-    <!-- Google SignIn begin -->
-    <!-- “MY_SERVER_CLIENT_ID”를 Google API 관리자 페이지 “OAuth 2.0 클라이인트 ID”리스트중，“Web Client”에 해당하는 “Client ID” 수치 로 수정해야합니다 -->
-    <activity
-        android:name="com.egls.socialization.google.signin.GoogleSignInActivity"
-        android:configChanges="fontScale|orientation|keyboardHidden|locale|navigation|screenSize|uiMode"
-        android:screenOrientation="landscape"
-        android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-    <activity
-        android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
-        android:excludeFromRecents="true"
-        android:exported="false"
-        android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-    <activity
-        android:name="com.google.android.gms.common.api.GoogleApiActivity"
-        android:exported="false"
-        android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
-    <meta-data
-        android:name="com.google.android.gms.version"
-        android:value="@integer/google_play_services_version" />
-        
-    <meta-data 
-        android:name="CHANNEL_SERVER_CLIENT_ID"
-        android:value="MY_SERVER_CLIENT_ID"/>
-    <!-- Google SignIn end -->
-	
-    
+    <!-- AGS begin -->
     <!-- Google Play Game begin -->
     <!-- 如果使用Google Play Game成就功能，请打开以下配置 -->
     <!-- 替换“MY_GAMES_APP_ID”字样为"MY_SERVER_CLIENT_ID"的第一处"-"左边的纯数字部分 -->
@@ -393,33 +224,6 @@ minSdkVersion = 14，targetSdkVersion >= 23
     
 
     <!-- Facebook begin -->
-    <!-- “MY_APPLICATION_ID”를Facebook관라자 페이지의 설정applicationId -->
-    <activity
-        android:name="com.egls.socialization.facebook.FacebookSignInActivity"
-        android:configChanges="fontScale|orientation|keyboardHidden|locale|navigation|screenSize|uiMode"
-        android:screenOrientation="landscape"
-        android:theme="@android:style/Theme.NoTitleBar" >
-    </activity>
-    <activity
-        android:name="com.facebook.FacebookActivity"
-        android:screenOrientation="landscape"
-        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
-
-    <provider
-        android:name="com.facebook.FacebookContentProvider"
-        android:authorities="com.facebook.app.FacebookContentProviderMY_APPLICATION_ID"
-        android:exported="true" />
-
-    <receiver android:name="com.egls.socialization.facebook.FacebookReceiver" >
-        <intent-filter>
-            <action android:name="com.facebook.platform.AppCallResultBroadcast" />
-        </intent-filter>
-    </receiver>
-
-    <meta-data
-        android:name="com.facebook.sdk.ApplicationId"
-        android:value="\0MY_APPLICATION_ID" />
-	
     <!--如果游戏需要开启Facebook的“USER_FRIEND”权限，请打开以下配置 --> 
     <!--
     <meta-data
@@ -711,10 +515,10 @@ String contentText = "텍스트내용";// 텍스트내용
 String contentImage = "공유이미지";// 공유 이미지 파일의주소
 String contentUrl = null; //공유링크url
 Bundle shareBundle = new Bundle();
-shareBundle.putString(AGPConstants.KEY_CONTENT_TITLE, contentTitle);
-shareBundle.putString(AGPConstants.KEY_CONTENT_TEXT, contentText);
-shareBundle.putString(AGPConstants.KEY_CONTENT_IMAGE, contentImage);
-shareBundle.putString(AGPConstants.KEY_CONTENT_URL, contentUrl);
+shareBundle.putString(Key.CONTENT_TITLE, contentTitle);
+shareBundle.putString(Key.CONTENT_TEXT, contentText);
+shareBundle.putString(Key.CONTENT_IMAGE, contentImage);
+shareBundle.putString(Key.CONTENT_URL, contentUrl);
 AGPManager.shareInTW(true, true, shareBundle);
 ```
 ### 11. 其他注意事项
