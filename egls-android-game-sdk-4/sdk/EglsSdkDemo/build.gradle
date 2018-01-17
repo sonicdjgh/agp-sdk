@@ -17,11 +17,11 @@ android {
     }
 }
 
-repositories {
-    flatDir {
-        dirs project(':AGS').file('libs/kr')
-    }
-}
+// repositories {
+//     flatDir {
+//         dirs project(':AGS').file('libs/kr')
+//     }
+// }
 
 dependencies {
     compile project(':AGP')
