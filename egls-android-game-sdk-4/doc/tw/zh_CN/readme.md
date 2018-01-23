@@ -134,7 +134,7 @@ minSdkVersion = 14，targetSdkVersion >= 23
     <!-- 替换"MY_APP_ID"字样为SDK初始化所需的eglsAppId -->
     <meta-data
         android:name="EGLS_APP_ID"
-        android:value="\00MY_APP_ID" />
+        android:value="\0MY_APP_ID" />
 	
     <!-- 替换"MY_SERVER_TYPE"字样为对应的服务类别码 -->
     <meta-data
