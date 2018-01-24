@@ -171,7 +171,12 @@
             android:windowSoftInputMode="adjustPan" >
         </activity>
 
-        <service android:name="com.egls.platform.backend.AGPNetworkCommunicationService" >
+        <service
+            android:name="com.egls.platform.backend.AGPNetworkCommunicationService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.egls.platform.SERVICE" />
+            </intent-filter>
         </service>
         <!-- EGLS Android Game Platform SDK end -->
     </application>
