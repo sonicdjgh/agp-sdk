@@ -98,7 +98,7 @@
     <!-- 如果用Mycard支付，请在application标签内添加属性 android:name="tw.com.mycard.sdk.libs.PSDKApplication" -->
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
         <activity android:name="com.egls.sdk.demo.MainActivity"
@@ -261,11 +261,11 @@
 
 
         <!-- Facebook begin -->
-           <!--如果游戏需要开启Facebook的“USER_FRIEND”权限，请打开以下配置 -->
+        <!--如果游戏需要开启Facebook的“USER_FRIEND”权限，请打开以下配置 -->
         <!--
         <meta-data
-                android:name="CNANNEL_PERMISSION_USER_FRIEND"
-                android:value="true"/>
+            android:name="CNANNEL_PERMISSION_USER_FRIEND"
+            android:value="true"/>
         -->
         <!-- Facebook end  -->
 

@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 26
     buildToolsVersion "26.0.2"
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 23
+        targetSdkVersion 26
     }
 
     buildTypes {
@@ -26,12 +26,12 @@ repositories {
 dependencies {
     // base begin
     compile project(':AGS')
-    compile files('libs/egls-agp-sdk-4.1.5.jar')
+    compile files('libs/egls-agp-sdk-4.1.6.jar')
     // base end
 
 
     // tw begin
-    // compile files('libs/tw/AF-Android-SDK-4.6.0.jar')
+    // provided files('libs/tw/AF-Android-SDK-4.6.0.jar')
     // tw end
 
 

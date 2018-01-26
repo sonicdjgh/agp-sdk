@@ -38,15 +38,10 @@
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
-        <activity
-            android:name="com.facebook.FacebookActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
-        <receiver android:name="com.egls.socialization.facebook.FacebookReceiver" >
-            <intent-filter>
-                <action android:name="com.facebook.platform.AppCallResultBroadcast" />
-            </intent-filter>
-        </receiver>
+        <activity android:name="com.egls.socialization.facebook.FacebookPortraitActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AGSTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation">
+        </activity>
         <!-- Facebook end -->
 
 
