@@ -1,7 +1,7 @@
 # egls-android-game-sdk-release-studio
 ### Version: 4.1.6
 1. 删除旧版Facebook相关的资源和代码，引用最新版Facebook功能；
-2. minSdkVersion升至为16，compileSdkVersion请用26<br /><br />
+2. minSdkVersion升至为16，compileSdkVersion请用26。<br /><br />
 ### Version: 4.1.5
 1. 修改权限弹窗提示功能，即：在首次运行时，当targetSdkVersion>=23且deviceSdkVersion>=23时，才会弹出；
 2. 添加“AGPManager.addPermissionContent()”接口；
