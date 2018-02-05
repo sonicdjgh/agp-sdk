@@ -1,4 +1,5 @@
 # egls-android-game-sdk-release-studio
+注：从4.x.x版本起，我们采用了新的账号体系，所以并不兼容旧版（即同一个账号在登录后返回的uid与3.x.x版本的不一致）。如果您的游戏曾经接过旧版本的SDK，并且将要使用4.x.x版本的SDK时，请配合我们做游戏的强更及其他必要的更新操作（详情请咨询我方运营）。
 ### Version: 4.1.6
 1. 删除旧版Facebook相关的资源和代码，引用最新版Facebook功能；
 2. minSdkVersion升至为16，compileSdkVersion请用26。<br /><br />
