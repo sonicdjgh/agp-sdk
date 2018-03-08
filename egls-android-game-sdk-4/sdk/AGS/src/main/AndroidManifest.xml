@@ -16,12 +16,6 @@
 
     <application>
         <!-- EGLS Android Game Socialization SDK begin -->
-        <activity
-            android:name="com.egls.socialization.performance.AGSShareActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/AGSTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation" >
-        </activity>
-        
 		<!-- Google SignIn begin -->
         <activity
             android:name="com.egls.socialization.google.signin.GoogleSignInActivity"

@@ -25,8 +25,8 @@ repositories {
 
 dependencies {
     // base begin
-    compile files('libs/egls-ags-sdk-4.1.6.jar')
-    compile files('libs/egls-sdk-support-4.1.6.jar')
+    compile files('libs/egls-ags-sdk-4.1.7.jar')
+    compile files('libs/egls-sdk-support-4.1.7.jar')
     compile files('libs/openDefault-1.0.0-openDefaultRelease.jar')
     //
     compile 'com.google.android.gms:play-services-auth:11.0.1'

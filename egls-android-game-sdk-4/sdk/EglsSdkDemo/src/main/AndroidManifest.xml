@@ -232,6 +232,12 @@
 
 
         <!-- AGS begin -->
+        <activity
+            android:name="com.egls.socialization.performance.AGSShareActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AGSTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation" >
+        </activity>
+
         <!-- Google Play Game begin -->
         <!-- 如果使用Google Play Game成就功能，请打开以下配置 -->
         <!-- 替换“MY_GAMES_APP_ID”字样为"MY_SERVER_CLIENT_ID"的第一处"-"左边的纯数字部分 -->
