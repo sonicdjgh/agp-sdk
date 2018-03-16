@@ -22,7 +22,10 @@ android {
 
 repositories {
     flatDir {
-        dirs project(':AGS').file('libs/kr')
+        dirs project(':AGS').file('libs')
+        // kr begin
+        // dirs project(':AGS').file('libs/kr')
+        // kr end
     }
 }
 

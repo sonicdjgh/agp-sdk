@@ -19,14 +19,15 @@ android {
 
 repositories {
     flatDir {
+        dirs 'libs'
         dirs 'libs/kr' //this way we can find the .aar file in libs folder
     }
 }
 
 dependencies {
     // base begin
-    compile files('libs/egls-ags-sdk-4.1.7.jar')
-    compile files('libs/egls-android-support-4.1.7.jar')
+    compile files('libs/egls-ags-sdk-4.1.8.jar')
+    compile(name: 'egls-android-support-4.1.8', ext: 'aar')
     compile files('libs/openDefault-1.0.0-openDefaultRelease.jar')
     //
     compile 'com.google.android.gms:play-services-auth:11.0.1'
