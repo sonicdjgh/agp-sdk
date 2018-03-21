@@ -39,34 +39,17 @@
                 android:gravity="center"
                 android:orientation="vertical" >
 
-                <!--
-                <ImageView
-                    android:id="@+id/imageProgress"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/egls_agp_progress_gear_001"
-                    android:contentDescription="@null" />                -->
-
-                <com.egls.platform.views.AGPRippleLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                <com.egls.support.anim.view.RippleView
                     android:id="@+id/rippleBackground"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:contentDescription="@null"
-                    app:rb_color="#ff6600"
-                    app:rb_duration="1500"
-                    app:rb_radius="@dimen/egls_agp_dp_24"
-                    app:rb_rippleAmount="2"
-                    app:rb_scale="4" >
+                    android:layout_height="match_parent"/>
 
-                    <ImageView
-                        android:id="@+id/centerImage"
-                        android:layout_width="@dimen/egls_agp_dp_48"
-                        android:layout_height="@dimen/egls_agp_dp_48"
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/egls_agp_progress_icon" />
-                </com.egls.platform.views.AGPRippleLayout>
+                <ImageView
+                    android:id="@+id/centerImage"
+                    android:layout_width="@dimen/egls_agp_dp_48"
+                    android:layout_height="@dimen/egls_agp_dp_48"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/egls_agp_progress_icon" />
 
                 <TextView
                     android:id="@+id/textProgress"

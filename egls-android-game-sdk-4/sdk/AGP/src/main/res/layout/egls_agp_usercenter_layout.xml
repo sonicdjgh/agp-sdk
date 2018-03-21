@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:id="@+id/ll_usercenter_main"
-        android:layout_width="@dimen/egls_agp_dp_390"
+        android:layout_width="@dimen/egls_agp_dp_320"
         android:layout_height="@dimen/egls_agp_dp_256"
         android:background="#ffffff"
         android:orientation="horizontal" >
@@ -113,12 +113,13 @@
 
                 <TextView
                     android:id="@+id/tv_usercenter_nickname"
-                    android:layout_width="@dimen/egls_agp_dp_280"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
                     android:ellipsize="end"
                     android:singleLine="true"
+                    android:layout_marginRight="@dimen/egls_agp_dp_20"
                     android:text="NickName"
                     android:textColor="#363636"
                     android:textSize="@dimen/egls_agp_sp_14"
@@ -299,13 +300,13 @@
                             android:scaleType="fitXY"
                             android:src="@drawable/xi_25" />
 
-                        <TextView
-                            android:id="@+id/tv_usercenter_security_bindmobile"
+                        <com.egls.platform.views.AGPAutoScaleMinSizeTextView
+                            android:id="@+id/asmstv_usercenter_security_bindmobile"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/egls_agp_dp_36"
                             android:layout_toLeftOf="@+id/ib_usercenter_security_bindmobile"
                             android:layout_toRightOf="@+id/tv_usercenter_security_info1"
-                            android:ellipsize="end"
+                            android:contentDescription="egls_agp_sp_8"
                             android:gravity="center_vertical|left"
                             android:textColor="#696969"
                             android:textSize="@dimen/egls_agp_sp_10" />
@@ -352,13 +353,13 @@
                             android:scaleType="fitXY"
                             android:src="@drawable/xi_25" />
 
-                        <TextView
-                            android:id="@+id/tv_usercenter_security_bindemail"
+                        <com.egls.platform.views.AGPAutoScaleMinSizeTextView
+                            android:id="@+id/asmstv_usercenter_security_bindemail"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/egls_agp_dp_36"
                             android:layout_toLeftOf="@+id/ib_usercenter_security_bindemail"
                             android:layout_toRightOf="@+id/tv_usercenter_security_info2"
-                            android:ellipsize="end"
+                            android:contentDescription="egls_agp_sp_8"
                             android:gravity="center_vertical|left"
                             android:textColor="#696969"
                             android:textSize="@dimen/egls_agp_sp_10" />
@@ -406,7 +407,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"
-                    android:visibility="visible" >
+                    android:visibility="gone" >
 
                     <LinearLayout
                         android:id="@+id/ll_usercenter_rechargerecord_contact"
@@ -461,6 +462,9 @@
                             android:id="@+id/lv_usercenter_rechargerecord"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
                             android:background="@android:color/transparent"
                             android:cacheColorHint="@android:color/transparent"
                             android:divider="#e7e7e7"
