@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
     defaultConfig {
-        applicationId "com.egls.sdk.demo"
+        applicationId "com.egls.demo"
         minSdkVersion 16
         targetSdkVersion 26
         versionCode 1
@@ -17,11 +17,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 repositories {
     flatDir {
+        dirs project(':AGP').file('libs')
         dirs project(':AGS').file('libs')
         // kr begin
         // dirs project(':AGS').file('libs/kr')

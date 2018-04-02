@@ -19,6 +19,7 @@ android {
 
 repositories {
     flatDir {
+        dirs 'libs'
         dirs project(':AGS').file('libs')
         dirs project(':AGS').file('libs/kr')
     }
@@ -27,7 +28,7 @@ repositories {
 dependencies {
     // base begin
     compile project(':AGS')
-    compile files('libs/egls-agp-sdk-4.1.8.jar')
+    compile(name: 'egls-agp-sdk-4.2.0', ext: 'aar')
     // base end
 
 
