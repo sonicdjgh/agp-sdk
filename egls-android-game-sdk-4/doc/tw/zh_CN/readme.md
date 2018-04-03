@@ -22,7 +22,26 @@ dependencies {
 ```
 #### 3.2 AGP lib 选择
 针对于在港台地区发行的游戏，请在Module“AGP”的“build.gradle”文件里打开如下图所示的配置：<br/>
-![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/tw/S4TW001.png)
+```gradle
+repositories {
+    flatDir {
+        dirs 'libs'
+        dirs project(':AGS').file('libs')
+    }
+}
+
+dependencies {
+    // base begin
+    compile project(':AGS')
+    compile(name: 'egls-agp-sdk-4.2.0', ext: 'aar')
+    // base end
+
+
+    // tw begin
+    provided files('libs/tw/AF-Android-SDK-4.6.0.jar')
+    // tw end
+}
+```
 #### 3.3 AGS lib 选择
 针对于在港台地区发行的游戏，请在Module“AGS”的“build.gradle”文件里打开如下图所示的配置：<br/>
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/tw/S4TW002.png)<br/>
