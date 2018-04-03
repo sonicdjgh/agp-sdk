@@ -16,16 +16,77 @@ Facebook앱 아이디입니다.
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/tw/S4TW000.png)<br/>
 如上图所示：假设Demo为SDK对接完毕的安卓游戏工程，那么Demo引入Module“AGP”，则需要在Demo中的“build.gradle”里添加如下配置：
 ```gradle
+repositories {
+    flatDir {
+        dirs project(':AGP').file('libs')
+        dirs project(':AGS').file('libs')
+    }
+}
+
 dependencies {
     compile project(':AGP')
 }
 ```
 #### 3.2 AGP lib 선택
 针对于在港台地区发行的游戏，请在Module“AGP”的“build.gradle”文件里打开如下图所示的配置：<br/>
-![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/tw/S4TW001.png)
+```gradle
+repositories {
+    flatDir {
+        dirs 'libs'
+        dirs project(':AGS').file('libs')
+    }
+}
+
+dependencies {
+    // base begin
+    compile(name: 'egls-agp-sdk-4.2.0', ext: 'aar')
+    compile project(':AGS')
+    // base end
+
+    // tw begin
+    provided files('libs/tw/AF-Android-SDK-4.6.0.jar')
+    // tw end
+}
+```
 #### 3.3 AGS lib 선택
 针对于在港台地区发行的游戏，请在Module“AGS”的“build.gradle”文件里打开如下图所示的配置：<br/>
-![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/tw/S4TW002.png)<br/>
+```gradle
+repositories {
+    flatDir {
+        dirs 'libs'
+        dirs 'libs/kr'
+    }
+}
+
+dependencies {
+    // base begin
+    compile(name: 'egls-ags-sdk-4.2.0', ext: 'aar')
+    compile(name: 'egls-android-support-4.2.0', ext: 'aar')
+    compile files('libs/openDefault-1.0.0-openDefaultRelease.jar')
+    //
+    compile 'com.google.android.gms:play-services-auth:11.0.1'
+    compile 'com.google.android.gms:play-services-auth-base:11.0.1'
+    compile 'com.google.android.gms:play-services-base:11.0.1'
+    compile 'com.google.android.gms:play-services-basement:11.0.1'
+    compile 'com.google.android.gms:play-services-drive:11.0.1'
+    compile 'com.google.android.gms:play-services-games:11.0.1'
+    compile 'com.google.android.gms:play-services-gcm:11.0.1'
+    compile 'com.google.android.gms:play-services-iid:11.0.1'
+    compile 'com.google.android.gms:play-services-tasks:11.0.1'
+    //
+    compile 'com.facebook.android:facebook-core:4.+'
+    compile 'com.facebook.android:facebook-login:4.+'
+    compile 'com.facebook.android:facebook-share:4.+'
+    // base end
+
+    // tw begin
+    // 如果使用 MyCard 支付，请打开下面的配置
+    // compile files('libs/tw/MyCardPaySDK.jar')
+    // 如果使用 Gash 支付，请打开下面的配置
+    // compile files('libs/tw/clientsdk_product_v2.jar')
+    // tw end
+}
+```
 #### 3.4 UnitySDK연동
 a. 먼저Android Studio를사용하여 안드로이드 프로젝트를 세팅후SDK 연동을 합니다<br/><br/>
 b. 주의사항:게임 MainActivity 는 Unity 와 UnityPlayerActivity 를 사용합니다<br/><br/>
@@ -411,9 +472,7 @@ protected void onNewIntent(Intent intent) {
 	
 @Override
 public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-    if (Build.VERSION.SDK_INT >= 23) {
-	super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
+    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     AGPManager.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
 }
 	
