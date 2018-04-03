@@ -27,15 +27,13 @@ repositories {
 
 dependencies {
     // base begin
-    compile project(':AGS')
     compile(name: 'egls-agp-sdk-4.2.0', ext: 'aar')
+    compile project(':AGS')
     // base end
-
 
     // tw begin
     // provided files('libs/tw/AF-Android-SDK-4.6.0.jar')
     // tw end
-
 
     // kr begin
     // compile files('libs/kr/IgawAdbrix_v4.4.0a.jar');

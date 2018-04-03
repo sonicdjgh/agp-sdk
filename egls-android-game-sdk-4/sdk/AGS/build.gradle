@@ -20,7 +20,7 @@ android {
 repositories {
     flatDir {
         dirs 'libs'
-        dirs 'libs/kr' //this way we can find the .aar file in libs folder
+        dirs 'libs/kr'
     }
 }
 
@@ -46,12 +46,13 @@ dependencies {
     // base end
 
     // tw begin
-    // compile files('libs/tw/clientsdk_product_v2.jar')
+    // 如果使用 MyCard 支付，请打开下面的配置
     // compile files('libs/tw/MyCardPaySDK.jar')
+    // 如果使用 Gash 支付，请打开下面的配置
+    // compile files('libs/tw/clientsdk_product_v2.jar')
     // tw end
 
     // kr begin
-    // compile files('libs/kr/iap_plugin_v16.03.00_20161123.jar');
     // compile files('libs/kr/gson-2.8.0.jar');
     // compile files('libs/kr/3rdparty_login_library_android_4.1.4.jar')
     // compile files('libs/kr/api-gateway-hmac-2.3.1.jar')
@@ -62,5 +63,7 @@ dependencies {
     //     exclude group: 'com.mcxiaoke.volley', module: 'library'
     // }
     // compile(name: 'cafeSdk-2.4.3', ext: 'aar')
+    // 如果使用 OneStore 支付，请打开下面的配置：
+    // compile files('libs/kr/iap_plugin_v16.03.00_20161123.jar');
     // kr end
 }
