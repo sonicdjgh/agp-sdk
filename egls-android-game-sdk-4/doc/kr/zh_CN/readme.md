@@ -14,7 +14,12 @@
 #### 2.5 CHANNEL_ONESTORE_APP_ID
 在OneStore后台生成的应用id。
 ### 3. 环境搭建
-#### 3.1 依赖关系
+#### 3.1 gradle版本及设置
+gradle版本为4.1，并且需要在你当前Project里的gradle.properties文件中加上如下配置：
+```gradle
+android.enableAapt2=false
+```
+#### 3.2 依赖关系
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/kr/S4KR000.png)<br/>
 如上图所示：假设Demo为SDK对接完毕的安卓游戏工程，那么Demo引入Module“AGP”，则需要在Demo中的“build.gradle”里添加如下配置：
 ```gradle
@@ -30,7 +35,7 @@ dependencies {
     compile project(':AGP')
 }
 ```
-#### 3.2 AGP lib 选择
+#### 3.3 AGP lib 选择
 针对于在韩国地区发行的游戏，请在Module“AGP”的“build.gradle”文件里打开如下图所示的配置：<br/>
 ```gradle
 repositories {
@@ -54,7 +59,7 @@ dependencies {
     // kr end
 }
 ```
-#### 3.3 AGS lib 选择
+#### 3.4 AGS lib 选择
 针对于在韩国地区发行的游戏，请在Module“AGS”的“build.gradle”文件里打开如下图所示的配置：<br/>
 ```gradle
 repositories {
@@ -101,7 +106,7 @@ dependencies {
     // kr end
 }
 ```
-#### 3.4 关于Unity的SDK接入
+#### 3.5 关于Unity的SDK接入
 a. 首先使用Android Studio自建一个安卓项目工程后并完成SDK的接入工作；<br/><br/>
 b. 请注意，游戏主Activity需要继承Unity的UnityPlayerActivity；<br/><br/>
 c. Google推荐对危险权限的使用有一定要求，需要加入申请权限的逻辑。但由于Unity会自动申请“AndroidManifest.xml”文件中所配置的危险权限，不便于逻辑控制。如果有需要，请在“AndroidManifest.xml”文件中的“application”标签内加入如下配置：
@@ -110,7 +115,7 @@ c. Google推荐对危险权限的使用有一定要求，需要加入申请权�
     android:name="unityplayer.SkipPermissionsDialog"
     android:value="true" />
 ```
-#### 3.5 其他
+#### 3.6 其他
 minSdkVersion = 16，targetSdkVersion >= 23
 ### 4. AndroidManifest.xml文件配置
 #### 4.1 AGP Permission 配置
