@@ -473,9 +473,7 @@ protected void onNewIntent(Intent intent) {
 	
 @Override
 public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-    if (Build.VERSION.SDK_INT >= 23) {
-	super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
+    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     AGPManager.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
 }
 	
