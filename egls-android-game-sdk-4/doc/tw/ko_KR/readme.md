@@ -12,7 +12,12 @@ Google API 관리자 페이지 “OAuth 2.0 클라이인트 ID”리스트중，
 #### 2.4 com.facebook.sdk.ApplicationId
 Facebook앱 아이디입니다.
 ### 3. 개발환경
-#### 3.1 관계도
+#### 3.1 gradle版本及设置
+gradle版本为4.1，并且需要在你当前Project里的gradle.properties文件中加上如下配置：
+```gradle
+android.enableAapt2=false
+```
+#### 3.2 관계도
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/tw/S4TW000.png)<br/>
 如上图所示：假设Demo为SDK对接完毕的安卓游戏工程，那么Demo引入Module“AGP”，则需要在Demo中的“build.gradle”里添加如下配置：
 ```gradle
@@ -27,7 +32,7 @@ dependencies {
     compile project(':AGP')
 }
 ```
-#### 3.2 AGP lib 선택
+#### 3.3 AGP lib 선택
 针对于在港台地区发行的游戏，请在Module“AGP”的“build.gradle”文件里打开如下图所示的配置：<br/>
 ```gradle
 repositories {
@@ -48,7 +53,7 @@ dependencies {
     // tw end
 }
 ```
-#### 3.3 AGS lib 선택
+#### 3.4 AGS lib 선택
 针对于在港台地区发行的游戏，请在Module“AGS”的“build.gradle”文件里打开如下图所示的配置：<br/>
 ```gradle
 repositories {
@@ -87,7 +92,7 @@ dependencies {
     // tw end
 }
 ```
-#### 3.4 UnitySDK연동
+#### 3.5 UnitySDK연동
 a. 먼저Android Studio를사용하여 안드로이드 프로젝트를 세팅후SDK 연동을 합니다<br/><br/>
 b. 주의사항:게임 MainActivity 는 Unity 와 UnityPlayerActivity 를 사용합니다<br/><br/>
 c. Google推荐对危险权限的使用有一定要求，需要加入申请权限的逻辑。但由于Unity会自动申请“AndroidManifest.xml”文件中所配置的危险权限，不便于逻辑控制。如果有需要，请在“AndroidManifest.xml”文件中的“application”标签内加入如下配置：<br/>
@@ -96,7 +101,7 @@ c. Google推荐对危险权限的使用有一定要求，需要加入申请权�
     android:name="unityplayer.SkipPermissionsDialog"
     android:value="true" />
 ```
-#### 3.5 기타
+#### 3.6 기타
 minSdkVersion = 16，targetSdkVersion >= 23
 ### 4. AndroidManifest.xml설정
 #### 4.1 AGP Permission 설정
