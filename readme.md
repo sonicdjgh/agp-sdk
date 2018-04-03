@@ -1,5 +1,9 @@
 # egls-android-game-sdk-release-studio
 注：从4.x.x版本起，我们采用了新的账号体系，所以并不兼容旧版（即同一个账号在登录后返回的uid与3.x.x版本的不一致）。如果您的游戏曾经接过旧版本的SDK，并且将要使用4.x.x版本的SDK时，请配合我们做游戏的强更及其他必要的更新操作（详情请咨询我方运营）。<br /><br />
+### Version: 4.2.0
+1. AGP、AGS的核心库及资源都打包成“aar”文件，在升级至4.2.0前，请先删除原有的Module然后重新导入；
+2. 增加登录banner信息提示，并在banner中添加Egls账号的切换按钮（banner3秒后自动消失，之后响应登录回调）；
+3. 优化部分逻辑代码。<br /><br />
 ### Version: 4.1.7
 1. 将AGS的AndroidManifest.xml文件中的AGSShareActivity配置移除，需在游戏项目中的AndroidManifest.xml文件中添加该配置；
 2. 优化部分逻辑代码。<br /><br />
