@@ -45,7 +45,7 @@ dependencies {
 
 
     // tw begin
-    provided files('libs/tw/AF-Android-SDK-4.6.0.jar')
+    compile files('libs/tw/AF-Android-SDK-4.6.0.jar')
     // tw end
 }
 ```
