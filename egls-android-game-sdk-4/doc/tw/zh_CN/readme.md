@@ -67,9 +67,9 @@ dependencies {
     // base end
 
     // tw begin
-    // 如果使用MyCard支付，请打开下面的配置
+    // 如果使用 MyCard 支付，请打开下面的配置
     // compile files('libs/tw/MyCardPaySDK.jar')
-    // 如果使用Gash支付，请打开下面的配置
+    // 如果使用 Gash 支付，请打开下面的配置
     // compile files('libs/tw/clientsdk_product_v2.jar')
     // tw end
 }
