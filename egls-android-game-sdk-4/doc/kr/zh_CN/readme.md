@@ -20,6 +20,8 @@
 ```gradle
 repositories {
     flatDir {
+        dirs project(':AGP').file('libs')
+        dirs project(':AGS').file('libs')
         dirs project(':AGS').file('libs/kr')
     }
 }
@@ -30,10 +32,75 @@ dependencies {
 ```
 #### 3.2 AGP lib 选择
 针对于在韩国地区发行的游戏，请在Module“AGP”的“build.gradle”文件里打开如下图所示的配置：<br/>
-![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/kr/S4KR001.png)
+```gradle
+repositories {
+    flatDir {
+        dirs 'libs'
+        dirs project(':AGS').file('libs')
+        dirs project(':AGS').file('libs/kr')
+    }
+}
+
+dependencies {
+    // base begin
+    compile project(':AGS')
+    compile(name: 'egls-agp-sdk-4.2.0', ext: 'aar')
+    // base end
+
+    // kr begin
+    compile files('libs/kr/IgawAdbrix_v4.4.0a.jar');
+    compile files('libs/kr/IgawCommon_v4.4.0a.jar');
+    compile files('libs/kr/IgawLiveOps_v1.3.6a_thirdparty.jar');
+    // kr end
+}
+```
 #### 3.3 AGS lib 选择
 针对于在韩国地区发行的游戏，请在Module“AGS”的“build.gradle”文件里打开如下图所示的配置：<br/>
-![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/kr/S4KR002.png)<br/>
+```gradle
+repositories {
+    flatDir {
+        dirs 'libs'
+        dirs 'libs/kr'
+    }
+}
+
+dependencies {
+    // base begin
+    compile(name: 'egls-ags-sdk-4.2.0', ext: 'aar')
+    compile(name: 'egls-android-support-4.2.0', ext: 'aar')
+    compile files('libs/openDefault-1.0.0-openDefaultRelease.jar')
+    //
+    compile 'com.google.android.gms:play-services-auth:11.0.1'
+    compile 'com.google.android.gms:play-services-auth-base:11.0.1'
+    compile 'com.google.android.gms:play-services-base:11.0.1'
+    compile 'com.google.android.gms:play-services-basement:11.0.1'
+    compile 'com.google.android.gms:play-services-drive:11.0.1'
+    compile 'com.google.android.gms:play-services-games:11.0.1'
+    compile 'com.google.android.gms:play-services-gcm:11.0.1'
+    compile 'com.google.android.gms:play-services-iid:11.0.1'
+    compile 'com.google.android.gms:play-services-tasks:11.0.1'
+    //
+    compile 'com.facebook.android:facebook-core:4.+'
+    compile 'com.facebook.android:facebook-login:4.+'
+    compile 'com.facebook.android:facebook-share:4.+'
+    // base end
+
+    // kr begin
+    compile files('libs/kr/gson-2.8.0.jar');
+    compile files('libs/kr/3rdparty_login_library_android_4.1.4.jar')
+    compile files('libs/kr/api-gateway-hmac-2.3.1.jar')
+    compile files('libs/kr/library-1.0.0.jar')
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.squareup:otto:1.3.8'
+    compile 'com.navercorp.volleyextensions:volleyer:2.0.1', {
+        exclude group: 'com.mcxiaoke.volley', module: 'library'
+    }
+    compile(name: 'cafeSdk-2.4.3', ext: 'aar')
+    // 如果使用 OneStore 支付，请打开下面的配置：
+    // compile files('libs/kr/iap_plugin_v16.03.00_20161123.jar');
+    // kr end
+}
+```
 #### 3.4 关于Unity的SDK接入
 a. 首先使用Android Studio自建一个安卓项目工程后并完成SDK的接入工作；<br/><br/>
 b. 请注意，游戏主Activity需要继承Unity的UnityPlayerActivity；<br/><br/>
@@ -337,9 +404,7 @@ protected void onNewIntent(Intent intent) {
 	
 @Override
 public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-    if (Build.VERSION.SDK_INT >= 23) {
-	super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
+    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     AGPManager.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
 }
 	

@@ -16,16 +16,78 @@
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/tw/S4TW000.png)<br/>
 如上图所示：假设Demo为SDK对接完毕的安卓游戏工程，那么Demo引入Module“AGP”，则需要在Demo中的“build.gradle”里添加如下配置：
 ```gradle
+repositories {
+    flatDir {
+        dirs project(':AGP').file('libs')
+        dirs project(':AGS').file('libs')
+    }
+}
+
 dependencies {
     compile project(':AGP')
 }
 ```
 #### 3.2 AGP lib 选择
 针对于在港台地区发行的游戏，请在Module“AGP”的“build.gradle”文件里打开如下图所示的配置：<br/>
-![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/tw/S4TW001.png)
+```gradle
+repositories {
+    flatDir {
+        dirs 'libs'
+        dirs project(':AGS').file('libs')
+    }
+}
+
+dependencies {
+    // base begin
+    compile(name: 'egls-agp-sdk-4.2.0', ext: 'aar')
+    compile project(':AGS')
+    // base end
+
+
+    // tw begin
+    provided files('libs/tw/AF-Android-SDK-4.6.0.jar')
+    // tw end
+}
+```
 #### 3.3 AGS lib 选择
 针对于在港台地区发行的游戏，请在Module“AGS”的“build.gradle”文件里打开如下图所示的配置：<br/>
-![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/tw/S4TW002.png)<br/>
+```gradle
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    // base begin
+    compile(name: 'egls-ags-sdk-4.2.0', ext: 'aar')
+    compile(name: 'egls-android-support-4.2.0', ext: 'aar')
+    compile files('libs/openDefault-1.0.0-openDefaultRelease.jar')
+    //
+    compile 'com.google.android.gms:play-services-auth:11.0.1'
+    compile 'com.google.android.gms:play-services-auth-base:11.0.1'
+    compile 'com.google.android.gms:play-services-base:11.0.1'
+    compile 'com.google.android.gms:play-services-basement:11.0.1'
+    compile 'com.google.android.gms:play-services-drive:11.0.1'
+    compile 'com.google.android.gms:play-services-games:11.0.1'
+    compile 'com.google.android.gms:play-services-gcm:11.0.1'
+    compile 'com.google.android.gms:play-services-iid:11.0.1'
+    compile 'com.google.android.gms:play-services-tasks:11.0.1'
+    //
+    compile 'com.facebook.android:facebook-core:4.+'
+    compile 'com.facebook.android:facebook-login:4.+'
+    compile 'com.facebook.android:facebook-share:4.+'
+    // base end
+
+    // tw begin
+    // 如果使用 MyCard 支付，请打开下面的配置
+    // compile files('libs/tw/MyCardPaySDK.jar')
+    // 如果使用 Gash 支付，请打开下面的配置
+    // compile files('libs/tw/clientsdk_product_v2.jar')
+    // tw end
+}
+
+```
 #### 3.4 关于Unity的SDK接入
 a. 首先使用Android Studio自建一个安卓项目工程后并完成SDK的接入工作；<br/><br/>
 b. 请注意，游戏主Activity需要继承Unity的UnityPlayerActivity；<br/><br/>
