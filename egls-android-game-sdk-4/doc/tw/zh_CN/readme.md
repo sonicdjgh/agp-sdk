@@ -13,7 +13,7 @@
 在Facebook后台生成的应用id。
 ### 3. 环境搭建
 #### 3.1 gradle版本及设置
-gradle版本为4.1，并且需要在你当前Project里的gradle.properties文件里加上如下配置：
+gradle版本为4.1，并且需要在你当前Project里的gradle.properties文件中加上如下配置：
 ```gradle
 android.enableAapt2=false
 ```
