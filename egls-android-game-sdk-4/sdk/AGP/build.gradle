@@ -21,7 +21,10 @@ repositories {
     flatDir {
         dirs 'libs'
         dirs project(':AGS').file('libs')
-        dirs project(':AGS').file('libs/kr')
+
+        // kr begin
+        // dirs project(':AGS').file('libs/kr')
+        // kr end
     }
 }
 
@@ -32,7 +35,7 @@ dependencies {
     // base end
 
     // tw begin
-    // provided files('libs/tw/AF-Android-SDK-4.6.0.jar')
+    // compile files('libs/tw/AF-Android-SDK-4.6.0.jar')
     // tw end
 
     // kr begin
