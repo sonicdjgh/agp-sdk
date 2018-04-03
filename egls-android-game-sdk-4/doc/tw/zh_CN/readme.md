@@ -45,6 +45,12 @@ dependencies {
 #### 3.3 AGS lib 选择
 针对于在港台地区发行的游戏，请在Module“AGS”的“build.gradle”文件里打开如下图所示的配置：<br/>
 ```gradle
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 dependencies {
     // base begin
     compile(name: 'egls-ags-sdk-4.2.0', ext: 'aar')
