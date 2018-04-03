@@ -56,6 +56,7 @@ dependencies {
 ```
 #### 3.3 AGS lib 选择
 针对于在韩国地区发行的游戏，请在Module“AGS”的“build.gradle”文件里打开如下图所示的配置：<br/>
+```gradle
 repositories {
     flatDir {
         dirs 'libs'
@@ -99,7 +100,7 @@ dependencies {
     // compile files('libs/kr/iap_plugin_v16.03.00_20161123.jar');
     // kr end
 }
-
+```
 #### 3.4 关于Unity的SDK接入
 a. 首先使用Android Studio自建一个安卓项目工程后并完成SDK的接入工作；<br/><br/>
 b. 请注意，游戏主Activity需要继承Unity的UnityPlayerActivity；<br/><br/>
