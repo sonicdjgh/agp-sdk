@@ -45,6 +45,12 @@ dependencies {
     compile 'com.facebook.android:facebook-share:4.+'
     // base end
 
+    // cn begin
+    // compile files('libs/cn/alipaySdk-20180316.jar')
+    // compile files('libs/cn/open_sdk_r5781_lite.jar')
+    // compile files('libs/cn/wechat-sdk-android-with-mta.jar')
+    // cn end
+
     // tw begin
     // 如果使用 MyCard 支付，请打开下面的配置
     // compile files('libs/tw/MyCardPaySDK.jar')
