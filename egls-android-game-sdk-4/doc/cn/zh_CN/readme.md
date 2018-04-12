@@ -1,4 +1,4 @@
-# EGLS-Android-Game-SDK-KR-4.X.X(Client-zhCN)
+# EGLS-Android-Game-SDK-CN-4.X.X(Client-zhCN)
 ### 1. 简介
 欢迎使用 EGLS Android Game SDK，这篇SDK对接文档说明适用于在**中国大陆**发行的游戏。<br/><br/>
 从4.x.x版本起，我们采用了新的账号体系，所以并不兼容旧版（即同一个账号在登录后返回的uid与3.x.x版本的不一致）。如果您的游戏曾经接过旧版本的SDK，并且将要使用4.x.x版本的SDK时，请配合我们做游戏的强更及其他必要的更新操作（详情请咨询我方运营）。
@@ -33,7 +33,7 @@ dependencies {
 }
 ```
 #### 3.3 AGP lib 选择
-针对于在韩国地区发行的游戏，请在Module“AGP”的“build.gradle”文件里打开如下图所示的配置：<br/>
+针对于在中国大陆地区发行的游戏，请在Module“AGP”的“build.gradle”文件里打开如下图所示的配置：<br/>
 ```gradle
 repositories {
     flatDir {
@@ -50,7 +50,7 @@ dependencies {
 }
 ```
 #### 3.4 AGS lib 选择
-针对于在韩国地区发行的游戏，请在Module“AGS”的“build.gradle”文件里打开如下图所示的配置：<br/>
+针对于在中国大陆地区发行的游戏，请在Module“AGS”的“build.gradle”文件里打开如下图所示的配置：<br/>
 ```gradle
 repositories {
     flatDir {
@@ -101,55 +101,28 @@ minSdkVersion = 16，targetSdkVersion >= 23
 #### 4.1 AGP Permission 配置
 ```Xml
 <!-- AGP begin -->
-<!-- IGAW begin -->
-<!-- IGAW为韩国地区所使用的统计功能，其他地区发行的游戏请不要使用 -->
-<!-- 替换“MY_PACKAGE_NAME”字样为正式包名 -->
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-<uses-permission android:name="android.permission.WAKE_LOCK" />
-<uses-permission android:name="android.permission.VIBRATE" />
-<uses-permission android:name="android.permission.GET_TASKS" />
-<permission
-    android:name="MY_PACKAGE_NAME.permission.C2D_MESSAGE"
-    android:protectionLevel="signature" />
-<uses-permission android:name="MY_PACKAGE_NAME.permission.C2D_MESSAGE" />
-<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-<!-- IGAW end -->
+<!-- 暂没有可添加的配置 -->
 <!-- AGP end -->
 ```
 #### 4.2 AGS Permission 配置
 ```Xml
 <!-- AGS begin -->
-<!-- Google Play begin -->
-<!-- 如果使用Google Play支付功能，请打开以下配置 -->
-<!--
-<uses-permission android:name="com.android.vending.BILLING" />
-<uses-feature
-    android:name="android.hardware.camera"
-    android:required="false" />
-<uses-feature
-    android:name="android.hardware.camera.autofocus"
-    android:required="false" />
-<uses-feature
-    android:name="android.hardware.telephony"
-    android:required="false" />
-<uses-feature
-    android:name="android.hardware.microphone"
-    android:required="false" />
--->
-<!-- Google Play end -->
-
-
-<!-- OneStore begin -->
-<!-- 如果使用OneStore支付，请打开以下配置 -->
-<!--
+<!-- 微博 begin -->
+<!-- 如果使用微博分享功能，请打开以下配置 -->
 <uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.RECEIVE_SMS" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-<uses-permission android:name="android.permission.READ_PHONE_STATE" />
 <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
--->
-<!-- OneStore end -->
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<!-- 微博 end -->
+
+
+<!-- 支付宝 begin -->
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<!-- 支付宝 end -->
 <!-- AGS end -->
 ```
 请注意：以上 Permission 配置中只打开了SDK基础功能相关的配置，如果使用到其他功能，请打开对应的 Permission 配置！
