@@ -3,16 +3,14 @@
 欢迎使用 EGLS Android Game SDK，这篇SDK对接文档说明适用于在**中国大陆**发行的游戏。<br/><br/>
 从4.x.x版本起，我们采用了新的账号体系，所以并不兼容旧版（即同一个账号在登录后返回的uid与3.x.x版本的不一致）。如果您的游戏曾经接过旧版本的SDK，并且将要使用4.x.x版本的SDK时，请配合我们做游戏的强更及其他必要的更新操作（详情请咨询我方运营）。
 ### 2. 所需参数
-#### 2.1 eglsAppId
+#### 2.1 EGLS_APP_ID
 由我方给游戏分配的应用id，一个游戏对应一个
-#### 2.2 CHANNEL_GOOGLE_PUBLIC_KEY
-在Goole Play后台生成的支付公钥。
-#### 2.3 CHANNEL_SERVER_CLIENT_ID
-在Google API后台“OAuth 2.0 客户端 ID”配置的列表中，关于“Web Client”项对应的“Client ID”参数值。
-#### 2.4 com.facebook.sdk.ApplicationId
-在Facebook后台生成的应用id。
-#### 2.5 CHANNEL_ONESTORE_APP_ID
-在OneStore后台生成的应用id。
+#### 2.2 wx_app_id
+在微信平台上分配的应用标识，用于微信登录
+#### 2.3 wx_secret
+在微信平台上分配的秘钥，用于获取微信用户昵称
+#### 2.4 alipay_app_id
+在支付宝平台上分配的应用标识，用于支付宝支付
 ### 3. 环境搭建
 #### 3.1 gradle版本及设置
 gradle版本为4.1，并且需要在你当前Project里的gradle.properties文件中加上如下配置：
