@@ -202,7 +202,7 @@ minSdkVersion = 16，targetSdkVersion >= 23
         android:name="EGLS_APP_ID"
         android:value="\0MY_APP_ID" />
 	
-    <!-- 'MY_SERVER_TYPE'는 대응하는SERVER_TYPE로 변경 -->
+    <!-- 'MY_SERVER_TYPE'부분에 해당한 서비스 종류 코드를 입력해주세요.자세한 내용은“첨부파일 - serverType”참조해주세요. -->
     <meta-data
         android:name="EGLS_SERVER_TYPE"
         android:value="MY_SERVER_TYPE" />
@@ -274,7 +274,7 @@ minSdkVersion = 16，targetSdkVersion >= 23
     <!-- Google Play 결제 begin -->
     <!-- Google Play결제를사용하려고싶으면실행기능을사용하면아래배치를열어주십시오 -->
     <!-- 'MY_PUBLIC_KEY'를Google Play관리자페이지에있는 'publicKey'로수정합니다 -->
-    <!-- 4.1.0版本以前name属性为“com.egls.socialization.google.play.BillingActivity” -->
+    <!-- 4.1.0이전버전name속성:com.egls.socialization.google.play.BillingActivity-->
     <!--
     <activity
         android:name="com.egls.socialization.google.play.GooglePlayActivity"
