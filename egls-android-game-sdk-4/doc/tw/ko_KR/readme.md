@@ -19,7 +19,7 @@ android.enableAapt2=false
 ```
 #### 3.2 관계도
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/tw/S4TW000.png)<br/>
-如上图所示：假设Demo为SDK对接完毕的安卓游戏工程，那么Demo引入Module“AGP”，则需要在Demo中的“build.gradle”里添加如下配置：
+가이드라인:Demo가 SDK을위한구글게임프로젝트를상정한것을상기하면, Demo는 Module AGP를도입할경우, Demo에삽입되는build.gradle에아래와같이배치되어야합니다.
 ```gradle
 repositories {
     flatDir {
@@ -33,7 +33,7 @@ dependencies {
 }
 ```
 #### 3.3 AGP lib 선택
-针对于在港台地区发行的游戏，请在Module“AGP”的“build.gradle”文件里打开如下图所示的配置：<br/>
+홍콩대만지역에서발행되는게임은 'AGP'에 'build.gradle'라는폴더에다음과같이배치되었습니다.<br/>
 ```gradle
 repositories {
     flatDir {
@@ -54,7 +54,7 @@ dependencies {
 }
 ```
 #### 3.4 AGS lib 선택
-针对于在港台地区发行的游戏，请在Module“AGS”的“build.gradle”文件里打开如下图所示的配置：<br/>
+홍콩대만지역에서발행되는게임은Module'AGS'에 'build.gradle'라는폴더에다음과같이배치되었습니다.<br/>
 ```gradle
 repositories {
     flatDir {
@@ -95,7 +95,7 @@ dependencies {
 #### 3.5 UnitySDK연동
 a. 먼저Android Studio를사용하여 안드로이드 프로젝트를 세팅후SDK 연동을 합니다<br/><br/>
 b. 주의사항:게임 MainActivity 는 Unity 와 UnityPlayerActivity 를 사용합니다<br/><br/>
-c. Google推荐对危险权限的使用有一定要求，需要加入申请权限的逻辑。但由于Unity会自动申请“AndroidManifest.xml”文件中所配置的危险权限，不便于逻辑控制。如果有需要，请在“AndroidManifest.xml”文件中的“application”标签内加入如下配置：<br/>
+c. 구글은위험한권한의사용에대해필수적으로요구하고있으며, 청약권한에가입하는논리가필요하다.하지만 Unity는 'AndroidManifest'파일에 'xml'라는파일을자동으로신청하므로, 논리적인통제가되지않습니다.만약필요하다면'AndroidManifest'파일에 'application'라는파일을넣어주십시오.<br/>
 ```Xml
 <meta-data
     android:name="unityplayer.SkipPermissionsDialog"
@@ -120,7 +120,7 @@ minSdkVersion = 16，targetSdkVersion >= 23
 ```Xml
 <!-- AGS begin -->
 <!-- Google  begin -->
-<!-- 如果使用Google Play支付功能，请打开以下配置 -->
+<!-- Google Play기능 사용하려고싶으면，아래배치를 열어주십시오 -->
 <uses-permission android:name="com.android.vending.BILLING" />
 <!--
 <uses-feature
@@ -140,7 +140,7 @@ minSdkVersion = 16，targetSdkVersion >= 23
 
 
 <!-- Mycard begin -->
-<!-- 如果使用Mycard支付，请打开以下配置 -->
+<!-- Mycard기능 사용하려고싶으면，아래배치를 열어주십시오-->
 <!--
 <uses-permission android:name="android.permission.CAMERA" />
 <uses-permission android:name="android.permission.VIBRATE" />
@@ -197,37 +197,37 @@ minSdkVersion = 16，targetSdkVersion >= 23
     </activity>
 	
     <!-- Base begin -->
-    <!-- 替换"MY_APP_ID"字样为SDK初始化所需的eglsAppId -->
+    <!-- "MY_APP_ID"는SDK초가화 필요한eglsAppId로 변경 -->
     <meta-data
         android:name="EGLS_APP_ID"
         android:value="\0MY_APP_ID" />
 	
-    <!-- 替换"MY_SERVER_TYPE"字样为对应的服务类别码 -->
+    <!-- "MY_SERVER_TYPE"는 대응하는SERVER_TYPE로 변경 -->
     <meta-data
         android:name="EGLS_SERVER_TYPE"
         android:value="MY_SERVER_TYPE" />
 	
-    <!-- 替换"MY_PAY_CHANNEL"字样为对应的支付渠道码 -->
+    <!-- "MY_PAY_CHANNEL"는 대응하는 결제코드로 변경."첨부-payChannel"참조-->
     <meta-data
         android:name="EGLS_PAY_CHANNEL"
         android:value="MY_PAY_CHANNEL" />
 	
-    <!-- 当没有特殊要求时，“EGLS_PAY_IS_SANDBOX”的参数值为"false"即可 -->
+    <!--특별한요구사항이없는경우'EGLS_PAY_IS_SANDBOX_"'의계수값은 'false'로되었습니다.-->
     <meta-data
         android:name="EGLS_PAY_IS_SANDBOX"
         android:value="false" />
 	
-    <!-- 当没有特殊要求时，“EGLS_PAY_OTHER_PARAM”的参数值为""即可 -->
+    <!--특별한요구사항이없는경우“EGLS_PAY_OTHER_PARAM”의계수값은 ''로되어있다-->
     <meta-data
         android:name="EGLS_PAY_OTHER_PARAM"
         android:value="" />
 
-    <!-- 替换“MY_SERVER_CLIENT_ID”字样为在Google API后台“OAuth 2.0 客户端 ID”配置的列表中，关于“Web Client”项对应的“Client ID”参数值 -->
+    <!-- 'MY_SERVER_CLIENT_ID'는 'Google API Console'에 'OAuth 2.0 크라이안트ID' 리스트에서 'Web Client'에 대응하는'Client ID'로 변경 -->
     <meta-data
         android:name="CHANNEL_SERVER_CLIENT_ID"
         android:value="MY_SERVER_CLIENT_ID"/>
 
-    <!-- 替换“MY_APPLICATION_ID”字样为Facebook后台配置的applicationId -->
+    <!-- 'MY_APPLICATION_ID'는 Facebook Background'에서 배치하는'applicationId'로 변경 -->
     <provider
         android:name="com.facebook.FacebookContentProvider"
         android:authorities="com.facebook.app.FacebookContentProviderMY_APPLICATION_ID"
@@ -261,8 +261,8 @@ minSdkVersion = 16，targetSdkVersion >= 23
     </activity>
 	
     <!-- Google Play Game begin -->
-    <!-- 如果使用Google Play Game成就功能，请打开以下配置 -->
-    <!-- 替换“MY_GAMES_APP_ID”字样为"MY_SERVER_CLIENT_ID"的第一处"-"左边的纯数字部分 -->
+    <!-- Google Play Game실행기능을사용하면아래배치를열어주십시오-->
+    <!-- 'MY_GAMES_APP_ID'는 "MY_SERVER_CLIENT_ID"의첫번체"-"왼쪽에 숫자부분으로 변경 -->
     <!--
     <meta-data
         android:name="com.google.android.gms.games.APP_ID"
@@ -272,8 +272,8 @@ minSdkVersion = 16，targetSdkVersion >= 23
     
         
     <!-- Google Play 결제 begin -->
-    <!-- 如果使用Google Play支付功能，请打开以下配置 -->
-    <!-- “MY_PUBLIC_KEY”를Google Play관리자 페이지에 있는 publicKey로 수정합니다 -->
+    <!-- Google Play결제를사용하려고싶으면실행기능을사용하면아래배치를열어주십시오 -->
+    <!-- 'MY_PUBLIC_KEY'를'Google Play'관리자페이지에있는 'publicKey'로수정합니다 -->
     <!-- 4.1.0版本以前name属性为“com.egls.socialization.google.play.BillingActivity” -->
     <!--
     <activity
@@ -290,7 +290,7 @@ minSdkVersion = 16，targetSdkVersion >= 23
     
 
     <!-- Facebook begin -->
-    <!--如果游戏需要开启Facebook的“USER_FRIEND”权限，请打开以下配置 --> 
+    <!--만약게임에'Facebook'의'USER_FRIEND'권한을열려면아래의배치를열어주십시오. -->
     <!--
     <meta-data
             android:name="CNANNEL_PERMISSION_USER_FRIEND"
@@ -300,7 +300,7 @@ minSdkVersion = 16，targetSdkVersion >= 23
 
 
     <!-- Mycard 결제설정 begin -->
-    <!-- 如果使用Mycard支付功能，请打开以下配置 -->	
+    <!-- 'Mycard'결제를 사용하려고싶으면실행기능을사용하면아래배치를열어주십시오 -->	
     <!--
     <activity
         android:name="soft_world.mycard.paymentapp.ui.SplashActivity"
@@ -436,7 +436,7 @@ minSdkVersion = 16，targetSdkVersion >= 23
     
     
     <!-- Gash begin -->
-    <!-- 如果使用Gash支付功能，请打开以下配置 -->
+    <!-- 'Gash'결제를 사용하려고싶으면실행기능을사용하면아래배치를열어주십시오 -->
     <!--
     <activity
         android:name="com.gashpoint.gpclientsdk.SdkActivity"
@@ -499,7 +499,7 @@ protected void onCreate(Bundle savedInstanceState) {
 	e.printStackTrace();
     }
     int serverType = 2;// initSDK방법중serverType를유의해 주세요,자세한 설명은 “첨부 파일 - serverType”를 참고해 주세요
-    AGPManager.initSDK(this, versionCode, new AGPInitProcessListener() {// SDK初始化回调
+    AGPManager.initSDK(this, versionCode, new AGPInitProcessListener() {
 
 	@Override
 	public void onInitSDK(int code, String msg) {
@@ -530,10 +530,10 @@ AGPManager.eglsLogin(isOpenAutoLogin, new AGPLoginProcessListener() {
     @Override
     public void onLoginProcess(int code, String token, String uid, String msg) {
 	// 로그인 결과 값 Return，code=0이면 로그인 성공
-	// msg = "0"时，表示游客账号登录
-	// msg = "1"时，表示EGLS账号登录
-	// msg = "2"时，表示Google账号登录
-	// msg = "3"时，表示Facebook账号登录
+	// msg = "0"，게스트 계정 등록
+	// msg = "1"，EGLS계정 등록
+	// msg = "2"，Google계정 등록
+	// msg = "3"，Facebook계정 등록
     }
 
     @Override
@@ -551,9 +551,9 @@ String cpOrderInfo = "2SDF34DF12GH0S23234GAER5";// CP주문번호
 AGPManager.eglsPay(amount, productId, productName, cpOrderInfo, new AGPClientPayProcessListener(){
 	
     @Override
-    public void onClientPayFinish() {
+    public void onClientPayFinish(String eglsOrderId) {
 	// 클라이언트 결제 return 성공
-	// 客户端的支付完成并不能够完全代表支付操作成功，请以服务器的通知为准
+	// 지불완료후결제완료가확실시되지않으므로서버의통지를기준으로하십시오.
     }
 
     @Override
@@ -586,11 +586,11 @@ shareBundle.putString(Key.CONTENT_URL, contentUrl);
 AGPManager.shareInTW(true, true, shareBundle);
 ```
 ### 11. 其他注意事项
-1. 凡是游戏项目工程为Android Studio工程，并且在Gradle里配置了productFlavor来控制打包流程的，请务必在调用“AGPManager.initSDK()”接口前，写上如下逻辑代码：
+1. 게임프로그램은안드로이드스튜디오에서운영하고있으며패킷을제작프로세스를조절위해 'Gradle'에 'productFlavor'를배치하면인터페이스"AGPManager.initSDK()"를호출하기전에아래의논리코드를써야하십시오.
 ```Java
 AGPManager.addFlavorsBasePackage(BuildConfig.class.getPackage().getName());
 ```
-2. Google推荐的审核中，会对游戏首次运行时所使用的必要“危险权限”的申请和使用进行检查。SDK会主动申请“android.permission.WRITE_EXTERNAL_STORAGE”权限，但如果游戏还另需申请其他的“危险权限”，可以在调用“AGPManager.initSDK()”接口前，使用“addNecessaryPermission()”接口。例如：
+2. 구글의추천심사에서는게임이처음적용될때사용할필요가있는위험권한의신청과사용을점검한다.SDK는“android.permission.WRITE_EXTERNAL_STORAGE”권한을자동신청하고，게임은다른 '위험한권한'을신청할필요가있는경우，인터페이스“AGPManager.initSDK()”를호출하기전에인터페이스“addNecessaryPermission()”를사용주십시오.예를들면:
 ```Java
 AGPManager.addNecessaryPermission(Manifest.permission.READ_PHONE_STATE);
 AGPManager.addNecessaryPermission(Manifest.permission.RECORD_AUDIO);
