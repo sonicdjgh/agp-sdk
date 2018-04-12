@@ -18,7 +18,7 @@ gradle版本为4.1，并且需要在你当前Project里的gradle.properties文�
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
-![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res、S4000.png)<br/>
+![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/S4000.png)<br/>
 如上图所示：假设Demo为SDK对接完毕的安卓游戏工程，那么Demo引入Module“AGP”，则需要在Demo中的“build.gradle”里添加如下配置：
 ```gradle
 repositories {
