@@ -145,20 +145,6 @@ minSdkVersion = 16，targetSdkVersion >= 23
 
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
-        <!-- DeepLink begin -->
-        <!-- DeepLink配置为韩国IGAW统计功能所使用 -->
-        <!-- 替换“MY_PACKAGE_NAME”字样为正式包名 -->
-        <intent-filter>
-            <data
-                android:host="MY_PACKAGE_NAME"
-                android:scheme="egls" />
-
-            <action android:name="android.intent.action.VIEW" />
-
-            <category android:name="android.intent.category.DEFAULT" />
-            <category android:name="android.intent.category.BROWSABLE" />
-        </intent-filter>
-        <!-- DeepLink end -->
     </activity>
 	
     <!-- Base begin -->
@@ -167,12 +153,12 @@ minSdkVersion = 16，targetSdkVersion >= 23
         android:name="EGLS_APP_ID"
         android:value="\0MY_APP_ID" />
 	
-    <!-- 替换"MY_SERVER_TYPE"字样为对应的服务类别码 -->
+    <!-- 替换"MY_SERVER_TYPE"字样为对应的服务类别码，详见“附表 - serverType” -->
     <meta-data
         android:name="EGLS_SERVER_TYPE"
         android:value="MY_SERVER_TYPE" />
 	
-    <!-- 替换"MY_PAY_CHANNEL"字样为对应的支付渠道码 -->
+    <!-- 替换"MY_PAY_CHANNEL"字样为对应的支付渠道码，详见“附表 - payChannel” -->
     <meta-data
         android:name="EGLS_PAY_CHANNEL"
         android:value="MY_PAY_CHANNEL" />
@@ -186,153 +172,90 @@ minSdkVersion = 16，targetSdkVersion >= 23
     <meta-data
         android:name="EGLS_PAY_OTHER_PARAM"
         android:value="" />
-
-    <!-- 替换“MY_SERVER_CLIENT_ID”字样为在Google API后台“OAuth 2.0 客户端 ID”配置的列表中，关于“Web Client”项对应的“Client ID”参数值 -->
-    <meta-data
-        android:name="CHANNEL_SERVER_CLIENT_ID"
-        android:value="MY_SERVER_CLIENT_ID"/>
-
-    <!-- 替换“MY_APPLICATION_ID”字样为Facebook后台配置的applicationId -->
-    <provider
-        android:name="com.facebook.FacebookContentProvider"
-        android:authorities="com.facebook.app.FacebookContentProviderMY_APPLICATION_ID"
-        android:exported="true" />
-    <meta-data
-        android:name="com.facebook.sdk.ApplicationId"
-        android:value="\0MY_APPLICATION_ID" />
     <!-- Base end -->
 	
-        
-    <!-- AGP begin -->
-    <!-- IGAW begin -->
-    <!-- IGAW为韩国地区所使用的统计功能，其他地区发行的游戏请不要使用 -->
-    <!-- 替换“MY_PACKAGE_NAME”字样为正式包名 -->
-    <!-- 替换“MY_APP_KEY”字样为IGAW后台配置的appKey -->
-    <!-- 替换“MY_HASH_KEY”字样为IGAW后台配置的hashKey -->
-    <receiver
-        android:name="com.igaworks.IgawReceiver"
-        android:exported="true" >
-        <intent-filter>
-            <action android:name="com.android.vending.INSTALL_REFERRER" />
-        </intent-filter>
-    </receiver>
-    <receiver
-        android:name="com.igaworks.liveops.pushservice.LiveOpsGCMBroadcastReceiver"
-        android:permission="com.google.android.c2dm.permission.SEND" >
-        <intent-filter>
-            <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-
-            <category android:name="MY_PACKAGE_NAME" />
-        </intent-filter>
-    </receiver>
-    <service
-        android:name="com.igaworks.liveops.pushservice.GCMIntentService"
-        android:enabled="true" />
-    <receiver
-        android:name="com.igaworks.liveops.pushservice.LiveOpsReceiver"
-        android:permission="MY_PACKAGE_NAME.permission.C2D_MESSAGE" >
-        <intent-filter>
-            <action android:name="com.igaworks.liveops.pushservice.CLIENT_PUSH_RECEIVE" />
-        </intent-filter>
-    </receiver>
-    <activity
-        android:name="com.igaworks.liveops.pushservice.IgawLiveOpsPushMessageLauncherActivity"
-        android:noHistory="true"
-        android:permission="MY_PACKAGE_NAME.permission.C2D_MESSAGE" />
-    <meta-data
-        android:name="igaworks_app_key"
-        android:value="MY_APP_KEY" />
-    <meta-data
-        android:name="igaworks_hash_key"
-        android:value="MY_HASH_KEY" />
-    -->
-    <!-- IGAW end -->
-    <!-- AGP end -->
-
 
     <!-- AGS begin -->
     <activity
         android:name="com.egls.socialization.performance.AGSShareActivity"
         android:screenOrientation="landscape"
-        android:theme="@style/AGSTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation" >
+        android:theme="@style/AGSTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation">
+	<!-- 微博 begin -->
+	<!-- 如果使用微博分享功能，请打开以下配置 -->
+	<!-- 
+        <intent-filter>
+            <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+        -->
+        <!-- 微博 end -->
     </activity>
 	
-    <!-- Google Play Game begin -->
-    <!-- 如果使用Google Play Game成就功能，请打开以下配置 -->	
-    <!-- 替换“MY_GAMES_APP_ID”字样为"MY_SERVER_CLIENT_ID"的第一处"-"左边的纯数字部分 -->
-    <!--
-    <meta-data
-        android:name="com.google.android.gms.games.APP_ID"
-        android:value="\0MY_GAMES_APP_ID" />
-    -->
-    <!-- Google Play Game end -->
-
-
-    <!-- Google Play begin -->
-    <!-- 如果使用Google Play支付功能，请打开以下配置 -->	
-    <!-- 替换“MY_PUBLIC_KEY”字样为Google Play后台配置的publicKey -->
-    <!-- 4.1.0版本以前name属性为“com.egls.socialization.google.play.BillingActivity” -->
-    <!--
+    <!-- 微信 begin -->
     <activity
-        android:name="com.egls.socialization.google.play.GooglePlayActivity"
-        android:configChanges="fontScale|orientation|keyboardHidden|locale|navigation|screenSize|uiMode"
-        android:screenOrientation="landscape"
-        android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
-    <meta-data
-        android:name="CHANNEL_GOOGLE_PUBLIC_KEY"
-        android:value="MY_PUBLIC_KEY" />
-    -->
-    <!-- Google Play end -->
+        android:name="com.eglsgame.template.wxapi.WXEntryActivity"
+        android:exported="true"
+        android:screenOrientation="portrait"
+        android:theme="@android:style/Theme.NoDisplay"/>
     
-
-    <!-- Facebook begin -->
-    <!--如果游戏需要开启Facebook的“USER_FRIEND”权限，请打开以下配置 --> 
-    <!--
+    <!-- 替换“MY_WX_APP_ID”字样为微信平台上分配的应用标识 -->
     <meta-data
-            android:name="CNANNEL_PERMISSION_USER_FRIEND"
-            android:value="true"/>
-    -->
-    <!-- Facebook end  -->
+        android:name="wx_app_id"
+        android:value="MY_WX_APP_ID" />
     
-
-    <!-- OneStore begin -->
-    <!-- 如果使用OneStore支付功能，请打开以下配置 -->	
-    <!-- 替换“MY_APP_ID”字样为OneStore后台配置的appId -->
-    <!--
+    <!-- 替换“MY_WX_SECRET”字样为微信平台上分配的秘钥 -->	
     <meta-data
-        android:name="iap:api_version"
-        android:value="4" />
-    <activity
-        android:name="com.skplanet.dodo.IapWeb"
-        android:configChanges="fontScale|orientation|keyboardHidden|locale|navigation|screenSize|uiMode"
-        android:excludeFromRecents="true"
-        android:windowSoftInputMode="stateHidden" >
+        android:name="wx_secret"
+        android:value="MY_WX_SECRET" />
+    <!-- 微信 end -->
+	
+    
+    <!-- 微博 begin -->
+    <!-- 如果使用微博分享功能，请打开以下配置 -->
+    <!-- 替换“MY_WB_APP_KEY”字样为微博平台上分配的应用key -->
+    <!--	
+    <meta-data
+        android:name="wb_app_key"
+        android:value="\0MY_WB_APP_KEY" />
+    -->
+    <!-- 微博 end -->
+	
+	
+    <!-- QQ begin -->
+    <!-- 如果使用QQ分享功能，请打开以下配置 -->
+    <!-- 替换“MY_QQ_APP_ID”字样为QQ平台上分配的应用标识 -->	
+    <!--	
+    <activity
+        android:name="com.tencent.tauth.AuthActivity"
+        android:launchMode="singleTask"
+        android:noHistory="true">
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+
+            <data android:scheme="tencentMY_QQ_APP_ID" />
+        </intent-filter>
     </activity>
-    <meta-data
-        android:name="CHANNEL_ONESTORE_APP_ID"
-        android:value="MY_APP_ID"/>
-    -->
-    <!-- OneStore end -->
+    <activity
+        android:name="com.tencent.connect.common.AssistActivity"
+        android:configChanges="orientation|keyboardHidden"
+        android:screenOrientation="behind"
+        android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+
+    <meta-data
+        android:name="qq_app_id"
+        android:value="\0MY_QQ_APP_ID" />
+    <!-- QQ end -->
 	
 	
-    <!-- NaverCafe begin -->
-    <!-- 如果使用NaverCafe论坛，请打开以下配置 -->
-    <!-- 替换“MY_CLIENT_ID”字样为Naver后台配置的clientId -->
-    <!-- 替换“MY_CLIENT_SECRET”字样为Naver后台配置的clientSecret -->
-    <!-- 替换“MY_CAFE_ID”字样为NaverCafe后台配置的cafeId -->
-    <!--
-    <meta-data
-        android:name="naver_login_client_id"
-        android:value="MY_CLIENT_ID" />
-    <meta-data
-        android:name="naver_login_client_secret"
-        android:value="MY_CLIENT_SECRET" />
-    <meta-data
-        android:name="naver_cafe_id"
-        android:value="\0MY_CAFE_ID" /> 
-    -->
-    <!-- NaverCafe end -->
+    <!-- 支付宝 begin -->
+    <activity
+        android:name="com.alipay.sdk.app.H5PayActivity"
+        android:screenOrientation="portrait"/>
+    <!-- 支付宝 end -->
     <!-- AGS end -->
 </application>
 ```
