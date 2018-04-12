@@ -6,9 +6,9 @@ EGLS Android Game SDK를 사용해 주셔서 진심으로 감사드립니다,이
 #### 2.1 eglsAppId
 EGLS 에서 세팅한 앱 아이디입니다
 #### 2.2 CHANNEL_GOOGLE_PUBLIC_KEY
-Goole Play관리자 페이지에서 생성한 PUBLIC KEY입니다.
+Goole Play Console 페이지에서 생성한 PUBLIC KEY입니다.
 #### 2.3 CHANNEL_SERVER_CLIENT_ID
-Google API 관리자 페이지 “OAuth 2.0 클라이인트 ID”리스트중，“Web Client”에 해당하는 “Client ID” 수치.
+Google API Console 페이지 OAuth 2.0 클라이인트 ID리스트중，Web Client에 해당하는 Client ID 수치.
 #### 2.4 com.facebook.sdk.ApplicationId
 Facebook앱 아이디입니다.
 ### 3. 개발환경
@@ -19,7 +19,7 @@ android.enableAapt2=false
 ```
 #### 3.2 관계도
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/tw/S4TW000.png)<br/>
-가이드라인:Demo가 SDK을위한구글게임프로젝트를상정한것을상기하면, Demo는 Module AGP를도입할경우, Demo에삽입되는build.gradle에아래와같이배치되어야합니다.
+가이드라인:Demo가 SDK을위한구글게임프로젝트를상정한것을상기하면, Demo는 Module 'AGP'를도입할경우, Demo에삽입되는build.gradle에아래와같이배치되어야합니다.
 ```gradle
 repositories {
     flatDir {
@@ -33,7 +33,7 @@ dependencies {
 }
 ```
 #### 3.3 AGP lib 선택
-홍콩대만지역에서발행되는게임은 'AGP'에 'build.gradle'라는폴더에다음과같이배치되었습니다.<br/>
+홍콩대만지역에서발행되는게임은 Module 'AGP'에 'build.gradle'라는폴더에다음과같이배치되었습니다.<br/>
 ```gradle
 repositories {
     flatDir {
@@ -197,37 +197,37 @@ minSdkVersion = 16，targetSdkVersion >= 23
     </activity>
 	
     <!-- Base begin -->
-    <!-- "MY_APP_ID"는SDK초가화 필요한eglsAppId로 변경 -->
+    <!-- 'MY_APP_ID'는SDK초가화 필요한eglsAppId로 변경 -->
     <meta-data
         android:name="EGLS_APP_ID"
         android:value="\0MY_APP_ID" />
 	
-    <!-- "MY_SERVER_TYPE"는 대응하는SERVER_TYPE로 변경 -->
+    <!-- 'MY_SERVER_TYPE'는 대응하는SERVER_TYPE로 변경 -->
     <meta-data
         android:name="EGLS_SERVER_TYPE"
         android:value="MY_SERVER_TYPE" />
 	
-    <!-- "MY_PAY_CHANNEL"는 대응하는 결제코드로 변경."첨부-payChannel"참조-->
+    <!-- 'MY_PAY_CHANNEL'는 대응하는 결제코드로 변경.'첨부-payChannel'참조-->
     <meta-data
         android:name="EGLS_PAY_CHANNEL"
         android:value="MY_PAY_CHANNEL" />
 	
-    <!--특별한요구사항이없는경우'EGLS_PAY_IS_SANDBOX_"'의계수값은 'false'로되었습니다.-->
+    <!--특별한요구사항이없는경우'EGLS_PAY_IS_SANDBOX'의계수값은 'false'로되었습니다.-->
     <meta-data
         android:name="EGLS_PAY_IS_SANDBOX"
         android:value="false" />
 	
-    <!--특별한요구사항이없는경우“EGLS_PAY_OTHER_PARAM”의계수값은 ''로되어있다-->
+    <!--특별한요구사항이없는경우'EGLS_PAY_OTHER_PARAM'의계수값은 ''로되어있다-->
     <meta-data
         android:name="EGLS_PAY_OTHER_PARAM"
         android:value="" />
 
-    <!-- 'MY_SERVER_CLIENT_ID'는 'Google API Console'에 'OAuth 2.0 크라이안트ID' 리스트에서 'Web Client'에 대응하는'Client ID'로 변경 -->
+    <!-- 'MY_SERVER_CLIENT_ID'는 Google API Console에 OAuth 2.0 크라이안트ID리스트에서 Web Client에 대응하는Client ID로 변경 -->
     <meta-data
         android:name="CHANNEL_SERVER_CLIENT_ID"
         android:value="MY_SERVER_CLIENT_ID"/>
 
-    <!-- 'MY_APPLICATION_ID'는 Facebook Background'에서 배치하는'applicationId'로 변경 -->
+    <!-- 'MY_APPLICATION_ID'는 Facebook Console에서 배치하는applicationId로 변경 -->
     <provider
         android:name="com.facebook.FacebookContentProvider"
         android:authorities="com.facebook.app.FacebookContentProviderMY_APPLICATION_ID"
@@ -273,7 +273,7 @@ minSdkVersion = 16，targetSdkVersion >= 23
         
     <!-- Google Play 결제 begin -->
     <!-- Google Play결제를사용하려고싶으면실행기능을사용하면아래배치를열어주십시오 -->
-    <!-- 'MY_PUBLIC_KEY'를'Google Play'관리자페이지에있는 'publicKey'로수정합니다 -->
+    <!-- 'MY_PUBLIC_KEY'를Google Play관리자페이지에있는 'publicKey'로수정합니다 -->
     <!-- 4.1.0版本以前name属性为“com.egls.socialization.google.play.BillingActivity” -->
     <!--
     <activity
@@ -290,7 +290,7 @@ minSdkVersion = 16，targetSdkVersion >= 23
     
 
     <!-- Facebook begin -->
-    <!--만약게임에'Facebook'의'USER_FRIEND'권한을열려면아래의배치를열어주십시오. -->
+    <!--만약게임에Facebook의'USER_FRIEND'권한을열려면아래의배치를열어주십시오. -->
     <!--
     <meta-data
             android:name="CNANNEL_PERMISSION_USER_FRIEND"
@@ -300,7 +300,7 @@ minSdkVersion = 16，targetSdkVersion >= 23
 
 
     <!-- Mycard 결제설정 begin -->
-    <!-- 'Mycard'결제를 사용하려고싶으면실행기능을사용하면아래배치를열어주십시오 -->	
+    <!-- Mycard결제를 사용하려고싶으면실행기능을사용하면아래배치를열어주십시오 -->	
     <!--
     <activity
         android:name="soft_world.mycard.paymentapp.ui.SplashActivity"
@@ -436,7 +436,7 @@ minSdkVersion = 16，targetSdkVersion >= 23
     
     
     <!-- Gash begin -->
-    <!-- 'Gash'결제를 사용하려고싶으면실행기능을사용하면아래배치를열어주십시오 -->
+    <!-- Gash결제를 사용하려고싶으면실행기능을사용하면아래배치를열어주십시오 -->
     <!--
     <activity
         android:name="com.gashpoint.gpclientsdk.SdkActivity"
@@ -585,7 +585,7 @@ shareBundle.putString(Key.CONTENT_IMAGE, contentImage);
 shareBundle.putString(Key.CONTENT_URL, contentUrl);
 AGPManager.shareInTW(true, true, shareBundle);
 ```
-### 11. 其他注意事项
+### 11. 기타
 1. 게임프로그램은안드로이드스튜디오에서운영하고있으며패킷을제작프로세스를조절위해 'Gradle'에 'productFlavor'를배치하면인터페이스"AGPManager.initSDK()"를호출하기전에아래의논리코드를써야하십시오.
 ```Java
 AGPManager.addFlavorsBasePackage(BuildConfig.class.getPackage().getName());
