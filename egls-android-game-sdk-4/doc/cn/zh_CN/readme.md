@@ -109,10 +109,12 @@ minSdkVersion = 16，targetSdkVersion >= 23
 <!-- AGS begin -->
 <!-- 微博 begin -->
 <!-- 如果使用微博分享功能，请打开以下配置 -->
+<!--
 <uses-permission android:name="android.permission.INTERNET" />
 <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+-->
 <!-- 微博 end -->
 
 
