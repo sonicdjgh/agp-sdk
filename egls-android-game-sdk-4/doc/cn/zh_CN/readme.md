@@ -18,14 +18,13 @@ gradle版本为4.1，并且需要在你当前Project里的gradle.properties文�
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
-![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/kr/S4KR000.png)<br/>
+![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res、S4000.png)<br/>
 如上图所示：假设Demo为SDK对接完毕的安卓游戏工程，那么Demo引入Module“AGP”，则需要在Demo中的“build.gradle”里添加如下配置：
 ```gradle
 repositories {
     flatDir {
         dirs project(':AGP').file('libs')
         dirs project(':AGS').file('libs')
-        dirs project(':AGS').file('libs/kr')
     }
 }
 
@@ -40,21 +39,14 @@ repositories {
     flatDir {
         dirs 'libs'
         dirs project(':AGS').file('libs')
-        dirs project(':AGS').file('libs/kr')
     }
 }
 
 dependencies {
     // base begin
     compile project(':AGS')
-    compile(name: 'egls-agp-sdk-4.2.0', ext: 'aar')
+    compile(name: 'egls-agp-sdk-4.2.2', ext: 'aar')
     // base end
-
-    // kr begin
-    compile files('libs/kr/IgawAdbrix_v4.4.0a.jar');
-    compile files('libs/kr/IgawCommon_v4.4.0a.jar');
-    compile files('libs/kr/IgawLiveOps_v1.3.6a_thirdparty.jar');
-    // kr end
 }
 ```
 #### 3.4 AGS lib 选择
@@ -63,14 +55,13 @@ dependencies {
 repositories {
     flatDir {
         dirs 'libs'
-        dirs 'libs/kr'
     }
 }
 
 dependencies {
     // base begin
-    compile(name: 'egls-ags-sdk-4.2.0', ext: 'aar')
-    compile(name: 'egls-android-support-4.2.0', ext: 'aar')
+    compile(name: 'egls-ags-sdk-4.2.2', ext: 'aar')
+    compile(name: 'egls-android-support-4.2.2', ext: 'aar')
     compile files('libs/openDefault-1.0.0-openDefaultRelease.jar')
     //
     compile 'com.google.android.gms:play-services-auth:11.0.1'
@@ -88,20 +79,11 @@ dependencies {
     compile 'com.facebook.android:facebook-share:4.+'
     // base end
 
-    // kr begin
-    compile files('libs/kr/gson-2.8.0.jar');
-    compile files('libs/kr/3rdparty_login_library_android_4.1.4.jar')
-    compile files('libs/kr/api-gateway-hmac-2.3.1.jar')
-    compile files('libs/kr/library-1.0.0.jar')
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'com.squareup:otto:1.3.8'
-    compile 'com.navercorp.volleyextensions:volleyer:2.0.1', {
-        exclude group: 'com.mcxiaoke.volley', module: 'library'
-    }
-    compile(name: 'cafeSdk-2.4.3', ext: 'aar')
-    // 如果使用 OneStore 支付，请打开下面的配置：
-    // compile files('libs/kr/iap_plugin_v16.03.00_20161123.jar');
-    // kr end
+    // cn begin
+    compile files('libs/cn/alipaySdk-20180316.jar')
+    compile files('libs/cn/open_sdk_r5781_lite.jar')
+    compile files('libs/cn/wechat-sdk-android-with-mta.jar')
+    // cn end
 }
 ```
 #### 3.5 关于Unity的SDK接入
