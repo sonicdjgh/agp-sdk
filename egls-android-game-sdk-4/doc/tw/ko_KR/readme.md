@@ -1,7 +1,7 @@
 # EGLS-Android-Game-SDK-TW-4.X.X(Client-koKR)
 ### 1. 소개
 EGLS Android Game SDK를 사용해 주셔서 진심으로 감사드립니다,이SDK문서는 **대만/홍콩** 퍼블리싱게임에적용합니다<br/><br/>
-从4.x.x版本起，我们采用了新的账号体系，所以并不兼容旧版（即同一个账号在登录后返回的uid与3.x.x版本的不一致）。如果您的游戏曾经接过旧版本的SDK，并且将要使用4.x.x版本的SDK时，请配合我们做游戏的强更及其他必要的更新操作（详情请咨询我方运营）。
+4.x.x버전부터 새로운 계정 로직을 업데이트 했습니다.이전 버전과는 같이 사용할 수 없습니다.(즉 같은 계정으로 로그인후 다시 돌아가기하면 UID와 3.x.x버전이 같지 않음)만약 게임이 구버전의 SDK를 적용하고 있고 4.x.x버전의 SDK를 사용하려면 게임 apk교체와 기타 필요한 작업이 필요합니다.(자세한건 저희 운영팀한테 문의하시길 바랍니다.)
 ### 2. Key/ID
 #### 2.1 eglsAppId
 EGLS 에서 세팅한 앱 아이디입니다
@@ -12,8 +12,8 @@ Google API Console 페이지 OAuth 2.0 클라이인트 ID리스트중，Web Clie
 #### 2.4 com.facebook.sdk.ApplicationId
 Facebook앱 아이디입니다.
 ### 3. 개발환경
-#### 3.1 gradle版本及设置
-gradle版本为4.1，并且需要在你当前Project里的gradle.properties文件中加上如下配置：
+#### 3.1 gradle버전 및 설정
+gradle버전은 4.1이며 Project안의 gradle.properties문서중에서 아래의 세팅이 필요함:
 ```gradle
 android.enableAapt2=false
 ```
