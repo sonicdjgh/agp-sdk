@@ -172,6 +172,22 @@ minSdkVersion = 16，targetSdkVersion >= 23
     <meta-data
         android:name="EGLS_PAY_OTHER_PARAM"
         android:value="" />
+	
+    <!-- 替换“MY_WX_APP_ID”字样为微信平台上分配的应用标识 -->
+    <meta-data
+        android:name="wx_app_id"
+        android:value="MY_WX_APP_ID" />
+    
+    <!-- 替换“MY_WX_SECRET”字样为微信平台上分配的秘钥 -->	
+    <meta-data
+        android:name="wx_secret"
+        android:value="MY_WX_SECRET" />
+
+	
+    <!-- 替换“MY_QQ_APP_ID”字样为QQ平台上分配的应用标识 -->
+    <meta-data
+        android:name="qq_app_id"
+        android:value="\0MY_QQ_APP_ID" />
     <!-- Base end -->
 	
 
@@ -197,17 +213,7 @@ minSdkVersion = 16，targetSdkVersion >= 23
         android:name="com.eglsgame.template.wxapi.WXEntryActivity"
         android:exported="true"
         android:screenOrientation="portrait"
-        android:theme="@android:style/Theme.NoDisplay"/>
-    
-    <!-- 替换“MY_WX_APP_ID”字样为微信平台上分配的应用标识 -->
-    <meta-data
-        android:name="wx_app_id"
-        android:value="MY_WX_APP_ID" />
-    
-    <!-- 替换“MY_WX_SECRET”字样为微信平台上分配的秘钥 -->	
-    <meta-data
-        android:name="wx_secret"
-        android:value="MY_WX_SECRET" />
+        android:theme="@android:style/Theme.NoDisplay"/>    
     <!-- 微信 end -->
 	
     
@@ -223,9 +229,7 @@ minSdkVersion = 16，targetSdkVersion >= 23
 	
 	
     <!-- QQ begin -->
-    <!-- 如果使用QQ分享功能，请打开以下配置 -->
-    <!-- 替换“MY_QQ_APP_ID”字样为QQ平台上分配的应用标识 -->	
-    <!--	
+    <!-- 替换“MY_QQ_APP_ID”字样为QQ平台上分配的应用标识 -->
     <activity
         android:name="com.tencent.tauth.AuthActivity"
         android:launchMode="singleTask"
@@ -244,10 +248,6 @@ minSdkVersion = 16，targetSdkVersion >= 23
         android:configChanges="orientation|keyboardHidden"
         android:screenOrientation="behind"
         android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
-
-    <meta-data
-        android:name="qq_app_id"
-        android:value="\0MY_QQ_APP_ID" />
     <!-- QQ end -->
 	
 	
