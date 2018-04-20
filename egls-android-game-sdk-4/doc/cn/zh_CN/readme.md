@@ -396,6 +396,8 @@ AGPManager.shareInCN(true, true, true, shareBundle);
 ### 11. 关于微信功能的使用
 SDK集成了“微信登录”及“微信分享”，除了添加相关的AndroidManifest.xml文件配置之外，还需要在项目工程中添加一个以“正式包名.wxapi”的package（以Demo为例，则添加的package为“com.egls.demo.wxapi”），并且在该package中添加一个名为“WXEntryActivity”的Activity类，这个类必须继承SDK中的“com.egls.socialization.wechat.WeChatEntryActivity”类，例如：
 ```java
+package 正式包名.wxapi;
+
 import com.egls.socialization.wechat.WeChatEntryActivity;
 
 public class WXEntryActivity extends WeChatEntryActivity {
