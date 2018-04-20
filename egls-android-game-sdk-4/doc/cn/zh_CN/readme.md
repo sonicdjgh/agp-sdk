@@ -136,7 +136,7 @@ minSdkVersion = 16，targetSdkVersion >= 23
     android:label="AGSDK Demo"
     android:theme="@style/AppTheme" >
     <activity
-        android:name="com.egls.sdk.demo.GameActivity"
+        android:name="com.egls.demo.GameActivity"
         android:configChanges="fontScale|orientation|keyboardHidden|locale|navigation|screenSize|uiMode"
         android:screenOrientation="landscape"
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
@@ -391,6 +391,16 @@ shareBundle.putString(Key.CONTENT_TEXT, contentText);
 shareBundle.putString(Key.CONTENT_IMAGE, contentImage);
 shareBundle.putString(Key.CONTENT_URL, contentUrl);
 AGPManager.shareInCN(true, true, true, shareBundle);
+```
+
+### 11. 关于微信功能的使用
+SDK集成了“微信登录”及“微信分享”，除了添加相关的AndroidManifest.xml文件配置之外，还需要在项目工程中添加一个以“正式包名.wxapi”的package（以Demo为例，则添加的package为“com.egls.demo.wxapi”），并且在该package中添加一个名为“WXEntryActivity”的Activity类，这个类必须继承SDK中的“com.egls.socialization.wechat.WeChatEntryActivity”类，例如：
+```java
+import com.egls.socialization.wechat.WeChatEntryActivity;
+
+public class WXEntryActivity extends WeChatEntryActivity {
+
+}
 ```
 ### 11. 其他注意事项
 1. 凡是游戏项目工程为Android Studio工程，并且在Gradle里配置了productFlavor来控制打包流程的，请务必在调用“AGPManager.initSDK()”接口前，写上如下逻辑代码：
