@@ -47,7 +47,7 @@ repositories {
 dependencies {
     // base begin
     compile project(':AGS')
-    compile(name: 'egls-agp-sdk-4.2.2', ext: 'aar')
+    compile(name: 'egls-agp-sdk-4.2.3', ext: 'aar')
     // base end
 }
 ```
