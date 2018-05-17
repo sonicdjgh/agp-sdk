@@ -49,7 +49,7 @@ repositories {
 dependencies {
     // base begin
     compile project(':AGS')
-    compile(name: 'egls-agp-sdk-4.2.4', ext: 'aar')
+    compile(name: 'egls-agp-sdk-4.2.5', ext: 'aar')
     // base end
 
     // kr begin
@@ -71,10 +71,12 @@ repositories {
 
 dependencies {
     // base begin
-    compile(name: 'egls-ags-sdk-4.2.4', ext: 'aar')
-    compile(name: 'egls-android-support-4.2.4', ext: 'aar')
+    compile(name: 'egls-ags-sdk-4.2.5', ext: 'aar')
+    compile(name: 'egls-android-support-4.2.5', ext: 'aar')
     compile files('libs/openDefault-1.0.0-openDefaultRelease.jar')
-    //
+    // base end
+
+    // kr begin
     compile 'com.google.android.gms:play-services-auth:11.0.1'
     compile 'com.google.android.gms:play-services-auth-base:11.0.1'
     compile 'com.google.android.gms:play-services-base:11.0.1'
@@ -84,13 +86,11 @@ dependencies {
     compile 'com.google.android.gms:play-services-gcm:11.0.1'
     compile 'com.google.android.gms:play-services-iid:11.0.1'
     compile 'com.google.android.gms:play-services-tasks:11.0.1'
-    //
+    
     compile 'com.facebook.android:facebook-core:4.+'
     compile 'com.facebook.android:facebook-login:4.+'
     compile 'com.facebook.android:facebook-share:4.+'
-    // base end
-
-    // kr begin
+    
     compile files('libs/kr/gson-2.8.0.jar');
     compile files('libs/kr/3rdparty_login_library_android_4.1.4.jar')
     compile files('libs/kr/api-gateway-hmac-2.3.1.jar')
@@ -101,6 +101,7 @@ dependencies {
         exclude group: 'com.mcxiaoke.volley', module: 'library'
     }
     compile(name: 'cafeSdk-2.4.3', ext: 'aar')
+    
     // 如果使用 OneStore 支付，请打开下面的配置：
     // compile files('libs/kr/iap_plugin_v16.03.00_20161123.jar');
     // kr end
