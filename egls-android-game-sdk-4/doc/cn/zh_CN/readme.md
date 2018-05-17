@@ -47,7 +47,7 @@ repositories {
 dependencies {
     // base begin
     compile project(':AGS')
-    compile(name: 'egls-agp-sdk-4.2.4', ext: 'aar')
+    compile(name: 'egls-agp-sdk-4.2.5', ext: 'aar')
     // base end
 }
 ```
@@ -62,23 +62,9 @@ repositories {
 
 dependencies {
     // base begin
-    compile(name: 'egls-ags-sdk-4.2.4', ext: 'aar')
-    compile(name: 'egls-android-support-4.2.4', ext: 'aar')
+    compile(name: 'egls-ags-sdk-4.2.5', ext: 'aar')
+    compile(name: 'egls-android-support-4.2.5', ext: 'aar')
     compile files('libs/openDefault-1.0.0-openDefaultRelease.jar')
-    //
-    compile 'com.google.android.gms:play-services-auth:11.0.1'
-    compile 'com.google.android.gms:play-services-auth-base:11.0.1'
-    compile 'com.google.android.gms:play-services-base:11.0.1'
-    compile 'com.google.android.gms:play-services-basement:11.0.1'
-    compile 'com.google.android.gms:play-services-drive:11.0.1'
-    compile 'com.google.android.gms:play-services-games:11.0.1'
-    compile 'com.google.android.gms:play-services-gcm:11.0.1'
-    compile 'com.google.android.gms:play-services-iid:11.0.1'
-    compile 'com.google.android.gms:play-services-tasks:11.0.1'
-    //
-    compile 'com.facebook.android:facebook-core:4.+'
-    compile 'com.facebook.android:facebook-login:4.+'
-    compile 'com.facebook.android:facebook-share:4.+'
     // base end
 
     // cn begin
