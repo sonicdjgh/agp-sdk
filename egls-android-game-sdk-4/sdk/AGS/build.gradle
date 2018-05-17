@@ -26,23 +26,9 @@ repositories {
 
 dependencies {
     // base begin
-    compile(name: 'egls-ags-sdk-4.2.4', ext: 'aar')
-    compile(name: 'egls-android-support-4.2.4', ext: 'aar')
+    compile(name: 'egls-ags-sdk-4.2.5', ext: 'aar')
+    compile(name: 'egls-android-support-4.2.5', ext: 'aar')
     compile files('libs/openDefault-1.0.0-openDefaultRelease.jar')
-    //
-    compile 'com.google.android.gms:play-services-auth:11.0.1'
-    compile 'com.google.android.gms:play-services-auth-base:11.0.1'
-    compile 'com.google.android.gms:play-services-base:11.0.1'
-    compile 'com.google.android.gms:play-services-basement:11.0.1'
-    compile 'com.google.android.gms:play-services-drive:11.0.1'
-    compile 'com.google.android.gms:play-services-games:11.0.1'
-    compile 'com.google.android.gms:play-services-gcm:11.0.1'
-    compile 'com.google.android.gms:play-services-iid:11.0.1'
-    compile 'com.google.android.gms:play-services-tasks:11.0.1'
-    //
-    compile 'com.facebook.android:facebook-core:4.+'
-    compile 'com.facebook.android:facebook-login:4.+'
-    compile 'com.facebook.android:facebook-share:4.+'
     // base end
 
     // cn begin
@@ -52,6 +38,20 @@ dependencies {
     // cn end
 
     // tw begin
+    // compile 'com.google.android.gms:play-services-auth:11.0.1'
+    // compile 'com.google.android.gms:play-services-auth-base:11.0.1'
+    // compile 'com.google.android.gms:play-services-base:11.0.1'
+    // compile 'com.google.android.gms:play-services-basement:11.0.1'
+    // compile 'com.google.android.gms:play-services-drive:11.0.1'
+    // compile 'com.google.android.gms:play-services-games:11.0.1'
+    // compile 'com.google.android.gms:play-services-gcm:11.0.1'
+    // compile 'com.google.android.gms:play-services-iid:11.0.1'
+    // compile 'com.google.android.gms:play-services-tasks:11.0.1'
+
+    // compile 'com.facebook.android:facebook-core:4.+'
+    // compile 'com.facebook.android:facebook-login:4.+'
+    // compile 'com.facebook.android:facebook-share:4.+'
+
     // 如果使用 MyCard 支付，请打开下面的配置
     // compile files('libs/tw/MyCardPaySDK.jar')
     // 如果使用 Gash 支付，请打开下面的配置
@@ -59,6 +59,20 @@ dependencies {
     // tw end
 
     // kr begin
+    // compile 'com.google.android.gms:play-services-auth:11.0.1'
+    // compile 'com.google.android.gms:play-services-auth-base:11.0.1'
+    // compile 'com.google.android.gms:play-services-base:11.0.1'
+    // compile 'com.google.android.gms:play-services-basement:11.0.1'
+    // compile 'com.google.android.gms:play-services-drive:11.0.1'
+    // compile 'com.google.android.gms:play-services-games:11.0.1'
+    // compile 'com.google.android.gms:play-services-gcm:11.0.1'
+    // compile 'com.google.android.gms:play-services-iid:11.0.1'
+    // compile 'com.google.android.gms:play-services-tasks:11.0.1'
+
+    // compile 'com.facebook.android:facebook-core:4.+'
+    // compile 'com.facebook.android:facebook-login:4.+'
+    // compile 'com.facebook.android:facebook-share:4.+'
+
     // compile files('libs/kr/gson-2.8.0.jar');
     // compile files('libs/kr/3rdparty_login_library_android_4.1.4.jar')
     // compile files('libs/kr/api-gateway-hmac-2.3.1.jar')
