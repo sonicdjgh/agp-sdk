@@ -44,7 +44,7 @@ repositories {
 
 dependencies {
     // base begin
-    compile(name: 'egls-agp-sdk-4.2.4', ext: 'aar')
+    compile(name: 'egls-agp-sdk-4.2.5', ext: 'aar')
     compile project(':AGS')
     // base end
 
@@ -66,8 +66,8 @@ repositories {
 
 dependencies {
     // base begin
-    compile(name: 'egls-ags-sdk-4.2.4', ext: 'aar')
-    compile(name: 'egls-android-support-4.2.4', ext: 'aar')
+    compile(name: 'egls-ags-sdk-4.2.5', ext: 'aar')
+    compile(name: 'egls-android-support-4.2.5', ext: 'aar')
     compile files('libs/openDefault-1.0.0-openDefaultRelease.jar')
     //
     compile 'com.google.android.gms:play-services-auth:11.0.1'
