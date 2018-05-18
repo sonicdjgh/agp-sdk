@@ -3,7 +3,7 @@
 ### Version: 4.2.5
 1. 去掉在中国大陆发行的游戏对Google、Facebook的库依赖；
 2. 简化Facebook登录逻辑代码；
-3. 更新了AppsFlyer的SDK，并请更改引入的配置<br /><br />
+3. 更新了AppsFlyer的SDK，并请更改引入的配置。<br /><br />
 ### Version: 4.2.4
 修复部分发行区错误引用AppsFlyer库的问题。<br /><br />
 ### Version: 4.2.3
