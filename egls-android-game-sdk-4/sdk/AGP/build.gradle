@@ -35,7 +35,8 @@ dependencies {
     // base end
 
     // tw begin
-    // compile files('libs/tw/AF-Android-SDK-4.6.0.jar')
+    // compile 'com.appsflyer:af-android-sdk:4+@aar'
+    // compile 'com.android.installreferrer:installreferrer:1.0'
     // tw end
 
     // kr begin
