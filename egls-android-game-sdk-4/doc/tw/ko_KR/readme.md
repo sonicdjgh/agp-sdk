@@ -49,7 +49,8 @@ dependencies {
     // base end
 
     // tw begin
-    compile files('libs/tw/AF-Android-SDK-4.6.0.jar')
+    compile 'com.appsflyer:af-android-sdk:4+@aar'
+    compile 'com.android.installreferrer:installreferrer:1.0'
     // tw end
 }
 ```
@@ -108,9 +109,6 @@ minSdkVersion = 16，targetSdkVersion >= 23
 ```Xml
 <!-- AGP begin -->
 <!-- AppsFlyer begin -->
-<!-- AppsFlyer홍콩,대만에서 사용하는 통계삽입 기능 -->
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 <!-- 현재 연동하는 안드로이드패키지가 Google Play외의 기타 엡스토어에 사용하면,이 권한에 대해 반드시 설명해야 합니다,아니면 이 설명권한을 삭제해야 합니다 -->
 <!-- <uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
 <!-- AppsFlyer end -->
