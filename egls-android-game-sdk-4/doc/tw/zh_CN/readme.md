@@ -50,7 +50,8 @@ dependencies {
 
 
     // tw begin
-    compile files('libs/tw/AF-Android-SDK-4.6.0.jar')
+    compile 'com.appsflyer:af-android-sdk:4+@aar'
+    compile 'com.android.installreferrer:installreferrer:1.0'
     // tw end
 }
 ```
@@ -110,9 +111,6 @@ minSdkVersion = 14，targetSdkVersion >= 23
 ```Xml
 <!-- AGP begin -->
 <!-- AppsFlyer begin -->
-<!-- AppsFlyer为港台地区所使用的内嵌统计功能 -->
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 <!-- 如果现在接入的安卓包是针对除Google Play以外的其他应用商店，那么此权限一定需要声明，否则要删除该权限声明 -->
 <!-- <uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
 <!-- AppsFlyer end -->
