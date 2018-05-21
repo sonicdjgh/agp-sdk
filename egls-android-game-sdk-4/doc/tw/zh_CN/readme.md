@@ -202,12 +202,12 @@ minSdkVersion = 14，targetSdkVersion >= 23
         android:name="EGLS_APP_ID"
         android:value="\0MY_APP_ID" />
 	
-    <!-- 替换"MY_SERVER_TYPE"字样为对应的服务类别码 -->
+    <!-- 替换"MY_SERVER_TYPE"字样为对应的服务类别码，详见“附表 - serverType” -->
     <meta-data
         android:name="EGLS_SERVER_TYPE"
         android:value="MY_SERVER_TYPE" />
 	
-    <!-- 替换"MY_PAY_CHANNEL"字样为对应的支付渠道码 -->
+    <!-- 替换"MY_PAY_CHANNEL"字样为对应的服务类别码，详见“附表 - payChannel” -->
     <meta-data
         android:name="EGLS_PAY_CHANNEL"
         android:value="MY_PAY_CHANNEL" />
