@@ -1,5 +1,8 @@
 # egls-android-game-sdk-release-studio
 注：从4.x.x版本起，我们采用了新的账号体系，所以并不兼容旧版（即同一个账号在登录后返回的uid与3.x.x版本的不一致）。如果您的游戏曾经接过旧版本的SDK，并且将要使用4.x.x版本的SDK时，请配合我们做游戏的强更及其他必要的更新操作（详情请咨询我方运营）。<br /><br />
+### Version: 4.2.8
+1. 修复Facebook登录无响应问题；
+2. 增加Appsflyer的devKey配置，如果有特殊需求，可以在Manifest文件中添加meta标签，其name为“CHANNEL_AF_DEV_KEY”。<br /><br />
 ### Version: 4.2.7
 1. 优化网络交互机制；
 2. 修改接口AGPManager.onDestroy()的接口名拼写错误；
