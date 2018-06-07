@@ -247,6 +247,14 @@ minSdkVersion = 16，targetSdkVersion >= 23
             <action android:name="com.android.vending.INSTALL_REFERRER" />
         </intent-filter>
     </receiver>
+	
+    <!-- 如果有特殊需求修改devkey时，请打开以下配置 -->	
+    <!-- 替换“MY_AF_DEV_KEY”字样为AppsFlyer后台配置的devkey -->
+    <!--	
+    <meta-data
+        android:name="CHANNEL_AF_DEV_KEY"
+        android:value="MY_AF_DEV_KEY" />
+    -->
     <!-- AppsFlyer end -->
     <!-- AGP end -->
 
