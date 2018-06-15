@@ -239,6 +239,7 @@ minSdkVersion = 16，targetSdkVersion >= 23
         android:value="MY_SERVER_CLIENT_ID"/>
 
     <!-- 替换“MY_APPLICATION_ID”字样为Facebook后台配置的applicationId -->
+    <!-- 目前google play商店对于provider的使用有漏洞检测，目前的处理方式是对于google play商店的包，exported属性需要改为false，但是会影响FB的分享功能，导致无法正常分享 -->
     <provider
         android:name="com.facebook.FacebookContentProvider"
         android:authorities="com.facebook.app.FacebookContentProviderMY_APPLICATION_ID"
