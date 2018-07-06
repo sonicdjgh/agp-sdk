@@ -49,7 +49,7 @@ repositories {
 dependencies {
     // base begin
     compile project(':AGS')
-    compile(name: 'egls-agp-sdk-4.2.5', ext: 'aar')
+    compile(name: 'egls-agp-sdk-4.2.11', ext: 'aar')
     // base end
 
     // kr begin
@@ -71,8 +71,8 @@ repositories {
 
 dependencies {
     // base begin
-    compile(name: 'egls-ags-sdk-4.2.5', ext: 'aar')
-    compile(name: 'egls-android-support-4.2.5', ext: 'aar')
+    compile(name: 'egls-ags-sdk-4.2.11', ext: 'aar')
+    compile(name: 'egls-android-support-4.2.11', ext: 'aar')
     compile files('libs/openDefault-1.0.0-openDefaultRelease.jar')
     // base end
 
