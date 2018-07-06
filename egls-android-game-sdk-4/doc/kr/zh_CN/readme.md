@@ -400,7 +400,7 @@ protected void onPause() {
 @Override
 protected void onDestroy() {
     super.onDestroy();
-    AGPManager.onDestory();
+    AGPManager.onDestroy();
 }
 	
 @Override
