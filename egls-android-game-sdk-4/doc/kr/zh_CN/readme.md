@@ -548,6 +548,11 @@ AGPManager.addFlavorsBasePackage(BuildConfig.class.getPackage().getName());
 AGPManager.addNecessaryPermission(Manifest.permission.READ_PHONE_STATE);
 AGPManager.addNecessaryPermission(Manifest.permission.RECORD_AUDIO);
 ```
+3. 同样也是为了适应Google推荐的审核要求，SDK在游戏第一次安装并启动后，会先弹出一个关于危险权限使用的说明。SDK默认的说明只有关于SD卡权限的使用说明，如果游戏在初始化时有使用到其他的危险权限，那么可以可以在调用“AGPManager.initSDK()”接口前，使用如下方法来修改提示文本：
+```Java
+String permissionContent = "xxx";
+AGPManager.addPermissionContent(permissionContent);
+```
 ### 附表 - serverType
 serverType | value
 ---|---
