@@ -15,9 +15,10 @@
 使用UTF-8格式编码。
 
 #### 2. 接口说明
-##### 2.1 token验证接口（GET）
-##### 2.1.1 接口地址
 
+##### 2.1 token验证接口（GET）
+
+##### 2.1.1 接口地址
 地区 | 地址
 ---|---
 中国大陆 | http://cnpassport.eglsgame.com/passport/egls/tokenVerify
@@ -25,24 +26,25 @@
 韩国 | http://krpassport.eglsgame.com/passport/egls/tokenVerify
 
 ##### 2.1.2 请求参数及实例
-
 参数名称 | 参数说明 | 必要
 ---|---|---
 uid | EGLS用户Id | 是
 ticket | 用户会话验证票 | 是
 appId | 商户Id，由EGLS分配 | 	是
 sign | 大写化的签名串，MD5(appId+uid+ticket+密钥) | 是
-
 **示例**：http://twpassport.eglsgame.com/passport/egls/tokenVerify?uid=123456&ticket=abcdefggg&appId=1&sign=E866C08C984405C3DBD39ECAE1ED5224
 
 ##### 2.1.3 响应参数
 {“code”:0,“message”:”响应信息”}
+
 ##### 2.2 支付信息回调接口(POST，由cp方提供)
+
 ##### 2.2.1 接口地址
 接口地址由CP方提供。
+
 ##### 2.2.2 请求参数及实例
 参数名称 | 参数说明 | 必传
---- | ---
+---|---|---
 appId | 商户id | 是
 cpOrder | CP自定义数据（建议值为CP订单号）,调用SDK的支付接口时由CP传入。注：不可含有“&#124;”，“=”，“@” | 是
 money | 充值金额,浮点值 | 是
@@ -55,6 +57,7 @@ sign | 大写化的签名数据：对所有不为空的参数按参数名升序�
 <br /><br />
 **签名源串示例（假设密钥为AAAAAA）**：
 000& xxxxxxxxxxxxx&RMB&1.0&5E3DC6F52063A2DD51057B870206E6&1486530505000&falseAAAAAA
+
 ##### 2.2.3 响应参数（CP方需要返回的数据）
 成功收到充值通知后需返回字符串success, 其他认为失败。
 **注意**：如收到通知不返回success, SDK平台会重复发送订单。
