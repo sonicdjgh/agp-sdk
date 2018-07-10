@@ -17,12 +17,14 @@
 #### 2. 接口说明
 ##### 2.1 token验证接口（GET）
 ##### 2.1.1 接口地址
+
 地区 | 地址
 --- | ---
 中国大陆 | http://cnpassport.eglsgame.com/passport/egls/tokenVerify
 台湾 | http://twpassport.eglsgame.com/passport/egls/tokenVerify
 韩国 | http://krpassport.eglsgame.com/passport/egls/tokenVerify
 ##### 2.1.2 请求参数及实例
+
 参数名称 | 参数说明 | 必要
 --- | ---
 uid | EGLS用户Id | 是
