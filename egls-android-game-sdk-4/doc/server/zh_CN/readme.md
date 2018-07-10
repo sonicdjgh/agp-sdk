@@ -15,14 +15,14 @@
 使用UTF-8格式编码。
 
 #### 2. 接口说明
-##### -> 2.1 token验证接口（GET）
-##### --> 2.1.1 接口地址
+##### 2.1 token验证接口（GET）
+##### 2.1.1 接口地址
 地区 | 地址
 --- | ---
 中国大陆 | http://cnpassport.eglsgame.com/passport/egls/tokenVerify
 台湾 | http://twpassport.eglsgame.com/passport/egls/tokenVerify
 韩国 | http://krpassport.eglsgame.com/passport/egls/tokenVerify
-##### --> 2.1.2 请求参数及实例
+##### 2.1.2 请求参数及实例
 参数名称 | 参数说明 | 必要
 --- | ---
 uid | EGLS用户Id | 是
@@ -30,7 +30,7 @@ ticket | 用户会话验证票 | 是
 appId | 商户Id，由EGLS分配 | 	是
 sign | 大写化的签名串，MD5(appId+uid+ticket+密钥) | 是
 **示例**：http://twpassport.eglsgame.com/passport/egls/tokenVerify?uid=123456&ticket=abcdefggg&appId=1&sign=E866C08C984405C3DBD39ECAE1ED5224
-##### --> 2.1.3 响应参数
+##### 2.1.3 响应参数
 {“code”:0,“message”:”响应信息”}
 ##### 2.2 支付信息回调接口(POST，由cp方提供)
 ##### 2.2.1 接口地址
