@@ -39,7 +39,7 @@ sign | 대문자 sign코드,MD5(appId+uid+ticket+secret) | 是
 ##### 2.1.3 피드백
 {“code”:0,“message”:”피드백 유효”}
 
-##### 2.2 2)	결제 정보 피드백 연동(POST，개발사에서 제공)
+##### 2.2 결제 정보 피드백 연동(POST，개발사에서 제공)
 
 ##### 2.2.1 연동 주소
 개발사에서 제공.
@@ -56,23 +56,23 @@ currency | 화페단위 | Yes
 sandbox | 테스트 환경, true or false | Yes
 sign | 대문자signdata비여 있지 않은 코드 관련하여 높은 순위로 정렬합니다(sign제외),”&”로 각 코드를 연결해주며,sign번호를 만듭니다,sign끝에는 appsecret를 추가합니다(EGLS 제공) | Yes
 
-请求示例：http://xxx.xx.xx/notify?appId=000&cpOrder=xxxxxxxxxxxxx&money=1.0&payTime=1486530505000&order=5E3DC6F52063A2DD51057B870206E6&currency=RMB&sandbox=false&sign=E866C08C984405C3DBD39ECAE1ED5224
+예시：http://xxx.xx.xx/notify?appId=000&cpOrder=xxxxxxxxxxxxx&money=1.0&payTime=1486530505000&order=5E3DC6F52063A2DD51057B870206E6&currency=RMB&sandbox=false&sign=E866C08C984405C3DBD39ECAE1ED5224
 
 签名源串示例（假设密钥为AAAAAA）：
 000&xxxxxxxxxxxxx&RMB&1.0&5E3DC6F52063A2DD51057B870206E6&1486530505000&falseAAAAAA
 
-##### 2.2.3 响应参数（CP方需要返回的数据）
-成功收到充值通知后需返回字符串success, 其他认为失败。
+##### 2.2.3 피드백（개발사에서 Return해야할 데이터）
+결제성공시success로 피드백을 줘야하며,기타는 실패로 인정함.
 **注意**：如收到通知不返回success, SDK平台会重复发送订单。
 <br /><br />
 
-### 附录
+### 첨부
 
-token验证接口code对应错误码信息：
+token검증 시 오류코드.
 
 code | message
 ---|---
-1 | 验签失败
-2 | Session过期
-3 | Session无效
+1 | 검증실패
+2 | Session기간초과
+3 | Session무효
 99 | 异常，请检查appId是否为EGLS提供的商户ID
