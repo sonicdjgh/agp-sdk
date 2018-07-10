@@ -1,60 +1,60 @@
-## EGLS Game SDK 服务端接入文档 V1.0.1
+## EGLS Game SDK 서버 연동 문서 V1.0.1
 
-### 一、文档说明
-本文档包含两个服务器端需要对接的接口，一是token验证接口；另外一个是支付信息回调接口。
+### 1. 설명
+이문서는 두가지 서버 연동 설명이 포함 되여 있습니다.
 
-#### 1. token验证接口
-用户在客户端调用SDK登录时，需增加服务器端验证token是否失效；每次登录时，服务器端必须调用该接口进行服务器端token验证，该接口是CP向EGLS SDK服务端发起请求。
+#### 1. Token검증
+클라이언트 에서 SDK로 로그인시,서버에서token검증을 추가해야 합니다 매번 로그인시,서버는 반드시 서버token을 검증해야 하며,개발사에서 EGLS SDK 서버로 요청을 합니다.
 
-#### 2. 支付信息回调接口
-在客户端支付完成后，CP方需提供一个接口来接收EGLS SDK服务器端发起的请求， 用于同步用户的支付信息。
+#### 2. 결제 정보 Return
+클라이언트 결제 완성 후,개발사에서는 EGLS SDK 서버에서 보내는 호출을 받을 수 있어야 하며,서로 결제 정보를 동기화 합니다.
 <br /><br />
 
-### 二、 交互协议
+### 2. Server interaction
 
-#### 1. 编码格式
-使用UTF-8格式编码。
+#### 1. 코드격식
+UTF-8격식 코드사용.
 
-#### 2. 接口说明
+#### 2. 연동설명
 
-##### 2.1 token验证接口（GET）
+##### 2.1 token검증（GET）
 
-##### 2.1.1 接口地址
+##### 2.1.1 연동주소
 地区 | 地址
 ---|---
-中国大陆 | http://cnpassport.eglsgame.com/passport/egls/tokenVerify
-台湾 | http://twpassport.eglsgame.com/passport/egls/tokenVerify
-韩国 | http://krpassport.eglsgame.com/passport/egls/tokenVerify
+중국 | http://cnpassport.eglsgame.com/passport/egls/tokenVerify
+대만 | http://twpassport.eglsgame.com/passport/egls/tokenVerify
+한국 | http://krpassport.eglsgame.com/passport/egls/tokenVerify
 
-##### 2.1.2 请求参数及实例
-参数名称 | 参数说明 | 必要
+##### 2.1.2 호출설명
+이름 | 설명 | 필요성
 ---|---|---
-uid | EGLS用户Id | 是
-ticket | 用户会话验证票 | 是
-appId | 商户Id，由EGLS分配 | 	是
-sign | 大写化的签名串，MD5(appId+uid+ticket+密钥) | 是
+uid | EGLS유저Id | 是
+ticket | 유저 검증표 | 是
+appId | App ID(EGLS에세 세팅합니다) | 	是
+sign | 대문자 sign코드,MD5(appId+uid+ticket+secret) | 是
 
-**示例**：http://twpassport.eglsgame.com/passport/egls/tokenVerify?uid=123456&ticket=abcdefggg&appId=1&sign=E866C08C984405C3DBD39ECAE1ED5224
+**예시**：http://twpassport.eglsgame.com/passport/egls/tokenVerify?uid=123456&ticket=abcdefggg&appId=1&sign=E866C08C984405C3DBD39ECAE1ED5224
 
-##### 2.1.3 响应参数
-{“code”:0,“message”:”响应信息”}
+##### 2.1.3 피드백
+{“code”:0,“message”:”피드백 유효”}
 
-##### 2.2 支付信息回调接口(POST，由cp方提供)
+##### 2.2 2)	결제 정보 피드백 연동(POST，개발사에서 제공)
 
-##### 2.2.1 接口地址
-接口地址由CP方提供。
+##### 2.2.1 연동 주소
+개발사에서 제공.
 
-##### 2.2.2 请求参数及实例
-参数名称 | 参数说明 | 必传
+##### 2.2.2 코드 설명
+이름 | 설명 | 필요성
 ---|---|---
-appId | 商户id | 是
-cpOrder | CP自定义数据（建议值为CP订单号）,调用SDK的支付接口时由CP传入。注：不可含有“&#124;”，“=”，“@” | 是
-money | 充值金额,浮点值 | 是
-payTime | 支付时间 | 是
-order | EGLS订单号 | 是
-currency | 货币种类 | 是
-sandbox | 是否为测试环境, true或者false | 是
-sign | 大写化的签名数据：对所有不为空的参数按参数名升序排列(除sign外)，通过”&”连接各参数值，拼装成签名串，并签名串末尾追加appSecret（由EGLS分配）。示例：MD5(value1&value2…appSecret) | 是
+appId | 상품 앱아이디 | Yes
+cpOrder | 개발사 자체 데이터(개발사 주문번호로 권장합니다),SDK를 호출하여 결제 연결시 개발사에서 전달해 줍니다 | Yes
+money | 충전금액 | Yes
+payTime | 결제시간 | Yes
+order | EGLS 주문번호 | Yes
+currency | 화페단위 | Yes
+sandbox | 테스트 환경, true or false | Yes
+sign | 대문자signdata비여 있지 않은 코드 관련하여 높은 순위로 정렬합니다(sign제외),”&”로 각 코드를 연결해주며,sign번호를 만듭니다,sign끝에는 appsecret를 추가합니다(EGLS 제공) | Yes
 
 请求示例：http://xxx.xx.xx/notify?appId=000&cpOrder=xxxxxxxxxxxxx&money=1.0&payTime=1486530505000&order=5E3DC6F52063A2DD51057B870206E6&currency=RMB&sandbox=false&sign=E866C08C984405C3DBD39ECAE1ED5224
 
