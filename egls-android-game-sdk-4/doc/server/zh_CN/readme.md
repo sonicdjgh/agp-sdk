@@ -9,6 +9,7 @@
 #### 2. 支付信息回调接口
 在客户端支付完成后，CP方需提供一个接口来接收EGLS SDK服务器端发起的请求， 用于同步用户的支付信息。
 <br /><br />
+
 ### 二、 交互协议
 
 #### 1. 编码格式
@@ -54,6 +55,7 @@ order | EGLS订单号 | 是
 currency | 货币种类 | 是
 sandbox | 是否为测试环境, true或者false | 是
 sign | 大写化的签名数据：对所有不为空的参数按参数名升序排列(除sign外)，通过”&”连接各参数值，拼装成签名串，并签名串末尾追加appSecret（由EGLS分配）。示例：MD5(value1&value2…appSecret) | 是
+
 **请求示例**:http://xxx.xx.xx/notify?appId=000&cpOrder=xxxxxxxxxxxxx&money=1.0&payTime=1486530505000&order=5E3DC6F52063A2DD51057B870206E6&currency=RMB&sandbox=false&sign=E866C08C984405C3DBD39ECAE1ED5224
 <br /><br />
 **签名源串示例（假设密钥为AAAAAA）**：
@@ -63,12 +65,12 @@ sign | 大写化的签名数据：对所有不为空的参数按参数名升序�
 成功收到充值通知后需返回字符串success, 其他认为失败。
 **注意**：如收到通知不返回success, SDK平台会重复发送订单。
 <br /><br />
+
 ### 附录
 
 token验证接口code对应错误码信息
-
 code | message
---- | ---
+---|---
 1 | 验签失败
 2 | Session过期
 3 | Session无效
