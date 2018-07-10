@@ -49,7 +49,7 @@ repositories {
 dependencies {
     // base begin
     compile project(':AGS')
-    compile(name: 'egls-agp-sdk-4.2.5', ext: 'aar')
+    compile(name: 'egls-agp-sdk-4.2.11', ext: 'aar')
     // base end
 
     // kr begin
@@ -71,8 +71,8 @@ repositories {
 
 dependencies {
     // base begin
-    compile(name: 'egls-ags-sdk-4.2.5', ext: 'aar')
-    compile(name: 'egls-android-support-4.2.5', ext: 'aar')
+    compile(name: 'egls-ags-sdk-4.2.11', ext: 'aar')
+    compile(name: 'egls-android-support-4.2.11', ext: 'aar')
     compile files('libs/openDefault-1.0.0-openDefaultRelease.jar')
     // base end
 
@@ -400,7 +400,7 @@ protected void onPause() {
 @Override
 protected void onDestroy() {
     super.onDestroy();
-    AGPManager.onDestory();
+    AGPManager.onDestroy();
 }
 	
 @Override
@@ -547,6 +547,12 @@ AGPManager.addFlavorsBasePackage(BuildConfig.class.getPackage().getName());
 ```Java
 AGPManager.addNecessaryPermission(Manifest.permission.READ_PHONE_STATE);
 AGPManager.addNecessaryPermission(Manifest.permission.RECORD_AUDIO);
+```
+3. 同样也是为了适应Google推荐的审核要求，SDK在游戏第一次安装并启动后，会先弹出一个关于危险权限使用的说明。SDK默认的说明只有关于SD卡权限的使用说明，如果游戏在初始化时有使用到其他的危险权限，那么可以在调用“AGPManager.initSDK()”接口前，使用如下方法来修改提示文本：
+```Java
+// 需要注意的是，以上接口是直接替换原默认文本的，所以还需要加上SD卡权限的使用说明。
+String permissionContent = "xxx";
+AGPManager.addPermissionContent(permissionContent);
 ```
 ### 附表 - serverType
 serverType | value
