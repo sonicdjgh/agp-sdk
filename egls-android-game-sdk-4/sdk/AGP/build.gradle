@@ -30,7 +30,7 @@ repositories {
 
 dependencies {
     // base begin
-    compile(name: 'egls-agp-sdk-4.2.11', ext: 'aar')
+    compile('com.egls.android:egls-agp-sdk:+')
     compile project(':AGS')
     // base end
 
