@@ -15,23 +15,38 @@
 在支付宝平台上分配的应用标识，用于支付宝支付
 ### 3. 环境搭建
 #### 3.1 gradle版本及设置
-gradle版本为4.1，并且需要在你当前Project里的gradle.properties文件中加上如下配置：
+gradle版本请更新至4.4，并且需要在你当前Project根目录下的build.gralde文件中加上如下配置：
 ```gradle
-android.enableAapt2=false
+buildscript {
+    repositories {
+        jcenter()
+        google()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.2'
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        google()
+    }
+}
 ```
+
 #### 3.2 依赖关系
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/S4000.png)<br/>
 如上图所示：假设Demo为SDK对接完毕的安卓游戏工程，那么Demo引入Module“AGP”，则需要在Demo中的“build.gradle”里添加如下配置：
 ```gradle
 repositories {
     flatDir {
-        dirs project(':AGP').file('libs')
         dirs project(':AGS').file('libs')
     }
 }
 
 dependencies {
-    compile project(':AGP')
+    implementation project(':AGP')
 }
 ```
 #### 3.3 AGP lib 选择
@@ -46,8 +61,8 @@ repositories {
 
 dependencies {
     // base begin
-    compile('com.egls.android:egls-agp-sdk:+')
-    compile project(':AGS')
+    api('com.egls.android:egls-agp-sdk:+')
+    api project(':AGS')
     // base end
 }
 ```
@@ -62,15 +77,15 @@ repositories {
 
 dependencies {
     // base begin
-    compile('com.egls.android:egls-ags-sdk:+')
-    compile('com.egls.android:egls-android-support:+')
+    api('com.egls.android:egls-ags-sdk:+')
+    api('com.egls.android:egls-android-support:+')
     compile files('libs/openDefault-1.0.0-openDefaultRelease.jar')
     // base end
 
     // cn begin
-    compile files('libs/cn/alipaySdk-20180316.jar')
-    compile files('libs/cn/open_sdk_r5781_lite.jar')
-    compile files('libs/cn/wechat-sdk-android-with-mta.jar')
+    api files('libs/cn/alipaySdk-20180316.jar')
+    api files('libs/cn/open_sdk_r5781_lite.jar')
+    api files('libs/cn/wechat-sdk-android-with-mta.jar')
     // cn end
 }
 ```
