@@ -15,9 +15,26 @@
 在OneStore后台生成的应用id。
 ### 3. 环境搭建
 #### 3.1 gradle版本及设置
-gradle版本为4.1，并且需要在你当前Project里的gradle.properties文件中加上如下配置：
+gradle版本请更新至4.4，并且需要在你当前Project根目录下的build.gralde文件中加上如下配置：
 ```gradle
-android.enableAapt2=false
+buildscript {
+    repositories {
+        jcenter()
+        google()
+	mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.2'
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        google()
+	mavenCentral()
+    }
+}
 ```
 #### 3.2 依赖关系
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/kr/S4KR000.png)<br/>
@@ -32,7 +49,7 @@ repositories {
 }
 
 dependencies {
-    compile project(':AGP')
+    implementation project(':AGP')
 }
 ```
 #### 3.3 AGP lib 选择
@@ -48,14 +65,14 @@ repositories {
 
 dependencies {
     // base begin
-    compile('com.egls.android:egls-agp-sdk:+')
-    compile project(':AGS')
+    api('com.egls.android:egls-agp-sdk:+')
+    api project(':AGS')
     // base end
 
     // kr begin
-    compile files('libs/kr/IgawAdbrix_v4.4.0a.jar');
-    compile files('libs/kr/IgawCommon_v4.4.0a.jar');
-    compile files('libs/kr/IgawLiveOps_v1.3.6a_thirdparty.jar');
+    api files('libs/kr/IgawAdbrix_v4.4.0a.jar');
+    api files('libs/kr/IgawCommon_v4.4.0a.jar');
+    api files('libs/kr/IgawLiveOps_v1.3.6a_thirdparty.jar');
     // kr end
 }
 ```
@@ -71,39 +88,39 @@ repositories {
 
 dependencies {
     // base begin
-    compile('com.egls.android:egls-ags-sdk:+')
-    compile('com.egls.android:egls-android-support:+')
-    compile files('libs/openDefault-1.0.0-openDefaultRelease.jar')
+    api('com.egls.android:egls-ags-sdk:+')
+    api('com.egls.android:egls-android-support:+')
+    api files('libs/openDefault-1.0.0-openDefaultRelease.jar')
     // base end
 
     // kr begin
-    compile 'com.google.android.gms:play-services-auth:11.0.1'
-    compile 'com.google.android.gms:play-services-auth-base:11.0.1'
-    compile 'com.google.android.gms:play-services-base:11.0.1'
-    compile 'com.google.android.gms:play-services-basement:11.0.1'
-    compile 'com.google.android.gms:play-services-drive:11.0.1'
-    compile 'com.google.android.gms:play-services-games:11.0.1'
-    compile 'com.google.android.gms:play-services-gcm:11.0.1'
-    compile 'com.google.android.gms:play-services-iid:11.0.1'
-    compile 'com.google.android.gms:play-services-tasks:11.0.1'
+    api 'com.google.android.gms:play-services-auth:11.0.1'
+    api 'com.google.android.gms:play-services-auth-base:11.0.1'
+    api 'com.google.android.gms:play-services-base:11.0.1'
+    api 'com.google.android.gms:play-services-basement:11.0.1'
+    api 'com.google.android.gms:play-services-drive:11.0.1'
+    api 'com.google.android.gms:play-services-games:11.0.1'
+    api 'com.google.android.gms:play-services-gcm:11.0.1'
+    api 'com.google.android.gms:play-services-iid:11.0.1'
+    api 'com.google.android.gms:play-services-tasks:11.0.1'
     
-    compile 'com.facebook.android:facebook-core:4.+'
-    compile 'com.facebook.android:facebook-login:4.+'
-    compile 'com.facebook.android:facebook-share:4.+'
+    api 'com.facebook.android:facebook-core:4.+'
+    api 'com.facebook.android:facebook-login:4.+'
+    api 'com.facebook.android:facebook-share:4.+'
     
-    compile files('libs/kr/gson-2.8.0.jar');
-    compile files('libs/kr/3rdparty_login_library_android_4.1.4.jar')
-    compile files('libs/kr/api-gateway-hmac-2.3.1.jar')
-    compile files('libs/kr/library-1.0.0.jar')
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'com.squareup:otto:1.3.8'
-    compile 'com.navercorp.volleyextensions:volleyer:2.0.1', {
+    api files('libs/kr/gson-2.8.0.jar');
+    api files('libs/kr/3rdparty_login_library_android_4.1.4.jar')
+    api files('libs/kr/api-gateway-hmac-2.3.1.jar')
+    api files('libs/kr/library-1.0.0.jar')
+    api 'com.github.bumptech.glide:glide:3.7.0'
+    api 'com.squareup:otto:1.3.8'
+    api 'com.navercorp.volleyextensions:volleyer:2.0.1', {
         exclude group: 'com.mcxiaoke.volley', module: 'library'
     }
-    compile(name: 'cafeSdk-2.4.3', ext: 'aar')
+    api(name: 'cafeSdk-2.4.3', ext: 'aar')
     
     // 如果使用 OneStore 支付，请打开下面的配置：
-    // compile files('libs/kr/iap_plugin_v16.03.00_20161123.jar');
+    // api files('libs/kr/iap_plugin_v16.03.00_20161123.jar');
     // kr end
 }
 ```
