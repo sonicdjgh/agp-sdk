@@ -15,7 +15,7 @@
 在OneStore后台生成的应用id。
 ### 3. 环境搭建
 #### 3.1 gradle版本及设置
-gradle版本请更新至4.4，并且需要在你当前Project根目录下的build.gralde文件中加上如下配置：
+gradle版本请更新至4.4，并且需要在当前Project根目录下的build.gralde文件中加上如下配置：
 ```gradle
 buildscript {
     repositories {
@@ -34,6 +34,10 @@ allprojects {
 	mavenCentral()
     }
 }
+```
+另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
+```gradle
+android.enableAapt2=false
 ```
 #### 3.2 依赖关系
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/kr/S4KR000.png)<br/>
