@@ -20,9 +20,6 @@ buildscript {
         jcenter()
         google()
     }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.2'
-    }
 }
 
 allprojects {
