@@ -15,7 +15,23 @@
 #### 3.1 gradle版本及设置
 gradle版本为4.1，并且需要在你当前Project里的gradle.properties文件中加上如下配置：
 ```gradle
-android.enableAapt2=false
+buildscript {
+    repositories {
+        jcenter()
+        google()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.2'
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        google()
+	mavenCentral()
+    }
+}
 ```
 #### 3.2 依赖关系
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/tw/S4TW000.png)<br/>
@@ -23,13 +39,12 @@ android.enableAapt2=false
 ```gradle
 repositories {
     flatDir {
-        dirs project(':AGP').file('libs')
         dirs project(':AGS').file('libs')
     }
 }
 
 dependencies {
-    compile project(':AGP')
+    implementation project(':AGP')
 }
 ```
 #### 3.3 AGP lib 选择
@@ -44,14 +59,14 @@ repositories {
 
 dependencies {
     // base begin
-    compile('com.egls.android:egls-agp-sdk:+')
-    compile project(':AGS')
+    api('com.egls.android:egls-agp-sdk:+')
+    api project(':AGS')
     // base end
 
 
     // tw begin
-    compile 'com.appsflyer:af-android-sdk:4+@aar'
-    compile 'com.android.installreferrer:installreferrer:1.0'
+    api 'com.appsflyer:af-android-sdk:4+@aar'
+    api 'com.android.installreferrer:installreferrer:1.0'
     // tw end
 }
 ```
@@ -66,31 +81,31 @@ repositories {
 
 dependencies {
     // base begin
-    compile('com.egls.android:egls-ags-sdk:+')
-    compile('com.egls.android:egls-android-support:+')
-    compile files('libs/openDefault-1.0.0-openDefaultRelease.jar')
+    api('com.egls.android:egls-ags-sdk:+')
+    api('com.egls.android:egls-android-support:+')
+    api files('libs/openDefault-1.0.0-openDefaultRelease.jar')
     // base end
 
     // tw begin
-    compile 'com.google.android.gms:play-services-auth:11.0.1'
-    compile 'com.google.android.gms:play-services-auth-base:11.0.1'
-    compile 'com.google.android.gms:play-services-base:11.0.1'
-    compile 'com.google.android.gms:play-services-basement:11.0.1'
-    compile 'com.google.android.gms:play-services-drive:11.0.1'
-    compile 'com.google.android.gms:play-services-games:11.0.1'
-    compile 'com.google.android.gms:play-services-gcm:11.0.1'
-    compile 'com.google.android.gms:play-services-iid:11.0.1'
-    compile 'com.google.android.gms:play-services-tasks:11.0.1'
+    api 'com.google.android.gms:play-services-auth:11.0.1'
+    api 'com.google.android.gms:play-services-auth-base:11.0.1'
+    api 'com.google.android.gms:play-services-base:11.0.1'
+    api 'com.google.android.gms:play-services-basement:11.0.1'
+    api 'com.google.android.gms:play-services-drive:11.0.1'
+    api 'com.google.android.gms:play-services-games:11.0.1'
+    api 'com.google.android.gms:play-services-gcm:11.0.1'
+    api 'com.google.android.gms:play-services-iid:11.0.1'
+    api 'com.google.android.gms:play-services-tasks:11.0.1'
     
-    compile 'com.facebook.android:facebook-core:4.+'
-    compile 'com.facebook.android:facebook-login:4.+'
-    compile 'com.facebook.android:facebook-share:4.+'
+    api 'com.facebook.android:facebook-core:4.+'
+    api 'com.facebook.android:facebook-login:4.+'
+    api 'com.facebook.android:facebook-share:4.+'
     
     // 如果使用 MyCard 支付，请打开下面的配置
-    // compile files('libs/tw/MyCardPaySDK.jar')
+    // api files('libs/tw/MyCardPaySDK.jar')
     
     // 如果使用 Gash 支付，请打开下面的配置
-    // compile files('libs/tw/clientsdk_product_v2.jar')
+    // api files('libs/tw/clientsdk_product_v2.jar')
     // tw end
 }
 
