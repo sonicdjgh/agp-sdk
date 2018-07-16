@@ -41,6 +41,7 @@ android.enableAapt2=false
 ```gradle
 repositories {
     flatDir {
+    	dirs project(':AGP').file('libs')
         dirs project(':AGS').file('libs')
     }
 }
