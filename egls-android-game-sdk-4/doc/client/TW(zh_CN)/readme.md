@@ -53,6 +53,7 @@ dependencies {
 ```gradle
 repositories {
     flatDir {
+    	dirs 'libs'
         dirs project(':AGS').file('libs')
     }
 }
