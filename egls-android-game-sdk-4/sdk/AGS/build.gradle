@@ -20,7 +20,10 @@ android {
 repositories {
     flatDir {
         dirs 'libs'
-        dirs 'libs/kr'
+
+        // kr begin
+        // dirs 'libs/kr'
+        // kr end
     }
 }
 

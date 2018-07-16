@@ -23,7 +23,7 @@ repositories {
     flatDir {
         dirs project(':AGP').file('libs')
         dirs project(':AGS').file('libs')
-        
+
         // kr begin
         // dirs project(':AGS').file('libs/kr')
         // kr end
