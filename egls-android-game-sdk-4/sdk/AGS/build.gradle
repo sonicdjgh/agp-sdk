@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
 
     defaultConfig {
         minSdkVersion 16
@@ -26,64 +26,64 @@ repositories {
 
 dependencies {
     // base begin
-    compile('com.egls.android:egls-ags-sdk:+')
-    compile('com.egls.android:egls-android-support:+')
-    compile files('libs/openDefault-1.0.0-openDefaultRelease.jar')
+    api 'com.egls.android:egls-ags-sdk:+@aar'
+    api 'com.egls.android:egls-android-support:+@aar'
+    api files('libs/openDefault-1.0.0-openDefaultRelease.jar')
     // base end
 
     // cn begin
-    // compile files('libs/cn/alipaySdk-20180316.jar')
-    // compile files('libs/cn/open_sdk_r5781_lite.jar')
-    // compile files('libs/cn/wechat-sdk-android-with-mta.jar')
+    // api files('libs/cn/alipaySdk-20180316.jar')
+    // api files('libs/cn/open_sdk_r5781_lite.jar')
+    // api files('libs/cn/wechat-sdk-android-with-mta.jar')
     // cn end
 
     // tw begin
-    // compile 'com.google.android.gms:play-services-auth:11.0.1'
-    // compile 'com.google.android.gms:play-services-auth-base:11.0.1'
-    // compile 'com.google.android.gms:play-services-base:11.0.1'
-    // compile 'com.google.android.gms:play-services-basement:11.0.1'
-    // compile 'com.google.android.gms:play-services-drive:11.0.1'
-    // compile 'com.google.android.gms:play-services-games:11.0.1'
-    // compile 'com.google.android.gms:play-services-gcm:11.0.1'
-    // compile 'com.google.android.gms:play-services-iid:11.0.1'
-    // compile 'com.google.android.gms:play-services-tasks:11.0.1'
+    // api 'com.google.android.gms:play-services-auth:11.0.1'
+    // api 'com.google.android.gms:play-services-auth-base:11.0.1'
+    // api 'com.google.android.gms:play-services-base:11.0.1'
+    // api 'com.google.android.gms:play-services-basement:11.0.1'
+    // api 'com.google.android.gms:play-services-drive:11.0.1'
+    // api 'com.google.android.gms:play-services-games:11.0.1'
+    // api 'com.google.android.gms:play-services-gcm:11.0.1'
+    // api 'com.google.android.gms:play-services-iid:11.0.1'
+    // api 'com.google.android.gms:play-services-tasks:11.0.1'
 
-    // compile 'com.facebook.android:facebook-core:4.+'
-    // compile 'com.facebook.android:facebook-login:4.+'
-    // compile 'com.facebook.android:facebook-share:4.+'
+    // api 'com.facebook.android:facebook-core:4.+'
+    // api 'com.facebook.android:facebook-login:4.+'
+    // api 'com.facebook.android:facebook-share:4.+'
 
     // 如果使用 MyCard 支付，请打开下面的配置
-    // compile files('libs/tw/MyCardPaySDK.jar')
+    // api files('libs/tw/MyCardPaySDK.jar')
     // 如果使用 Gash 支付，请打开下面的配置
-    // compile files('libs/tw/clientsdk_product_v2.jar')
+    // api files('libs/tw/clientsdk_product_v2.jar')
     // tw end
 
     // kr begin
-    // compile 'com.google.android.gms:play-services-auth:11.0.1'
-    // compile 'com.google.android.gms:play-services-auth-base:11.0.1'
-    // compile 'com.google.android.gms:play-services-base:11.0.1'
-    // compile 'com.google.android.gms:play-services-basement:11.0.1'
-    // compile 'com.google.android.gms:play-services-drive:11.0.1'
-    // compile 'com.google.android.gms:play-services-games:11.0.1'
-    // compile 'com.google.android.gms:play-services-gcm:11.0.1'
-    // compile 'com.google.android.gms:play-services-iid:11.0.1'
-    // compile 'com.google.android.gms:play-services-tasks:11.0.1'
+    // api 'com.google.android.gms:play-services-auth:11.0.1'
+    // api 'com.google.android.gms:play-services-auth-base:11.0.1'
+    // api 'com.google.android.gms:play-services-base:11.0.1'
+    // api 'com.google.android.gms:play-services-basement:11.0.1'
+    // api 'com.google.android.gms:play-services-drive:11.0.1'
+    // api 'com.google.android.gms:play-services-games:11.0.1'
+    // api 'com.google.android.gms:play-services-gcm:11.0.1'
+    // api 'com.google.android.gms:play-services-iid:11.0.1'
+    // api 'com.google.android.gms:play-services-tasks:11.0.1'
 
-    // compile 'com.facebook.android:facebook-core:4.+'
-    // compile 'com.facebook.android:facebook-login:4.+'
-    // compile 'com.facebook.android:facebook-share:4.+'
+    // api 'com.facebook.android:facebook-core:4.+'
+    // api 'com.facebook.android:facebook-login:4.+'
+    // api 'com.facebook.android:facebook-share:4.+'
 
-    // compile files('libs/kr/gson-2.8.0.jar');
-    // compile files('libs/kr/3rdparty_login_library_android_4.1.4.jar')
-    // compile files('libs/kr/api-gateway-hmac-2.3.1.jar')
-    // compile files('libs/kr/library-1.0.0.jar')
-    // compile 'com.github.bumptech.glide:glide:3.7.0'
-    // compile 'com.squareup:otto:1.3.8'
-    // compile 'com.navercorp.volleyextensions:volleyer:2.0.1', {
+    // api files('libs/kr/gson-2.8.0.jar');
+    // api files('libs/kr/3rdparty_login_library_android_4.1.4.jar')
+    // api files('libs/kr/api-gateway-hmac-2.3.1.jar')
+    // api files('libs/kr/library-1.0.0.jar')
+    // api 'com.github.bumptech.glide:glide:3.7.0'
+    // api 'com.squareup:otto:1.3.8'
+    // api 'com.navercorp.volleyextensions:volleyer:2.0.1', {
     //     exclude group: 'com.mcxiaoke.volley', module: 'library'
     // }
-    // compile(name: 'cafeSdk-2.4.3', ext: 'aar')
+    // api(name: 'cafeSdk-2.4.3', ext: 'aar')
     // 如果使用 OneStore 支付，请打开下面的配置：
-    // compile files('libs/kr/iap_plugin_v16.03.00_20161123.jar');
+    // api files('libs/kr/iap_plugin_v16.03.00_20161123.jar');
     // kr end
 }

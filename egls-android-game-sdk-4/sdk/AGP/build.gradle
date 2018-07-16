@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
 
     defaultConfig {
         minSdkVersion 16
@@ -30,18 +30,18 @@ repositories {
 
 dependencies {
     // base begin
-    compile('com.egls.android:egls-agp-sdk:+')
-    compile project(':AGS')
+    api 'com.egls.android:egls-agp-sdk:+@aar'
+    api project(':AGS')
     // base end
 
     // tw begin
-    // compile 'com.appsflyer:af-android-sdk:4+@aar'
-    // compile 'com.android.installreferrer:installreferrer:1.0'
+    // api 'com.appsflyer:af-android-sdk:4+@aar'
+    // api 'com.android.installreferrer:installreferrer:1.0'
     // tw end
 
     // kr begin
-    // compile files('libs/kr/IgawAdbrix_v4.4.0a.jar');
-    // compile files('libs/kr/IgawCommon_v4.4.0a.jar');
-    // compile files('libs/kr/IgawLiveOps_v1.3.6a_thirdparty.jar');
+    // api files('libs/kr/IgawAdbrix_v4.4.0a.jar');
+    // api files('libs/kr/IgawCommon_v4.4.0a.jar');
+    // api files('libs/kr/IgawLiveOps_v1.3.6a_thirdparty.jar');
     // kr end
 }
