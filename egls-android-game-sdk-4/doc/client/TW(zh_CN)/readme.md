@@ -63,7 +63,7 @@ repositories {
 
 dependencies {
     // base begin
-    api 'com.appsflyer:af-android-sdk:4+@aar'
+    api "com.egls.android:egls-agp-sdk:$EGLS_AGP_VERSION@aar"
     api project(':AGS')
     // base end
 
