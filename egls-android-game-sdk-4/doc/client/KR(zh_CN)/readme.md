@@ -15,7 +15,7 @@
 在OneStore后台生成的应用id。
 ### 3. 环境搭建
 #### 3.1 gradle版本及设置
-gradle版本请更新至4.4，并且需要在当前Project根目录下的build.gralde文件中加上如下配置：
+gradle版本为4.1，并且需要在当前Project根目录下的build.gralde文件中加上如下配置：
 ```gradle
 buildscript {
     repositories {
@@ -34,6 +34,9 @@ allprojects {
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
+EGLS_AGP_VERSION=4.2.18
+EGLS_AGS_VERSION=4.2.18
+EGLS_SUPPORT_VERSION=4.2.18
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -65,7 +68,7 @@ repositories {
 
 dependencies {
     // base begin
-    api 'com.egls.android:egls-agp-sdk:+@aar'
+    api "com.egls.android:egls-agp-sdk:$EGLS_AGP_VERSION@aar"
     api project(':AGS')
     // base end
 
@@ -88,8 +91,8 @@ repositories {
 
 dependencies {
     // base begin
-    api 'com.egls.android:egls-ags-sdk:+@aar'
-    api 'com.egls.android:egls-android-support:+@aar'
+    api "com.egls.android:egls-ags-sdk:$EGLS_AGS_VERSION@aar"
+    api "com.egls.android:egls-android-support:$EGLS_SUPPORT_VERSION@aar"
     api files('libs/openDefault-1.0.0-openDefaultRelease.jar')
     // base end
 
