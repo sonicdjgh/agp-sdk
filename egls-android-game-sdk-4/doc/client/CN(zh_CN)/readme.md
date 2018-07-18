@@ -15,7 +15,7 @@
 在支付宝平台上分配的应用标识，用于支付宝支付
 ### 3. 环境搭建
 #### 3.1 gradle版本及设置
-gradle版本为4.1，并且需要在你当前Project根目录下的build.gralde文件中加上如下配置：
+gradle版本为4.1，并且需要在当前Project根目录下的build.gralde文件中加上如下配置：
 ```gradle
 buildscript {
     repositories {
