@@ -68,7 +68,7 @@ repositories {
 
 dependencies {
     // base begin
-    api 'com.egls.android:egls-agp-sdk:+@aar'
+    api "com.egls.android:egls-agp-sdk:$EGLS_AGP_VERSION@aar"
     api project(':AGS')
     // base end
 }
@@ -84,8 +84,8 @@ repositories {
 
 dependencies {
     // base begin
-    api 'com.egls.android:egls-ags-sdk:+@aar'
-    api 'com.egls.android:egls-android-support:+@aar'
+    api "com.egls.android:egls-ags-sdk:$EGLS_AGS_VERSION@aar"
+    api "com.egls.android:egls-android-support:$EGLS_SUPPORT_VERSION@aar"
     compile files('libs/openDefault-1.0.0-openDefaultRelease.jar')
     // base end
 
