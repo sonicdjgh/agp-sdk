@@ -214,10 +214,12 @@ minSdkVersion = 16，targetSdkVersion >= 23
         <!-- DeepLink begin -->
         <!-- DeepLink配置为韩国IGAW统计功能所使用 -->
         <!-- 替换“MY_PACKAGE_NAME”字样为正式包名 -->
+	<!-- 替换“MY_APPLICATION_ID”字样为Facebook后台配置的applicationId -->
         <intent-filter>
             <data
                 android:host="MY_PACKAGE_NAME"
-                android:scheme="egls" />
+                android:scheme="egls"
+		android:path="fbMY_APPLICATION_ID"/>
 
             <action android:name="android.intent.action.VIEW" />
 
