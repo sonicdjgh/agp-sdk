@@ -217,8 +217,8 @@ minSdkVersion = 16，targetSdkVersion >= 23
 	<!-- 替换“MY_APPLICATION_ID”字样为Facebook后台配置的applicationId -->
         <intent-filter>
             <data
-                android:host="MY_PACKAGE_NAME"
-                android:scheme="egls"
+		android:host="MY_PACKAGE_NAME"
+		android:scheme="egls"
 		android:path="fbMY_APPLICATION_ID"/>
 
             <action android:name="android.intent.action.VIEW" />
