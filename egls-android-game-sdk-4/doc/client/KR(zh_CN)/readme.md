@@ -219,7 +219,7 @@ minSdkVersion = 16，targetSdkVersion >= 23
             <data
                   android:host="MY_PACKAGE_NAME"
                   android:scheme="egls"
-		  android:data="fbMY_APPLICATION_ID"/>
+		  android:path="fbMY_APPLICATION_ID"/>
 
             <action android:name="android.intent.action.VIEW" />
 
