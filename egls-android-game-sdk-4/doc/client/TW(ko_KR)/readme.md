@@ -68,6 +68,7 @@ dependencies {
     // base begin
     compile('com.egls.android:egls-ags-sdk:+')
     compile('com.egls.android:egls-android-support:+')
+    api 'com.android.support.constraint:constraint-layout:1.0.2'
     compile files('libs/openDefault-1.0.0-openDefaultRelease.jar')
     //
     compile 'com.google.android.gms:play-services-auth:11.0.1'
