@@ -33,9 +33,9 @@ allprojects {
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.2.18
-EGLS_AGS_VERSION=4.2.18
-EGLS_SUPPORT_VERSION=4.2.18
+EGLS_AGP_VERSION=4.3.1
+EGLS_AGS_VERSION=4.3.1
+EGLS_SUPPORT_VERSION=4.3.1
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -83,6 +83,7 @@ dependencies {
     // base begin
     api "com.egls.android:egls-ags-sdk:$EGLS_AGS_VERSION@aar"
     api "com.egls.android:egls-android-support:$EGLS_SUPPORT_VERSION@aar"
+    api 'com.android.support.constraint:constraint-layout:1.0.2'
     compile files('libs/openDefault-1.0.0-openDefaultRelease.jar')
     // base end
 
