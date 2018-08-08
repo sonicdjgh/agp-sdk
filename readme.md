@@ -1,5 +1,8 @@
 # egls-android-game-sdk-release-studio
 注：从4.x.x版本起，我们采用了新的账号体系，所以并不兼容旧版（即同一个账号在登录后返回的uid与3.x.x版本的不一致）。如果您的游戏曾经接过旧版本的SDK，并且将要使用4.x.x版本的SDK时，请配合我们做游戏的强更及其他必要的更新操作（详情请咨询我方运营）。<br /><br />
+### Version：4.3.1
+1. 解决SDK初始化异常问题；
+2. AGS增加库引用：api 'com.android.support.constraint:constraint-layout:1.0.2'。
 ### Version：4.3.0
 优化网络通信接口及其他部分业务逻辑，在更新SDK时请修改版本号后再同步至最新版本，并且需要更换so文件。
 ### Version: 4.2.18
