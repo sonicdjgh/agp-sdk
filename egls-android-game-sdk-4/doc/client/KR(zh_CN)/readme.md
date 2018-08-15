@@ -207,6 +207,7 @@ minSdkVersion = 16，targetSdkVersion >= 23
     <activity
         android:name="com.egls.sdk.demo.GameActivity"
         android:configChanges="fontScale|orientation|keyboardHidden|locale|navigation|screenSize|uiMode"
+	android:launchMode="singleTask"
         android:screenOrientation="landscape"
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         <intent-filter>
@@ -522,6 +523,21 @@ AGPManager.eglsPay(amount, productId, productName, cpOrderInfo, new AGPClientPay
     @Override
     public void onClientPayCancel() {
 	// 客户端支付取消回调
+    }
+});
+```
+### 9. SDK游戏退出接口（必接）
+```Java
+//当需要退出游戏时，请务必调用该方法
+AGPManager.eglsExit(new AGPExitProcessListener() {
+
+    @Override
+    public void onExitProcess(boolean isExit) {
+  	if (isExit) {
+	    //点击确认
+	} else {
+	    //点击取消
+	}
     }
 });
 ```
