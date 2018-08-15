@@ -1,5 +1,10 @@
 # egls-android-game-sdk-release-studio
 注：从4.x.x版本起，我们采用了新的账号体系，所以并不兼容旧版（即同一个账号在登录后返回的uid与3.x.x版本的不一致）。如果您的游戏曾经接过旧版本的SDK，并且将要使用4.x.x版本的SDK时，请配合我们做游戏的强更及其他必要的更新操作（详情请咨询我方运营）。<br /><br />
+### Version：4.3.5
+1. 优化SDK初始化逻辑；
+2. 增加AGPManager.eglsExit()游戏退出接口（必接接口）；
+3. 更新韩国发行区内部统计SDK（IGAWorks）版本至4.6.0（请留意对接文档中的相关Gradle配置）；
+4. 韩国发行区的游戏，其游戏启动Activity的“launchMode”属性必须为“singleTask”。
 ### Version：4.3.1
 1. 解决SDK初始化异常问题；
 2. AGS增加库引用：api 'com.android.support.constraint:constraint-layout:1.0.2'。
