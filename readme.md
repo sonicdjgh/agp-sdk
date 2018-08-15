@@ -3,7 +3,7 @@
 ### Version：4.3.5
 1. 优化SDK初始化逻辑；
 2. 增加AGPManager.eglsExit()游戏退出接口（必接接口）；
-3. 更新韩国发行区内部统计SDK（IGAWorks）版本至4.6.0（请留意对接文档中的相关Gradle配置）；
+3. 更新韩国发行区内部统计SDK（IGAWorks）版本至4.6.0（请留意对接文档中，游戏工程及AGP相关的Gradle配置）；
 4. 韩国发行区的游戏，其游戏启动Activity的“launchMode”属性必须为“singleTask”。
 ### Version：4.3.1
 1. 解决SDK初始化异常问题；
