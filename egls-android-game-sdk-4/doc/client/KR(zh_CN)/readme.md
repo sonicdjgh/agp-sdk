@@ -207,7 +207,7 @@ minSdkVersion = 16，targetSdkVersion >= 23
     <activity
         android:name="com.egls.sdk.demo.GameActivity"
         android:configChanges="fontScale|orientation|keyboardHidden|locale|navigation|screenSize|uiMode"
-	android:launchMode="singleTask"
+	 android:launchMode="singleTask"
         android:screenOrientation="landscape"
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         <intent-filter>
