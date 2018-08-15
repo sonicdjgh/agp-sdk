@@ -34,9 +34,9 @@ allprojects {
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.3.1
-EGLS_AGS_VERSION=4.3.1
-EGLS_SUPPORT_VERSION=4.3.1
+EGLS_AGP_VERSION=4.3.5
+EGLS_AGS_VERSION=4.3.5
+EGLS_SUPPORT_VERSION=4.3.5
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -46,6 +46,7 @@ android.enableAapt2=false
 repositories {
     flatDir {
         dirs project(':AGP').file('libs')
+	dirs project(':AGP').file('libs/kr')
         dirs project(':AGS').file('libs')
         dirs project(':AGS').file('libs/kr')
     }
@@ -61,6 +62,7 @@ dependencies {
 repositories {
     flatDir {
         dirs 'libs'
+	dirs 'libs/kr'
         dirs project(':AGS').file('libs')
         dirs project(':AGS').file('libs/kr')
     }
@@ -73,9 +75,9 @@ dependencies {
     // base end
 
     // kr begin
-    api files('libs/kr/IgawAdbrix_v4.4.0a.jar');
-    api files('libs/kr/IgawCommon_v4.4.0a.jar');
-    api files('libs/kr/IgawLiveOps_v1.3.6a_thirdparty.jar');
+    api files('libs/kr/IgawAdbrix_v4.6.0.jar')
+    api files('libs/kr/IgawCommon_v4.6.0.jar')
+    api(name: 'IgawLiveOps_v2.1.0', ext: 'aar')
     // kr end
 }
 ```
@@ -205,6 +207,7 @@ minSdkVersion = 16，targetSdkVersion >= 23
     <activity
         android:name="com.egls.sdk.demo.GameActivity"
         android:configChanges="fontScale|orientation|keyboardHidden|locale|navigation|screenSize|uiMode"
+	android:launchMode="singleTask"
         android:screenOrientation="landscape"
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         <intent-filter>
@@ -523,12 +526,27 @@ AGPManager.eglsPay(amount, productId, productName, cpOrderInfo, new AGPClientPay
     }
 });
 ```
-### 9. onEnterGame接口调用（必接）
+### 9. SDK游戏退出接口（必接）
+```Java
+//当需要退出游戏时，请务必调用该方法
+AGPManager.eglsExit(new AGPExitProcessListener() {
+
+    @Override
+    public void onExitProcess(boolean isExit) {
+  	if (isExit) {
+	    //点击确认
+	} else {
+	    //点击取消
+	}
+    }
+});
+```
+### 10. onEnterGame接口调用（必接）
 ```Java
 //当玩家登录进入到游戏服务器之后，请务必调用该方法
 AGPManager.onEnterGame();
 ```
-### 10. SDK分享功能（选接）
+### 11. SDK分享功能（选接）
 ```Java
 String contentTitle = "分享";// 分享标题
 String contentText = "文本内容";// 文本内容
@@ -541,28 +559,28 @@ shareBundle.putString(Key.CONTENT_IMAGE, contentImage);
 shareBundle.putString(Key.CONTENT_URL, contentUrl);
 AGPManager.shareInKR(true, true, shareBundle);
 ```
-### 11. IGAW数据统计（必接）
+### 12. IGAW数据统计（必接）
 IGAW主要用于韩服地区发行的游戏的数据统计，启用该功能的做法，首先要按照上面所提到的，在AndroidManifest.xml文件中打开对应的配置。对于IGAW统计功能的相关接口调用，其相关初始化部分的逻辑已经嵌入进SDK当中，因此开发者无需关心较为复杂的初始化步骤，只需根据需求，调用对应的接口即可。<br /><br />
 **注：通过调用AGPManager.getIgawHelper()来获取接口对象**。
-#### 11.1 eventIgawSplashImage()（根据情况接入）
+#### 12.1 eventIgawSplashImage()（根据情况接入）
     如果游戏有闪屏动画（或首次启动的游戏动画），请在开始播放动画时调用该方法
-#### 11.2 eventIgawCharacterSelect()（必接）
+#### 12.2 eventIgawCharacterSelect()（必接）
     请在玩家选择游戏角色后调用该方法（对于首次进入游戏的情况，请在创建角色后调用）
-#### 11.3 eventIgawCharacterName()（必接）
+#### 12.3 eventIgawCharacterName()（必接）
     请在玩家创建角色并完成角色命名后调用该方法
-#### 11.4 eventIgawTutorialStart()（根据情况接入）
+#### 12.4 eventIgawTutorialStart()（根据情况接入）
     如果游戏有新手教学阶段，请在新手教学开始时调用该接口
-#### 11.5 eventIgawtutorialComplete()（根据情况接入）
+#### 12.5 eventIgawtutorialComplete()（根据情况接入）
     如果游戏有新手教学阶段，请在新手教学结束时调用该接口
-#### 11.6 eventIgawRoleLevelUp(int level)（必接）
+#### 12.6 eventIgawRoleLevelUp(int level)（必接）
     角色升级时调用该接口（当创建角色后，不必调用该接口）
-#### 11.7 eventIgawVIPLevelUp(int level)（必接）
+#### 12.7 eventIgawVIPLevelUp(int level)（必接）
     玩家VIP等级提升时调用该接口
-#### 11.8 eventIgawVisitShop()（必接）
+#### 12.8 eventIgawVisitShop()（必接）
     玩家打开游戏内的商店（指需要玩家真实付费购买的商店）页面时，请调用该接口
-#### 11.9 eventIgawFansite()（根据情况接入）
+#### 12.9 eventIgawFansite()（根据情况接入）
     如果在游戏中有加入对Naver论坛的访问链接，请在打开Naver论坛时调用该接口（目前SDK已集成NaverCafeSDK，可以选择不自行添加Naver论坛的访问链接）
-### 12. 其他注意事项
+### 13. 其他注意事项
 1. 凡是游戏项目工程为Android Studio工程，并且在Gradle里配置了productFlavor来控制打包流程的，请务必在调用“AGPManager.initSDK()”接口前，写上如下逻辑代码：
 ```Java
 AGPManager.addFlavorsBasePackage(BuildConfig.class.getPackage().getName());
