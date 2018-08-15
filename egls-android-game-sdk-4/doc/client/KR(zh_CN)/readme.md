@@ -46,6 +46,7 @@ android.enableAapt2=false
 repositories {
     flatDir {
         dirs project(':AGP').file('libs')
+	dirs project(':AGP').file('libs/kr')
         dirs project(':AGS').file('libs')
         dirs project(':AGS').file('libs/kr')
     }
@@ -61,6 +62,7 @@ dependencies {
 repositories {
     flatDir {
         dirs 'libs'
+	dirs 'libs/kr'
         dirs project(':AGS').file('libs')
         dirs project(':AGS').file('libs/kr')
     }
@@ -73,9 +75,9 @@ dependencies {
     // base end
 
     // kr begin
-    api files('libs/kr/IgawAdbrix_v4.4.0a.jar');
-    api files('libs/kr/IgawCommon_v4.4.0a.jar');
-    api files('libs/kr/IgawLiveOps_v1.3.6a_thirdparty.jar');
+    api files('libs/kr/IgawAdbrix_v4.6.0.jar')
+    api files('libs/kr/IgawCommon_v4.6.0.jar')
+    api(name: 'IgawLiveOps_v2.1.0', ext: 'aar')
     // kr end
 }
 ```
