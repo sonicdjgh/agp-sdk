@@ -33,9 +33,9 @@ allprojects {
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.3.9
-EGLS_AGS_VERSION=4.3.9
-EGLS_SUPPORT_VERSION=4.3.9
+EGLS_AGP_VERSION=4.3.16
+EGLS_AGS_VERSION=4.3.16
+EGLS_SUPPORT_VERSION=4.3.16
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -104,7 +104,7 @@ c. Google推荐对危险权限的使用有一定要求，需要加入申请权�
     android:value="true" />
 ```
 #### 3.6 其他
-minSdkVersion = 16，targetSdkVersion >= 23
+minSdkVersion = 16，targetSdkVersion >= 26
 ### 4. AndroidManifest.xml文件配置
 #### 4.1 AGP Permission 配置
 ```Xml
