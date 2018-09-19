@@ -215,22 +215,6 @@ minSdkVersion = 16，targetSdkVersion >= 26
 
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
-        <!-- DeepLink begin -->
-        <!-- DeepLink配置为韩国IGAW统计功能所使用 -->
-        <!-- 替换“MY_PACKAGE_NAME”字样为正式包名 -->
-	<!-- 替换“MY_APPLICATION_ID”字样为Facebook后台配置的applicationId -->
-        <intent-filter>
-            <data
-                  android:host="MY_PACKAGE_NAME"
-                  android:scheme="egls"
-		  android:path="fbMY_APPLICATION_ID"/>
-
-            <action android:name="android.intent.action.VIEW" />
-
-            <category android:name="android.intent.category.DEFAULT" />
-            <category android:name="android.intent.category.BROWSABLE" />
-        </intent-filter>
-        <!-- DeepLink end -->
     </activity>
 	
     <!-- Base begin -->
@@ -280,8 +264,35 @@ minSdkVersion = 16，targetSdkVersion >= 26
     <!-- IGAW begin -->
     <!-- IGAW为韩国地区所使用的统计功能，其他地区发行的游戏请不要使用 -->
     <!-- 替换“MY_PACKAGE_NAME”字样为正式包名 -->
+    <!-- 替换“MY_APPLICATION_ID”字样为Facebook后台配置的applicationId -->
+    <!-- 替换“MY_MAIN_ACTIVITY_FULL_NAME”字样为游戏主Activity的全称 -->
     <!-- 替换“MY_APP_KEY”字样为IGAW后台配置的appKey -->
     <!-- 替换“MY_HASH_KEY”字样为IGAW后台配置的hashKey -->
+    <activity
+    	android:name="com.igaworks.IgawDefaultDeeplinkActivity"
+        android:label="@string/app_name"
+        android:launchMode="singleTask"
+        android:noHistory="true"
+        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen
+	<!-- DeepLink begin -->
+        <!-- DeepLink配置为韩国IGAW统计功能所使用 -->
+    	<intent-filter android:label="@string/app_name">
+            <action android:name="android.intent.action.VIEW" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+
+            <data
+                android:host="MY_PACKAGE_NAME"
+                android:scheme="egls"
+		android:path="fbMY_APPLICATION_ID"/>
+        </intent-filter>
+
+        <meta-data
+            android:name="IgawRedirectActivity"
+            android:value="MY_MAIN_ACTIVITY_FULL_NAME" />
+	<!-- DeepLink end -->
+    </activity>
     <receiver
         android:name="com.igaworks.IgawReceiver"
         android:exported="true" >
