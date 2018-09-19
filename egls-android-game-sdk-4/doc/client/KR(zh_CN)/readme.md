@@ -204,20 +204,19 @@ minSdkVersion = 16，targetSdkVersion >= 26
     android:icon="@drawable/icon"
     android:label="AGSDK Demo"
     android:theme="@style/AppTheme" >
+    <!-- 变动部分 begin -->
     <activity
         android:name="com.egls.sdk.demo.GameActivity"
         android:configChanges="fontScale|orientation|keyboardHidden|locale|navigation|screenSize|uiMode"
-	android:launchMode="singleTask"
         android:screenOrientation="landscape"
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-	<!-- 变动部分 begin -->
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
-	<!-- 变动部分 end -->
     </activity>
+    <!-- 变动部分 end -->	
 	
     <!-- Base begin -->
     <!-- 替换"MY_APP_ID"字样为SDK初始化所需的eglsAppId -->
