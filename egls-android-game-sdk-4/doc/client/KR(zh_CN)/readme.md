@@ -34,9 +34,9 @@ allprojects {
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.3.21
-EGLS_AGS_VERSION=4.3.21
-EGLS_SUPPORT_VERSION=4.3.21
+EGLS_AGP_VERSION=4.3.22
+EGLS_AGS_VERSION=4.3.22
+EGLS_SUPPORT_VERSION=4.3.22
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -204,10 +204,10 @@ minSdkVersion = 16，targetSdkVersion >= 26
     android:icon="@drawable/icon"
     android:label="AGSDK Demo"
     android:theme="@style/AppTheme" >
+    <!-- 变动部分 begin -->
     <activity
         android:name="com.egls.sdk.demo.GameActivity"
         android:configChanges="fontScale|orientation|keyboardHidden|locale|navigation|screenSize|uiMode"
-	android:launchMode="singleTask"
         android:screenOrientation="landscape"
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         <intent-filter>
@@ -215,23 +215,8 @@ minSdkVersion = 16，targetSdkVersion >= 26
 
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
-        <!-- DeepLink begin -->
-        <!-- DeepLink配置为韩国IGAW统计功能所使用 -->
-        <!-- 替换“MY_PACKAGE_NAME”字样为正式包名 -->
-	<!-- 替换“MY_APPLICATION_ID”字样为Facebook后台配置的applicationId -->
-        <intent-filter>
-            <data
-                  android:host="MY_PACKAGE_NAME"
-                  android:scheme="egls"
-		  android:path="fbMY_APPLICATION_ID"/>
-
-            <action android:name="android.intent.action.VIEW" />
-
-            <category android:name="android.intent.category.DEFAULT" />
-            <category android:name="android.intent.category.BROWSABLE" />
-        </intent-filter>
-        <!-- DeepLink end -->
     </activity>
+    <!-- 变动部分 end -->	
 	
     <!-- Base begin -->
     <!-- 替换"MY_APP_ID"字样为SDK初始化所需的eglsAppId -->
@@ -280,8 +265,37 @@ minSdkVersion = 16，targetSdkVersion >= 26
     <!-- IGAW begin -->
     <!-- IGAW为韩国地区所使用的统计功能，其他地区发行的游戏请不要使用 -->
     <!-- 替换“MY_PACKAGE_NAME”字样为正式包名 -->
+    <!-- 替换“MY_APPLICATION_ID”字样为Facebook后台配置的applicationId -->
+    <!-- 替换“MY_MAIN_ACTIVITY_FULL_NAME”字样为游戏主Activity的全称 -->
     <!-- 替换“MY_APP_KEY”字样为IGAW后台配置的appKey -->
     <!-- 替换“MY_HASH_KEY”字样为IGAW后台配置的hashKey -->
+    <!-- 变动部分 begin -->	
+    <activity
+    	android:name="com.igaworks.IgawDefaultDeeplinkActivity"
+        android:label="@string/app_name"
+        android:launchMode="singleTask"
+        android:noHistory="true"
+        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen
+	<!-- DeepLink begin -->
+        <!-- DeepLink配置为韩国IGAW统计功能所使用 -->
+    	<intent-filter android:label="@string/app_name">
+            <action android:name="android.intent.action.VIEW" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+
+            <data
+                android:host="MY_PACKAGE_NAME"
+                android:scheme="egls"
+		android:path="fbMY_APPLICATION_ID"/>
+        </intent-filter>
+
+        <meta-data
+            android:name="IgawRedirectActivity"
+            android:value="MY_MAIN_ACTIVITY_FULL_NAME" />
+	<!-- DeepLink end -->
+    </activity>
+    <!-- 变动部分 end -->	
     <receiver
         android:name="com.igaworks.IgawReceiver"
         android:exported="true" >
