@@ -268,6 +268,7 @@ minSdkVersion = 16，targetSdkVersion >= 26
     <!-- 替换“MY_MAIN_ACTIVITY_FULL_NAME”字样为游戏主Activity的全称 -->
     <!-- 替换“MY_APP_KEY”字样为IGAW后台配置的appKey -->
     <!-- 替换“MY_HASH_KEY”字样为IGAW后台配置的hashKey -->
+    <!-- 变动部分 begin -->	
     <activity
     	android:name="com.igaworks.IgawDefaultDeeplinkActivity"
         android:label="@string/app_name"
@@ -293,6 +294,7 @@ minSdkVersion = 16，targetSdkVersion >= 26
             android:value="MY_MAIN_ACTIVITY_FULL_NAME" />
 	<!-- DeepLink end -->
     </activity>
+    <!-- 变动部分 end -->	
     <receiver
         android:name="com.igaworks.IgawReceiver"
         android:exported="true" >
