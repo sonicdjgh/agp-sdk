@@ -210,11 +210,13 @@ minSdkVersion = 16，targetSdkVersion >= 26
 	android:launchMode="singleTask"
         android:screenOrientation="landscape"
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+	<!-- 变动部分 begin -->
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
+	<!-- 变动部分 end -->
     </activity>
 	
     <!-- Base begin -->
