@@ -8,8 +8,6 @@ import com.egls.platform.components.AGPManager;
 import com.egls.platform.interfaces.AGPClientPayProcessListener;
 import com.egls.platform.interfaces.AGPInitProcessListener;
 import com.egls.platform.interfaces.AGPLoginProcessListener;
-import com.egls.platform.utils.AGPDebugUtil;
-import com.egls.socialization.interfaces.OnAGSShareCallback;
 import com.egls.support.utils.AppUtil;
 
 public class MainActivity extends Activity {
