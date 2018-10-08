@@ -523,13 +523,13 @@ protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     AGPManager.initSDK(this, AppUtil.getVersionName(this) + "", new AGPInitProcessListener() {// SDK初始化回调
 
-            @Override
-            public void onInitSDK(int code, String msg) {
-                if (code == 0) {// 当SDK初始化成功后再做后续的事情
+        @Override
+        public void onInitSDK(int code, String msg) {
+            if (code == 0) {// 当SDK初始化成功后再做后续的事情
 
-                }
             }
-        });
+        }
+    });
 }
 ```
 ### 7. SDK登录（必接）
