@@ -88,6 +88,6 @@ dependencies {
     // }
     // api(name: 'cafeSdk-2.4.3', ext: 'aar')
     // 如果使用 OneStore 支付，请打开下面的配置：
-    // api files('libs/kr/iap_plugin_v16.03.00_20161123.jar');
+    // api files('libs/kr/iap_plugin_v17.01.00_20180206.jar');
     // kr end
 }

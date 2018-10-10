@@ -13,9 +13,6 @@ allprojects {
     repositories {
         jcenter()
         google()
-
-        // kr begin
-        // mavenCentral()
-        // kr end
+        mavenCentral()
     }
 }
