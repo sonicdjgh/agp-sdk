@@ -521,27 +521,14 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    String versionCode = "1";
-    try {
-	versionCode = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionCode + "";
-    } catch (NameNotFoundException e) {
-	e.printStackTrace();
-    }
-    AGPManager.initSDK(this, versionCode, new AGPInitProcessListener() {// SDK初始化回调
+    AGPManager.initSDK(this, AppUtil.getVersionName(this) + "", new AGPInitProcessListener() {// SDK初始化回调
 
-	@Override
-	public void onInitSDK(int code, String msg) {
-	    if (code == 0) {// 当SDK初始化成功后再做后续的事情
-	    	AGPManager.setOpenChannelShare(true,new OnAGSShareCallback() {// 打开分享功能并设置分享回调
-								
-	            @Override
-	            public void onShare(int requestCode, int resultCode, String msg) {
-	            }
-	    	});
-	    } else {// 否则关闭游戏
-	        finish();
-	    }
-    	}
+        @Override
+        public void onInitSDK(int code, String msg) {
+            if (code == 0) {// 当SDK初始化成功后再做后续的事情
+
+            }
+        }
     });
 }
 ```
