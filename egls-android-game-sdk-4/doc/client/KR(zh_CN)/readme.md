@@ -389,13 +389,10 @@ minSdkVersion = 16，targetSdkVersion >= 26
     <!--
     <meta-data
         android:name="iap:api_version"
-        android:value="4" />
-    <activity
-        android:name="com.skplanet.dodo.IapWeb"
-        android:configChanges="fontScale|orientation|keyboardHidden|locale|navigation|screenSize|uiMode"
-        android:excludeFromRecents="true"
-        android:windowSoftInputMode="stateHidden" >
-    </activity>
+        android:value="5" />
+    <meta-data
+            android:name="iap:view_option"
+            android:value="popup" />
     <meta-data
         android:name="CHANNEL_ONESTORE_APP_ID"
         android:value="MY_APP_ID"/>
