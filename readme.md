@@ -4,7 +4,7 @@
 从4.x.x版本起，我们采用了新的账号体系，所以并不兼容旧版（即同一个账号在登录后返回的uid与3.x.x版本的不一致）。如果您的游戏曾经接过旧版本的SDK，并且将要使用4.x.x版本的SDK时，请配合我们做游戏的强更及其他必要的更新操作（详情请咨询我方运营）。<br /><br />
 ### Version：4.3.34
 1. 部分bug修复；
-2. 韩国发行区所使用的OneStore SDK版本升级到v5，AndroidManifest.xml文件中，去掉名为“com.skplanet.dodo.IapWeb”的Activity配置，增加名为“iap:view_option”的meta元素配置；其库文件引用变更为“iap_plugin_v17.01.00_20180206.jar”
+2. 韩国发行区所使用的OneStore SDK版本升级到v5，AndroidManifest.xml文件中，去掉名为“com.skplanet.dodo.IapWeb”的Activity配置，增加名为“iap:view_option”的meta元素配置；其库文件引用变更为“iap_plugin_v17.01.00_20180206.jar”。
 ### Version：4.3.25
 修复在部分设备上初始化崩溃的问题。
 ### Version：4.3.24
