@@ -143,6 +143,16 @@ minSdkVersion = 16，targetSdkVersion >= 26
 
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
+	<!-- 微博 begin -->
+	<!-- 如果使用微博分享功能，请打开以下配置 -->
+	<!-- 
+        <intent-filter>
+            <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+        -->
+        <!-- 微博 end -->
     </activity>
 	
     <!-- Base begin -->
@@ -174,22 +184,6 @@ minSdkVersion = 16，targetSdkVersion >= 26
 	
 
     <!-- AGS begin -->
-    <activity
-        android:name="com.egls.socialization.performance.AGSShareActivity"
-        android:screenOrientation="landscape"
-        android:theme="@style/AGSTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation">
-	<!-- 微博 begin -->
-	<!-- 如果使用微博分享功能，请打开以下配置 -->
-	<!-- 
-        <intent-filter>
-            <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
-
-            <category android:name="android.intent.category.DEFAULT" />
-        </intent-filter>
-        -->
-        <!-- 微博 end -->
-    </activity>
-	
     <!-- 微信 begin -->
     <!-- 如果使用微信登录或微信分享功能，请打开以下配置 -->
     <!-- 替换“MY_PACKAGE_NAME”字样为游戏的正式包名 -->	
