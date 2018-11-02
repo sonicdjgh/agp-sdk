@@ -184,12 +184,12 @@ minSdkVersion = 16，targetSdkVersion >= 26
         android:name="EGLS_APP_ID"
         android:value="\0MY_APP_ID" />
 	
-    <!-- 替换"MY_PUBLISHMENT_AREA"字样为对应的服务类别码，详见“附表 - publishmentArea” -->
+    <!-- 替换"MY_PUBLISHMENT_AREA"字样为对应的发行区标识码，详见“附表 - publishmentArea” -->
     <meta-data
         android:name="EGLS_PUBLISHMENT_AREA"
         android:value="MY_PUBLISHMENT_AREA" />
 	
-    <!-- 替换"MY_PAY_CHANNEL"字样为对应的服务类别码，详见“附表 - payChannel” -->
+    <!-- 替换"MY_PAY_CHANNEL"字样为对应的支付渠道标识码，详见“附表 - payChannel” -->
     <meta-data
         android:name="EGLS_PAY_CHANNEL"
         android:value="MY_PAY_CHANNEL" />
