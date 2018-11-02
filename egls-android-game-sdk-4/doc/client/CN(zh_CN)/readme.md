@@ -33,9 +33,9 @@ allprojects {
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.3.44
-EGLS_AGS_VERSION=4.3.44
-EGLS_SUPPORT_VERSION=4.3.44
+EGLS_AGP_VERSION=4.3.50
+EGLS_AGS_VERSION=4.3.50
+EGLS_SUPPORT_VERSION=4.3.50
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -89,13 +89,13 @@ dependencies {
     api "com.egls.android:egls-ags-sdk:$EGLS_AGS_VERSION@aar"
     api "com.egls.android:egls-android-support:$EGLS_SUPPORT_VERSION@aar"
     api 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile files('libs/openDefault-1.0.0-openDefaultRelease.jar')
     // base end
 
     // cn begin
     api files('libs/cn/alipaySdk-20180316.jar')
     api files('libs/cn/open_sdk_r5781_lite.jar')
     api files('libs/cn/wechat-sdk-android-with-mta.jar')
+    api files('libs/openDefault-1.0.0-openDefaultRelease.jar')
     // cn end
 }
 ```
@@ -386,16 +386,7 @@ AGPManager.onEnterGame();
 ```
 ### 10. SDK分享功能（选接）
 ```Java
-String contentTitle = "分享";// 分享标题
-String contentText = "文本内容";// 文本内容
-String contentImage = "分享图像文件地址";//分享本地图像文件的绝对地址
-String contentUrl = null; //分享的链接url
-Bundle shareBundle = new Bundle();
-shareBundle.putString(Key.CONTENT_TITLE, contentTitle);
-shareBundle.putString(Key.CONTENT_TEXT, contentText);
-shareBundle.putString(Key.CONTENT_IMAGE, contentImage);
-shareBundle.putString(Key.CONTENT_URL, contentUrl);
-AGPManager.shareInCN(true, true, true, shareBundle);
+改版中……
 ```
 ### 11. 关于微信功能的使用
 SDK集成了“微信登录”功能及“微信分享”功能，除了添加相关的AndroidManifest.xml文件配置之外，还需要在项目工程中添加一个以“正式包名.wxapi”的package（以Demo为例，则添加的package为“com.egls.demo.wxapi”），并且在该package中添加一个名为“WXEntryActivity”的Activity类，这个类必须继承SDK中的“com.egls.socialization.wechat.WeChatEntryActivity”类，例如：
