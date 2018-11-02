@@ -214,6 +214,7 @@ minSdkVersion = 16，targetSdkVersion >= 26
         android:name="CHANNEL_SERVER_CLIENT_ID"
         android:value="MY_SERVER_CLIENT_ID"/>
 
+    <!-- 替换“MY_APPLICATION_ID”字样为Facebook后台配置的applicationId -->	
     <meta-data
         android:name="com.facebook.sdk.ApplicationId"
         android:value="\0MY_APPLICATION_ID" />
