@@ -32,9 +32,9 @@ allprojects {
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.3.50
-EGLS_AGS_VERSION=4.3.50
-EGLS_SUPPORT_VERSION=4.3.50
+EGLS_AGP_VERSION=4.3.51
+EGLS_AGS_VERSION=4.3.51
+EGLS_SUPPORT_VERSION=4.3.51
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -123,12 +123,7 @@ minSdkVersion = 16，targetSdkVersion >= 26
 ### 4. AndroidManifest.xml文件配置
 #### 4.1 AGP Permission 配置
 ```Xml
-<!-- AGP begin -->
-<!-- AppsFlyer begin -->
-<!-- 如果现在接入的安卓包是针对除Google Play以外的其他应用商店，那么此权限一定需要声明，否则要删除该权限声明 -->
-<!-- <uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
-<!-- AppsFlyer end -->
-<!-- AGP end -->
+<!-- 暂无配置要求 -->
 ```
 #### 4.2 AGS Permission 配置
 ```Xml
