@@ -112,4 +112,8 @@ public class MainActivity extends Activity {
         });
     }
 
+    private void onEnterGame() {
+        AGPManager.onEnterGame();
+    }
+
 }
