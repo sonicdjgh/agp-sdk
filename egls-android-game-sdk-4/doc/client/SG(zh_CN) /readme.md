@@ -1,6 +1,6 @@
-# EGLS-Android-Game-SDK-TW-4.X.X(Client-zhCN)
+# EGLS-Android-Game-SDK-SG-4.X.X(Client-zhCN)
 ### 1. 简介
-欢迎使用 EGLS Android Game SDK，这篇SDK对接文档说明适用于在**港台**地区发行的游戏。<br/><br/>
+欢迎使用 EGLS Android Game SDK，这篇SDK对接文档说明适用于在**新加坡**发行的游戏。<br/><br/>
 从4.x.x版本起，我们采用了新的账号体系，所以并不兼容旧版（即同一个账号在登录后返回的uid与3.x.x版本的不一致）。如果您的游戏曾经接过旧版本的SDK，并且将要使用4.x.x版本的SDK时，请配合我们做游戏的强更及其他必要的更新操作（详情请咨询我方运营）。
 ### 2. 所需参数
 #### 2.1 eglsAppId
@@ -32,9 +32,9 @@ allprojects {
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.3.44
-EGLS_AGS_VERSION=4.3.44
-EGLS_SUPPORT_VERSION=4.3.44
+EGLS_AGP_VERSION=4.3.50
+EGLS_AGS_VERSION=4.3.50
+EGLS_SUPPORT_VERSION=4.3.50
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -69,10 +69,10 @@ dependencies {
     // base end
 
 
-    // tw begin
+    // sg begin
     api 'com.appsflyer:af-android-sdk:4+@aar'
     api 'com.android.installreferrer:installreferrer:1.0'
-    // tw end
+    // sg end
 }
 ```
 #### 3.4 AGS lib 选择
@@ -89,10 +89,9 @@ dependencies {
     api "com.egls.android:egls-ags-sdk:$EGLS_AGS_VERSION@aar"
     api "com.egls.android:egls-android-support:$EGLS_SUPPORT_VERSION@aar"
     api 'com.android.support.constraint:constraint-layout:1.0.2'
-    api files('libs/openDefault-1.0.0-openDefaultRelease.jar')
     // base end
 
-    // tw begin
+    // sg begin
     api 'com.google.android.gms:play-services-auth:11.0.1'
     api 'com.google.android.gms:play-services-auth-base:11.0.1'
     api 'com.google.android.gms:play-services-base:11.0.1'
@@ -106,13 +105,7 @@ dependencies {
     api 'com.facebook.android:facebook-core:4.+'
     api 'com.facebook.android:facebook-login:4.+'
     api 'com.facebook.android:facebook-share:4.+'
-    
-    // 如果使用 MyCard 支付，请打开下面的配置
-    // api files('libs/tw/MyCardPaySDK.jar')
-    
-    // 如果使用 Gash 支付，请打开下面的配置
-    // api files('libs/tw/clientsdk_product_v2.jar')
-    // tw end
+    // sg end
 }
 
 ```
@@ -223,10 +216,10 @@ minSdkVersion = 16，targetSdkVersion >= 26
         android:name="EGLS_APP_ID"
         android:value="\0MY_APP_ID" />
 	
-    <!-- 替换"MY_SERVER_TYPE"字样为对应的服务类别码，详见“附表 - serverType” -->
+    <!-- 替换"MY_PUBLISHMENT_AREA_TYPE"字样为对应的服务类别码，详见“附表 - publishmentAreaType” -->
     <meta-data
-        android:name="EGLS_SERVER_TYPE"
-        android:value="MY_SERVER_TYPE" />
+        android:name="EGLS_PUBLISHMENT_AREA_TYPE"
+        android:value="MY_PUBLISHMENT_AREA_TYPE" />
 	
     <!-- 替换"MY_PAY_CHANNEL"字样为对应的服务类别码，详见“附表 - payChannel” -->
     <meta-data
@@ -301,10 +294,8 @@ minSdkVersion = 16，targetSdkVersion >= 26
 
 
     <!-- Google Play begin -->
-    <!-- 如果使用Google Play支付功能，请打开以下配置 -->
     <!-- 替换“MY_PUBLIC_KEY”字样为Google Play后台配置的publicKey -->
     <!-- 4.1.0版本以前name属性为“com.egls.socialization.google.play.BillingActivity” -->
-    <!--
     <activity
         android:name="com.egls.socialization.google.play.GooglePlayActivity"
         android:configChanges="fontScale|orientation|keyboardHidden|locale|navigation|screenSize|uiMode"
@@ -314,7 +305,6 @@ minSdkVersion = 16，targetSdkVersion >= 26
     <meta-data
         android:name="CHANNEL_GOOGLE_PUBLIC_KEY"
         android:value="MY_PUBLIC_KEY" />
-    -->
     <!-- Google Play end -->
     
 
@@ -326,155 +316,6 @@ minSdkVersion = 16，targetSdkVersion >= 26
         android:value="true"/>
     -->
     <!-- Facebook end  -->
-
-
-    <!-- Mycard begin -->
-    <!-- 如果使用Mycard支付功能，请打开以下配置 -->
-    <!--
-    <activity
-        android:name="soft_world.mycard.paymentapp.ui.SplashActivity"
-        android:screenOrientation="portrait" >
-    </activity>
-    <activity
-        android:name="soft_world.mycard.paymentapp.ui.MainActivity"
-        android:screenOrientation="portrait"
-        android:windowSoftInputMode="adjustPan" >
-    </activity>
-    <activity
-        android:name="soft_world.mycard.paymentapp.ui.TrainActivity"
-        android:screenOrientation="portrait" >
-    </activity>
-    <activity
-        android:name="com.google.zxing.CaptureActivity"
-        android:screenOrientation="portrait" >
-    </activity>
-    <activity
-        android:name="tw.com.mycard.paymentsdk.PSDKActivity"
-        android:screenOrientation="portrait" >
-    </activity>
-    <activity
-        android:name="soft_world.mycard.paymentapp.ui.billing.BillingWebViewActivity"
-        android:screenOrientation="portrait"
-        android:theme="@android:style/Theme.Dialog" >
-    </activity>
-    <activity
-        android:name="soft_world.mycard.paymentapp.Ecom.ATMMenuActivity"
-        ndroid:screenOrientation="portrait" >
-    </activity>
-    <activity
-        android:name="com.xmobilepay.xpaymentlibs.XCardTypeForm"
-        android:screenOrientation="portrait" >
-    </activity>
-    <activity
-        android:name="com.xmobilepay.xpaymentlibs.PaymentErrResultForm"
-        android:screenOrientation="portrait" >
-    </activity>
-    <activity
-        android:name="com.fet.iap.activity.FetLoginActivity"
-        android:configChanges="keyboardHidden|orientation|screenSize"
-        android:theme="@android:style/Theme.Translucent.NoTitleBar"
-        android:windowSoftInputMode="adjustPan" >
-    </activity>
-    <activity android:name="com.cht.iap.api.ChtRegMainActivity" />
-    <activity android:name="com.cht.iap.api.ChtPhoneNumPayConfirmActivity" />
-    <activity android:name="com.cht.iap.api.ChtRegEInvoiceInfo" />
-    <activity android:name="com.cht.iap.api.ChtRegVerifyOTP" />
-    <activity android:name="com.cht.iap.api.ChtRegHNDataTabActivity" />
-    <activity android:name="com.cht.iap.api.ChtRegHNAccountActivity" />
-    <activity android:name="com.cht.iap.api.ChtRegMobileAuth" />
-    <activity android:name="com.cht.iap.api.ChtRegMobileHNData" />
-    <activity android:name="com.cht.iap.api.ChtTransactionAuth" />
-    <activity android:name="com.cht.iap.api.ChtRegVerifyMessage" />
-    <activity
-        android:name="com.softmobile.ui.PayPageActivity"
-        android:configChanges="orientation"
-        android:screenOrientation="portrait" />
-    <activity
-        android:name="com.payeasenet.token.lib.ui.TokenPayTypeCheckUI"
-        android:screenOrientation="portrait"
-        android:theme="@android:style/Theme.Light.NoTitleBar" />
-    <activity
-        android:name="com.payeasenet.token.lib.ui.CardTypeCheckUI"
-        android:screenOrientation="portrait"
-        android:theme="@android:style/Theme.Light.NoTitleBar" />
-    <activity
-         android:name="com.payeasenet.token.lib.ui.TokenCreateUI"
-         android:screenOrientation="portrait"
-         android:theme="@android:style/Theme.Light.NoTitleBar" >
-    </activity>
-    <activity
-        android:name="com.payeasenet.token.lib.ui.TokenCreateResultUI"
-        android:screenOrientation="portrait"
-        android:theme="@android:style/Theme.Light.NoTitleBar" />
-    <activity
-        android:name="com.payeasenet.token.lib.ui.TokenPayUI"
-        android:screenOrientation="portrait"
-        android:theme="@android:style/Theme.Light.NoTitleBar" />
-    <activity
-        android:name="com.payeasenet.token.lib.ui.PEPayRelUI"
-        android:screenOrientation="portrait"
-        android:theme="@android:style/Theme.Light.NoTitleBar" />
-    <activity
-        android:name="com.payeasenet.token.lib.ui.TokenIntroductionUI"
-        android:screenOrientation="portrait"
-        android:theme="@android:style/Theme.Light.NoTitleBar" >
-    </activity>
-    <activity
-        android:name="com.payeasenet.token.lib.ui.TokenUnBindedUI"
-        android:screenOrientation="portrait"
-        android:theme="@android:style/Theme.Light.NoTitleBar" >
-    </activity>
-    <activity
-        android:name="com.payeasenet.token.lib.ui.MoreAboutUI"
-        android:screenOrientation="portrait"
-        android:theme="@android:style/Theme.Light.NoTitleBar" />
-    <activity
-        android:name="com.payeasenet.token.lib.ui.PEQuickPayUI"
-        android:screenOrientation="portrait"
-        android:theme="@android:style/Theme.Light.NoTitleBar" />
-    <activity
-        android:name="com.payeasenet.token.lib.ui.PEUpmpPayUI"
-        android:screenOrientation="portrait"
-        android:theme="@android:style/Theme.Light.NoTitleBar" />
-    <activity
-        android:name="com.payeasenet.token.lib.ui.PEVisaPayUI"
-        android:screenOrientation="portrait"
-        android:theme="@android:style/Theme.Light.NoTitleBar" />
-    <activity
-        android:name="com.payeasenet.token.lib.ui.PEVisaInfoUI"
-        android:screenOrientation="portrait"
-        android:theme="@android:style/Theme.Light.NoTitleBar" />
-    <activity
-        android:name="com.payeasenet.token.lib.ui.PEVisaBillInfoUI"
-        android:screenOrientation="portrait"
-        android:theme="@android:style/Theme.Light.NoTitleBar" />
-    <activity
-        android:name="com.payeasenet.token.lib.ui.PEDebitBillInfoUI"
-        android:screenOrientation="portrait"
-        android:theme="@android:style/Theme.Light.NoTitleBar" />
-    <activity
-        android:name="com.payeasenet.token.lib.ui.PEQuickInfoUI"
-        android:screenOrientation="portrait"
-        android:theme="@android:style/Theme.Light.NoTitleBar" />
-    <activity
-        android:name="com.payeasenet.token.lib.ui.PEUpmpInfoUI"
-        android:screenOrientation="portrait"
-        android:theme="@android:style/Theme.Light.NoTitleBar" />
-    -->
-    <!-- Mycard end -->
-    
-    
-    <!-- Gash begin -->
-    <!-- 如果使用Gash支付功能，请打开以下配置 -->
-    <!--
-    <activity
-        android:name="com.gashpoint.gpclientsdk.SdkActivity"
-	android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
-        android:exported="true"
-        android:screenOrientation="portrait"
-        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
-    -->
-    <!-- Gash end -->
     <!-- EGLS Android Game Socialization SDK end -->
 </application>
 ```
