@@ -32,9 +32,9 @@ allprojects {
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.3.44
-EGLS_AGS_VERSION=4.3.44
-EGLS_SUPPORT_VERSION=4.3.44
+EGLS_AGP_VERSION=4.3.51
+EGLS_AGS_VERSION=4.3.51
+EGLS_SUPPORT_VERSION=4.3.51
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -223,12 +223,12 @@ minSdkVersion = 16，targetSdkVersion >= 26
         android:name="EGLS_APP_ID"
         android:value="\0MY_APP_ID" />
 	
-    <!-- 替换"MY_SERVER_TYPE"字样为对应的服务类别码，详见“附表 - serverType” -->
+    <!-- 替换"MY_PUBLISHMENT_AREA"字样为对应的发行区标识码，详见“附表 - publishmentArea” -->
     <meta-data
-        android:name="EGLS_SERVER_TYPE"
-        android:value="MY_SERVER_TYPE" />
+        android:name="EGLS_PUBLISHMENT_AREA"
+        android:value="MY_PUBLISHMENT_AREA" />
 	
-    <!-- 替换"MY_PAY_CHANNEL"字样为对应的服务类别码，详见“附表 - payChannel” -->
+    <!-- 替换"MY_PAY_CHANNEL"字样为对应的支付渠道标识码，详见“附表 - payChannel” -->
     <meta-data
         android:name="EGLS_PAY_CHANNEL"
         android:value="MY_PAY_CHANNEL" />
@@ -249,10 +249,6 @@ minSdkVersion = 16，targetSdkVersion >= 26
         android:value="MY_SERVER_CLIENT_ID"/>
 
     <!-- 替换“MY_APPLICATION_ID”字样为Facebook后台配置的applicationId -->
-    <provider
-        android:name="com.facebook.FacebookContentProvider"
-        android:authorities="com.facebook.app.FacebookContentProviderMY_APPLICATION_ID"
-        android:exported="true" />
     <meta-data
         android:name="com.facebook.sdk.ApplicationId"
         android:value="\0MY_APPLICATION_ID" />
@@ -282,13 +278,7 @@ minSdkVersion = 16，targetSdkVersion >= 26
     <!-- AGP end -->
 
 
-    <!-- AGS begin -->
-    <activity
-        android:name="com.egls.socialization.performance.AGSShareActivity"
-        android:screenOrientation="landscape"
-        android:theme="@style/AGSTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation" >
-    </activity>
-	
+    <!-- AGS begin -->	
     <!-- Google Play Game begin -->
     <!-- 如果使用Google Play Game成就功能，请打开以下配置 -->
     <!-- 替换“MY_GAMES_APP_ID”字样为"MY_SERVER_CLIENT_ID"的第一处"-"左边的纯数字部分 -->
@@ -319,6 +309,12 @@ minSdkVersion = 16，targetSdkVersion >= 26
     
 
     <!-- Facebook begin -->
+    <!-- 替换“MY_APPLICATION_ID”字样为Facebook后台配置的applicationId -->
+    <provider
+        android:name="com.facebook.FacebookContentProvider"
+        android:authorities="com.facebook.app.FacebookContentProviderMY_APPLICATION_ID"
+        android:exported="true" />
+	
     <!--如果游戏需要开启Facebook的“USER_FRIEND”权限，请打开以下配置 --> 
     <!--
     <meta-data
@@ -610,14 +606,19 @@ AGPManager.addFlavorsBasePackage(BuildConfig.class.getPackage().getName());
 AGPManager.addNecessaryPermission(Manifest.permission.READ_PHONE_STATE);
 AGPManager.addNecessaryPermission(Manifest.permission.RECORD_AUDIO);
 ```
-### 附表 - serverType
-serverType | value
+### 附表 - publishmentArea
+publishmentArea | value
 ---|---
 中国大陆 | 1
-港台地区 | 2
+港奥台地区 | 2
 韩国 | 3
 日本 | 4
 美国 | 5
+俄罗斯 | 6
+泰国 | 7
+越南 | 8
+印度尼西亚 | 9
+新加坡 | 10
 
 ### 附表 - payChannel
 payChannel | value
