@@ -53,7 +53,7 @@ dependencies {
 }
 ```
 #### 3.3 AGP lib 选择
-针对于在港台地区发行的游戏，请在Module“AGP”的“build.gradle”文件里打开如下图所示的配置：<br/>
+针对于在新加坡发行的游戏，请在Module“AGP”的“build.gradle”文件里打开如下图所示的配置：<br/>
 ```gradle
 repositories {
     flatDir {
@@ -76,7 +76,7 @@ dependencies {
 }
 ```
 #### 3.4 AGS lib 选择
-针对于在港台地区发行的游戏，请在Module“AGS”的“build.gradle”文件里打开如下图所示的配置：<br/>
+针对于在新加坡发行的游戏，请在Module“AGS”的“build.gradle”文件里打开如下图所示的配置：<br/>
 ```gradle
 repositories {
     flatDir {
@@ -134,8 +134,6 @@ minSdkVersion = 16，targetSdkVersion >= 26
 ```Xml
 <!-- AGS begin -->
 <!-- Google Play begin -->
-<!-- 如果使用Google Play支付功能，请打开以下配置 -->
-<!--
 <uses-permission android:name="com.android.vending.BILLING" />
 <uses-feature
     android:name="android.hardware.camera"
@@ -149,36 +147,12 @@ minSdkVersion = 16，targetSdkVersion >= 26
 <uses-feature
     android:name="android.hardware.microphone"
     android:required="false" />
--->
 <!-- Google Play end -->
-
-
-<!-- Mycard begin -->
-<!-- 如果使用Mycard支付，请打开以下配置 -->
-<!--
-<uses-permission android:name="android.permission.CAMERA" />
-<uses-permission android:name="android.permission.VIBRATE" />
-<uses-permission android:name="android.permission.FLASHLIGHT" />
-<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-<uses-permission android:name="android.permission.READ_LOGS" />
-<uses-feature android:name="android.hardware.camera" />
-<uses-feature android:name="android.hardware.camera.autofocus" />
--->
-<!-- Mycard end -->
 <!-- AGS end -->
 ```
 请注意：以上 Permission 配置中只打开了SDK基础功能相关的配置，如果使用到其他功能，请打开对应的 Permission 配置！
 #### 4.3 Application相关配置
 ```Xml
-<!-- 如果用Mycard支付功能，请在application标签内添加属性 android:name="tw.com.mycard.sdk.libs.PSDKApplication" -->
 <application
     android:allowBackup="false"
     android:icon="@drawable/icon"
@@ -195,7 +169,6 @@ minSdkVersion = 16，targetSdkVersion >= 26
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
         <!-- DeepLink begin -->
-        <!-- DeepLink配置为台湾地区LINE积分墙功能所使用 -->
         <!-- 替换“MY_PACKAGE_NAME”字样为正式包名 -->
         <intent-filter>
             <data
@@ -241,11 +214,6 @@ minSdkVersion = 16，targetSdkVersion >= 26
         android:name="CHANNEL_SERVER_CLIENT_ID"
         android:value="MY_SERVER_CLIENT_ID"/>
 
-    <!-- 替换“MY_APPLICATION_ID”字样为Facebook后台配置的applicationId -->
-    <provider
-        android:name="com.facebook.FacebookContentProvider"
-        android:authorities="com.facebook.app.FacebookContentProviderMY_APPLICATION_ID"
-        android:exported="true" />
     <meta-data
         android:name="com.facebook.sdk.ApplicationId"
         android:value="\0MY_APPLICATION_ID" />
@@ -276,12 +244,6 @@ minSdkVersion = 16，targetSdkVersion >= 26
 
 
     <!-- AGS begin -->
-    <activity
-        android:name="com.egls.socialization.performance.AGSShareActivity"
-        android:screenOrientation="landscape"
-        android:theme="@style/AGSTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation" >
-    </activity>
-	
     <!-- Google Play Game begin -->
     <!-- 如果使用Google Play Game成就功能，请打开以下配置 -->
     <!-- 替换“MY_GAMES_APP_ID”字样为"MY_SERVER_CLIENT_ID"的第一处"-"左边的纯数字部分 -->
@@ -309,6 +271,12 @@ minSdkVersion = 16，targetSdkVersion >= 26
     
 
     <!-- Facebook begin -->
+    <!-- 替换“MY_APPLICATION_ID”字样为Facebook后台配置的applicationId -->
+    <provider
+        android:name="com.facebook.FacebookContentProvider"
+        android:authorities="com.facebook.app.FacebookContentProviderMY_APPLICATION_ID"
+        android:exported="true" />
+	
     <!--如果游戏需要开启Facebook的“USER_FRIEND”权限，请打开以下配置 --> 
     <!--
     <meta-data
@@ -428,20 +396,7 @@ AGPManager.eglsPay(amount, productId, productName, cpOrderInfo, new AGPClientPay
 //当玩家登录进入到游戏服务器之后，请务必调用该方法
 AGPManager.onEnterGame();
 ```
-### 10. SDK分享功能（选接）
-```Java
-String contentTitle = "分享";// 分享标题
-String contentText = "文本内容";// 文本内容
-String contentImage = "分享图像文件地址";//分享本地图像文件的绝对地址
-String contentUrl = null; //分享的链接url
-Bundle shareBundle = new Bundle();
-shareBundle.putString(Key.CONTENT_TITLE, contentTitle);
-shareBundle.putString(Key.CONTENT_TEXT, contentText);
-shareBundle.putString(Key.CONTENT_IMAGE, contentImage);
-shareBundle.putString(Key.CONTENT_URL, contentUrl);
-AGPManager.shareInTW(true, true, shareBundle);
-```
-### 11. 其他注意事项
+### 10. 其他注意事项
 1. 凡是游戏项目工程为Android Studio工程，并且在Gradle里配置了productFlavor来控制打包流程的，请务必在调用“AGPManager.initSDK()”接口前，写上如下逻辑代码：
 ```Java
 AGPManager.addFlavorsBasePackage(BuildConfig.class.getPackage().getName());
@@ -451,14 +406,19 @@ AGPManager.addFlavorsBasePackage(BuildConfig.class.getPackage().getName());
 AGPManager.addNecessaryPermission(Manifest.permission.READ_PHONE_STATE);
 AGPManager.addNecessaryPermission(Manifest.permission.RECORD_AUDIO);
 ```
-### 附表 - serverType
+### 附表 - publishmentAreaType
 serverType | value
 ---|---
 中国大陆 | 1
-港台地区 | 2
+港奥台地区 | 2
 韩国 | 3
 日本 | 4
 美国 | 5
+俄罗斯 | 6
+泰国 | 7
+越南 | 8
+印度尼西亚 | 9
+新加坡 | 10
 
 ### 附表 - payChannel
 payChannel | value
