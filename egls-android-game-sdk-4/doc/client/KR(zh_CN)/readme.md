@@ -34,9 +34,9 @@ allprojects {
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.3.44
-EGLS_AGS_VERSION=4.3.44
-EGLS_SUPPORT_VERSION=4.3.44
+EGLS_AGP_VERSION=4.3.50
+EGLS_AGS_VERSION=4.3.50
+EGLS_SUPPORT_VERSION=4.3.50
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -96,7 +96,6 @@ dependencies {
     api "com.egls.android:egls-ags-sdk:$EGLS_AGS_VERSION@aar"
     api "com.egls.android:egls-android-support:$EGLS_SUPPORT_VERSION@aar"
     api 'com.android.support.constraint:constraint-layout:1.0.2'
-    api files('libs/openDefault-1.0.0-openDefaultRelease.jar')
     // base end
 
     // kr begin
@@ -250,11 +249,6 @@ minSdkVersion = 16，targetSdkVersion >= 26
         android:value="MY_SERVER_CLIENT_ID"/>
 
     <!-- 替换“MY_APPLICATION_ID”字样为Facebook后台配置的applicationId -->
-    <!-- 目前google play商店对于provider的使用有漏洞检测，目前的处理方式是对于google play商店的包，exported属性需要改为false，但是会影响FB的分享功能，导致无法正常分享 -->
-    <provider
-        android:name="com.facebook.FacebookContentProvider"
-        android:authorities="com.facebook.app.FacebookContentProviderMY_APPLICATION_ID"
-        android:exported="true" />
     <meta-data
         android:name="com.facebook.sdk.ApplicationId"
         android:value="\0MY_APPLICATION_ID" />
@@ -374,11 +368,18 @@ minSdkVersion = 16，targetSdkVersion >= 26
     
 
     <!-- Facebook begin -->
+    <!-- 替换“MY_APPLICATION_ID”字样为Facebook后台配置的applicationId -->
+    <!-- 目前google play商店对于provider的使用有漏洞检测，目前的处理方式是对于google play商店的包，exported属性需要改为false，但是会影响FB的分享功能，导致无法正常分享 -->
+    <provider
+        android:name="com.facebook.FacebookContentProvider"
+        android:authorities="com.facebook.app.FacebookContentProviderMY_APPLICATION_ID"
+        android:exported="true" />
+	
     <!--如果游戏需要开启Facebook的“USER_FRIEND”权限，请打开以下配置 --> 
     <!--
     <meta-data
-            android:name="CNANNEL_PERMISSION_USER_FRIEND"
-            android:value="true"/>
+        android:name="CNANNEL_PERMISSION_USER_FRIEND"
+        android:value="true"/>
     -->
     <!-- Facebook end  -->
     
@@ -547,16 +548,7 @@ AGPManager.onEnterGame();
 ```
 ### 11. SDK分享功能（选接）
 ```Java
-String contentTitle = "分享";// 分享标题
-String contentText = "文本内容";// 文本内容
-String contentImage = "分享图像文件地址";//分享本地图像文件的绝对地址
-String contentUrl = null; //分享的链接url
-Bundle shareBundle = new Bundle();
-shareBundle.putString(Key.CONTENT_TITLE, contentTitle);
-shareBundle.putString(Key.CONTENT_TEXT, contentText);
-shareBundle.putString(Key.CONTENT_IMAGE, contentImage);
-shareBundle.putString(Key.CONTENT_URL, contentUrl);
-AGPManager.shareInKR(true, true, shareBundle);
+改版中……
 ```
 ### 12. IGAW数据统计（必接）
 IGAW主要用于韩服地区发行的游戏的数据统计，启用该功能的做法，首先要按照上面所提到的，在AndroidManifest.xml文件中打开对应的配置。对于IGAW统计功能的相关接口调用，其相关初始化部分的逻辑已经嵌入进SDK当中，因此开发者无需关心较为复杂的初始化步骤，只需根据需求，调用对应的接口即可。<br /><br />
