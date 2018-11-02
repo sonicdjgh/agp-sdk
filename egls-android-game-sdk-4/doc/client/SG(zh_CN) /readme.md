@@ -407,7 +407,7 @@ AGPManager.addNecessaryPermission(Manifest.permission.READ_PHONE_STATE);
 AGPManager.addNecessaryPermission(Manifest.permission.RECORD_AUDIO);
 ```
 ### 附表 - publishmentAreaType
-serverType | value
+publishmentAreaType | value
 ---|---
 中国大陆 | 1
 港奥台地区 | 2
