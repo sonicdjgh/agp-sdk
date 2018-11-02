@@ -89,7 +89,6 @@ dependencies {
     api "com.egls.android:egls-ags-sdk:$EGLS_AGS_VERSION@aar"
     api "com.egls.android:egls-android-support:$EGLS_SUPPORT_VERSION@aar"
     api 'com.android.support.constraint:constraint-layout:1.0.2'
-    api files('libs/openDefault-1.0.0-openDefaultRelease.jar')
     // base end
 
     // tw begin
