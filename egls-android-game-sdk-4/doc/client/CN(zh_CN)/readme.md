@@ -161,10 +161,10 @@ minSdkVersion = 16，targetSdkVersion >= 26
         android:name="EGLS_APP_ID"
         android:value="\0MY_APP_ID" />
 	
-    <!-- 替换"MY_SERVER_TYPE"字样为对应的服务类别码，详见“附表 - serverType” -->
+    <!-- 替换"MY_PUBLISHMENT_AREA_TYPE"字样为对应的服务类别码，详见“附表 - publishmentAreaType” -->
     <meta-data
-        android:name="EGLS_SERVER_TYPE"
-        android:value="MY_SERVER_TYPE" />
+        android:name="EGLS_PUBLISHMENT_AREA_TYPE"
+        android:value="MY_PUBLISHMENT_AREA_TYPE" />
 	
     <!-- 替换"MY_PAY_CHANNEL"字样为对应的支付渠道码，详见“附表 - payChannel” -->
     <meta-data
@@ -405,14 +405,19 @@ AGPManager.addFlavorsBasePackage(BuildConfig.class.getPackage().getName());
 AGPManager.addNecessaryPermission(Manifest.permission.READ_PHONE_STATE);
 AGPManager.addNecessaryPermission(Manifest.permission.RECORD_AUDIO);
 ```
-### 附表 - serverType
-serverType | value
+### 附表 - publishmentAreaType
+publishmentAreaType | value
 ---|---
 中国大陆 | 1
-港台地区 | 2
+港奥台地区 | 2
 韩国 | 3
 日本 | 4
 美国 | 5
+俄罗斯 | 6
+泰国 | 7
+越南 | 8
+印度尼西亚 | 9
+新加坡 | 10
 
 ### 附表 - payChannel
 payChannel | value
