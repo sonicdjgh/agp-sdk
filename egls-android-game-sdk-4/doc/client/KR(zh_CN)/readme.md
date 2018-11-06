@@ -351,8 +351,8 @@ minSdkVersion = 16，targetSdkVersion >= 26
     <activity
         android:name="com.egls.socialization.google.play.GooglePlayActivity"
         android:configChanges="fontScale|orientation|keyboardHidden|locale|navigation|screenSize|uiMode"
-        android:screenOrientation="landscape"
-        android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        android:screenOrientation="behind"
+        android:theme="@style/EglsTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation" />
 
     <meta-data
         android:name="CHANNEL_GOOGLE_PUBLIC_KEY"
