@@ -5,7 +5,8 @@
 ### Version：4.3.52
 1. 增加对新加坡发行的适配逻辑；
 2. 将原有的“EGLS_SERVER_TYPE”字段修改为“EGLS_PUBLISHMENT_AREA”；
-3. 分享接口目前改版中，原有的接口不再推荐使用，等新的分享接口发布后，旧版分享接口将被废弃。
+3. 分享接口目前改版中，原有的接口不再推荐使用，等新的分享接口发布后，旧版分享接口将被废弃;
+4. 为了兼容Android API 27版本要求，修改“com.egls.socialization.google.play.GooglePlayActivity”的“screenOrientation”属性值为“behind”，修改“theme”属性值为“@style/EglsTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation”。
 ### Version：4.3.49
 修复游客账号绑定功能的bug。
 ### Version：4.3.45
