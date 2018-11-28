@@ -62,7 +62,7 @@ public class MainActivity extends Activity {
         AGPManager.onNewIntent(intent);
     }
 
-    private void reuestLogin() {
+    private void requestLogin() {
         AGPManager.eglsLogin(false, new AGPLoginProcessListener() {
 
             @Override
