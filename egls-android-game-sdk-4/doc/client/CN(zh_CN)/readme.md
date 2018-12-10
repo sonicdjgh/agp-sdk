@@ -389,11 +389,11 @@ AGPManager.onEnterGame();
 ### 10. SDK分享功能（选接）
 ```Java
 int type = Constants.TYPE_SHARE_WECHAT;
-String shareTitle = "";
-String shareText = "";
-String shareImageFilePath = "";
-String shareLink = "";
-boolean isTimelineCb = false;
+String shareTitle = "";// 分享标题
+String shareText = "";// 分享文本
+String shareImageFilePath = "";// 分享图片（绝对路径）
+String shareLink = "";// 分享链接
+boolean isTimelineCb = false;// 仅当用于微信分享，当isTimelineCb为true时，SDK启用微信分享到朋友圈，否则启用微信分享到好友
 AGPManager.eglsShare(this, type, shareTitle, shareText, shareImageFilePath, shareLink, isTimelineCb, new AGPShareProcessListenter() {
 
     @Override
