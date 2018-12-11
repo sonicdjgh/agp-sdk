@@ -4,6 +4,7 @@
 从4.x.x版本起，我们采用了新的账号体系，所以并不兼容旧版（即同一个账号在登录后返回的uid与3.x.x版本的不一致）。如果您的游戏曾经接过旧版本的SDK，并且将要使用4.x.x版本的SDK时，请配合我们做游戏的强更及其他必要的更新操作（详情请咨询我方运营）。
 ### 2. 所需参数
 #### 2.1 eglsAppId
+
 由我方给游戏分配的应用id，一个游戏对应一个。
 #### 2.2 CHANNEL_GOOGLE_PUBLIC_KEY
 在Goole Play后台生成的支付公钥。
@@ -326,7 +327,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    AGPManager.initSDK(this, AppUtil.getVersionName(this) + "", new AGPInitProcessListener() {// SDK初始化回调
+    AGPManager.initSDK(this, AppUtil.getVersionName(this), new AGPInitProcessListener() {// SDK初始化回调
 
         @Override
         public void onInitProcess(int action, String msg) {
@@ -339,8 +340,8 @@ protected void onCreate(Bundle savedInstanceState) {
 ```
 ### 7. SDK登录（必接）
 ```Java
-boolean isOpenAutoLogin = false;// 韩国地区发行的游戏请传true
-AGPManager.eglsLogin(isOpenAutoLogin, new AGPLoginProcessListener() {
+int loginMode = Constants.MODE_LOGIN_COMMON;
+AGPManager.eglsLogin(loginMode, new AGPLoginProcessListener() {
 
     @Override
     public void onTokenFailure() {
@@ -368,7 +369,8 @@ String amount = "1";// 总金额
 String productId = "PDT001";// 档位id
 String productName = "钻石";// 档位名称
 String cpOrderInfo = "2SDF34DF12GH0S23234GAER5";// CP订单信息，由接入方生成
-AGPManager.eglsPay(amount, productId, productName, cpOrderInfo, new AGPClientPayProcessListener(){
+String flag = "";// 额外标记，一般传空字符串即可
+AGPManager.eglsPay(amount, productId, productName, cpOrderInfo, flag, new AGPClientPayProcessListener(){
 	
     @Override
     public void onClientPayFinish(String message) {
