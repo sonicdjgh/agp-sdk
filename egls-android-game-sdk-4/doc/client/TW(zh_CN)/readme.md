@@ -274,8 +274,9 @@ minSdkVersion = 16，targetSdkVersion >= 26
     <!-- AppsFlyer begin -->
     <!-- AppsFlyer为港台地区所使用的内嵌统计功能 -->
     <!-- 为了确保所有Install Referrer监听器可以成功监听由系统播放的referrer参数，请一定在AndroidManifest.xml中将AppsFlyer的监听器置于所有同类监听器第一位，并保证receiver tag在application tag中 -->
+    <!-- 如果已经有其他的receiver来监听“INSTALL_REFERRER”， 那么请用“MultipleInstallBroadcastReceiver” -->
     <receiver
-        android:name="com.appsflyer.MultipleInstallBroadcastReceiver"
+        android:name="com.appsflyer.SingleInstallBroadcastReceiver"
         android:exported="true" >
         <intent-filter>
             <action android:name="com.android.vending.INSTALL_REFERRER" />
