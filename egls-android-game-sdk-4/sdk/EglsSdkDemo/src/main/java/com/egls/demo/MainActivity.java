@@ -16,7 +16,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AGPManager.initSDK(this, AppUtil.getVersionName(this) + "", new AGPInitProcessListener() {// SDK初始化回调
+        AGPManager.initSDK(this, AppUtil.getVersionName(this), new AGPInitProcessListener() {// SDK初始化回调
 
             @Override
             public void onInitProcess(int code, String msg) {
@@ -92,7 +92,8 @@ public class MainActivity extends Activity {
         String productId = "";
         String productName = "";
         String cpOrderId = "";
-        AGPManager.eglsPay(amount, productId, productName, cpOrderId, new AGPClientPayProcessListener() {
+        String flag = "";
+        AGPManager.eglsPay(amount, productId, productName, cpOrderId, flag, new AGPClientPayProcessListener() {
 
             @Override
             public void onClientPayFinish(String eglsOrderId) {
