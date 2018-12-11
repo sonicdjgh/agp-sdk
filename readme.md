@@ -11,7 +11,7 @@
 3. 台湾发行增加“LINE推广”运营活动接口（具体使用方法请查阅相关对接文档）；
 4. 增加Firebase的云消息推送功能，目前暂时用来为台湾发行提供服务；
 5. 重构SDK的分享接口（具体使用方法请查阅相关对接文档）；
-6. SDK初始化监听接口中的onInitSDK()接口改为onInitProcess()；
+6. SDK初始化监听接口中的onInitSDK()方法改为onInitProcess()；
 7. 修复已知bug。
 
 ### Version：4.3.72
