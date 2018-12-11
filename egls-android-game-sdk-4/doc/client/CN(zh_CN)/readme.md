@@ -30,20 +30,18 @@ allprojects {
         google()
 	mavenCentral()
 	
-	// weibo begin
 	// 如果使用新浪微博分享，请打开以下配置
         // maven {
         //     url "https://dl.bintray.com/thelasterstar/maven/"
         // }
-	// weibo end
     }
 }
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.4.0
-EGLS_AGS_VERSION=4.4.0
-EGLS_SUPPORT_VERSION=4.4.0
+EGLS_AGP_VERSION=4.4.1
+EGLS_AGS_VERSION=4.4.1
+EGLS_SUPPORT_VERSION=4.4.1
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -322,7 +320,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    AGPManager.initSDK(this, AppUtil.getVersionName(this) + "", new AGPInitProcessListener() {// SDK初始化回调
+    AGPManager.initSDK(this, AppUtil.getVersionName(this), new AGPInitProcessListener() {// SDK初始化回调
 
         @Override
         public void onInitProcess(int action, String msg) {
@@ -335,8 +333,8 @@ protected void onCreate(Bundle savedInstanceState) {
 ```
 ### 7. SDK登录（必接）
 ```Java
-boolean isOpenAutoLogin = false;
-AGPManager.eglsLogin(isOpenAutoLogin, new AGPLoginProcessListener() {
+int loginMode = Constants.MODE_LOGIN_COMMON;
+AGPManager.eglsLogin(loginMode, new AGPLoginProcessListener() {
 
     @Override
     public void onTokenFailure() {
@@ -363,7 +361,8 @@ String amount = "1";// 总金额
 String productId = "PDT001";// 档位id
 String productName = "钻石";// 档位名称
 String cpOrderInfo = "2SDF34DF12GH0S23234GAER5";// CP订单号
-AGPManager.eglsPay(amount, productId, productName, cpOrderInfo, new AGPClientPayProcessListener(){
+String flag = "";// 额外标记，一般传空字符串即可
+AGPManager.eglsPay(amount, productId, productName, cpOrderInfo, flag, new AGPClientPayProcessListener(){
 	
     @Override
     public void onClientPayFinish(String message) {
