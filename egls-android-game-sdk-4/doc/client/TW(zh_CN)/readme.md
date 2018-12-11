@@ -20,6 +20,12 @@ buildscript {
         jcenter()
         google()
     }
+    dependencies {
+        // Firebase begin
+        // 如果使用Firebase云消息推送功能，请打开以下配置
+    	// classpath 'com.google.gms:google-services:3.0.0'
+	// Firebase end
+    }
 }
 
 allprojects {
@@ -30,11 +36,15 @@ allprojects {
     }
 }
 ```
+如果使用Firebase云消息推送功能，请在当前游戏Module工程目录下的build.gradle文件中加上如下配置：
+```gradle
+apply plugin: 'com.google.gms.google-services'
+```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.3.67
-EGLS_AGS_VERSION=4.3.67
-EGLS_SUPPORT_VERSION=4.3.67
+EGLS_AGP_VERSION=4.4.0
+EGLS_AGS_VERSION=4.4.0
+EGLS_SUPPORT_VERSION=4.4.0
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -277,7 +287,32 @@ minSdkVersion = 16，targetSdkVersion >= 26
     <!-- AGP end -->
 
 
-    <!-- AGS begin -->	
+    <!-- AGS begin -->
+    <!-- 如果使用Firebase云消息推送，请打开以下配置 -->
+    <!-- Firebase begin -->
+    <!--
+    <service android:name="com.egls.socialization.backend.AGSPushMessageService">
+        <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+        </intent-filter>
+    </service>
+    <service android:name="com.egls.socialization.backend.AGSPushTokenService">
+        <intent-filter>
+            <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+        </intent-filter>
+    </service>
+    <!-- Firebase云消息推送所使用的icon图案 -->
+    <meta-data
+        android:name="com.google.firebase.messaging.default_notification_icon"
+        android:resource="@drawable/egls_push_icon" />
+    <!-- Firebase云消息推送所使用的icon底色 -->	
+    <meta-data
+        android:name="com.google.firebase.messaging.default_notification_color"
+        android:resource="@color/support_egls" />
+    -->
+    <!-- Firebase end -->
+	
+	
     <!-- Google Play Game begin -->
     <!-- 如果使用Google Play Game成就功能，请打开以下配置 -->
     <!-- 替换“MY_GAMES_APP_ID”字样为"MY_SERVER_CLIENT_ID"的第一处"-"左边的纯数字部分 -->
@@ -519,8 +554,8 @@ protected void onCreate(Bundle savedInstanceState) {
     AGPManager.initSDK(this, AppUtil.getVersionName(this) + "", new AGPInitProcessListener() {// SDK初始化回调
 
         @Override
-        public void onInitSDK(int code, String msg) {
-            if (code == 0) {// 当SDK初始化成功后再做后续的事情
+        public void onInitProcess(int action, String msg) {
+            if (action == 0) {// 当SDK初始化成功后再做后续的事情
 
             }
         }
@@ -538,8 +573,8 @@ AGPManager.eglsLogin(isOpenAutoLogin, new AGPLoginProcessListener() {
     }
 
     @Override
-    public void onLoginProcess(int code, String token, String uid, String msg) {
-	// 登录结果回调，只有当code=0时，示为登录成功
+    public void onLoginProcess(int action, String token, String uid, String msg) {
+	// 登录结果回调，只有当action为0时，示为登录成功
 	// msg = "0"时，表示游客账号登录
 	// msg = "1"时，表示EGLS账号登录
 	// msg = "2"时，表示Google账号登录
@@ -584,16 +619,23 @@ AGPManager.onEnterGame();
 ```
 ### 10. SDK分享功能（选接）
 ```Java
-String contentTitle = "分享";// 分享标题
-String contentText = "文本内容";// 文本内容
-String contentImage = "分享图像文件地址";//分享本地图像文件的绝对地址
-String contentUrl = null; //分享的链接url
-Bundle shareBundle = new Bundle();
-shareBundle.putString(Key.CONTENT_TITLE, contentTitle);
-shareBundle.putString(Key.CONTENT_TEXT, contentText);
-shareBundle.putString(Key.CONTENT_IMAGE, contentImage);
-shareBundle.putString(Key.CONTENT_URL, contentUrl);
-AGPManager.shareInTW(true, true, shareBundle);
+int type = Constants.TYPE_SHARE_FACEBOOK;
+String shareTitle = "";// 分享标题
+String shareText = "";// 分享文本
+String shareImageFilePath = "";// 分享图片（绝对路径）
+String shareLink = "";// 分享链接
+boolean isTimelineCb = false;
+AGPManager.eglsShare(this, type, shareTitle, shareText, shareImageFilePath, shareLink, isTimelineCb, new AGPShareProcessListenter() {
+
+    @Override
+    public void onShareProcess(int type, int action, String message) {
+        // 当type为Constants.TYPE_SHARE_FACEBOOK时，表示Facebook分享
+	// 当type为Constants.TYPE_SHARE_LINE时，表示LINE分享
+        // 当action为0时，表示分享成功
+	// 当action为1时，表示分享取消
+	// 当action为2时，表示分享失败
+    }
+});
 ```
 ### 11. 其他注意事项
 1. 凡是游戏项目工程为Android Studio工程，并且在Gradle里配置了productFlavor来控制打包流程的，请务必在调用“AGPManager.initSDK()”接口前，写上如下逻辑代码：
