@@ -457,7 +457,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     String versionCode = "1";
-    AGPManager.initSDK(this, AppUtil.getVersionName(this) + "", new AGPInitProcessListener() {// SDK初始化回调
+    AGPManager.initSDK(this, AppUtil.getVersionName(this), new AGPInitProcessListener() {// SDK初始化回调
 
         @Override
         public void onInitProcess(int action, String msg) {
@@ -471,8 +471,8 @@ protected void onCreate(Bundle savedInstanceState) {
 ```
 ### 7. SDK登录（必接）
 ```Java
-boolean isOpenAutoLogin = false;// 韩国地区发行的游戏请传true
-AGPManager.eglsLogin(isOpenAutoLogin, new AGPLoginProcessListener() {
+int loginMode = Constants.MODE_LOGIN_AUTO;
+AGPManager.eglsLogin(loginMode, new AGPLoginProcessListener() {
 
     @Override
     public void onTokenFailure() {
@@ -500,7 +500,8 @@ String amount = "1";// 总金额
 String productId = "PDT001";// 档位id
 String productName = "钻石";// 档位名称
 String cpOrderInfo = "2SDF34DF12GH0S23234GAER5";// CP订单号
-AGPManager.eglsPay(amount, productId, productName, cpOrderInfo, new AGPClientPayProcessListener(){
+String flag = "";// 额外标记，一般传空字符串即可
+AGPManager.eglsPay(amount, productId, productName, cpOrderInfo, flag, new AGPClientPayProcessListener(){
 	
     @Override
     public void onClientPayFinish(String message) {
