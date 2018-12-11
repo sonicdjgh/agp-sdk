@@ -34,9 +34,9 @@ allprojects {
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.3.67
-EGLS_AGS_VERSION=4.3.67
-EGLS_SUPPORT_VERSION=4.3.67
+EGLS_AGP_VERSION=4.4.0
+EGLS_AGS_VERSION=4.4.0
+EGLS_SUPPORT_VERSION=4.4.0
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -462,8 +462,8 @@ protected void onCreate(Bundle savedInstanceState) {
     AGPManager.initSDK(this, AppUtil.getVersionName(this) + "", new AGPInitProcessListener() {// SDK初始化回调
 
         @Override
-        public void onInitSDK(int code, String msg) {
-            if (code == 0) {// 当SDK初始化成功后再做后续的事情
+        public void onInitProcess(int action, String msg) {
+            if (action == 0) {// 当SDK初始化成功后再做后续的事情
 
             }
         }
@@ -482,8 +482,8 @@ AGPManager.eglsLogin(isOpenAutoLogin, new AGPLoginProcessListener() {
     }
 
     @Override
-    public void onLoginProcess(int code, String token, String uid, String msg) {
-	// 登录结果回调，只有当code=0时，示为登录成功
+    public void onLoginProcess(int action, String token, String uid, String msg) {
+	// 登录结果回调，只有当action为0时，示为登录成功
 	// msg = "0"时，表示游客账号登录
 	// msg = "1"时，表示EGLS账号登录
 	// msg = "2"时，表示Google账号登录
@@ -542,7 +542,22 @@ AGPManager.onEnterGame();
 ```
 ### 11. SDK分享功能（选接）
 ```Java
-改版中……
+int type = Constants.TYPE_SHARE_NAVER;
+String shareTitle = "";// 分享标题
+String shareText = "";// 分享文本
+String shareImageFilePath = "";// 分享图片（绝对路径）
+String shareLink = "";// 分享链接
+boolean isTimelineCb = false;
+AGPManager.eglsShare(this, type, shareTitle, shareText, shareImageFilePath, shareLink, isTimelineCb, new AGPShareProcessListenter() {
+
+    @Override
+    public void onShareProcess(int type, int action, String message) {
+        // 当type为Constants.TYPE_SHARE_NAVER时，表示Naver分享
+        // 当action为0时，表示分享成功
+	// 当action为1时，表示分享取消
+	// 当action为2时，表示分享失败
+    }
+});
 ```
 ### 12. IGAW数据统计（必接）
 IGAW主要用于韩服地区发行的游戏的数据统计，启用该功能的做法，首先要按照上面所提到的，在AndroidManifest.xml文件中打开对应的配置。对于IGAW统计功能的相关接口调用，其相关初始化部分的逻辑已经嵌入进SDK当中，因此开发者无需关心较为复杂的初始化步骤，只需根据需求，调用对应的接口即可。<br /><br />
