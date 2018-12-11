@@ -32,9 +32,9 @@ allprojects {
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.3.67
-EGLS_AGS_VERSION=4.3.67
-EGLS_SUPPORT_VERSION=4.3.67
+EGLS_AGP_VERSION=4.4.0
+EGLS_AGS_VERSION=4.4.0
+EGLS_SUPPORT_VERSION=4.4.0
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -329,8 +329,8 @@ protected void onCreate(Bundle savedInstanceState) {
     AGPManager.initSDK(this, AppUtil.getVersionName(this) + "", new AGPInitProcessListener() {// SDK初始化回调
 
         @Override
-        public void onInitSDK(int code, String msg) {
-            if (code == 0) {// 当SDK初始化成功后再做后续的事情
+        public void onInitProcess(int action, String msg) {
+            if (action == 0) {// 当SDK初始化成功后再做后续的事情
 
             }
         }
@@ -348,8 +348,8 @@ AGPManager.eglsLogin(isOpenAutoLogin, new AGPLoginProcessListener() {
     }
 
     @Override
-    public void onLoginProcess(int code, String token, String uid, String msg) {
-	// 登录结果回调，只有当code=0时，示为登录成功
+    public void onLoginProcess(int action, String token, String uid, String msg) {
+	// 登录结果回调，只有当action为0时，示为登录成功
 	// msg = "0"时，表示游客账号登录
 	// msg = "1"时，表示EGLS账号登录
 	// msg = "2"时，表示Google账号登录
