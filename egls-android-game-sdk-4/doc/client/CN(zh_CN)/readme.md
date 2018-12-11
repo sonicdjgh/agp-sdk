@@ -28,14 +28,22 @@ allprojects {
     repositories {
         jcenter()
         google()
+	mavenCentral()
+	
+	// weibo begin
+	// 如果使用新浪微博分享，请打开以下配置
+        // maven {
+        //     url "https://dl.bintray.com/thelasterstar/maven/"
+        // }
+	// weibo end
     }
 }
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.3.67
-EGLS_AGS_VERSION=4.3.67
-EGLS_SUPPORT_VERSION=4.3.67
+EGLS_AGP_VERSION=4.4.0
+EGLS_AGS_VERSION=4.4.0
+EGLS_SUPPORT_VERSION=4.4.0
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -266,7 +274,7 @@ minSdkVersion = 16，targetSdkVersion >= 26
     <!-- 替换“MY_ALIPAY_APP_ID”字样为支付宝平台上分配的应用标识 -->
     <meta-data
         android:name="alipay_app_id"
-        android:value="MY_ALIPAY_APP_ID" />
+        android:value="\0MY_ALIPAY_APP_ID" />
     <!-- 支付宝 end -->
     <!-- AGS end -->
 </application>
@@ -317,9 +325,9 @@ protected void onCreate(Bundle savedInstanceState) {
     AGPManager.initSDK(this, AppUtil.getVersionName(this) + "", new AGPInitProcessListener() {// SDK初始化回调
 
         @Override
-        public void onInitSDK(int code, String msg) {
-            if (code == 0) {// 当SDK初始化成功后再做后续的事情
-
+        public void onInitProcess(int action, String msg) {
+            if (action == 0) {// 当SDK初始化成功后再做后续的事情
+			
             }
         }
     });
@@ -336,8 +344,8 @@ AGPManager.eglsLogin(isOpenAutoLogin, new AGPLoginProcessListener() {
     }
 
     @Override
-    public void onLoginProcess(int code, String token, String uid, String msg) {
-	// 登录结果回调，只有当code=0时，示为登录成功
+    public void onLoginProcess(int action, String token, String uid, String msg) {
+	// 登录结果回调，只有当action为0时，示为登录成功
 	// msg = "0"时，表示游客账号登录
 	// msg = "1"时，表示EGLS账号登录
 	// msg = "4"时，表示微信账号登录
@@ -380,7 +388,24 @@ AGPManager.onEnterGame();
 ```
 ### 10. SDK分享功能（选接）
 ```Java
-改版中……
+int type = Constants.TYPE_SHARE_WECHAT;
+String shareTitle = "";// 分享标题
+String shareText = "";// 分享文本
+String shareImageFilePath = "";// 分享图片（绝对路径）
+String shareLink = "";// 分享链接
+boolean isTimelineCb = false;// 仅当用于微信分享，当isTimelineCb为true时，SDK启用微信分享到朋友圈，否则启用微信分享到好友
+AGPManager.eglsShare(this, type, shareTitle, shareText, shareImageFilePath, shareLink, isTimelineCb, new AGPShareProcessListenter() {
+
+    @Override
+    public void onShareProcess(int type, int action, String message) {
+        // 当type为Constants.TYPE_SHARE_WECHAT时，表示微信分享
+	// 当type为Constants.TYPE_SHARE_WEIBO时，表示微博分享
+	// 当type为Constants.TYPE_SHARE_QQ时，表示QQ分享
+        // 当action为0时，表示分享成功
+	// 当action为1时，表示分享取消
+	// 当action为2时，表示分享失败
+    }
+});
 ```
 ### 11. 关于微信功能的使用
 SDK集成了“微信登录”功能及“微信分享”功能，除了添加相关的AndroidManifest.xml文件配置之外，还需要在项目工程中添加一个以“正式包名.wxapi”的package（以Demo为例，则添加的package为“com.egls.demo.wxapi”），并且在该package中添加一个名为“WXEntryActivity”的Activity类，这个类必须继承SDK中的“com.egls.socialization.wechat.WeChatEntryActivity”类，例如：
@@ -393,9 +418,7 @@ public class WXEntryActivity extends WeChatEntryActivity {
 
 }
 ```
-### 12. 关于微博功能的使用
-SDK集成了“微博分享”功能，除了添加相关的AndroidManifest.xml文件配置之外，还需要在项目工程中的assets目录下添加一个有关微博的网页授权认证文件（相关问题可咨询我方运营）。
-### 13. 其他注意事项
+### 12. 其他注意事项
 1. 凡是游戏项目工程为Android Studio工程，并且在Gradle里配置了productFlavor来控制打包流程的，请务必在调用“AGPManager.initSDK()”接口前，写上如下逻辑代码：
 ```Java
 AGPManager.addFlavorsBasePackage(BuildConfig.class.getPackage().getName());
