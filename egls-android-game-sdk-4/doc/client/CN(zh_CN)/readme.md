@@ -30,12 +30,10 @@ allprojects {
         google()
 	mavenCentral()
 	
-	// weibo begin
 	// 如果使用新浪微博分享，请打开以下配置
         // maven {
         //     url "https://dl.bintray.com/thelasterstar/maven/"
         // }
-	// weibo end
     }
 }
 ```
