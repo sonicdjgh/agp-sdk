@@ -21,10 +21,8 @@ buildscript {
         google()
     }
     dependencies {
-        // Firebase begin
         // 如果使用Firebase云消息推送功能，请打开以下配置
     	// classpath 'com.google.gms:google-services:3.0.0'
-	// Firebase end
     }
 }
 
@@ -111,6 +109,14 @@ dependencies {
     api 'com.google.android.gms:play-services-gcm:11.0.1'
     api 'com.google.android.gms:play-services-iid:11.0.1'
     api 'com.google.android.gms:play-services-tasks:11.0.1'
+    
+    // 如果使用 Firebase 云消息推送，请打下面的配置
+    // api 'com.google.firebase:firebase-analytics:11.0.1'
+    // api 'com.google.firebase:firebase-analytics-impl:11.0.1'
+    // api 'com.google.firebase:firebase-common:11.0.1'
+    // api 'com.google.firebase:firebase-core:11.0.1'
+    // api 'com.google.firebase:firebase-iid:11.0.1'
+    // api 'com.google.firebase:firebase-messaging:11.0.1'
     
     api 'com.facebook.android:facebook-core:4.+'
     api 'com.facebook.android:facebook-login:4.+'
@@ -268,8 +274,9 @@ minSdkVersion = 16，targetSdkVersion >= 26
     <!-- AppsFlyer begin -->
     <!-- AppsFlyer为港台地区所使用的内嵌统计功能 -->
     <!-- 为了确保所有Install Referrer监听器可以成功监听由系统播放的referrer参数，请一定在AndroidManifest.xml中将AppsFlyer的监听器置于所有同类监听器第一位，并保证receiver tag在application tag中 -->
+    <!-- 如果已经有其他的receiver来监听“INSTALL_REFERRER”， 那么请用“MultipleInstallBroadcastReceiver” -->
     <receiver
-        android:name="com.appsflyer.MultipleInstallBroadcastReceiver"
+        android:name="com.appsflyer.SingleInstallBroadcastReceiver"
         android:exported="true" >
         <intent-filter>
             <action android:name="com.android.vending.INSTALL_REFERRER" />
@@ -638,7 +645,7 @@ AGPManager.eglsShare(this, type, shareTitle, shareText, shareImageFilePath, shar
 });
 ```
 ### 11. Firebase云消息推送（选接）
-当有需要使用Firebase的云消息推送时，除了按照对接文档中“3.1”和“4.3”的说明进行配置以外，还需要从Google后台下载一个名为“google-services.json”的文件，并将该文件放在当前游戏Module工程目录下，如下图所示：
+当有需要使用Firebase的云消息推送时，除了按照对接文档中“3.1”、“3.4”和“4.3”的说明进行配置以外，还需要从Google后台下载一个名为“google-services.json”的文件，并将该文件放在当前游戏Module工程目录下，如下图所示：<br/>
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/S4001.png)<br/>
 
 ### 12. 其他注意事项
