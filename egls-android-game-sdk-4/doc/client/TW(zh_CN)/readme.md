@@ -639,7 +639,7 @@ AGPManager.eglsShare(this, type, shareTitle, shareText, shareImageFilePath, shar
 ```
 ### 11. Firebase云消息推送（选接）
 当有需要使用Firebase的云消息推送时，除了按照对接文档中“3.1”和“4.3”的说明进行配置以外，还需要从Google后台下载一个名为“google-services.json”的文件，并将该文件放在当前游戏Module工程目录下，如下图所示：
-![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/S4001.png)<br/>
+![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/S4002.png)<br/>
 
 ### 12. 其他注意事项
 1. 凡是游戏项目工程为Android Studio工程，并且在Gradle里配置了productFlavor来控制打包流程的，请务必在调用“AGPManager.initSDK()”接口前，写上如下逻辑代码：
