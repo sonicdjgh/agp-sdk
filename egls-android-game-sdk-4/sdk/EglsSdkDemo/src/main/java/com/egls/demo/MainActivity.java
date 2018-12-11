@@ -8,6 +8,7 @@ import com.egls.platform.components.AGPManager;
 import com.egls.platform.interfaces.AGPClientPayProcessListener;
 import com.egls.platform.interfaces.AGPInitProcessListener;
 import com.egls.platform.interfaces.AGPLoginProcessListener;
+import com.egls.support.base.Constants;
 import com.egls.support.utils.AppUtil;
 
 public class MainActivity extends Activity {
@@ -18,7 +19,7 @@ public class MainActivity extends Activity {
         AGPManager.initSDK(this, AppUtil.getVersionName(this) + "", new AGPInitProcessListener() {// SDK初始化回调
 
             @Override
-            public void onInitSDK(int code, String msg) {
+            public void onInitProcess(int code, String msg) {
                 if (code == 0) {// 当SDK初始化成功后再做后续的事情
 
                 }
@@ -63,7 +64,8 @@ public class MainActivity extends Activity {
     }
 
     private void requestLogin() {
-        AGPManager.eglsLogin(false, new AGPLoginProcessListener() {
+        int loginMode = Constants.MODE_LOGIN_COMMON;
+        AGPManager.eglsLogin(loginMode, new AGPLoginProcessListener() {
 
             @Override
             public void onLoginProcess(int code, String token, String uid, String msg) {
