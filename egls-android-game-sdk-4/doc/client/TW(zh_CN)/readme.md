@@ -21,6 +21,8 @@ buildscript {
         google()
     }
     dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.1'
+	
         // 如果使用Firebase云消息推送功能，请打开以下配置
     	// classpath 'com.google.gms:google-services:3.0.0'
     }
