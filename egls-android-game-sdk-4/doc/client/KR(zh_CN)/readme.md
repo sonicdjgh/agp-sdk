@@ -579,7 +579,7 @@ IGAW主要用于韩服地区发行的游戏的数据统计，启用该功能的�
     玩家打开游戏内的商店（指需要玩家真实付费购买的商店）页面时，请调用该接口
 #### 12.9 eventIgawFansite()（根据情况接入）
     如果在游戏中有加入对Naver论坛的访问链接，请在打开Naver论坛时调用该接口（目前SDK已集成NaverCafeSDK，可以选择不自行添加Naver论坛的访问链接）
-#### 12.10 eventIgawCustom(String eventName)（根据情况介入）
+#### 12.10 eventIgawCustom(String eventName, String param)（根据情况介入）
     如果以上接口都无法满足事件统计需求，可以使用该接口进行自定义事件统计
 ### 13. 其他注意事项
 1. 凡是游戏项目工程为Android Studio工程，并且在Gradle里配置了productFlavor来控制打包流程的，请务必在调用“AGPManager.initSDK()”接口前，写上如下逻辑代码：
