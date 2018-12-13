@@ -360,8 +360,8 @@ minSdkVersion = 16，targetSdkVersion >= 26
 	
     <!-- 港澳台发行必须开启Facebook的“email”权限 --> 	
     <meta-data
-            android:name="CNANNEL_PERMISSION_EMAIL"
-            android:value="true" />
+        android:name="CNANNEL_PERMISSION_EMAIL"
+        android:value="true" />
 	
     <!--如果游戏需要开启Facebook的“USER_FRIEND”权限，请打开以下配置 --> 
     <!--
