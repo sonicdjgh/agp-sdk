@@ -661,7 +661,7 @@ AGPManager.eglsShare(this, type, shareTitle, shareText, shareImageFilePath, shar
 ### 11. Firebase云消息推送（选接）
 当有需要使用Firebase的云消息推送时，除了按照对接文档中“3.1”、“3.4”和“4.3”的说明进行配置以外，还需要从Google后台下载一个名为“google-services.json”的文件（该文件由我方运营提供），并将该文件放在当前游戏Module工程目录下，如下图所示：<br/>
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/S4001.png)<br/>
-另外，可在“AndroidManifest.xml”文件中修改推送图标的图案和底色（图案必须为白色，且背景透明）。
+另外，可在“AndroidManifest.xml”文件中修改推送图标的图案和底色（图案必须为白色、背景透明，且文件名称必须为“egls_push_icon”）。
 
 ### 12. SDK运营活动（根据运营需求）
 SDK的“运营活动”接口，主要是为游戏提供了相关操作页面以及SDK功能接口的实现。在这之前，为了实现这些运营活动，都需要游戏来承担相关页面的开发、第三方SDK的功能对接以及奖励发放的逻辑开发等等。而现在，游戏可以通过调用SDK的“运营活动”功能接口就可以轻松地展示相关操作页面，并通过回调方法的响应来处理奖励发放的相关逻辑。
