@@ -124,7 +124,7 @@ dependencies {
     api 'com.facebook.android:facebook-login:4.+'
     api 'com.facebook.android:facebook-share:4.+'
     
-    // 如果使用 MyCard 支付，请打开下面的配置
+    // 如果使用 MyCard 支付，请打开下面的配置https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/egls-android-game-sdk-4/doc/client/TW(zh_CN)/readme.md
     // api files('libs/tw/MyCardPaySDK.jar')
     
     // 如果使用 Gash 支付，请打开下面的配置
@@ -670,7 +670,7 @@ AGPManager.openFiveStarReview(this, new OnSimpleActionCallback() {
     }
 });
 	
-// Facebook运营活动（加入粉丝团、每日分享）
+// Facebook运营活动（加入粉丝团、分享）
 boolean isEnableJoin = true;
 boolean isEnableShare = true;
 AGPManager.openFacebookOperation(this, isEnableJoin, isEnableShare, new OnSimpleActionCallback() {
