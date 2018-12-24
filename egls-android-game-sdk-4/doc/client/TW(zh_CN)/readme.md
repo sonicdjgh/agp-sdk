@@ -409,7 +409,7 @@ minSdkVersion = 16，targetSdkVersion >= 26
     </activity>
     <activity
         android:name="soft_world.mycard.paymentapp.Ecom.ATMMenuActivity"
-        ndroid:screenOrientation="portrait" >
+        android:screenOrientation="portrait" >
     </activity>
     <activity
         android:name="com.xmobilepay.xpaymentlibs.XCardTypeForm"
