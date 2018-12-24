@@ -584,7 +584,7 @@ protected void onCreate(Bundle savedInstanceState) {
 ```
 ### 7. SDK登录（必接）
 ```Java
-int loginMode = Constants.MODE_LOGIN_COMMON;
+int loginMode = Constants.MODE_LOGIN_AUTO;
 AGPManager.eglsLogin(loginMode, new AGPLoginProcessListener() {
 
     @Override
