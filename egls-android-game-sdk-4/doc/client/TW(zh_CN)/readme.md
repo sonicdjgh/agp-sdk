@@ -42,9 +42,9 @@ apply plugin: 'com.google.gms.google-services'
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.4.8
-EGLS_AGS_VERSION=4.4.8
-EGLS_SUPPORT_VERSION=4.4.8
+EGLS_AGP_VERSION=4.4.26
+EGLS_AGS_VERSION=4.4.26
+EGLS_SUPPORT_VERSION=4.4.26
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -142,8 +142,14 @@ c. Google推荐对危险权限的使用有一定要求，需要加入申请权�
     android:name="unityplayer.SkipPermissionsDialog"
     android:value="true" />
 ```
+d. 如果发现SDK的悬浮窗无法响应手势动作，请在“AndroidManifest.xml”文件中的“application”标签内加入如下配置：
+```Xml
+<meta-data 
+    android:name="unityplayer.ForwardNativeEventsToDalvik" 
+    android:value="true"/>
+```
 #### 3.6 其他
-minSdkVersion = 16，targetSdkVersion >= 26
+minSdkVersion = 16，targetSdkVersion >= 27
 ### 4. AndroidManifest.xml文件配置
 #### 4.1 AGP Permission 配置
 ```Xml
@@ -607,7 +613,13 @@ AGPManager.eglsLogin(loginMode, new AGPLoginProcessListener() {
     }
 });
 ```
-### 8. SDK支付（必接）
+### 8. SDK切换账号（必接）
+```Java
+AGPManager.eglsSwitch();
+// 如果游戏中没有“切换账号”或是相似的功能按钮，可以打开banner中的“切换账号”按钮，但要自行处理好相关游戏逻辑
+// AGPManager.setEnableBannerSwitch(true);
+```
+### 9. SDK支付（必接）
 ```Java
 String amount = "1";// 总金额
 String productId = "PDT001";// 档位id
@@ -633,12 +645,12 @@ AGPManager.eglsPay(amount, productId, productName, cpOrderInfo, flag, new AGPCli
     }
 });
 ```
-### 9. onEnterGame接口调用（必接）
+### 10. onEnterGame接口调用（必接）
 ```Java
 //当玩家登录进入到游戏服务器之后，请务必调用该方法
 AGPManager.onEnterGame();
 ```
-### 10. SDK分享功能（选接）
+### 11. SDK分享功能（选接）
 ```Java
 int type = Constants.TYPE_SHARE_FACEBOOK;
 String shareTitle = "";// 分享标题
@@ -658,11 +670,11 @@ AGPManager.eglsShare(this, type, shareTitle, shareText, shareImageFilePath, shar
     }
 });
 ```
-### 11. Firebase云消息推送（选接）
+### 12. Firebase云消息推送（选接）
 当有需要使用Firebase的云消息推送时，首先请在游戏项目的“/res/drawable”目录下，添加一张名为“egls_push_icon”的图片。然后，除了按照对接文档中“3.1”、“3.4”和“4.3”的说明进行配置以外，还需要从Google后台下载一个名为“google-services.json”的文件（该文件由我方运营提供），并将该文件放在当前游戏Module工程目录下，如下图所示：<br/>
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/S4001.png)<br/>
 
-### 12. SDK运营活动（根据运营需求）
+### 13. SDK运营活动（根据运营需求）
 SDK的“运营活动”接口，主要是为游戏提供了相关操作页面以及SDK功能接口的实现。在这之前，为了实现这些运营活动，都需要游戏来承担相关页面的开发、第三方SDK的功能对接以及奖励发放的逻辑开发等等。而现在，游戏可以通过调用SDK的“运营活动”功能接口就可以轻松地展示相关操作页面，并通过回调方法的响应来处理奖励发放的相关逻辑。
 
 关于“五星评价”、“Facebook运营活动”以及“LINE推广”的运营活动功能接口，在使用前，需要配合我方运营在后台上配置相关展示所需的图片。“五星评价”的图片宽高比为**3:1**，其他则为**5:2**。
@@ -702,7 +714,29 @@ AGPManager.openLINEPromotion(this, new OnSimpleActionCallback() {
     }
 });
 ```
-### 13. 其他注意事项
+### 14. AppsFlyer数据统计（根据运营需求对接）
+AppsFlyer主要用于港澳台地区发行的游戏的数据统计，启用该功能的做法，首先要按照上面所提到的，在AndroidManifest.xml文件中打开对应的配置。对于AppsFlyer统计功能的相关接口调用，其相关初始化部分的逻辑已经嵌入进SDK当中，因此开发者无需关心较为复杂的初始化步骤，只需根据需求，调用对应的接口即可。<br /><br />
+**注**：通过调用AGPManager.getAppsFlyerHelper()来获取接口对象。
+#### 12.1 trackEventOneSplashImage()（必接）
+    用于统计首次播放游戏闪屏动画的次数，请在开始播放动画时调用该方法
+#### 12.2 trackEventTutorialStart()（必接）
+    用于统计新手任务开始的次数，请在新手任务开始时调用该方法
+#### 12.3 trackEventTutorialComplete()（必接）
+    用于统计新手任务结束的次数，请在新手任务结束时调用该方法
+#### 12.4 trackEventNewCharacter()（必接）
+    用于统计创建角色的次数，请在创建角色成功后调用该方法
+#### 12.5 trackEventOneUpdateStart()（必接）
+    用于统计首次下载游戏资源开始的次数，请在下载游戏资源开始时调用该方法
+#### 12.6 trackEventOneUpdateComplete()（必接）
+    用于统计首次下载游戏资源结束的次数，请在下载游戏资源结束时调用该方法
+#### 12.7 trackEventOneLoadStart()（必接）
+    用于统计首次加载游戏资源开始的次数，请在加载游戏资源开始时调用该方法
+#### 12.8 trackEventOneLoadComplete()（必接）
+    用于统计首次加载游戏资源结束的次数，请在加载游戏资源结束时调用该方法
+#### 12.9 trackEventCustom()（根据需求接入）
+    有时候运营会针对具体的数据分析增加特定的事件统计，那么请调用该接口，传入特定的事件名称
+**注**：这里需要强调一下“首次”的概念。我们所说的“首次”，并不是仅仅指游戏第一次调用接口，同时也强调了时机，即游戏第一次安装并启动后的第一次调用，被称为“首次”。相关“首次”的数据统计接口内部已经做了“首次”状态的逻辑判断，只需在对应的事件触发逻辑中调用该接口即可。
+### 15. 其他注意事项
 1. 凡是游戏项目工程为Android Studio工程，并且在Gradle里配置了productFlavor来控制打包流程的，请务必在调用“AGPManager.initSDK()”接口前，写上如下逻辑代码：
 ```Java
 AGPManager.addFlavorsBasePackage(BuildConfig.class.getPackage().getName());
