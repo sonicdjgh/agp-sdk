@@ -715,7 +715,26 @@ AGPManager.openLINEPromotion(this, new OnSimpleActionCallback() {
 });
 ```
 ### 14. AppsFlyer数据统计（根据运营需求对接）
-
+AppsFlyer主要用于港澳台地区发行的游戏的数据统计，启用该功能的做法，首先要按照上面所提到的，在AndroidManifest.xml文件中打开对应的配置。对于AppsFlyer统计功能的相关接口调用，其相关初始化部分的逻辑已经嵌入进SDK当中，因此开发者无需关心较为复杂的初始化步骤，只需根据需求，调用对应的接口即可。<br /><br />
+**注：通过调用AGPManager.getAppsFlyerHelper()来获取接口对象**。
+#### 12.1 eventOneSplashImage()（必接）
+    用于统计首次播放游戏闪屏动画的次数，请在开始播放动画时调用该方法
+#### 12.2 eventTutorialStart()（必接）
+    用于统计新手任务开始的次数，请在新手任务开始时调用该方法
+#### 12.3 eventTutorialComplete()（必接）
+    用于统计新手任务结束的次数，请在新手任务结束时调用该方法
+#### 12.4 eventNewCharacter()（必接）
+    用于统计创建角色的次数，请在创建角色成功后调用该方法
+#### 12.5 eventOneUpdateStart()（必接）
+    用于统计首次下载游戏资源开始的次数，请在下载游戏资源开始时调用该方法
+#### 12.6 eventOneUpdateComplete()（必接）
+    用于统计首次下载游戏资源结束的次数，请在下载游戏资源结束时调用该方法
+#### 12.7 eventOneLoadStart()（必接）
+    用于统计首次加载游戏资源开始的次数，请在加载游戏资源开始时调用该方法
+#### 12.8 eventOneLoadComplete()（必接）
+    用于统计首次加载游戏资源结束的次数，请在加载游戏资源结束时调用该方法
+#### 12.9 trackEvent()（根据需求接入）
+    有时候运营会针对具体的数据分析增加特定的事件统计，那么请调用该接口，传入特定的事件名称
 ### 15. 其他注意事项
 1. 凡是游戏项目工程为Android Studio工程，并且在Gradle里配置了productFlavor来控制打包流程的，请务必在调用“AGPManager.initSDK()”接口前，写上如下逻辑代码：
 ```Java
