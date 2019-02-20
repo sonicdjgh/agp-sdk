@@ -112,7 +112,7 @@ dependencies {
     api 'com.google.android.gms:play-services-iid:11.0.1'
     api 'com.google.android.gms:play-services-tasks:11.0.1'
     
-    // 如果使用 Firebase 云消息推送，请打下面的配置
+    // 如果使用 Firebase 云消息推送，请打开下面的配置
     // api 'com.google.firebase:firebase-analytics:11.0.1'
     // api 'com.google.firebase:firebase-analytics-impl:11.0.1'
     // api 'com.google.firebase:firebase-common:11.0.1'
