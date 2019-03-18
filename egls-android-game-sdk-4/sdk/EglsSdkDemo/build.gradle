@@ -25,8 +25,8 @@ repositories {
         dirs project(':AGS').file('libs')
 
         // kr begin
-        // dirs project(':AGP').file('libs/kr')
-        // dirs project(':AGS').file('libs/kr')
+         dirs project(':AGP').file('libs/kr')
+         dirs project(':AGS').file('libs/kr')
         // kr end
     }
 }

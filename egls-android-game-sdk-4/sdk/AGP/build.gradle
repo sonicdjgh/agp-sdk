@@ -23,8 +23,8 @@ repositories {
         dirs project(':AGS').file('libs')
 
         // kr begin
-        // dirs 'libs/kr'
-        // dirs project(':AGS').file('libs/kr')
+         dirs 'libs/kr'
+         dirs project(':AGS').file('libs/kr')
         // kr end
     }
 }
@@ -41,8 +41,8 @@ dependencies {
     // tw end
 
     // kr begin
-    // api files('libs/kr/IgawAdbrix_v4.6.0.jar')
-    // api files('libs/kr/IgawCommon_v4.6.0.jar')
-    // api(name: 'IgawLiveOps_v2.1.0', ext: 'aar')
+     api files('libs/kr/IgawAdbrix_v4.6.0.jar')
+     api files('libs/kr/IgawCommon_v4.6.0.jar')
+     api(name: 'IgawLiveOps_v2.1.0', ext: 'aar')
     // kr end
 }
