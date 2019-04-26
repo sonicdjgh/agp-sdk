@@ -42,9 +42,9 @@ allprojects {
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.5.16
-EGLS_AGS_VERSION=4.5.16
-EGLS_SUPPORT_VERSION=4.5.16
+EGLS_AGP_VERSION=4.5.31
+EGLS_AGS_VERSION=4.5.31
+EGLS_SUPPORT_VERSION=4.5.31
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -104,7 +104,7 @@ dependencies {
     api files('libs/cn/alipaySdk-20180316.jar')
     api files('libs/cn/open_sdk_r5781_lite.jar')
     api files('libs/cn/wechat-sdk-android-with-mta.jar')
-    api files('libs/cn/openDefault-1.0.0-openDefaultRelease.jar')
+    api 'com.sina.weibo.sdk:core:4.3.4:openDefaultRelease@aar'
     // cn end
 }
 ```
@@ -118,7 +118,7 @@ c. Google推荐对危险权限的使用有一定要求，需要加入申请权�
     android:value="true" />
 ```
 #### 3.6 其他
-minSdkVersion = 16，targetSdkVersion >= 26
+minSdkVersion = 17，targetSdkVersion >= 27
 ### 4. AndroidManifest.xml文件配置
 #### 4.1 AGP Permission 配置
 ```Xml
@@ -323,7 +323,8 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    AGPManager.initSDK(this, AppUtil.getVersionName(this), new AGPInitProcessListener() {// SDK初始化回调
+    boolean isWebMode = false;// 如果是H5游戏请设置为true
+    AGPManager.initSDK(this, AppUtil.getVersionName(this), isWebMode, new AGPInitProcessListener() {// SDK初始化回调
 
         @Override
         public void onInitProcess(int action, String msg) {
@@ -420,7 +421,9 @@ public class WXEntryActivity extends WeChatEntryActivity {
 
 }
 ```
-### 12. 其他注意事项
+### 12. 关于H5游戏的SDK接入
+从4.5.31版本起，我们为SDK添加了“H5”游戏模式，即在调用SDK初始化接口时，“isWebMode”参数值设置为true。初始化完成后，SDK会自动向SDK平台请求并获取H5游戏启动页面的网址并执行网页跳转。其实，本质上与原生接入方式无太大差异，只是需要一个H5与Android原生交互的过程。Demo中新添了一个“MainH5Activity”类，里面包含了Android原生部分的对接示例；另外在“assets/web”目录下添加了一个"demo.html"文件，里面包含了H5部分的对接示例。
+### 13. 其他注意事项
 1. 凡是游戏项目工程为Android Studio工程，并且在Gradle里配置了productFlavor来控制打包流程的，请务必在调用“AGPManager.initSDK()”接口前，写上如下逻辑代码：
 ```Java
 AGPManager.addFlavorsBasePackage(BuildConfig.class.getPackage().getName());
