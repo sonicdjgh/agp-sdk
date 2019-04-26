@@ -22,7 +22,7 @@ repositories {
         dirs 'libs'
 
         // kr begin
-         dirs 'libs/kr'
+//         dirs 'libs/kr'
         // kr end
     }
 }
