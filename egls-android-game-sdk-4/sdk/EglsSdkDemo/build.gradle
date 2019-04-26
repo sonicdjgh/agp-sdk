@@ -5,8 +5,8 @@ android {
     buildToolsVersion "27.0.3"
     defaultConfig {
         applicationId "com.egls.demo"
-        minSdkVersion 16
-        targetSdkVersion 26
+        minSdkVersion 17
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         flavorDimensions "versionCode"

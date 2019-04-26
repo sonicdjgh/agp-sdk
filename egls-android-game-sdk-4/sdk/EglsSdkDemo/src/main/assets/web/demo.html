@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        function login(){
+            var u = navigator.userAgent;
+            var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
+            var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+
+            if(isAndroid){
+                window.EGLSH5Interface.postMessage('{"method":"login","loginMode":0,"callback":"loginCallback"}');
+            }else if(isiOS){
+                window.webkit.messageHandlers.EGLSH5Interface.postMessage('{"method":"login","loginMode":0,"callback":"loginCallback"}');
+            }
+        }
+
+        function loginCallback(jsonStr){
+            var jsonObj = JSON.parse(jsonStr);
+            document.getElementById("action").innerHTML="action = " + jsonObj.action;
+            document.getElementById("token").innerHTML="token = " + jsonObj.token;
+            document.getElementById("uid").innerHTML="uid = " + jsonObj.uid;
+            document.getElementById("accountType").innerHTML="accountType = " + jsonObj.accountType;
+            document.getElementById("nickName").innerHTML="nickName = " + jsonObj.nickName;
+        }
+
+        function pay(){
+            var u = navigator.userAgent;
+            var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
+            var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+
+            if(isAndroid){
+                window.EGLSH5Interface.postMessage('{"method":"pay","amount":30.0,"productId":"100001","productName":"demon","cpOrderId":"XXXXXXXXX"}');
+            }else if(isiOS){
+                window.webkit.messageHandlers.EGLSH5Interface.postMessage('{"method":"pay","amount":30.0,"productId":"100001","productName":"demon","cpOrderId":"XXXXXXXXX"}');
+            }
+        }
+    </script>
+</head>
+<body>
+
+<h1>My First Web Page</h1>
+
+<p id="action">action = ?</p>
+<p id="token">token = ?</p>
+<p id="uid">uid = ?</p>
+<p id="accountType">accountType = ?</p>
+<p id="nickName">nickName = ?</p>
+
+<button type="button" onclick="login()">登录</button>
+
+</body>
+</html>

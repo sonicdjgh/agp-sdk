@@ -68,8 +68,7 @@ public class MainActivity extends Activity {
         AGPManager.eglsLogin(loginMode, new AGPLoginProcessListener() {
 
             @Override
-            public void onLoginProcess(int code, String token, String uid, String msg) {
-                // TODO Auto-generated method stub
+            public void onLoginProcess(int action, String token, String uid, String accountType, String nickName) {
 
             }
 
