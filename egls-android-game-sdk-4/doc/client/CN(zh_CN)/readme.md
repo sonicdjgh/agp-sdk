@@ -42,9 +42,9 @@ allprojects {
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.5.16
-EGLS_AGS_VERSION=4.5.16
-EGLS_SUPPORT_VERSION=4.5.16
+EGLS_AGP_VERSION=4.5.31
+EGLS_AGS_VERSION=4.5.31
+EGLS_SUPPORT_VERSION=4.5.31
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
