@@ -104,7 +104,7 @@ dependencies {
     api files('libs/cn/alipaySdk-20180316.jar')
     api files('libs/cn/open_sdk_r5781_lite.jar')
     api files('libs/cn/wechat-sdk-android-with-mta.jar')
-    api files('libs/cn/openDefault-1.0.0-openDefaultRelease.jar')
+    api 'com.sina.weibo.sdk:core:4.3.4:openDefaultRelease@aar'
     // cn end
 }
 ```
