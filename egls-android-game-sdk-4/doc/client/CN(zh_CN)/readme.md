@@ -142,6 +142,8 @@ minSdkVersion = 17，targetSdkVersion >= 27
     android:icon="@drawable/icon"
     android:label="AGSDK Demo"
     android:theme="@style/AppTheme" >
+
+    <!-- 游戏Activity -->
     <activity
         android:name="com.egls.demo.GameActivity"
         android:configChanges="fontScale|orientation|keyboardHidden|locale|navigation|screenSize|uiMode"
@@ -152,64 +154,44 @@ minSdkVersion = 17，targetSdkVersion >= 27
 
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
-	<!-- 微博 begin -->
-	<!-- 如果使用微博分享功能，请打开以下配置 -->
-	<!-- 
-        <intent-filter>
-            <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
-
-            <category android:name="android.intent.category.DEFAULT" />
-        </intent-filter>
-        -->
-        <!-- 微博 end -->
     </activity>
 	
     <!-- Base begin -->
-    <!-- 替换"MY_APP_ID"字样为SDK初始化所需的eglsAppId -->
     <meta-data
         android:name="EGLS_APP_ID"
-        android:value="\0MY_APP_ID" />
+        android:value="${EGLS_APP_ID}" />
 	
-    <!-- 替换"MY_PUBLISHMENT_AREA"字样为对应的发行区标识码，详见“附表 - publishmentArea” -->
     <meta-data
         android:name="EGLS_PUBLISHMENT_AREA"
-        android:value="MY_PUBLISHMENT_AREA" />
+        android:value="${EGLS_PUBLISHMENT_AREA}" />
 	
-    <!-- 替换"MY_PAY_CHANNEL"字样为对应的支付渠道标识码，详见“附表 - payChannel” -->
     <meta-data
         android:name="EGLS_PAY_CHANNEL"
-        android:value="MY_PAY_CHANNEL" />
+        android:value="${EGLS_PAY_CHANNEL}" />
 	
-    <!-- 当没有特殊要求时，“EGLS_PAY_IS_SANDBOX”的参数值为"false"即可 -->
     <meta-data
         android:name="EGLS_PAY_IS_SANDBOX"
-        android:value="false" />
-	
-    <!-- 当没有特殊要求时，“EGLS_PAY_OTHER_PARAM”的参数值为""即可 -->
-    <meta-data
-        android:name="EGLS_PAY_OTHER_PARAM"
-        android:value="" />
+        android:value="${EGLS_PAY_IS_SANDBOX}" />
     <!-- Base end -->
 	
 
     <!-- AGS begin -->
     <!-- 微信 begin -->
     <!-- 如果使用微信登录或微信分享功能，请打开以下配置 -->
-    <!-- 替换“MY_PACKAGE_NAME”字样为游戏的正式包名 -->	
+    <!-- 需要在工程里建立一个名为“xxx.wxapi”的package，其中“xxx”为游戏的正式包名 -->	
     <!--	
     <activity
-        android:name="MY_PACKAGE_NAME.wxapi.WXEntryActivity"
+        android:name="xxx.wxapi.WXEntryActivity"
         android:exported="true"
         android:screenOrientation="portrait"
         android:theme="@android:style/Theme.NoDisplay"/>
     -->
     
     <!-- 如果使用微信登录或微信分享功能，请打开以下配置 -->	
-    <!-- 替换“MY_WX_APP_ID”字样为微信平台上分配的应用标识 -->
     <!--	
     <meta-data
         android:name="wx_app_id"
-        android:value="MY_WX_APP_ID" />
+        android:value="${WX_APP_ID}" />
     -->
     
     <!-- 如果使用微信登录或微信分享功能，请打开以下配置 -->	
@@ -217,7 +199,7 @@ minSdkVersion = 17，targetSdkVersion >= 27
     <!--	
     <meta-data
         android:name="wx_secret"
-        android:value="MY_WX_SECRET" />
+        android:value="${WX_SECRET}" />
     -->
     <!-- 微信 end -->
 	
@@ -228,14 +210,13 @@ minSdkVersion = 17，targetSdkVersion >= 27
     <!--	
     <meta-data
         android:name="wb_app_key"
-        android:value="\0MY_WB_APP_KEY" />
+        android:value="${WB_APP_KRY}" />
     -->
     <!-- 微博 end -->
 	
 	
     <!-- QQ begin -->
-    <!-- 如果使用QQ登录或微信分享功能，请打开以下配置 -->	
-    <!-- 替换“MY_QQ_APP_ID”字样为QQ平台上分配的应用标识 -->
+    <!-- 如果使用QQ登录或QQ分享功能，请打开以下配置 -->	
     <!--
     <activity
         android:name="com.tencent.tauth.AuthActivity"
@@ -247,7 +228,7 @@ minSdkVersion = 17，targetSdkVersion >= 27
             <category android:name="android.intent.category.DEFAULT" />
             <category android:name="android.intent.category.BROWSABLE" />
 
-            <data android:scheme="tencentMY_QQ_APP_ID" />
+            <data android:scheme="tencent${QQ_APP_ID}" />
         </intent-filter>
     </activity>
     <activity
@@ -258,11 +239,10 @@ minSdkVersion = 17，targetSdkVersion >= 27
     -->
 	
     <!-- 如果使用QQ登录或微信分享功能，请打开以下配置 -->		
-    <!-- 替换“MY_QQ_APP_ID”字样为QQ平台上分配的应用标识 -->
     <!--	
     <meta-data
         android:name="qq_app_id"
-        android:value="\0MY_QQ_APP_ID" />
+        android:value="${QQ_APP_ID}" />
     -->
     <!-- QQ end -->
 	
@@ -272,10 +252,9 @@ minSdkVersion = 17，targetSdkVersion >= 27
         android:name="com.alipay.sdk.app.H5PayActivity"
         android:screenOrientation="portrait"/>
     
-    <!-- 替换“MY_ALIPAY_APP_ID”字样为支付宝平台上分配的应用标识 -->
     <meta-data
         android:name="alipay_app_id"
-        android:value="\0MY_ALIPAY_APP_ID" />
+        android:value="${ALIPAY_APP_ID}" />
     <!-- 支付宝 end -->
     <!-- AGS end -->
 </application>
