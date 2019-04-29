@@ -8,7 +8,7 @@
 由我方给游戏分配的应用id，一个游戏对应一个。
 #### 2.2 CHANNEL_GOOGLE_PUBLIC_KEY
 在Goole Play后台生成的支付公钥。
-#### 2.3 CHANNEL_SERVER_CLIENT_ID
+#### 2.3 CHANNEL_GOOGLE_CLIENT_ID
 在Google API后台“OAuth 2.0 客户端 ID”配置的列表中，关于“Web Client”项对应的“Client ID”参数值。
 #### 2.4 com.facebook.sdk.ApplicationId
 在Facebook后台生成的应用id。
@@ -18,8 +18,8 @@ gradle版本为4.1，并且需要在当前Project根目录下的build.gralde文�
 ```gradle
 buildscript {
     repositories {
-        jcenter()
         google()
+        jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
@@ -28,17 +28,17 @@ buildscript {
 
 allprojects {
     repositories {
-        jcenter()
         google()
+        jcenter()
 	mavenCentral()
     }
 }
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.5.16
-EGLS_AGS_VERSION=4.5.16
-EGLS_SUPPORT_VERSION=4.5.16
+EGLS_AGP_VERSION=4.5.35
+EGLS_AGS_VERSION=4.5.35
+EGLS_SUPPORT_VERSION=4.5.35
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -123,13 +123,35 @@ c. Google推荐对危险权限的使用有一定要求，需要加入申请权�
     android:value="true" />
 ```
 #### 3.6 其他
-minSdkVersion = 16，targetSdkVersion >= 26
+minSdkVersion = 17，targetSdkVersion >= 27
 ### 4. AndroidManifest.xml文件配置
-#### 4.1 AGP Permission 配置
+#### 4.1 AndroidManifest.xml中的参数配置
+```gradle
+// 在游戏Module的“build.gradle”中的“defaultConfig”里添加如下配置：
+manifestPlaceholders = [
+                // base begin
+                EGLS_APP_ID              : "",// 用于SDK初始化 
+                EGLS_PUBLISHMENT_AREA    : "",// 用于SDK识别发行区，可详见文档附录
+                EGLS_PAY_CHANNEL         : "",// 用于SDK识别支付方式，可详见文档附录
+                EGLS_PAY_IS_SANDBOX      : "false",// 新加坡发行区设为false即可
+		
+		GOOGLE_WEB_CLIENT_ID     : "",// 用于SDK的Google登录
+		FACEBOOK_APPLICATION_ID  : "",// 用于SDK的Facebook登录
+		
+		// APPS_FLYER_DEV_KEY    : "",// 用于AppsFlyer统计功能初始化，如果运营没有特殊需求，这里无需添加
+                // base end
+		
+		// other begin
+		GOOGLE_PLAY_PUBLIC_KEY   : "",// 用于SDK的Google Play支付，若无需求可不填
+		GOOGLE_GAME_APP_ID       : "",// 用于SDK的Google Game成就系统，若无需求可不填
+                // other end
+        ]
+```
+#### 4.2 AGP Permission 配置
 ```Xml
 <!-- 暂无配置要求 -->
 ```
-#### 4.2 AGS Permission 配置
+#### 4.3 AGS Permission 配置
 ```Xml
 <!-- AGS begin -->
 <!-- Google Play begin -->
@@ -150,7 +172,7 @@ minSdkVersion = 16，targetSdkVersion >= 26
 <!-- AGS end -->
 ```
 请注意：以上 Permission 配置中只打开了SDK基础功能相关的配置，如果使用到其他功能，请打开对应的 Permission 配置！
-#### 4.3 Application相关配置
+#### 4.4 Application相关配置
 ```Xml
 <application
     android:allowBackup="false"
@@ -168,10 +190,9 @@ minSdkVersion = 16，targetSdkVersion >= 26
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
         <!-- DeepLink begin -->
-        <!-- 替换“MY_PACKAGE_NAME”字样为正式包名 -->
         <intent-filter>
             <data
-                android:host="MY_PACKAGE_NAME"
+                android:host="${applicationId}"
                 android:scheme="egls" />
 
             <action android:name="android.intent.action.VIEW" />
@@ -183,40 +204,21 @@ minSdkVersion = 16，targetSdkVersion >= 26
     </activity>
 	
     <!-- Base begin -->
-    <!-- 替换"MY_APP_ID"字样为SDK初始化所需的eglsAppId -->
     <meta-data
         android:name="EGLS_APP_ID"
-        android:value="\0MY_APP_ID" />
+        android:value="${EGLS_APP_ID}" />
 	
-    <!-- 替换"MY_PUBLISHMENT_AREA"字样为对应的发行区标识码，详见“附表 - publishmentArea” -->
     <meta-data
         android:name="EGLS_PUBLISHMENT_AREA"
-        android:value="MY_PUBLISHMENT_AREA" />
+        android:value="${EGLS_PUBLISHMENT_AREA}" />
 	
-    <!-- 替换"MY_PAY_CHANNEL"字样为对应的支付渠道标识码，详见“附表 - payChannel” -->
     <meta-data
         android:name="EGLS_PAY_CHANNEL"
-        android:value="MY_PAY_CHANNEL" />
+        android:value="${EGLS_PAY_CHANNEL}" />
 	
-    <!-- 当没有特殊要求时，“EGLS_PAY_IS_SANDBOX”的参数值为"false"即可 -->
     <meta-data
         android:name="EGLS_PAY_IS_SANDBOX"
-        android:value="false" />
-	
-    <!-- 当没有特殊要求时，“EGLS_PAY_OTHER_PARAM”的参数值为""即可 -->
-    <meta-data
-        android:name="EGLS_PAY_OTHER_PARAM"
-        android:value="" />
-
-    <!-- 替换“MY_SERVER_CLIENT_ID”字样为在Google API后台“OAuth 2.0 客户端 ID”配置的列表中，关于“Web Client”项对应的“Client ID”参数值 -->
-    <meta-data
-        android:name="CHANNEL_SERVER_CLIENT_ID"
-        android:value="MY_SERVER_CLIENT_ID"/>
-
-    <!-- 替换“MY_APPLICATION_ID”字样为Facebook后台配置的applicationId -->	
-    <meta-data
-        android:name="com.facebook.sdk.ApplicationId"
-        android:value="\0MY_APPLICATION_ID" />
+        android:value="${EGLS_PAY_IS_SANDBOX}" />
     <!-- Base end -->
         
     
@@ -237,26 +239,26 @@ minSdkVersion = 16，targetSdkVersion >= 26
     <!--	
     <meta-data
         android:name="CHANNEL_AF_DEV_KEY"
-        android:value="MY_AF_DEV_KEY" />
+        android:value="${APPS_FLYER_DEV_KEY}" />
     -->
     <!-- AppsFlyer end -->
     <!-- AGP end -->
 
 
     <!-- AGS begin -->
-    <!-- Google Play Game begin -->
+    <!-- Google begin -->
+    <meta-data
+        android:name="CHANNEL_GOOGLE_CLIENT_ID"
+        android:value="${GOOGLE_WEB_CLIENT_ID}" />
+	
     <!-- 如果使用Google Play Game成就功能，请打开以下配置 -->
-    <!-- 替换“MY_GAMES_APP_ID”字样为"MY_SERVER_CLIENT_ID"的第一处"-"左边的纯数字部分 -->
     <!--
     <meta-data
         android:name="com.google.android.gms.games.APP_ID"
-        android:value="\0MY_GAMES_APP_ID" />
+        android:value="\0${GOOGLE_GAME_APP_ID}" />
     -->
-    <!-- Google Play Game end -->
 
-
-    <!-- Google Play begin -->
-    <!-- 替换“MY_PUBLIC_KEY”字样为Google Play后台配置的publicKey -->
+    <!-- 如果使用Google Play支付功能，请打开以下配置 -->
     <!-- 4.1.0版本以前name属性为“com.egls.socialization.google.play.BillingActivity” -->
     <activity
         android:name="com.egls.socialization.google.play.GooglePlayActivity"
@@ -266,25 +268,35 @@ minSdkVersion = 16，targetSdkVersion >= 26
 
     <meta-data
         android:name="CHANNEL_GOOGLE_PUBLIC_KEY"
-        android:value="MY_PUBLIC_KEY" />
-    <!-- Google Play end -->
+        android:value="${GOOGLE_PLAY_PUBLIC_KEY}" />
+    <!-- Google end -->
     
 
     <!-- Facebook begin -->
-    <!-- 替换“MY_APPLICATION_ID”字样为Facebook后台配置的applicationId -->
-    <provider
-        android:name="com.facebook.FacebookContentProvider"
-        android:authorities="com.facebook.app.FacebookContentProviderMY_APPLICATION_ID"
-        android:exported="true" />
-	
-    <!--如果游戏需要开启Facebook的“USER_FRIEND”权限，请打开以下配置 --> 
+    <meta-data
+        android:name="com.facebook.sdk.ApplicationId"
+        android:value="\0${FACEBOOK_APPLICATION_ID}" />
+						    
+    <meta-data
+        android:name="CNANNEL_PERMISSION_EMAIL"
+        android:value="true" />
+
+    <!--如果游戏需要开启Facebook的“USER_FRIEND”权限，请打开以下配置 -->
     <!--
     <meta-data
         android:name="CNANNEL_PERMISSION_USER_FRIEND"
-        android:value="true"/>
+        android:value="true" />
+    -->
+						    
+    <!-- 如果游戏需要使用Facebook分享功能，请打开以下配置 -->
+    <!--
+    <provider
+        android:name="com.facebook.FacebookContentProvider"
+        android:authorities="com.facebook.app.FacebookContentProvider${FACEBOOK_APPLICATION_ID}"
+        android:exported="true" />
     -->
     <!-- Facebook end  -->
-    <!-- EGLS Android Game Socialization SDK end -->
+    <!-- AGS end -->
 </application>
 ```
 ### 5. 基础方法实现（必接）
