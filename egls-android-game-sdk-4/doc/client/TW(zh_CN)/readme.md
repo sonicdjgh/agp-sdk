@@ -151,7 +151,30 @@ d. 如果发现SDK的悬浮窗无法响应手势动作，请在“AndroidManifes
 #### 3.6 其他
 minSdkVersion = 17，targetSdkVersion >= 27
 ### 4. AndroidManifest.xml文件配置
-#### 4.1 AGP Permission 配置
+#### 4.1 AndroidManifest.xml中的参数配置
+```gradle
+// 在游戏Module的“build.gradle”中的“defaultConfig”里添加如下配置：
+manifestPlaceholders = [
+                // base begin
+                EGLS_APP_ID              : "",// 用于SDK初始化 
+                EGLS_PUBLISHMENT_AREA    : "",// 用于SDK识别发行区，可详见文档附录
+                EGLS_PAY_CHANNEL         : "",// 用于SDK识别支付方式，可详见文档附录
+                EGLS_PAY_IS_SANDBOX      : "false",// 港澳台发行区设为false即可
+		
+		GOOGLE_WEB_CLIENT_ID     : "",// 用于SDK的Google登录
+		FACEBOOK_APPLICATION_ID  : "",// 用于SDK的Faceb登录
+		
+		// APPS_FLYER_DEV_KEY       : "",// 用于AppsFlyer统计功能初始化，如果运营没有特殊需求，这里无需添加
+                // base end
+		
+		// other begin
+		GOOGLE_PLAY_PUBLIC_KEY   : "",// 用于SDK的Google Play支付，若无需求可不填
+		GOOGLE_GAME_APP_ID       : "",// 用于SDK的Google Game成就系统，若无需求可不填
+		
+                // other end
+        ]
+```
+#### 4.2 AGP Permission 配置
 ```Xml
 <!-- AGP begin -->
 <!-- AppsFlyer begin -->
@@ -160,7 +183,7 @@ minSdkVersion = 17，targetSdkVersion >= 27
 <!-- AppsFlyer end -->
 <!-- AGP end -->
 ```
-#### 4.2 AGS Permission 配置
+#### 4.3 AGS Permission 配置
 ```Xml
 <!-- AGS begin -->
 <!-- Google Play begin -->
@@ -206,7 +229,7 @@ minSdkVersion = 17，targetSdkVersion >= 27
 <!-- AGS end -->
 ```
 请注意：以上 Permission 配置中只打开了SDK基础功能相关的配置，如果使用到其他功能，请打开对应的 Permission 配置！
-#### 4.3 Application相关配置
+#### 4.4 Application相关配置
 ```Xml
 <!-- 如果用Mycard支付功能，请在application标签内添加属性 android:name="tw.com.mycard.sdk.libs.PSDKApplication" -->
 <application
@@ -277,15 +300,19 @@ minSdkVersion = 17，targetSdkVersion >= 27
     <!--	
     <meta-data
         android:name="CHANNEL_AF_DEV_KEY"
-        android:value="MY_AF_DEV_KEY" />
+        android:value="${APPS_FLYER_DEV_KEY}" />
     -->
     <!-- AppsFlyer end -->
     <!-- AGP end -->
 
 
     <!-- AGS begin -->
+    <!-- Google begin -->
+    <meta-data
+        android:name="CHANNEL_GOOGLE_CLIENT_ID"
+        android:value="${GOOGLE_WEB_CLIENT_ID}" />
+	
     <!-- 如果使用Firebase云消息推送，请打开以下配置 -->
-    <!-- Firebase begin -->
     <!--
     <service android:name="com.egls.socialization.backend.AGSPushMessageService">
         <intent-filter>
@@ -298,37 +325,31 @@ minSdkVersion = 17，targetSdkVersion >= 27
         </intent-filter>
     </service>
     -->
-    <!-- Firebase云消息推送所使用的icon图案 -->
+	
     <!-- 如果使用Firebase云消息推送，请打开以下配置 -->
+    <!-- Firebase云消息推送所使用的icon图案 -->
     <!--
     <meta-data
         android:name="com.google.firebase.messaging.default_notification_icon"
         android:resource="@drawable/egls_push_icon" />
-    -->	
-    <!-- Firebase云消息推送所使用的icon底色 -->
+    -->
+	
     <!-- 如果使用Firebase云消息推送，请打开以下配置 -->
+    <!-- Firebase云消息推送所使用的icon底色 -->
     <!--
     <meta-data
         android:name="com.google.firebase.messaging.default_notification_color"
         android:resource="@color/support_egls" />
     -->
-    <!-- Firebase end -->
 	
-	
-    <!-- Google Play Game begin -->
     <!-- 如果使用Google Play Game成就功能，请打开以下配置 -->
-    <!-- 替换“MY_GAMES_APP_ID”字样为"MY_SERVER_CLIENT_ID"的第一处"-"左边的纯数字部分 -->
     <!--
     <meta-data
         android:name="com.google.android.gms.games.APP_ID"
-        android:value="\0MY_GAMES_APP_ID" />
+        android:value="\0${GOOGLE_GAME_APP_ID}" />
     -->
-    <!-- Google Play Game end -->
 
-
-    <!-- Google Play begin -->
     <!-- 如果使用Google Play支付功能，请打开以下配置 -->
-    <!-- 替换“MY_PUBLIC_KEY”字样为Google Play后台配置的publicKey -->
     <!-- 4.1.0版本以前name属性为“com.egls.socialization.google.play.BillingActivity” -->
     <!--
     <activity
@@ -339,28 +360,33 @@ minSdkVersion = 17，targetSdkVersion >= 27
 
     <meta-data
         android:name="CHANNEL_GOOGLE_PUBLIC_KEY"
-        android:value="MY_PUBLIC_KEY" />
+        android:value="${GOOGLE_PLAY_PUBLIC_KEY}" />
     -->
-    <!-- Google Play end -->
+    <!-- Google end -->
     
 
     <!-- Facebook begin -->
-    <!-- 替换“MY_APPLICATION_ID”字样为Facebook后台配置的applicationId -->
-    <provider
-        android:name="com.facebook.FacebookContentProvider"
-        android:authorities="com.facebook.app.FacebookContentProviderMY_APPLICATION_ID"
-        android:exported="true" />
-	
-    <!-- 港澳台发行必须开启Facebook的“email”权限 --> 	
+    <meta-data
+        android:name="com.facebook.sdk.ApplicationId"
+        android:value="\0${FACEBOOK_APPLICATION_ID}" />
+						    
     <meta-data
         android:name="CNANNEL_PERMISSION_EMAIL"
         android:value="true" />
-	
-    <!--如果游戏需要开启Facebook的“USER_FRIEND”权限，请打开以下配置 --> 
+
+    <!--如果游戏需要开启Facebook的“USER_FRIEND”权限，请打开以下配置 -->
     <!--
     <meta-data
         android:name="CNANNEL_PERMISSION_USER_FRIEND"
-        android:value="true"/>
+        android:value="true" />
+    -->
+						    
+    <!-- 如果游戏需要使用Facebook分享功能，请打开以下配置 -->
+    <!--
+    <provider
+        android:name="com.facebook.FacebookContentProvider"
+        android:authorities="com.facebook.app.FacebookContentProvider${FACEBOOK_APPLICATION_ID}"
+        android:exported="true" />
     -->
     <!-- Facebook end  -->
 
