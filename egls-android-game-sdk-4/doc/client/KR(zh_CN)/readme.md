@@ -270,7 +270,7 @@ manifestPlaceholders = [
         android:label="@string/app_name"
         android:launchMode="singleTask"
         android:noHistory="true"
-        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen
+        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen>
 	<!-- DeepLink begin -->
     	<intent-filter android:label="@string/app_name">
             <action android:name="android.intent.action.VIEW" />
