@@ -149,28 +149,24 @@ manifestPlaceholders = [
                 EGLS_APP_ID              : "",// 用于SDK初始化 
                 EGLS_PUBLISHMENT_AREA    : "",// 用于SDK识别发行区，可详见文档附录
                 EGLS_PAY_CHANNEL         : "",// 用于SDK识别支付方式，可详见文档附录
-                EGLS_PAY_IS_SANDBOX      : "false",// 大陆发行区设为false即可
+                EGLS_PAY_IS_SANDBOX      : "false",// 港澳台发行区设为false即可
 		
-		GOOGLE_WEB_CLIENT_ID     : "",
-		FACEBOOK_APPLICATION_ID  : "",
+		GOOGLE_WEB_CLIENT_ID     : "",// 用于SDK的Google登录
+		FACEBOOK_APPLICATION_ID  : "",// 用于SDK的Faceb登录
 		
-		IGAW_APP_KEY             : "",
-                IGAW_HASH_KEY            : "",
-		GAME_ACTIVITY_NAME       : "",
+		IGAW_APP_KEY             : "",// 用于IgaWorks统计功能初始化
+                IGAW_HASH_KEY            : "",// 用于IgaWorks统计功能初始化
+		GAME_ACTIVITY_NAME       : "",// 用于IgaWorks统计功能的DeepLink定位，为游戏Activity的“name”全称
 		
-		NAVER_LOGIN_CLIENT_ID    : "",
-                NAVER_LOGIN_CLIENT_SECRET: "",
-                NAVER_CAFE_ID            : "",
+		NAVER_LOGIN_CLIENT_ID    : "",// 用于Naver Cafe论坛功能初始化
+                NAVER_LOGIN_CLIENT_SECRET: "",// 用于Naver Cafe论坛功能初始化
+                NAVER_CAFE_ID            : "",// 用于Naver Cafe论坛功能初始化
                 // base end
 		
 		// other begin
 		GOOGLE_PLAY_PUBLIC_KEY   : "",// 用于SDK的Google Play支付，若无需求可不填
 		GOOGLE_GAME_APP_ID       : "",// 用于SDK的Google Game成就系统，若无需求可不填
-		ONE_STORE_APP_ID         : "",// 用于SDK的One商店支付，
-                WX_APP_ID                : "",
-                WX_SECRET                : "",// 用于微信登录、分享，若无需求可不填
-                WB_APP_KEY               : "",// 用于新浪微博分享，若无需求可不填
-                QQ_APP_ID                : "",// 用于QQ登录、分享，若无需求可不填
+		ONE_STORE_APP_ID         : "",// 用于SDK的One商店支付，若无需求可不填
                 // other end
         ]
 ```
@@ -249,40 +245,21 @@ manifestPlaceholders = [
     </activity>
 	
     <!-- Base begin -->
-    <!-- 替换"MY_APP_ID"字样为SDK初始化所需的eglsAppId -->
     <meta-data
         android:name="EGLS_APP_ID"
-        android:value="\0MY_APP_ID" />
+        android:value="${EGLS_APP_ID}" />
 	
-    <!-- 替换"MY_PUBLISHMENT_AREA"字样为对应的发行区标识码，详见“附表 - publishmentArea” -->
     <meta-data
         android:name="EGLS_PUBLISHMENT_AREA"
-        android:value="MY_PUBLISHMENT_AREA" />
+        android:value="${EGLS_PUBLISHMENT_AREA}" />
 	
-    <!-- 替换"MY_PAY_CHANNEL"字样为对应的支付渠道标识码，详见“附表 - payChannel” -->
     <meta-data
         android:name="EGLS_PAY_CHANNEL"
         android:value="MY_PAY_CHANNEL" />
 	
-    <!-- 当没有特殊要求时，“EGLS_PAY_IS_SANDBOX”的参数值为"false"即可 -->
     <meta-data
         android:name="EGLS_PAY_IS_SANDBOX"
         android:value="false" />
-	
-    <!-- 当没有特殊要求时，“EGLS_PAY_OTHER_PARAM”的参数值为""即可 -->
-    <meta-data
-        android:name="EGLS_PAY_OTHER_PARAM"
-        android:value="" />
-
-    <!-- 替换“MY_SERVER_CLIENT_ID”字样为在Google API后台“OAuth 2.0 客户端 ID”配置的列表中，关于“Web Client”项对应的“Client ID”参数值 -->
-    <meta-data
-        android:name="CHANNEL_SERVER_CLIENT_ID"
-        android:value="MY_SERVER_CLIENT_ID"/>
-
-    <!-- 替换“MY_APPLICATION_ID”字样为Facebook后台配置的applicationId -->
-    <meta-data
-        android:name="com.facebook.sdk.ApplicationId"
-        android:value="\0MY_APPLICATION_ID" />
     <!-- Base end -->
 	
         
@@ -363,20 +340,19 @@ manifestPlaceholders = [
 
 
     <!-- AGS begin -->
-    <!-- Google Play Game begin -->
+    <!-- Google begin -->
+    <meta-data
+        android:name="CHANNEL_GOOGLE_CLIENT_ID"
+        android:value="${GOOGLE_WEB_CLIENT_ID}" />
+				   
     <!-- 如果使用Google Play Game成就功能，请打开以下配置 -->	
-    <!-- 替换“MY_GAMES_APP_ID”字样为"MY_SERVER_CLIENT_ID"的第一处"-"左边的纯数字部分 -->
     <!--
     <meta-data
         android:name="com.google.android.gms.games.APP_ID"
-        android:value="\0MY_GAMES_APP_ID" />
+        android:value="\0${GOOGLE_GAME_APP_ID}" />
     -->
-    <!-- Google Play Game end -->
 
-
-    <!-- Google Play begin -->
     <!-- 如果使用Google Play支付功能，请打开以下配置 -->	
-    <!-- 替换“MY_PUBLIC_KEY”字样为Google Play后台配置的publicKey -->
     <!-- 4.1.0版本以前name属性为“com.egls.socialization.google.play.BillingActivity” -->
     <!--
     <activity
@@ -387,60 +363,69 @@ manifestPlaceholders = [
 
     <meta-data
         android:name="CHANNEL_GOOGLE_PUBLIC_KEY"
-        android:value="MY_PUBLIC_KEY" />
-    -->
-    <!-- Google Play end -->
+        android:value="${GOOGLE_PLAY_PUBLIC_KEY}" />
+    -->										
+    <!-- Google end -->
     
 
     <!-- Facebook begin -->
-    <!-- 替换“MY_APPLICATION_ID”字样为Facebook后台配置的applicationId -->
-    <!-- 目前google play商店对于provider的使用有漏洞检测，目前的处理方式是对于google play商店的包，exported属性需要改为false，但是会影响FB的分享功能，导致无法正常分享 -->
-    <provider
-        android:name="com.facebook.FacebookContentProvider"
-        android:authorities="com.facebook.app.FacebookContentProviderMY_APPLICATION_ID"
-        android:exported="true" />
-	
-    <!--如果游戏需要开启Facebook的“USER_FRIEND”权限，请打开以下配置 --> 
+    <meta-data
+        android:name="com.facebook.sdk.ApplicationId"
+        android:value="\0${FACEBOOK_APPLICATION_ID}" />
+						    
+    <meta-data
+        android:name="CNANNEL_PERMISSION_EMAIL"
+        android:value="true" />
+
+    <!--如果游戏需要开启Facebook的“USER_FRIEND”权限，请打开以下配置 -->
     <!--
     <meta-data
         android:name="CNANNEL_PERMISSION_USER_FRIEND"
-        android:value="true"/>
+        android:value="true" />
+    -->
+						    
+    <!-- 如果游戏需要使用Facebook分享功能，请打开以下配置 -->
+    <!--
+    <provider
+        android:name="com.facebook.FacebookContentProvider"
+        android:authorities="com.facebook.app.FacebookContentProvider${FACEBOOK_APPLICATION_ID}"
+        android:exported="true" />
     -->
     <!-- Facebook end  -->
     
 
     <!-- OneStore begin -->
     <!-- 如果使用OneStore支付功能，请打开以下配置 -->	
-    <!-- 替换“MY_APP_ID”字样为OneStore后台配置的appId -->
     <!--
     <meta-data
         android:name="iap:api_version"
         android:value="5" />
+			 
     <meta-data
             android:name="iap:view_option"
             android:value="popup" />
+				 
     <meta-data
         android:name="CHANNEL_ONESTORE_APP_ID"
-        android:value="MY_APP_ID"/>
+        android:value="${ONE_STORE_APP_ID}"/>
     -->
     <!-- OneStore end -->
 	
 	
     <!-- NaverCafe begin -->
     <!-- 如果使用NaverCafe论坛，请打开以下配置 -->
-    <!-- 替换“MY_CLIENT_ID”字样为Naver后台配置的clientId -->
-    <!-- 替换“MY_CLIENT_SECRET”字样为Naver后台配置的clientSecret -->
-    <!-- 替换“MY_CAFE_ID”字样为NaverCafe后台配置的cafeId -->
     <!--
     <meta-data
         android:name="naver_login_client_id"
-        android:value="MY_CLIENT_ID" />
+        android:value="${NAVER_LOGIN_CLIENT_ID}" />
+				    
     <meta-data
         android:name="naver_login_client_secret"
-        android:value="MY_CLIENT_SECRET" />
+        android:value="${NAVER_LOGIN_CLIENT_SECRET}" />
+					
     <meta-data
         android:name="naver_cafe_id"
-        android:value="\0MY_CAFE_ID" /> 
+        android:value="${NAVER_CAFE_ID}" /> 
     -->
     <!-- NaverCafe end -->
     <!-- AGS end -->
