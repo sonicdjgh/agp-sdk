@@ -19,24 +19,24 @@ gradle版本为4.1，并且需要在当前Project根目录下的build.gralde文�
 ```gradle
 buildscript {
     repositories {
+    	google()
         jcenter()
-        google()
     }
 }
 
 allprojects {
     repositories {
+    	google()
         jcenter()
-        google()
 	mavenCentral()
     }
 }
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.5.16
-EGLS_AGS_VERSION=4.5.16
-EGLS_SUPPORT_VERSION=4.5.16
+EGLS_AGP_VERSION=4.5.35
+EGLS_AGS_VERSION=4.5.35
+EGLS_SUPPORT_VERSION=4.5.35
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -122,7 +122,7 @@ dependencies {
     api 'com.navercorp.volleyextensions:volleyer:2.0.1', {
         exclude group: 'com.mcxiaoke.volley', module: 'library'
     }
-    api(name: 'cafeSdk-2.4.3', ext: 'aar')
+    api(name: 'cafeSdk-4.2.1', ext: 'aar')
     
     // 如果使用 OneStore 支付，请打开下面的配置：
     // api files('libs/kr/iap_plugin_v17.01.00_20180206.jar');
@@ -141,7 +141,40 @@ c. Google推荐对危险权限的使用有一定要求，需要加入申请权�
 #### 3.6 其他
 minSdkVersion = 16，targetSdkVersion >= 26
 ### 4. AndroidManifest.xml文件配置
-#### 4.1 AGP Permission 配置
+#### 4.1 AndroidManifest.xml中的参数配置
+```gradle
+// 在游戏Module的“build.gradle”中的“defaultConfig”里添加如下配置：
+manifestPlaceholders = [
+                // base begin
+                EGLS_APP_ID              : "",// 用于SDK初始化 
+                EGLS_PUBLISHMENT_AREA    : "",// 用于SDK识别发行区，可详见文档附录
+                EGLS_PAY_CHANNEL         : "",// 用于SDK识别支付方式，可详见文档附录
+                EGLS_PAY_IS_SANDBOX      : "false",// 大陆发行区设为false即可
+		
+		GOOGLE_WEB_CLIENT_ID     : "",
+		FACEBOOK_APPLICATION_ID  : "",
+		
+		IGAW_APP_KEY             : "",
+                IGAW_HASH_KEY            : "",
+		GAME_ACTIVITY_NAME       : "",
+		
+		NAVER_LOGIN_CLIENT_ID    : "",
+                NAVER_LOGIN_CLIENT_SECRET: "",
+                NAVER_CAFE_ID            : "",
+                // base end
+		
+		// other begin
+		GOOGLE_PLAY_PUBLIC_KEY   : "",// 用于SDK的Google Play支付，若无需求可不填
+		GOOGLE_GAME_APP_ID       : "",// 用于SDK的Google Game成就系统，若无需求可不填
+		ONE_STORE_APP_ID         : "",// 用于SDK的One商店支付，
+                WX_APP_ID                : "",
+                WX_SECRET                : "",// 用于微信登录、分享，若无需求可不填
+                WB_APP_KEY               : "",// 用于新浪微博分享，若无需求可不填
+                QQ_APP_ID                : "",// 用于QQ登录、分享，若无需求可不填
+                // other end
+        ]
+```
+#### 4.2 AGP Permission 配置
 ```Xml
 <!-- AGP begin -->
 <!-- IGAW begin -->
@@ -160,7 +193,7 @@ minSdkVersion = 16，targetSdkVersion >= 26
 <!-- IGAW end -->
 <!-- AGP end -->
 ```
-#### 4.2 AGS Permission 配置
+#### 4.3 AGS Permission 配置
 ```Xml
 <!-- AGS begin -->
 <!-- Google Play begin -->
@@ -196,7 +229,7 @@ minSdkVersion = 16，targetSdkVersion >= 26
 <!-- AGS end -->
 ```
 请注意：以上 Permission 配置中只打开了SDK基础功能相关的配置，如果使用到其他功能，请打开对应的 Permission 配置！
-#### 4.3 Application相关配置
+#### 4.4 Application相关配置
 ```Xml
 <application
     android:allowBackup="false"
