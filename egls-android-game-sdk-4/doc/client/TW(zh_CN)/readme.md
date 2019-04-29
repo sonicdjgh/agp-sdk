@@ -236,6 +236,8 @@ manifestPlaceholders = [
     android:icon="@drawable/icon"
     android:label="AGSDK Demo"
     android:theme="@style/AppTheme" >
+	
+    <!-- 游戏Activity -->	
     <activity
         android:name="com.egls.sdk.demo.MainActivity"
         android:configChanges="fontScale|orientation|keyboardHidden|locale|navigation|screenSize|uiMode"
