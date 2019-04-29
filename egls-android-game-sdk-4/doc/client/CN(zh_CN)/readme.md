@@ -135,7 +135,7 @@ manifestPlaceholders = [
 		ALIPAY_APP_ID            : "",// 用于SDK支付
                 WX_APP_ID                : "",// 用于微信登录、分享，若无需求可不填
                 WX_SECRET                : "",// 用于微信登录、分享，若无需求可不填
-                WB_APP_KRY               : "",// 用于新浪微博分享，若无需求可不填
+                WB_APP_KEY               : "",// 用于新浪微博分享，若无需求可不填
                 QQ_APP_ID                : "",// 用于QQ登录、分享，若无需求可不填
                 // other end
         ]
@@ -230,7 +230,7 @@ manifestPlaceholders = [
     <!--	
     <meta-data
         android:name="wb_app_key"
-        android:value="${WB_APP_KRY}" />
+        android:value="${WB_APP_KEY}" />
     -->
     <!-- 微博 end -->
 	
