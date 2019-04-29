@@ -7,7 +7,7 @@
 由我方给游戏分配的应用id，一个游戏对应一个。
 #### 2.2 CHANNEL_GOOGLE_PUBLIC_KEY
 在Goole Play后台生成的支付公钥。
-#### 2.3 CHANNEL_SERVER_CLIENT_ID
+#### 2.3 CHANNEL_GOOGLE_CLIENT_ID
 在Google API后台“OAuth 2.0 客户端 ID”配置的列表中，关于“Web Client”项对应的“Client ID”参数值。
 #### 2.4 com.facebook.sdk.ApplicationId
 在Facebook后台生成的应用id。
@@ -17,8 +17,8 @@ gradle版本为4.1，并且需要在当前Project根目录下的build.gralde文�
 ```gradle
 buildscript {
     repositories {
+    	google()
         jcenter()
-        google()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
@@ -30,8 +30,8 @@ buildscript {
 
 allprojects {
     repositories {
-        jcenter()
         google()
+        jcenter()
 	mavenCentral()
     }
 }
@@ -42,9 +42,9 @@ apply plugin: 'com.google.gms.google-services'
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.5.16
-EGLS_AGS_VERSION=4.5.16
-EGLS_SUPPORT_VERSION=4.5.16
+EGLS_AGP_VERSION=4.5.35
+EGLS_AGS_VERSION=4.5.35
+EGLS_SUPPORT_VERSION=4.5.35
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -149,7 +149,7 @@ d. 如果发现SDK的悬浮窗无法响应手势动作，请在“AndroidManifes
     android:value="true"/>
 ```
 #### 3.6 其他
-minSdkVersion = 16，targetSdkVersion >= 27
+minSdkVersion = 17，targetSdkVersion >= 27
 ### 4. AndroidManifest.xml文件配置
 #### 4.1 AGP Permission 配置
 ```Xml
@@ -229,7 +229,7 @@ minSdkVersion = 16，targetSdkVersion >= 27
         <!-- 替换“MY_PACKAGE_NAME”字样为正式包名 -->
         <intent-filter>
             <data
-                android:host="MY_PACKAGE_NAME"
+                android:host="${applicationId}"
                 android:scheme="egls" />
 
             <action android:name="android.intent.action.VIEW" />
@@ -241,40 +241,21 @@ minSdkVersion = 16，targetSdkVersion >= 27
     </activity>
 	
     <!-- Base begin -->
-    <!-- 替换"MY_APP_ID"字样为SDK初始化所需的eglsAppId -->
     <meta-data
         android:name="EGLS_APP_ID"
-        android:value="\0MY_APP_ID" />
+        android:value="${EGLS_APP_ID}" />
 	
-    <!-- 替换"MY_PUBLISHMENT_AREA"字样为对应的发行区标识码，详见“附表 - publishmentArea” -->
     <meta-data
         android:name="EGLS_PUBLISHMENT_AREA"
-        android:value="MY_PUBLISHMENT_AREA" />
+        android:value="${EGLS_PUBLISHMENT_AREA}" />
 	
-    <!-- 替换"MY_PAY_CHANNEL"字样为对应的支付渠道标识码，详见“附表 - payChannel” -->
     <meta-data
         android:name="EGLS_PAY_CHANNEL"
-        android:value="MY_PAY_CHANNEL" />
+        android:value="${EGLS_PAY_CHANNEL}" />
 	
-    <!-- 当没有特殊要求时，“EGLS_PAY_IS_SANDBOX”的参数值为"false"即可 -->
     <meta-data
         android:name="EGLS_PAY_IS_SANDBOX"
-        android:value="false" />
-	
-    <!-- 当没有特殊要求时，“EGLS_PAY_OTHER_PARAM”的参数值为""即可 -->
-    <meta-data
-        android:name="EGLS_PAY_OTHER_PARAM"
-        android:value="" />
-
-    <!-- 替换“MY_SERVER_CLIENT_ID”字样为在Google API后台“OAuth 2.0 客户端 ID”配置的列表中，关于“Web Client”项对应的“Client ID”参数值 -->
-    <meta-data
-        android:name="CHANNEL_SERVER_CLIENT_ID"
-        android:value="MY_SERVER_CLIENT_ID"/>
-
-    <!-- 替换“MY_APPLICATION_ID”字样为Facebook后台配置的applicationId -->
-    <meta-data
-        android:name="com.facebook.sdk.ApplicationId"
-        android:value="\0MY_APPLICATION_ID" />
+        android:value="${EGLS_PAY_IS_SANDBOX}" />
     <!-- Base end -->
         
     
