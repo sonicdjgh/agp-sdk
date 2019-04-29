@@ -7,7 +7,7 @@
 由我方给游戏分配的应用id，一个游戏对应一个
 #### 2.2 CHANNEL_GOOGLE_PUBLIC_KEY
 在Goole Play后台生成的支付公钥。
-#### 2.3 CHANNEL_SERVER_CLIENT_ID
+#### 2.3 CHANNEL_GOOGLE_CLIENT_ID
 在Google API后台“OAuth 2.0 客户端 ID”配置的列表中，关于“Web Client”项对应的“Client ID”参数值。
 #### 2.4 com.facebook.sdk.ApplicationId
 在Facebook后台生成的应用id。
