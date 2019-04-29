@@ -19,8 +19,8 @@ gradle版本为4.1，并且需要在当前Project根目录下的build.gralde文�
 ```gradle
 buildscript {
     repositories {
+    	google()
         jcenter()
-        google()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
@@ -29,8 +29,8 @@ buildscript {
 
 allprojects {
     repositories {
+    	google()
         jcenter()
-        google()
 	mavenCentral()
 	
 	// 如果使用新浪微博分享，请打开以下配置
