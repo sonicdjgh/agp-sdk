@@ -449,6 +449,7 @@ publishmentArea | value
 ### 附表 - payChannel
 payChannel | value
 ---|---
+EGLS | 1
 Google Play | 2
 Mycard | 3
 OneStore | 4
