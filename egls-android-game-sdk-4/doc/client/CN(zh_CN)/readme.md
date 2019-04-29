@@ -132,6 +132,7 @@ manifestPlaceholders = [
                 // base end
 		
 		// other begin
+		ALIPAY_APP_ID            : "",// 用于SDK支付
                 WX_APP_ID                : "",// 用于微信登录、分享，若无需求可不填
                 WX_SECRET                : "",// 用于微信登录、分享，若无需求可不填
                 WB_APP_KRY               : "",// 用于新浪微博分享，若无需求可不填
