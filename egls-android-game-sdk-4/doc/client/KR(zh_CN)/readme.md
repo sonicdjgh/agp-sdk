@@ -405,8 +405,6 @@ manifestPlaceholders = [
 	
 	
     <!-- NaverCafe begin -->
-    <!-- 如果使用NaverCafe论坛，请打开以下配置 -->
-    <!--
     <meta-data
         android:name="naver_login_client_id"
         android:value="${NAVER_LOGIN_CLIENT_ID}" />
@@ -418,7 +416,6 @@ manifestPlaceholders = [
     <meta-data
         android:name="naver_cafe_id"
         android:value="${NAVER_CAFE_ID}" /> 
-    -->
     <!-- NaverCafe end -->
     <!-- AGS end -->
 </application>
