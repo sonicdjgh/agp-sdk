@@ -254,11 +254,11 @@ manifestPlaceholders = [
 	
     <meta-data
         android:name="EGLS_PAY_CHANNEL"
-        android:value="MY_PAY_CHANNEL" />
+        android:value="${EGLS_PAY_CHANNEL}" />
 	
     <meta-data
         android:name="EGLS_PAY_IS_SANDBOX"
-        android:value="false" />
+        android:value="${EGLS_PAY_IS_SANDBOX}" />
     <!-- Base end -->
 	
         
@@ -320,9 +320,11 @@ manifestPlaceholders = [
         android:name="com.igaworks.liveops.pushservice.IgawLiveOpsPushMessageLauncherActivity"
         android:noHistory="true"
         android:permission="${applicationId}.permission.C2D_MESSAGE" />
+	
     <meta-data
         android:name="igaworks_app_key"
         android:value="${IGAW_APP_KEY}" />
+	
     <meta-data
         android:name="igaworks_hash_key"
         android:value="${IGAW_HASH_KEY}" />
