@@ -139,7 +139,7 @@ c. Google推荐对危险权限的使用有一定要求，需要加入申请权�
     android:value="true" />
 ```
 #### 3.6 其他
-minSdkVersion = 16，targetSdkVersion >= 26
+minSdkVersion = 17，targetSdkVersion >= 27
 ### 4. AndroidManifest.xml文件配置
 #### 4.1 AndroidManifest.xml中的参数配置
 ```gradle
