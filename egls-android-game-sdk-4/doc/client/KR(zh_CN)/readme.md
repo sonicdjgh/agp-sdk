@@ -280,8 +280,8 @@ manifestPlaceholders = [
 
             <data
                 android:host="${applicationId}.dplk"
-                android:scheme="egls"
-		android:path="fb${FACEBOOK_APPLICATION_ID}"/>
+                android:path="fb${FACEBOOK_APPLICATION_ID}"
+                android:scheme="egls" />
         </intent-filter>
 
         <meta-data
