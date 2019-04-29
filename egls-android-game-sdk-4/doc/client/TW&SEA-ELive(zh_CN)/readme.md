@@ -535,7 +535,7 @@ manifestPlaceholders = [
         android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
     -->
     <!-- Gash end -->
-    <!-- EGLS Android Game Socialization SDK end -->
+    <!-- AGS end -->
 </application>
 ```
 ### 5. 基础方法实现（必接）
