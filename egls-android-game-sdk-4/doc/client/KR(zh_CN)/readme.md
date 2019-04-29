@@ -175,16 +175,15 @@ manifestPlaceholders = [
 <!-- AGP begin -->
 <!-- IGAW begin -->
 <!-- IGAW为韩国地区所使用的统计功能，其他地区发行的游戏请不要使用 -->
-<!-- 替换“MY_PACKAGE_NAME”字样为正式包名 -->
 <uses-permission android:name="android.permission.INTERNET" />
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 <uses-permission android:name="android.permission.WAKE_LOCK" />
 <uses-permission android:name="android.permission.VIBRATE" />
 <uses-permission android:name="android.permission.GET_TASKS" />
 <permission
-    android:name="MY_PACKAGE_NAME.permission.C2D_MESSAGE"
+    android:name="${applicationId}.permission.C2D_MESSAGE"
     android:protectionLevel="signature" />
-<uses-permission android:name="MY_PACKAGE_NAME.permission.C2D_MESSAGE" />
+<uses-permission android:name="${applicationId}.permission.C2D_MESSAGE" />
 <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 <!-- IGAW end -->
 <!-- AGP end -->
@@ -266,12 +265,6 @@ manifestPlaceholders = [
     <!-- AGP begin -->
     <!-- IGAW begin -->
     <!-- IGAW为韩国地区所使用的统计功能，其他地区发行的游戏请不要使用 -->
-    <!-- 替换“MY_PACKAGE_NAME”字样为正式包名 -->
-    <!-- 替换“MY_APPLICATION_ID”字样为Facebook后台配置的applicationId -->
-    <!-- 替换“MY_MAIN_ACTIVITY_FULL_NAME”字样为游戏主Activity的全称 -->
-    <!-- 替换“MY_APP_KEY”字样为IGAW后台配置的appKey -->
-    <!-- 替换“MY_HASH_KEY”字样为IGAW后台配置的hashKey -->
-    <!-- 变动部分 begin -->	
     <activity
     	android:name="com.igaworks.IgawDefaultDeeplinkActivity"
         android:label="@string/app_name"
@@ -279,7 +272,6 @@ manifestPlaceholders = [
         android:noHistory="true"
         android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen
 	<!-- DeepLink begin -->
-        <!-- DeepLink配置为韩国IGAW统计功能所使用 -->
     	<intent-filter android:label="@string/app_name">
             <action android:name="android.intent.action.VIEW" />
 
@@ -287,17 +279,17 @@ manifestPlaceholders = [
             <category android:name="android.intent.category.BROWSABLE" />
 
             <data
-                android:host="MY_PACKAGE_NAME"
+                android:host="${applicationId}.dplk"
                 android:scheme="egls"
-		android:path="fbMY_APPLICATION_ID"/>
+		android:path="fb${FACEBOOK_APPLICATION_ID}"/>
         </intent-filter>
 
         <meta-data
             android:name="IgawRedirectActivity"
-            android:value="MY_MAIN_ACTIVITY_FULL_NAME" />
+            android:value="${GAME_ACTIVITY_NAME}" />
 	<!-- DeepLink end -->
     </activity>
-    <!-- 变动部分 end -->	
+
     <receiver
         android:name="com.igaworks.IgawReceiver"
         android:exported="true" >
@@ -311,7 +303,7 @@ manifestPlaceholders = [
         <intent-filter>
             <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 
-            <category android:name="MY_PACKAGE_NAME" />
+            <category android:name="${applicationId}" />
         </intent-filter>
     </receiver>
     <service
@@ -319,7 +311,7 @@ manifestPlaceholders = [
         android:enabled="true" />
     <receiver
         android:name="com.igaworks.liveops.pushservice.LiveOpsReceiver"
-        android:permission="MY_PACKAGE_NAME.permission.C2D_MESSAGE" >
+        android:permission="${applicationId}.permission.C2D_MESSAGE" >
         <intent-filter>
             <action android:name="com.igaworks.liveops.pushservice.CLIENT_PUSH_RECEIVE" />
         </intent-filter>
@@ -327,13 +319,13 @@ manifestPlaceholders = [
     <activity
         android:name="com.igaworks.liveops.pushservice.IgawLiveOpsPushMessageLauncherActivity"
         android:noHistory="true"
-        android:permission="MY_PACKAGE_NAME.permission.C2D_MESSAGE" />
+        android:permission="${applicationId}.permission.C2D_MESSAGE" />
     <meta-data
         android:name="igaworks_app_key"
-        android:value="MY_APP_KEY" />
+        android:value="${IGAW_APP_KEY}" />
     <meta-data
         android:name="igaworks_hash_key"
-        android:value="MY_HASH_KEY" />
+        android:value="${IGAW_HASH_KEY}" />
     -->
     <!-- IGAW end -->
     <!-- AGP end -->
