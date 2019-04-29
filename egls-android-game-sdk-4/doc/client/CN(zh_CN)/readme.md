@@ -120,13 +120,32 @@ c. Google推荐对危险权限的使用有一定要求，需要加入申请权�
 #### 3.6 其他
 minSdkVersion = 17，targetSdkVersion >= 27
 ### 4. AndroidManifest.xml文件配置
-#### 4.1 AGP Permission 配置
+#### 4.1 AndroidManifest.xml中的参数配置
+```gradle
+// 在游戏Module的“build.gradle”中的“defaultConfig”里添加如下配置：
+manifestPlaceholders = [
+                // base begin
+                EGLS_APP_ID              : "",// 用于SDK初始化 
+                EGLS_PUBLISHMENT_AREA    : "",// 用于SDK识别发行区，可详见文档附录
+                EGLS_PAY_CHANNEL         : "",// 用于SDK识别支付方式，可详见文档附录
+                EGLS_PAY_IS_SANDBOX      : "false",// 大陆发行区设为false即可
+                // base end
+		
+		// other begin
+                WX_APP_ID                : "",// 用于微信登录、分享，若无需求可不填
+                WX_SECRET                : "",// 用于微信登录、分享，若无需求可不填
+                WB_APP_KRY               : "",// 用于新浪微博分享，若无需求可不填
+                QQ_APP_ID                : "",// 用于QQ登录、分享，若无需求可不填
+                // other end
+        ]
+```
+#### 4.2 AGP Permission 配置
 ```Xml
 <!-- AGP begin -->
 <!-- 暂没有可添加的配置 -->
 <!-- AGP end -->
 ```
-#### 4.2 AGS Permission 配置
+#### 4.3 AGS Permission 配置
 ```Xml
 <!-- AGS begin -->
 <!-- 支付宝 begin -->
@@ -135,7 +154,7 @@ minSdkVersion = 17，targetSdkVersion >= 27
 <!-- AGS end -->
 ```
 请注意：以上 Permission 配置中只打开了SDK基础功能相关的配置，如果使用到其他功能，请打开对应的 Permission 配置！
-#### 4.3 Application相关配置
+#### 4.4 Application相关配置
 ```Xml
 <application
     android:allowBackup="false"
