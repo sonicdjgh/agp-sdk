@@ -224,7 +224,6 @@ manifestPlaceholders = [
     
     <!-- AGP begin -->
     <!-- AppsFlyer begin -->
-    <!-- AppsFlyer为港台地区所使用的内嵌统计功能 -->
     <!-- 为了确保所有Install Referrer监听器可以成功监听由系统播放的referrer参数，请一定在AndroidManifest.xml中将AppsFlyer的监听器置于所有同类监听器第一位，并保证receiver tag在application tag中 -->
     <receiver
         android:name="com.appsflyer.MultipleInstallBroadcastReceiver"
