@@ -164,13 +164,12 @@ manifestPlaceholders = [
 		GOOGLE_WEB_CLIENT_ID     : "",// 用于SDK的Google登录
 		FACEBOOK_APPLICATION_ID  : "",// 用于SDK的Faceb登录
 		
-		// APPS_FLYER_DEV_KEY       : "",// 用于AppsFlyer统计功能初始化，如果运营没有特殊需求，这里无需添加
+		// APPS_FLYER_DEV_KEY    : "",// 用于AppsFlyer统计功能初始化，如果运营没有特殊需求，这里无需添加
                 // base end
 		
 		// other begin
 		GOOGLE_PLAY_PUBLIC_KEY   : "",// 用于SDK的Google Play支付，若无需求可不填
 		GOOGLE_GAME_APP_ID       : "",// 用于SDK的Google Game成就系统，若无需求可不填
-		
                 // other end
         ]
 ```
