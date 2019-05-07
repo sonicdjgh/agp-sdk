@@ -505,7 +505,7 @@ AGPManager.eglsLogin(loginMode, new AGPLoginProcessListener() {
     }
 });
 ```
-### 8. SDK账号切换（一般常用于非普通登录模式的游戏）
+### 8. SDK账号切换（必接）
 ```Java
 AGPManager.eglsSwitch();
 ```
