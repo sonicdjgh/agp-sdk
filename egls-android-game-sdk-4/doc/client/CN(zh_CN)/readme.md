@@ -358,7 +358,11 @@ AGPManager.eglsLogin(loginMode, new AGPLoginProcessListener() {
     }
 });
 ```
-### 8. SDK支付（必接）
+### 8. SDK切换账号（选接）
+```Java
+AGPManager.eglsSwitch();
+```
+### 9. SDK支付（必接）
 ```Java
 String amount = "1";// 总金额
 String productId = "PDT001";// 档位id
@@ -383,12 +387,12 @@ AGPManager.eglsPay(amount, productId, productName, cpOrderInfo, flag, new AGPCli
     }
 });
 ```
-### 9. onEnterGame接口调用（必接）
+### 10. onEnterGame接口调用（必接）
 ```Java
 //当玩家登录进入到游戏服务器之后，请务必调用该方法
 AGPManager.onEnterGame();
 ```
-### 10. SDK分享功能（选接）
+### 11. SDK分享功能（选接）
 ```Java
 int type = Constants.TYPE_SHARE_WECHAT;
 String shareTitle = "";// 分享标题
@@ -409,7 +413,7 @@ AGPManager.eglsShare(this, type, shareTitle, shareText, shareImageFilePath, shar
     }
 });
 ```
-### 11. 关于微信功能的使用
+### 12. 关于微信功能的使用
 SDK集成了“微信登录”功能及“微信分享”功能，除了添加相关的AndroidManifest.xml文件配置之外，还需要在项目工程中添加一个以“正式包名.wxapi”的package（以Demo为例，则添加的package为“com.egls.demo.wxapi”），并且在该package中添加一个名为“WXEntryActivity”的Activity类，这个类必须继承SDK中的“com.egls.socialization.wechat.WeChatEntryActivity”类，例如：
 ```java
 package 正式包名.wxapi;
@@ -420,9 +424,9 @@ public class WXEntryActivity extends WeChatEntryActivity {
 
 }
 ```
-### 12. 关于H5游戏的SDK接入
+### 13. 关于H5游戏的SDK接入
 从4.5.31版本起，我们为SDK添加了“H5”游戏模式，即在调用SDK初始化接口时，“isWebMode”参数值设置为true。初始化完成后，SDK会自动向SDK平台请求并获取H5游戏启动页面的网址并执行网页跳转。其实，本质上与原生接入方式无太大差异，只是需要一个H5与Android原生交互的过程。Demo中新添了一个“MainH5Activity”类，里面包含了Android原生部分的对接示例；另外在“assets/web”目录下添加了一个"demo.html"文件，里面包含了H5部分的对接示例。
-### 13. 其他注意事项
+### 14. 其他注意事项
 1. 凡是游戏项目工程为Android Studio工程，并且在Gradle里配置了productFlavor来控制打包流程的，请务必在调用“AGPManager.initSDK()”接口前，写上如下逻辑代码：
 ```Java
 AGPManager.addFlavorsBasePackage(BuildConfig.class.getPackage().getName());
