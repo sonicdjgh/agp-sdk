@@ -620,8 +620,6 @@ AGPManager.eglsLogin(loginMode, new AGPLoginProcessListener() {
 ### 8. SDK切换账号（必接）
 ```Java
 AGPManager.eglsSwitch();
-// 如果游戏中没有“切换账号”或是相似的功能按钮，可以打开banner中的“切换账号”按钮，但要自行处理好相关游戏逻辑
-// AGPManager.setEnableBannerSwitch(true);
 ```
 ### 9. SDK支付（必接）
 ```Java
