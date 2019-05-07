@@ -345,11 +345,11 @@ AGPManager.eglsLogin(loginMode, new AGPLoginProcessListener() {
     }
 
     @Override
-    public void onLoginProcess(int action, String token, String uid, String msg) {
+    public void onLoginProcess(int action, String token, String uid, String accountType, String nickName) {
 	// 登录结果回调，只有当action为0时，示为登录成功
-	// msg = "0"时，表示游客账号登录
-	// msg = "1"时，表示EGLS账号登录
-	// msg = "4"时，表示微信账号登录
+	// accountType = "0"时，表示游客账号登录
+	// accountType = "1"时，表示EGLS账号登录
+	// accountType = "4"时，表示微信账号登录
     }
 
     @Override
