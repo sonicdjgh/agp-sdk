@@ -377,7 +377,11 @@ AGPManager.eglsLogin(loginMode, new AGPLoginProcessListener() {
     }
 });
 ```
-### 8. SDK支付（必接）
+### 8. SDK账号切换（必接）
+```Java
+AGPManager.eglsSwitch();
+```
+### 9. SDK支付（必接）
 ```Java
 String amount = "1";// 总金额
 String productId = "PDT001";// 档位id
@@ -403,12 +407,12 @@ AGPManager.eglsPay(amount, productId, productName, cpOrderInfo, flag, new AGPCli
     }
 });
 ```
-### 9. onEnterGame接口调用（必接）
+### 10. onEnterGame接口调用（必接）
 ```Java
 //当玩家登录进入到游戏服务器之后，请务必调用该方法
 AGPManager.onEnterGame();
 ```
-### 10. 其他注意事项
+### 11. 其他注意事项
 1. 凡是游戏项目工程为Android Studio工程，并且在Gradle里配置了productFlavor来控制打包流程的，请务必在调用“AGPManager.initSDK()”接口前，写上如下逻辑代码：
 ```Java
 AGPManager.addFlavorsBasePackage(BuildConfig.class.getPackage().getName());
