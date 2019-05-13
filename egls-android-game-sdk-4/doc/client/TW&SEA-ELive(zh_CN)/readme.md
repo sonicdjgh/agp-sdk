@@ -162,7 +162,7 @@ manifestPlaceholders = [
                 EGLS_PAY_IS_SANDBOX      : "false",// 港澳台发行区设为false即可
 		
 		GOOGLE_WEB_CLIENT_ID     : "",// 用于SDK的Google登录
-		FACEBOOK_APPLICATION_ID  : "",// 用于SDK的Faceb登录
+		FACEBOOK_APPLICATION_ID  : "",// 用于SDK的Facebook登录
 		
 		// APPS_FLYER_DEV_KEY    : "",// 用于AppsFlyer统计功能初始化，如果运营没有特殊需求，这里无需添加
                 // base end
@@ -719,23 +719,23 @@ AGPManager.openLINEPromotion(this, new OnSimpleActionCallback() {
 ### 14. AppsFlyer数据统计（根据运营需求对接）
 AppsFlyer主要用于港澳台地区发行的游戏的数据统计，启用该功能的做法，首先要按照上面所提到的，在AndroidManifest.xml文件中打开对应的配置。对于AppsFlyer统计功能的相关接口调用，其相关初始化部分的逻辑已经嵌入进SDK当中，因此开发者无需关心较为复杂的初始化步骤，只需根据需求，调用对应的接口即可。<br /><br />
 **注**：通过调用AGPManager.getAppsFlyerHelper()来获取接口对象。
-#### 12.1 trackEventOneSplashImage()（必接）
+#### 14.1 trackEventOneSplashImage()（必接）
     用于统计首次播放游戏闪屏动画的次数，请在开始播放动画时调用该方法
-#### 12.2 trackEventTutorialStart()（必接）
+#### 14.2 trackEventTutorialStart()（必接）
     用于统计新手任务开始的次数，请在新手任务开始时调用该方法
-#### 12.3 trackEventTutorialComplete()（必接）
+#### 14.3 trackEventTutorialComplete()（必接）
     用于统计新手任务结束的次数，请在新手任务结束时调用该方法
-#### 12.4 trackEventNewCharacter()（必接）
+#### 14.4 trackEventNewCharacter()（必接）
     用于统计创建角色的次数，请在创建角色成功后调用该方法
-#### 12.5 trackEventOneUpdateStart()（必接）
+#### 14.5 trackEventOneUpdateStart()（必接）
     用于统计首次下载游戏资源开始的次数，请在下载游戏资源开始时调用该方法
-#### 12.6 trackEventOneUpdateComplete()（必接）
+#### 14.6 trackEventOneUpdateComplete()（必接）
     用于统计首次下载游戏资源结束的次数，请在下载游戏资源结束时调用该方法
-#### 12.7 trackEventOneLoadStart()（必接）
+#### 14.7 trackEventOneLoadStart()（必接）
     用于统计首次加载游戏资源开始的次数，请在加载游戏资源开始时调用该方法
-#### 12.8 trackEventOneLoadComplete()（必接）
+#### 14.8 trackEventOneLoadComplete()（必接）
     用于统计首次加载游戏资源结束的次数，请在加载游戏资源结束时调用该方法
-#### 12.9 trackEventCustom()（根据需求接入）
+#### 14.9 trackEventCustom()（根据需求接入）
     有时候运营会针对具体的数据分析增加特定的事件统计，那么请调用该接口，传入特定的事件名称
 **注**：这里需要强调一下“首次”的概念。我们所说的“首次”，并不是仅仅指游戏第一次调用接口，同时也强调了时机，即游戏第一次安装并启动后的第一次调用，被称为“首次”。相关“首次”的数据统计接口内部已经做了“首次”状态的逻辑判断，只需在对应的事件触发逻辑中调用该接口即可。
 ### 15. 其他注意事项
