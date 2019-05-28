@@ -149,7 +149,7 @@ d. 如果发现SDK的悬浮窗无法响应手势动作，请在“AndroidManifes
     android:value="true"/>
 ```
 #### 3.6 其他
-minSdkVersion = 17，targetSdkVersion >= 27
+minSdkVersion = 17，targetSdkVersion = 27
 ### 4. AndroidManifest.xml文件配置
 #### 4.1 AndroidManifest.xml中的参数配置
 ```gradle
