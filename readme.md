@@ -11,7 +11,7 @@
 2. 优化内部逻辑。
 ### Version：4.5.35
 1. 优化参数配置方式；
-2. minSdkVersion提升至17，targetSdkVersion不得低于27。
+2. minSdkVersion提升至17，targetSdkVersion提升至27。
 ### Version：4.5.31
 优化内部逻辑。
 ### Version：4.5.16
