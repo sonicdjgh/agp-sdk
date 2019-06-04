@@ -7,6 +7,7 @@
 ### Version：4.6.9
 1. 提升google相关功能支持库版本，需修改“AGS”中“bulid.gradle”文件里的配置，如下：<br /><br />
     api 'com.google.android.gms:play-services-auth:15.+'<br />
+    ~~api 'com.google.android.gms:play-services-auth-base:11.0.1'~~<br />
     api 'com.google.android.gms:play-services-base:15.+'<br />
     api 'com.google.android.gms:play-services-basement:15.+'<br />
     api 'com.google.android.gms:play-services-drive:15.+'<br />
