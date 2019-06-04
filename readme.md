@@ -24,7 +24,7 @@
     api 'com.google.firebase:firebase-messaging:15.+'<br />
 2. 修改“AGS”中“AndroidManifest.xml”文件里的Google支付Activity的主题样式为：<br /><br />
     “@style/EglsTheme.AppCompat.Translucent.NoActionBar.Fullscreen.NoAnimation”
-3. 为“SUPPORT”中“bulid.gradle”文件里的配置增加一个库依赖，如下：<br /><br />
+3. 为“AGS”中“bulid.gradle”文件里的配置增加一个库依赖，如下：<br /><br />
     api "com.android.support:appcompat-v7:27.0.0"
 ### Version：4.6.1
 修复已知bug。
