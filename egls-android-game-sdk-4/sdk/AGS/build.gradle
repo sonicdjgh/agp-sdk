@@ -32,6 +32,7 @@ dependencies {
     api "com.egls.android:egls-ags-sdk:$EGLS_AGS_VERSION@aar"
     api "com.egls.android:egls-android-support:$EGLS_SUPPORT_VERSION@aar"
     api 'com.android.support.constraint:constraint-layout:1.1.0'
+    api "com.android.support:appcompat-v7:27.0.0"
     // base end
 
     // cn begin
@@ -42,15 +43,14 @@ dependencies {
     // cn end
 
     // tw begin
-    // api 'com.google.android.gms:play-services-auth:11.0.1'
-    // api 'com.google.android.gms:play-services-auth-base:11.0.1'
-    // api 'com.google.android.gms:play-services-base:11.0.1'
-    // api 'com.google.android.gms:play-services-basement:11.0.1'
-    // api 'com.google.android.gms:play-services-drive:11.0.1'
-    // api 'com.google.android.gms:play-services-games:11.0.1'
-    // api 'com.google.android.gms:play-services-gcm:11.0.1'
-    // api 'com.google.android.gms:play-services-iid:11.0.1'
-    // api 'com.google.android.gms:play-services-tasks:11.0.1'
+    // api 'com.google.android.gms:play-services-auth:15.+'
+    // api 'com.google.android.gms:play-services-base:15.+‘
+    // api 'com.google.android.gms:play-services-basement:15.+'
+    // api 'com.google.android.gms:play-services-drive:15.+
+    // api 'com.google.android.gms:play-services-games:15.+'
+    // api 'com.google.android.gms:play-services-gcm:15.+'
+    // api 'com.google.android.gms:play-services-iid:15.+'
+    // api 'com.google.android.gms:play-services-tasks:15.+'
 
     // api 'com.facebook.android:facebook-core:4.+'
     // api 'com.facebook.android:facebook-login:4.+'
@@ -63,15 +63,14 @@ dependencies {
     // tw end
 
     // kr begin
-//     api 'com.google.android.gms:play-services-auth:11.0.1'
-//     api 'com.google.android.gms:play-services-auth-base:11.0.1'
-//     api 'com.google.android.gms:play-services-base:11.0.1'
-//     api 'com.google.android.gms:play-services-basement:11.0.1'
-//     api 'com.google.android.gms:play-services-drive:11.0.1'
-//     api 'com.google.android.gms:play-services-games:11.0.1'
-//     api 'com.google.android.gms:play-services-gcm:11.0.1'
-//     api 'com.google.android.gms:play-services-iid:11.0.1'
-//     api 'com.google.android.gms:play-services-tasks:11.0.1'
+    // api 'com.google.android.gms:play-services-auth:15.+'
+    // api 'com.google.android.gms:play-services-base:15.+‘
+    // api 'com.google.android.gms:play-services-basement:15.+'
+    // api 'com.google.android.gms:play-services-drive:15.+
+    // api 'com.google.android.gms:play-services-games:15.+'
+    // api 'com.google.android.gms:play-services-gcm:15.+'
+    // api 'com.google.android.gms:play-services-iid:15.+'
+    // api 'com.google.android.gms:play-services-tasks:15.+'
 
 //     api 'com.facebook.android:facebook-core:4.+'
 //     api 'com.facebook.android:facebook-login:4.+'
