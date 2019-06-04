@@ -42,9 +42,9 @@ apply plugin: 'com.google.gms.google-services'
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.5.35
-EGLS_AGS_VERSION=4.5.35
-EGLS_SUPPORT_VERSION=4.5.35
+EGLS_AGP_VERSION=4.6.9
+EGLS_AGS_VERSION=4.6.9
+EGLS_SUPPORT_VERSION=4.6.9
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -99,26 +99,26 @@ dependencies {
     api "com.egls.android:egls-ags-sdk:$EGLS_AGS_VERSION@aar"
     api "com.egls.android:egls-android-support:$EGLS_SUPPORT_VERSION@aar"
     api 'com.android.support.constraint:constraint-layout:1.1.0'
+    api 'com.android.support:appcompat-v7:27.0.0'
     // base end
 
     // tw begin
-    api 'com.google.android.gms:play-services-auth:11.0.1'
-    api 'com.google.android.gms:play-services-auth-base:11.0.1'
-    api 'com.google.android.gms:play-services-base:11.0.1'
-    api 'com.google.android.gms:play-services-basement:11.0.1'
-    api 'com.google.android.gms:play-services-drive:11.0.1'
-    api 'com.google.android.gms:play-services-games:11.0.1'
-    api 'com.google.android.gms:play-services-gcm:11.0.1'
-    api 'com.google.android.gms:play-services-iid:11.0.1'
-    api 'com.google.android.gms:play-services-tasks:11.0.1'
+    api 'com.google.android.gms:play-services-auth:15.+'
+    api 'com.google.android.gms:play-services-base:15.+'
+    api 'com.google.android.gms:play-services-basement:15.+'
+    api 'com.google.android.gms:play-services-drive:15.+'
+    api 'com.google.android.gms:play-services-games:15.+'
+    api 'com.google.android.gms:play-services-gcm:15.+'
+    api 'com.google.android.gms:play-services-iid:15.+'
+    api 'com.google.android.gms:play-services-tasks:15.+'
     
     // 如果使用 Firebase 云消息推送，请打开下面的配置
-    // api 'com.google.firebase:firebase-analytics:11.0.1'
-    // api 'com.google.firebase:firebase-analytics-impl:11.0.1'
-    // api 'com.google.firebase:firebase-common:11.0.1'
-    // api 'com.google.firebase:firebase-core:11.0.1'
-    // api 'com.google.firebase:firebase-iid:11.0.1'
-    // api 'com.google.firebase:firebase-messaging:11.0.1'
+    // api 'com.google.firebase:firebase-analytics:15.+'
+    // api 'com.google.firebase:firebase-analytics-impl:15.+'
+    // api 'com.google.firebase:firebase-common:15.+'
+    // api 'com.google.firebase:firebase-core:15.+'
+    // api 'com.google.firebase:firebase-iid:15.+'
+    // api 'com.google.firebase:firebase-messaging:15.+'
     
     api 'com.facebook.android:facebook-core:4.+'
     api 'com.facebook.android:facebook-login:4.+'
@@ -353,7 +353,7 @@ manifestPlaceholders = [
         android:name="com.egls.socialization.google.play.GooglePlayActivity"
         android:configChanges="fontScale|orientation|keyboardHidden|locale|navigation|screenSize|uiMode"
         android:screenOrientation="behind"
-        android:theme="@style/EglsTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation" />
+        android:theme="@style/EglsTheme.AppCompat.Translucent.NoActionBar.Fullscreen.NoAnimation" />
 
     <meta-data
         android:name="CHANNEL_GOOGLE_PUBLIC_KEY"
