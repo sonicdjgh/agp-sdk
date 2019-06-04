@@ -21,7 +21,7 @@
     compileOnly 'com.google.firebase:firebase-core:15.+'<br />
     compileOnly 'com.google.firebase:firebase-iid:15.+'<br />
     compileOnly 'com.google.firebase:firebase-messaging:15.+'<br />
-2. 修改Google支付Activity的主题样式为：
+2. 修改Google支付Activity的主题样式为：<br /><br />
     “@style/EglsTheme.AppCompat.Translucent.NoActionBar.Fullscreen.NoAnimation”
 ### Version：4.6.1
 修复已知bug。
