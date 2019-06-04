@@ -16,12 +16,12 @@
     api 'com.google.android.gms:play-services-iid:15.+'<br />
     api 'com.google.android.gms:play-services-tasks:15.+'<br /><br />
     
-    compileOnly 'com.google.firebase:firebase-analytics:15.+'<br />
-    compileOnly 'com.google.firebase:firebase-analytics-impl:15.+'<br />
-    compileOnly 'com.google.firebase:firebase-common:15.+'<br />
-    compileOnly 'com.google.firebase:firebase-core:15.+'<br />
-    compileOnly 'com.google.firebase:firebase-iid:15.+'<br />
-    compileOnly 'com.google.firebase:firebase-messaging:15.+'<br />
+    api 'com.google.firebase:firebase-analytics:15.+'<br />
+    api 'com.google.firebase:firebase-analytics-impl:15.+'<br />
+    api 'com.google.firebase:firebase-common:15.+'<br />
+    api 'com.google.firebase:firebase-core:15.+'<br />
+    api 'com.google.firebase:firebase-iid:15.+'<br />
+    api 'com.google.firebase:firebase-messaging:15.+'<br />
 2. 修改“AGS”中“AndroidManifest.xml”文件里的Google支付Activity的主题样式为：<br /><br />
     “@style/EglsTheme.AppCompat.Translucent.NoActionBar.Fullscreen.NoAnimation”
 3. 为“SUPPORT”中“bulid.gradle”文件里的配置增加一个库依赖，如下：<br /><br />
