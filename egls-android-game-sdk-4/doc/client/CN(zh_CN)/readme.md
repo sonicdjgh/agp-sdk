@@ -42,9 +42,9 @@ allprojects {
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.5.35
-EGLS_AGS_VERSION=4.5.35
-EGLS_SUPPORT_VERSION=4.5.35
+EGLS_AGP_VERSION=4.6.9
+EGLS_AGS_VERSION=4.6.9
+EGLS_SUPPORT_VERSION=4.6.9
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -98,6 +98,7 @@ dependencies {
     api "com.egls.android:egls-ags-sdk:$EGLS_AGS_VERSION@aar"
     api "com.egls.android:egls-android-support:$EGLS_SUPPORT_VERSION@aar"
     api 'com.android.support.constraint:constraint-layout:1.1.0'
+    api "com.android.support:appcompat-v7:27.0.0"
     // base end
 
     // cn begin
@@ -118,7 +119,7 @@ c. Google推荐对危险权限的使用有一定要求，需要加入申请权�
     android:value="true" />
 ```
 #### 3.6 其他
-minSdkVersion = 17，targetSdkVersion >= 27
+minSdkVersion = 17，targetSdkVersion = 27
 ### 4. AndroidManifest.xml文件配置
 #### 4.1 AndroidManifest.xml中的参数配置
 ```gradle
@@ -133,8 +134,8 @@ manifestPlaceholders = [
 		
 		// other begin
 		ALIPAY_APP_ID            : "",// 用于SDK支付
-                WX_APP_ID                : "",// 用于微信登录、分享，若无需求可不填
-                WX_SECRET                : "",// 用于微信登录、分享，若无需求可不填
+                WX_APP_ID                : "",// 用于微信登录、支付及分享，若无需求可不填
+                WX_SECRET                : "",// 用于微信登录、支付及分享，若无需求可不填
                 WB_APP_KEY               : "",// 用于新浪微博分享，若无需求可不填
                 QQ_APP_ID                : "",// 用于QQ登录、分享，若无需求可不填
                 // other end
@@ -206,16 +207,26 @@ manifestPlaceholders = [
         android:screenOrientation="portrait"
         android:theme="@android:style/Theme.NoDisplay"/>
     -->
-    
-    <!-- 如果使用微信登录或微信分享功能，请打开以下配置 -->	
+	
+    <!-- 微信 begin -->
+    <!-- 如果使用微信支付功能，请打开以下配置 -->
+    <!-- 需要在工程里建立一个名为“xxx.wxapi”的package，其中“xxx”为游戏的正式包名 -->	
+    <!--
+    <activity
+        android:name="xxx.wxapi.WXPayEntryActivity"
+        android:exported="true"
+        android:screenOrientation="behind"
+        android:theme="@android:style/Theme.NoDisplay" />
+    -->    
+
+    <!-- 如果使用微信登录、微信支付或微信分享功能，请打开以下配置 -->	
     <!--	
     <meta-data
         android:name="wx_app_id"
         android:value="${WX_APP_ID}" />
     -->
     
-    <!-- 如果使用微信登录或微信分享功能，请打开以下配置 -->	
-    <!-- 替换“MY_WX_SECRET”字样为微信平台上分配的秘钥 -->
+    <!-- 如果使用微信登录、微信支付或微信分享功能，请打开以下配置 -->
     <!--	
     <meta-data
         android:name="wx_secret"
