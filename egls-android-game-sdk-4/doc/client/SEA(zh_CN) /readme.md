@@ -36,9 +36,9 @@ allprojects {
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.5.35
-EGLS_AGS_VERSION=4.5.35
-EGLS_SUPPORT_VERSION=4.5.35
+EGLS_AGP_VERSION=4.6.9
+EGLS_AGS_VERSION=4.6.9
+EGLS_SUPPORT_VERSION=4.6.9
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -73,10 +73,10 @@ dependencies {
     // base end
 
 
-    // sg begin
+    // sea begin
     api 'com.appsflyer:af-android-sdk:4+@aar'
     api 'com.android.installreferrer:installreferrer:1.0'
-    // sg end
+    // sea end
 }
 ```
 #### 3.4 AGS lib 选择
@@ -93,23 +93,23 @@ dependencies {
     api "com.egls.android:egls-ags-sdk:$EGLS_AGS_VERSION@aar"
     api "com.egls.android:egls-android-support:$EGLS_SUPPORT_VERSION@aar"
     api 'com.android.support.constraint:constraint-layout:1.1.0'
+    api "com.android.support:appcompat-v7:27.0.0"
     // base end
 
-    // sg begin
-    api 'com.google.android.gms:play-services-auth:11.0.1'
-    api 'com.google.android.gms:play-services-auth-base:11.0.1'
-    api 'com.google.android.gms:play-services-base:11.0.1'
-    api 'com.google.android.gms:play-services-basement:11.0.1'
-    api 'com.google.android.gms:play-services-drive:11.0.1'
-    api 'com.google.android.gms:play-services-games:11.0.1'
-    api 'com.google.android.gms:play-services-gcm:11.0.1'
-    api 'com.google.android.gms:play-services-iid:11.0.1'
-    api 'com.google.android.gms:play-services-tasks:11.0.1'
+    // sea begin
+    api 'com.google.android.gms:play-services-auth:15.+'
+    api 'com.google.android.gms:play-services-base:15.+'
+    api 'com.google.android.gms:play-services-basement:15.+'
+    api 'com.google.android.gms:play-services-drive:15.+'
+    api 'com.google.android.gms:play-services-games:15.+'
+    api 'com.google.android.gms:play-services-gcm:15.+'
+    api 'com.google.android.gms:play-services-iid:15.+'
+    api 'com.google.android.gms:play-services-tasks:15.+'
     
     api 'com.facebook.android:facebook-core:4.+'
     api 'com.facebook.android:facebook-login:4.+'
     api 'com.facebook.android:facebook-share:4.+'
-    // sg end
+    // sea end
 }
 
 ```
@@ -123,7 +123,7 @@ c. Google推荐对危险权限的使用有一定要求，需要加入申请权�
     android:value="true" />
 ```
 #### 3.6 其他
-minSdkVersion = 17，targetSdkVersion >= 27
+minSdkVersion = 17，targetSdkVersion = 27
 ### 4. AndroidManifest.xml文件配置
 #### 4.1 AndroidManifest.xml中的参数配置
 ```gradle
@@ -259,15 +259,17 @@ manifestPlaceholders = [
 
     <!-- 如果使用Google Play支付功能，请打开以下配置 -->
     <!-- 4.1.0版本以前name属性为“com.egls.socialization.google.play.BillingActivity” -->
+    <!--
     <activity
         android:name="com.egls.socialization.google.play.GooglePlayActivity"
         android:configChanges="fontScale|orientation|keyboardHidden|locale|navigation|screenSize|uiMode"
         android:screenOrientation="behind"
-        android:theme="@style/EglsTheme.Translucent.NoTitleBar.Fullscreen.NoAnimation" />
+        android:theme="@style/EglsTheme.AppCompat.Translucent.NoActionBar.Fullscreen.NoAnimation" />
 
     <meta-data
         android:name="CHANNEL_GOOGLE_PUBLIC_KEY"
         android:value="${GOOGLE_PLAY_PUBLIC_KEY}" />
+    -->
     <!-- Google end -->
     
 
