@@ -5,7 +5,7 @@
 ### SDK展示
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/demo-kr-login.gif)
 ### Version：4.6.9
-1. 提升google相关功能支持库版本，需修改“AGS”中“bulid.gradle”文件中的配置，如下：<br /><br />
+1. 提升google相关功能支持库版本，需修改“AGS”中“bulid.gradle”文件里的配置，如下：<br /><br />
     api 'com.google.android.gms:play-services-auth:15.+'<br />
     api 'com.google.android.gms:play-services-base:15.+'<br />
     api 'com.google.android.gms:play-services-basement:15.+'<br />
@@ -21,8 +21,10 @@
     compileOnly 'com.google.firebase:firebase-core:15.+'<br />
     compileOnly 'com.google.firebase:firebase-iid:15.+'<br />
     compileOnly 'com.google.firebase:firebase-messaging:15.+'<br />
-2. 修改Google支付Activity的主题样式为：<br /><br />
+2. 修改“AGS”中“AndroidManifest.xml”文件里的Google支付Activity的主题样式为：<br /><br />
     “@style/EglsTheme.AppCompat.Translucent.NoActionBar.Fullscreen.NoAnimation”
+3. 为“SUPPORT”中“bulid.gradle”文件里的配置增加一个库依赖，如下：<br /><br />
+    api "com.android.support:appcompat-v7:27.0.0"
 ### Version：4.6.1
 修复已知bug。
 ### Version：4.6.0
