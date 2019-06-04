@@ -4,6 +4,23 @@
 从4.x.x版本起，我们采用了新的账号体系，所以并不兼容旧版（即同一个账号在登录后返回的uid与3.x.x版本的不一致）。如果您的游戏曾经接过旧版本的SDK，并且将要使用4.x.x版本的SDK时，请配合我们做游戏的强更及其他必要的更新操作（详情请咨询我方运营）。<br /><br />
 ### SDK展示
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/demo-kr-login.gif)
+### Version：4.6.9
+1. 更新google相关功能支持库，需修改“AGS”中“bulid.gradle”文件中的配置，如下：
+    api 'com.google.android.gms:play-services-auth:15.+'
+    api 'com.google.android.gms:play-services-base:15.+'
+    api 'com.google.android.gms:play-services-basement:15.+'
+    api 'com.google.android.gms:play-services-drive:15.+'
+    api 'com.google.android.gms:play-services-games:15.+'
+    api 'com.google.android.gms:play-services-gcm:15.+'
+    api 'com.google.android.gms:play-services-iid:15.+'
+    api 'com.google.android.gms:play-services-tasks:15.+'
+    
+    compileOnly 'com.google.firebase:firebase-analytics:15.+'
+    compileOnly 'com.google.firebase:firebase-analytics-impl:15.+'
+    compileOnly 'com.google.firebase:firebase-common:15.+'
+    compileOnly 'com.google.firebase:firebase-core:15.+'
+    compileOnly 'com.google.firebase:firebase-iid:15.+'
+    compileOnly 'com.google.firebase:firebase-messaging:15.+'
 ### Version：4.6.1
 修复已知bug。
 ### Version：4.6.0
