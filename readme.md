@@ -6,21 +6,21 @@
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/demo-kr-login.gif)
 ### Version：4.6.9
 1. 更新google相关功能支持库，需修改“AGS”中“bulid.gradle”文件中的配置，如下：
-    api 'com.google.android.gms:play-services-auth:15.+'
-    api 'com.google.android.gms:play-services-base:15.+'
-    api 'com.google.android.gms:play-services-basement:15.+'
-    api 'com.google.android.gms:play-services-drive:15.+'
-    api 'com.google.android.gms:play-services-games:15.+'
-    api 'com.google.android.gms:play-services-gcm:15.+'
-    api 'com.google.android.gms:play-services-iid:15.+'
-    api 'com.google.android.gms:play-services-tasks:15.+'
+    api 'com.google.android.gms:play-services-auth:15.+'\n
+    api 'com.google.android.gms:play-services-base:15.+'\n
+    api 'com.google.android.gms:play-services-basement:15.+'\n
+    api 'com.google.android.gms:play-services-drive:15.+'\n
+    api 'com.google.android.gms:play-services-games:15.+'\n
+    api 'com.google.android.gms:play-services-gcm:15.+'\n
+    api 'com.google.android.gms:play-services-iid:15.+'\n
+    api 'com.google.android.gms:play-services-tasks:15.+'\n\n
     
-    compileOnly 'com.google.firebase:firebase-analytics:15.+'
-    compileOnly 'com.google.firebase:firebase-analytics-impl:15.+'
-    compileOnly 'com.google.firebase:firebase-common:15.+'
-    compileOnly 'com.google.firebase:firebase-core:15.+'
-    compileOnly 'com.google.firebase:firebase-iid:15.+'
-    compileOnly 'com.google.firebase:firebase-messaging:15.+'
+    compileOnly 'com.google.firebase:firebase-analytics:15.+'\n
+    compileOnly 'com.google.firebase:firebase-analytics-impl:15.+'\n
+    compileOnly 'com.google.firebase:firebase-common:15.+'\n
+    compileOnly 'com.google.firebase:firebase-core:15.+'\n
+    compileOnly 'com.google.firebase:firebase-iid:15.+'\n
+    compileOnly 'com.google.firebase:firebase-messaging:15.+'\n
 ### Version：4.6.1
 修复已知bug。
 ### Version：4.6.0
