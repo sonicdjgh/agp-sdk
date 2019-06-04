@@ -5,7 +5,7 @@
 ### SDK展示
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/demo-kr-login.gif)
 ### Version：4.6.9
-1. 更新google相关功能支持库，需修改“AGS”中“bulid.gradle”文件中的配置，如下：
+1. 更新google相关功能支持库，需修改“AGS”中“bulid.gradle”文件中的配置，如下：<br /><br />
     api 'com.google.android.gms:play-services-auth:15.+'<br />
     api 'com.google.android.gms:play-services-base:15.+'<br />
     api 'com.google.android.gms:play-services-basement:15.+'<br />
