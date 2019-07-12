@@ -83,6 +83,11 @@ public class MainActivity extends Activity {
                 // TODO Auto-generated method stub
 
             }
+
+            @Override
+            public void onAgreement(boolean isAgree) {
+
+            }
         });
     }
 

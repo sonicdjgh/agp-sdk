@@ -142,6 +142,11 @@ public class MainH5Activity extends Activity {
                     e.printStackTrace();
                 }
             }
+
+            @Override
+            public void onAgreement(boolean isAgree) {
+
+            }
         });
     }
 
