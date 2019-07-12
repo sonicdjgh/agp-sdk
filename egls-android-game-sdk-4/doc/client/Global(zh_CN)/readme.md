@@ -617,6 +617,11 @@ AGPManager.eglsLogin(loginMode, new AGPLoginProcessListener() {
     public void onLoginCancel() {
 	// 登录取消回调
     }
+    
+    @Override
+    public void onAgreement(boolean isAgree){
+        // 游戏通过isAgree参数值来判断用户在“用户协议确认页”的操作
+    }
 });
 ```
 ### 8. SDK切换账号（必接）
