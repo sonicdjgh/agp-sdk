@@ -37,9 +37,9 @@ allprojects {
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.6.15
-EGLS_AGS_VERSION=4.6.15
-EGLS_SUPPORT_VERSION=4.6.15
+EGLS_AGP_VERSION=4.6.19
+EGLS_AGS_VERSION=4.6.19
+EGLS_SUPPORT_VERSION=4.6.19
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -142,7 +142,7 @@ c. Google推荐对危险权限的使用有一定要求，需要加入申请权�
     android:value="true" />
 ```
 #### 3.6 其他
-minSdkVersion = 17，targetSdkVersion = 27
+minSdkVersion = 17，targetSdkVersion = 28
 ### 4. AndroidManifest.xml文件配置
 #### 4.1 AndroidManifest.xml中的参数配置
 ```gradle
@@ -233,6 +233,7 @@ manifestPlaceholders = [
     android:allowBackup="false"
     android:icon="@drawable/icon"
     android:label="AGSDK Demo"
+    android:networkSecurityConfig="@xml/network_security_config"	
     android:theme="@style/AppTheme" >
 	
     <!-- 游戏Activity -->
@@ -507,6 +508,11 @@ AGPManager.eglsLogin(loginMode, new AGPLoginProcessListener() {
     @Override
     public void onLoginCancel() {
 	// 登录取消回调
+    }
+    
+    @Override
+    public void onAgreement(boolean isAgree){
+        // 游戏通过isAgree参数值来判断用户在“用户协议确认页”的操作
     }
 });
 ```
