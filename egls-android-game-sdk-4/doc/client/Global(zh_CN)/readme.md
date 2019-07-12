@@ -42,9 +42,9 @@ apply plugin: 'com.google.gms.google-services'
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.6.15
-EGLS_AGS_VERSION=4.6.15
-EGLS_SUPPORT_VERSION=4.6.15
+EGLS_AGP_VERSION=4.6.18
+EGLS_AGS_VERSION=4.6.18
+EGLS_SUPPORT_VERSION=4.6.18
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -79,10 +79,10 @@ dependencies {
     // base end
 
 
-    // tw begin
+    // global begin
     api 'com.appsflyer:af-android-sdk:4+@aar'
     api 'com.android.installreferrer:installreferrer:1.0'
-    // tw end
+    // global end
 }
 ```
 #### 3.4 AGS lib 选择
@@ -102,7 +102,7 @@ dependencies {
     api 'com.android.support:appcompat-v7:27.0.0'
     // base end
 
-    // tw begin
+    // global begin
     api 'com.google.android.gms:play-services-auth:15.+'
     api 'com.google.android.gms:play-services-base:15.+'
     api 'com.google.android.gms:play-services-basement:15.+'
@@ -123,7 +123,9 @@ dependencies {
     api 'com.facebook.android:facebook-core:4.+'
     api 'com.facebook.android:facebook-login:4.+'
     api 'com.facebook.android:facebook-share:4.+'
+    // global end
     
+    // tw begin
     // 如果使用 MyCard 支付，请打开下面的配置
     // api files('libs/tw/MyCardPaySDK.jar')
     
