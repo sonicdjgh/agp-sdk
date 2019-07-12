@@ -4,8 +4,11 @@
 从4.x.x版本起，我们采用了新的账号体系，所以并不兼容旧版（即同一个账号在登录后返回的uid与3.x.x版本的不一致）。如果您的游戏曾经接过旧版本的SDK，并且将要使用4.x.x版本的SDK时，请配合我们做游戏的强更及其他必要的更新操作（详情请咨询我方运营）。<br /><br />
 ### SDK展示
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/demo-kr-login.gif)
-### Version：4.6.18
-优化内部逻辑。
+### Version：4.6.19
+1. 优化内部逻辑;
+2. 2019年8月后，Google要求新上架的游戏，targetSdkVersion必须为28，则在“AndroidManifest.xml”文件中为“Application”标签内添加以下属性：
+   android:networkSecurityConfig="@xml/network_security_config"；
+3. SDK的登录监听接口中增加“onAgreement(boolean isAgree)”方法，通过该方法可判断用户在游戏首次启动并点击登录后所弹出的“用户协议确认页”的操作。
 ### Version：4.6.15
 修复已知bug。
 ### Version：4.6.14
