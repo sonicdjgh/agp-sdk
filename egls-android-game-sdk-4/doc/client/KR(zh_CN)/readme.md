@@ -141,6 +141,12 @@ c. Google推荐对危险权限的使用有一定要求，需要加入申请权�
     android:name="unityplayer.SkipPermissionsDialog"
     android:value="true" />
 ```
+d. 如果发现SDK的悬浮窗无法响应手势动作，请在“AndroidManifest.xml”文件中的“application”标签内加入如下配置：
+```Xml
+<meta-data 
+    android:name="unityplayer.ForwardNativeEventsToDalvik" 
+    android:value="true"/>
+```
 #### 3.6 其他
 minSdkVersion = 17，targetSdkVersion = 28
 ### 4. AndroidManifest.xml文件配置
