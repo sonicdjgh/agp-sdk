@@ -20,14 +20,7 @@
 4. Firebase云推送功能引用库升级，即：<br />
     api 'com.google.firebase:firebase-core:16.0.8'<br />
     api 'com.google.firebase:firebase-messaging:18.0.0'<br />
-5. Firebase云推送功能的“AndroidManifest.xml”文件中的service配置修改为：<br />
-    <service<br />
-        android:name="com.egls.socialization.google.firebase.FirebaseMesgService"<br />
-        android:exported="false"><br />
-        <intent-filter><br />
-            <action android:name="com.google.firebase.MESSAGING_EVENT" /><br />
-        </intent-filter><br />
-    </service><br />
+5. Firebase云推送功能的“AndroidManifest.xml”文件中的service配置有修改，详情请参考对接文档。
 ### Version：4.6.19
 1. 优化内部逻辑;
 2. 2019年8月后，Google要求新上架的游戏，targetSdkVersion必须为28，则在“AndroidManifest.xml”文件中为“Application”标签内添加以下属性：<br />
