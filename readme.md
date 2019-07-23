@@ -4,6 +4,23 @@
 从4.x.x版本起，我们采用了新的账号体系，所以并不兼容旧版（即同一个账号在登录后返回的uid与3.x.x版本的不一致）。如果您的游戏曾经接过旧版本的SDK，并且将要使用4.x.x版本的SDK时，请配合我们做游戏的强更及其他必要的更新操作（详情请咨询我方运营）。<br /><br />
 ### SDK展示
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/demo-kr-login.gif)
+### Version：4.6.24
+为迎合Google审核要求，适应新的API版本（28）编译，升级了相关引用的库，并对SDK的内部逻辑进行对应的修改，其中包括：
+1. Firebase云推送功能升级，提升google-services版本，即：classpath 'com.google.gms:google-services:4.2.0'；
+2. AGS中所引用的google-support库升级，即：api 'com.android.support:appcompat-v7:28.0.0'；
+3. AGS中google-gms库升级，即：<br />
+    api 'com.google.android.gms:play-services-auth:16.+'<br />
+    api 'com.google.android.gms:play-services-base:16.+'<br />
+    api 'com.google.android.gms:play-services-basement:16.+'<br />
+    api 'com.google.android.gms:play-services-drive:16.+'<br />
+    api 'com.google.android.gms:play-services-games:16.+'<br />
+    api 'com.google.android.gms:play-services-gcm:16.+'<br />
+    api 'com.google.android.gms:play-services-iid:16.+'<br />
+    api 'com.google.android.gms:play-services-tasks:16.+'<br />
+4. Firebase云推送功能引用库升级，即：<br />
+    api 'com.google.firebase:firebase-core:16.0.8'<br />
+    api 'com.google.firebase:firebase-messaging:18.0.0'<br />
+5. Firebase云推送功能的“AndroidManifest.xml”文件中的service配置有修改，详情请参考对接文档。
 ### Version：4.6.19
 1. 优化内部逻辑;
 2. 2019年8月后，Google要求新上架的游戏，targetSdkVersion必须为28，则在“AndroidManifest.xml”文件中为“Application”标签内添加以下属性：<br />

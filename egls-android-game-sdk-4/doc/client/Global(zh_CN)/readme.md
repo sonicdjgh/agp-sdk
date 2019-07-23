@@ -24,7 +24,7 @@ buildscript {
         classpath 'com.android.tools.build:gradle:3.0.1'
 	
         // 如果使用Firebase云消息推送功能，请打开以下配置
-    	// classpath 'com.google.gms:google-services:3.0.0'
+    	// classpath 'com.google.gms:google-services:4.2.0'
     }
 }
 
@@ -42,15 +42,20 @@ apply plugin: 'com.google.gms.google-services'
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.6.19
-EGLS_AGS_VERSION=4.6.19
-EGLS_SUPPORT_VERSION=4.6.19
+EGLS_AGP_VERSION=4.6.24
+EGLS_AGS_VERSION=4.6.24
+EGLS_SUPPORT_VERSION=4.6.24
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/tw/S4TW000.png)<br/>
 如上图所示：假设Demo为SDK对接完毕的安卓游戏工程，那么Demo引入Module“AGP”，则需要在Demo中的“build.gradle”里添加如下配置：
 ```gradle
+android {
+    buildToolsVersion "28.0.3"
+    compileSdkVersion 28
+}
+
 repositories {
     flatDir {
         dirs project(':AGP').file('libs')
@@ -99,26 +104,22 @@ dependencies {
     api "com.egls.android:egls-ags-sdk:$EGLS_AGS_VERSION@aar"
     api "com.egls.android:egls-android-support:$EGLS_SUPPORT_VERSION@aar"
     api 'com.android.support.constraint:constraint-layout:1.1.0'
-    api 'com.android.support:appcompat-v7:27.0.0'
+    api 'com.android.support:appcompat-v7:28.0.0'
     // base end
 
     // global begin
-    api 'com.google.android.gms:play-services-auth:15.+'
-    api 'com.google.android.gms:play-services-base:15.+'
-    api 'com.google.android.gms:play-services-basement:15.+'
-    api 'com.google.android.gms:play-services-drive:15.+'
-    api 'com.google.android.gms:play-services-games:15.+'
-    api 'com.google.android.gms:play-services-gcm:15.+'
-    api 'com.google.android.gms:play-services-iid:15.+'
-    api 'com.google.android.gms:play-services-tasks:15.+'
+    api 'com.google.android.gms:play-services-auth:16.+'
+    api 'com.google.android.gms:play-services-base:16.+'
+    api 'com.google.android.gms:play-services-basement:16.+'
+    api 'com.google.android.gms:play-services-drive:16.+'
+    api 'com.google.android.gms:play-services-games:16.+'
+    api 'com.google.android.gms:play-services-gcm:16.+'
+    api 'com.google.android.gms:play-services-iid:16.+'
+    api 'com.google.android.gms:play-services-tasks:16.+'
     
     // 如果使用 Firebase 云消息推送，请打开下面的配置
-    // api 'com.google.firebase:firebase-analytics:15.+'
-    // api 'com.google.firebase:firebase-analytics-impl:15.+'
-    // api 'com.google.firebase:firebase-common:15.+'
-    // api 'com.google.firebase:firebase-core:15.+'
-    // api 'com.google.firebase:firebase-iid:15.+'
-    // api 'com.google.firebase:firebase-messaging:15.+'
+    // api 'com.google.firebase:firebase-core:16.0.8'
+    // api 'com.google.firebase:firebase-messaging:18.0.0'
     
     api 'com.facebook.android:facebook-core:4.+'
     api 'com.facebook.android:facebook-login:4.+'
@@ -313,14 +314,11 @@ manifestPlaceholders = [
 	
     <!-- 如果使用Firebase云消息推送，请打开以下配置 -->
     <!--
-    <service android:name="com.egls.socialization.backend.AGSPushMessageService">
+    <service
+        android:name="com.egls.socialization.google.firebase.FirebaseMesgService"
+        android:exported="false">
         <intent-filter>
             <action android:name="com.google.firebase.MESSAGING_EVENT" />
-        </intent-filter>
-    </service>
-    <service android:name="com.egls.socialization.backend.AGSPushTokenService">
-        <intent-filter>
-            <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
         </intent-filter>
     </service>
     -->
