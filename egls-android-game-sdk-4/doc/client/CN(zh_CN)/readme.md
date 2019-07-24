@@ -98,7 +98,7 @@ dependencies {
     api "com.egls.android:egls-ags-sdk:$EGLS_AGS_VERSION@aar"
     api "com.egls.android:egls-android-support:$EGLS_SUPPORT_VERSION@aar"
     api 'com.android.support.constraint:constraint-layout:1.1.0'
-    api "com.android.support:appcompat-v7:28.0.0"
+    api "com.android.support:appcompat-v7:27.0.0"
     // base end
 
     // cn begin
