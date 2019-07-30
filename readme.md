@@ -4,6 +4,8 @@
 从4.x.x版本起，我们采用了新的账号体系，所以并不兼容旧版（即同一个账号在登录后返回的uid与3.x.x版本的不一致）。如果您的游戏曾经接过旧版本的SDK，并且将要使用4.x.x版本的SDK时，请配合我们做游戏的强更及其他必要的更新操作（详情请咨询我方运营）。<br /><br />
 ### SDK展示
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/demo-kr-login.gif)
+### Version：4.6.34
+增加Facebook App Events统计接口。
 ### Version：4.6.24
 为迎合Google审核要求，适应新的API版本（28）编译，升级了相关引用的库，并对SDK的内部逻辑进行对应的修改，其中包括：
 1. Firebase云推送功能升级，提升google-services版本，即：classpath 'com.google.gms:google-services:4.2.0'；
