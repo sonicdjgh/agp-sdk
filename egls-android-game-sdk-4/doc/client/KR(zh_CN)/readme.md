@@ -635,8 +635,9 @@ IGAW主要用于韩服地区发行的游戏的数据统计，启用该功能的�
 ```gradle
 android {
     defaultConfig {
- 	resValue("string","facebook_app_id","134020643875388")
-        resValue("string","fb_login_protocol_scheme","fb134020643875388")   
+    	// 替换"MY_APPLICATION_ID"字样内容为在Facebook后台上配置的applicationId
+ 	resValue("string","facebook_app_id","MY_APPLICATION_ID")
+        resValue("string","fb_login_protocol_scheme","fbMY_APPLICATION_ID")   
     }
 }
 ```
