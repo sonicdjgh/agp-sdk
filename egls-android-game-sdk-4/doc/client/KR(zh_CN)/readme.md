@@ -620,8 +620,26 @@ IGAW主要用于韩服地区发行的游戏的数据统计，启用该功能的�
     如果以上接口都无法满足事件统计需求，可以使用该接口进行自定义事件统计
 ### 14. Facebook App Events统计（根据需求接入）
 根据我们市场推广的需求，集成了Facebook应用事件的统计功能，下面将需要对接的接口进行说明。
-#### 1. logSpentCreditsEvent()（必接）
-
+#### 14.1. logSpentCreditsEvent()（必接）
+```Java
+// 花费点数：用户在完成交易时花费您公司或应用程序专用的点数，例如应用内货币
+String contentId = System.currentTimeMillis() + "";// 如果无特殊需求，可传入一个时间戳作为contentId
+String contentType = "钻石";
+double totalValue = 20;
+AGPManager.getFacebookLogger().logSpentCreditsEvent(contentId, contentType, totalValue);
+```
+#### 14.2 logAchievedLevelEvent()（必接）
+```Java
+// 完成关卡：完成您在应用程序、公司或组织中定义的特定关卡
+String level = "第一关";
+AGPManager.getFacebookLogger().logAchievedLevelEvent(level);
+```
+#### 14.3 logUnlockedAchievementEvent()（必接）
+```Java
+// 解锁成就：完成您在应用程序、公司或组织中想要奖励的特定活动或操作。例如，推荐一位好友、完善个人主页等
+String description = "百万富翁";
+AGPManager.getFacebookLogger().logUnlockedAchievementEvent(description);
+```
 ### 15. 其他注意事项
 1. 凡是游戏项目工程为Android Studio工程，并且在Gradle里配置了productFlavor来控制打包流程的，请务必在调用“AGPManager.initSDK()”接口前，写上如下逻辑代码：
 ```Java
