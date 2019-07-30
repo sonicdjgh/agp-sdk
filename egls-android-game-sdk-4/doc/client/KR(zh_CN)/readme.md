@@ -166,7 +166,8 @@ manifestPlaceholders = [
                 EGLS_PAY_IS_SANDBOX      : "false",// 港澳台发行区设为false即可
 		
 		GOOGLE_WEB_CLIENT_ID     : "",// 用于SDK的Google登录
-		FACEBOOK_APPLICATION_ID  : "",// 用于SDK的Faceb登录
+		FACEBOOK_APPLICATION_ID  : "",// 用于SDK的Facebook登录
+		FACEBOOK_LOGGER_ENABLE   : "false",// 用于SDK的Facebook App Events事件统计
 		
 		IGAW_APP_KEY             : "",// 用于IgaWorks统计功能初始化
                 IGAW_HASH_KEY            : "",// 用于IgaWorks统计功能初始化
@@ -385,6 +386,11 @@ manifestPlaceholders = [
     <meta-data
         android:name="com.facebook.sdk.ApplicationId"
         android:value="\0${FACEBOOK_APPLICATION_ID}" />
+	
+    <!-- 如果要求接入Facebook App Events统计接口，请将value改为true -->
+    <meta-data
+        android:name="CHANNEL_FACEBOOK_LOGGER_ENABLE"
+        android:value="false" />
 						    
     <meta-data
         android:name="CNANNEL_PERMISSION_EMAIL"
@@ -619,7 +625,22 @@ IGAW主要用于韩服地区发行的游戏的数据统计，启用该功能的�
 #### 13.10 eventIgawCustom(String eventName, String param)（根据情况介入）
     如果以上接口都无法满足事件统计需求，可以使用该接口进行自定义事件统计
 ### 14. Facebook App Events统计（根据需求接入）
-根据我们市场推广的需求，集成了Facebook应用事件的统计功能，下面将需要对接的接口进行说明。
+根据我们市场推广的需求，集成了Facebook应用事件的统计功能。如果想使用该功能首先要完成如下配置：
+```xml
+<!-- 如果要求接入Facebook App Events统计接口，请将value改为true -->
+    <meta-data
+        android:name="CHANNEL_FACEBOOK_LOGGER_ENABLE"
+        android:value="false" />
+```
+其次，需要在游戏Module下的“build.gralde”文件中的“defaultConfig”里添加如下配置：
+```gradle
+android {
+    defaultConfig {
+ 	resValue("string","facebook_app_id","134020643875388")
+        resValue("string","fb_login_protocol_scheme","fb134020643875388")   
+    }
+}
+```
 #### 14.1. logSpentCreditsEvent()（必接）
 ```Java
 // 花费点数：用户在完成交易时花费您公司或应用程序专用的点数，例如应用内货币
