@@ -623,7 +623,7 @@ IGAW主要用于韩服地区发行的游戏的数据统计，启用该功能的�
 #### 14.1. logSpentCreditsEvent()（必接）
 ```Java
 // 花费点数：用户在完成交易时花费您公司或应用程序专用的点数，例如应用内货币
-String contentId = System.currentTimeMillis() + "";// 如果无特殊需求，可传入一个时间戳作为contentId
+String contentId = System.currentTimeMillis() + "";// 如果无其他需求，可传入一个时间戳作为contentId
 String contentType = "钻石";
 double totalValue = 20;
 AGPManager.getFacebookLogger().logSpentCreditsEvent(contentId, contentType, totalValue);
@@ -640,6 +640,14 @@ AGPManager.getFacebookLogger().logAchievedLevelEvent(level);
 String description = "百万富翁";
 AGPManager.getFacebookLogger().logUnlockedAchievementEvent(description);
 ```
+#### 14.4 logCompletedTutorialEvent()（必接）
+```Java
+// 完成教程学习：完成应用中的教程学习
+String contentId = System.currentTimeMillis() + "";// 如果无其他需求，可传入一个时间戳作为contentId
+boolean success = true;
+AGPManager.getFacebookLogger().logCompletedTutorialEvent(contentId, success);
+```
+#### 14.5 
 ### 15. 其他注意事项
 1. 凡是游戏项目工程为Android Studio工程，并且在Gradle里配置了productFlavor来控制打包流程的，请务必在调用“AGPManager.initSDK()”接口前，写上如下逻辑代码：
 ```Java
