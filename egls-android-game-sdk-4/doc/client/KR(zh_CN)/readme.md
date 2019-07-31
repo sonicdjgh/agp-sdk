@@ -37,9 +37,9 @@ allprojects {
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.6.24
-EGLS_AGS_VERSION=4.6.24
-EGLS_SUPPORT_VERSION=4.6.24
+EGLS_AGP_VERSION=4.6.35
+EGLS_AGS_VERSION=4.6.35
+EGLS_SUPPORT_VERSION=4.6.35
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -166,7 +166,7 @@ manifestPlaceholders = [
                 EGLS_PAY_IS_SANDBOX      : "false",// 港澳台发行区设为false即可
 		
 		GOOGLE_WEB_CLIENT_ID     : "",// 用于SDK的Google登录
-		FACEBOOK_APPLICATION_ID  : "",// 用于SDK的Faceb登录
+		FACEBOOK_APPLICATION_ID  : "",// 用于SDK的Facebook登录
 		
 		IGAW_APP_KEY             : "",// 用于IgaWorks统计功能初始化
                 IGAW_HASH_KEY            : "",// 用于IgaWorks统计功能初始化
@@ -300,7 +300,7 @@ manifestPlaceholders = [
             <data
                 android:host="${applicationId}.dplk"
                 android:path="fb${FACEBOOK_APPLICATION_ID}"
-                android:scheme="egls" />
+                android:scheme="egls${EGLS_APP_ID}" />
         </intent-filter>
 
         <meta-data
@@ -385,6 +385,11 @@ manifestPlaceholders = [
     <meta-data
         android:name="com.facebook.sdk.ApplicationId"
         android:value="\0${FACEBOOK_APPLICATION_ID}" />
+	
+    <!-- 如果要求接入Facebook App Events统计接口，请将value改为true -->
+    <meta-data
+        android:name="CHANNEL_FACEBOOK_LOGGER_ENABLE"
+        android:value="false" />
 						    
     <meta-data
         android:name="CNANNEL_PERMISSION_EMAIL"
@@ -618,7 +623,53 @@ IGAW主要用于韩服地区发行的游戏的数据统计，启用该功能的�
     如果在游戏中有加入对Naver论坛的访问链接，请在打开Naver论坛时调用该接口（目前SDK已集成NaverCafeSDK，可以选择不自行添加Naver论坛的访问链接）
 #### 13.10 eventIgawCustom(String eventName, String param)（根据情况介入）
     如果以上接口都无法满足事件统计需求，可以使用该接口进行自定义事件统计
-### 14. 其他注意事项
+### 14. Facebook App Events统计（根据需求接入）
+根据我们市场推广的需求，集成了Facebook应用事件的统计功能。如果想使用该功能，首先要在“AndroidManifest.xml”文件中修改如下配置：
+```xml
+<!-- 如果要求接入Facebook App Events统计接口，请将value改为true -->
+    <meta-data
+        android:name="CHANNEL_FACEBOOK_LOGGER_ENABLE"
+        android:value="true" />
+```
+其次，需要在游戏Module下的“build.gralde”文件中的“defaultConfig”里添加如下配置：
+```gradle
+android {
+    defaultConfig {
+    	// 替换"MY_APPLICATION_ID"字样内容为在Facebook后台上配置的applicationId
+ 	resValue("string","facebook_app_id","MY_APPLICATION_ID")
+        resValue("string","fb_login_protocol_scheme","fbMY_APPLICATION_ID")   
+    }
+}
+```
+下面就相关接口作简要说明：
+#### 14.1. logSpentCreditsEvent()（必接）
+```Java
+// 花费点数：用户在完成交易时花费您公司或应用程序专用的点数，例如应用内货币
+String contentId = System.currentTimeMillis() + "";// 如果无其他需求，可传入一个时间戳作为contentId
+String contentType = "钻石";
+double totalValue = 20;
+AGPManager.getFacebookLogger().logSpentCreditsEvent(contentId, contentType, totalValue);
+```
+#### 14.2 logAchievedLevelEvent()（必接）
+```Java
+// 完成关卡：完成您在应用程序、公司或组织中定义的特定关卡
+String level = "第一关";
+AGPManager.getFacebookLogger().logAchievedLevelEvent(level);
+```
+#### 14.3 logUnlockedAchievementEvent()（必接）
+```Java
+// 解锁成就：完成您在应用程序、公司或组织中想要奖励的特定活动或操作。例如，推荐一位好友、完善个人主页等
+String description = "百万富翁";
+AGPManager.getFacebookLogger().logUnlockedAchievementEvent(description);
+```
+#### 14.4 logCompletedTutorialEvent()（必接）
+```Java
+// 完成教程学习：完成应用中的教程学习
+String contentId = System.currentTimeMillis() + "";// 如果无其他需求，可传入一个时间戳作为contentId
+boolean success = true;
+AGPManager.getFacebookLogger().logCompletedTutorialEvent(contentId, success);
+``` 
+### 15. 其他注意事项
 1. 凡是游戏项目工程为Android Studio工程，并且在Gradle里配置了productFlavor来控制打包流程的，请务必在调用“AGPManager.initSDK()”接口前，写上如下逻辑代码：
 ```Java
 AGPManager.addFlavorsBasePackage(BuildConfig.class.getPackage().getName());
