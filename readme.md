@@ -5,7 +5,7 @@
 ### SDK展示
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/demo-kr-login.gif)
 ### Version：4.6.38
-修复Igaw内部统计逻辑
+修复Igaw内部统计逻辑的bug。
 ### Version：4.6.37
 修复OneStore支付功能的bug。
 ### Version：4.6.34
