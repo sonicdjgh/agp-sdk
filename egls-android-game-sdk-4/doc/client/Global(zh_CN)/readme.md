@@ -42,9 +42,9 @@ apply plugin: 'com.google.gms.google-services'
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.6.37
-EGLS_AGS_VERSION=4.6.37
-EGLS_SUPPORT_VERSION=4.6.37
+EGLS_AGP_VERSION=4.6.46
+EGLS_AGS_VERSION=4.6.46
+EGLS_SUPPORT_VERSION=4.6.46
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -121,9 +121,9 @@ dependencies {
     // api 'com.google.firebase:firebase-core:16.0.8'
     // api 'com.google.firebase:firebase-messaging:18.0.0'
     
-    api 'com.facebook.android:facebook-core:4.+'
-    api 'com.facebook.android:facebook-login:4.+'
-    api 'com.facebook.android:facebook-share:4.+'
+    api 'com.facebook.android:facebook-core:5.+'
+    api 'com.facebook.android:facebook-login:5.+'
+    api 'com.facebook.android:facebook-share:5.+'
     // global end
     
     // tw begin
