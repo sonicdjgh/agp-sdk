@@ -5,10 +5,10 @@
 ### SDK展示
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/demo-kr-login.gif)
 ### Version：4.6.46
-升级内部集成的Facebook SDK版本至5.+，并修改如下引用配置：
-api 'com.facebook.android:facebook-core:5.+'
-api 'com.facebook.android:facebook-login:5.+'
-api 'com.facebook.android:facebook-share:5.+'
+升级内部集成的Facebook SDK版本至5.+，并请修改AGS中的如下引用配置：<br />
+api 'com.facebook.android:facebook-core:5.+'<br />
+api 'com.facebook.android:facebook-login:5.+'<br />
+api 'com.facebook.android:facebook-share:5.+'<br />
 ### Version：4.6.38
 修复Igaw内部统计逻辑的bug。
 ### Version：4.6.37
