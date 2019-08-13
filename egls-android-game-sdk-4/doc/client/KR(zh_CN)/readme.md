@@ -37,9 +37,9 @@ allprojects {
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.6.37
-EGLS_AGS_VERSION=4.6.37
-EGLS_SUPPORT_VERSION=4.6.37
+EGLS_AGP_VERSION=4.6.46
+EGLS_AGS_VERSION=4.6.46
+EGLS_SUPPORT_VERSION=4.6.46
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -117,9 +117,9 @@ dependencies {
     api 'com.google.android.gms:play-services-iid:16.+'
     api 'com.google.android.gms:play-services-tasks:16.+'
     
-    api 'com.facebook.android:facebook-core:4.+'
-    api 'com.facebook.android:facebook-login:4.+'
-    api 'com.facebook.android:facebook-share:4.+'
+    api 'com.facebook.android:facebook-core:5.+'
+    api 'com.facebook.android:facebook-login:5.+'
+    api 'com.facebook.android:facebook-share:5.+'
     
     api files('libs/kr/gson-2.8.0.jar');
     api files('libs/kr/3rdparty_login_library_android_4.1.4.jar')
