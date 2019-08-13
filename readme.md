@@ -4,6 +4,11 @@
 从4.x.x版本起，我们采用了新的账号体系，所以并不兼容旧版（即同一个账号在登录后返回的uid与3.x.x版本的不一致）。如果您的游戏曾经接过旧版本的SDK，并且将要使用4.x.x版本的SDK时，请配合我们做游戏的强更及其他必要的更新操作（详情请咨询我方运营）。<br /><br />
 ### SDK展示
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/demo-kr-login.gif)
+### Version：4.6.46
+升级内部集成的Facebook SDK版本至5.+，并修改如下引用配置：
+api 'com.facebook.android:facebook-core:5.+'
+api 'com.facebook.android:facebook-login:5.+'
+api 'com.facebook.android:facebook-share:5.+'
 ### Version：4.6.38
 修复Igaw内部统计逻辑的bug。
 ### Version：4.6.37
