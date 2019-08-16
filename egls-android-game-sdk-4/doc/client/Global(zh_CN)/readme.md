@@ -162,7 +162,7 @@ manifestPlaceholders = [
                 EGLS_APP_ID              : "",// 用于SDK初始化 
                 EGLS_PUBLISHMENT_AREA    : "",// 用于SDK识别发行区，可详见文档附录
                 EGLS_PAY_CHANNEL         : "",// 用于SDK识别支付方式，可详见文档附录
-                EGLS_PAY_IS_SANDBOX      : "false",// 港澳台发行区设为false即可
+                EGLS_PAY_IS_SANDBOX      : "false",// 设为false即可
 		
 		GOOGLE_WEB_CLIENT_ID     : "",// 用于SDK的Google登录
 		FACEBOOK_APPLICATION_ID  : "",// 用于SDK的Facebook登录
