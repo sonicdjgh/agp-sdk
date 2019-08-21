@@ -681,7 +681,7 @@ AGPManager.eglsSwitch();
 ```
 ### 9. SDK支付（必接）
 ```Java
-String amount = "1";// 总金额
+String amount = "1.0";// 总金额
 String productId = "PDT001";// 档位id
 String productName = "钻石";// 档位名称
 String cpOrderInfo = "2SDF34DF12GH0S23234GAER5";// CP订单信息，由接入方生成
