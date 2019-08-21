@@ -686,7 +686,7 @@ String productId = "PDT001";// 档位id
 String productName = "钻石";// 档位名称
 String cpOrderInfo = "2SDF34DF12GH0S23234GAER5";// CP订单信息，由接入方生成
 String flag = "";// 额外标记，一般传空字符串即可
-AGPManager.eglsPay(amount, productId, productName, cpOrderId, flag);
+AGPManager.eglsPay(amount, productId, productName, cpOrderInfo, flag);
 ```
 ### 10. onEnterGame接口调用（必接）
 ```Java
