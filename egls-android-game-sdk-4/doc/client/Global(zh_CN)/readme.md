@@ -673,33 +673,7 @@ protected void onCreate(Bundle savedInstanceState) {
 ```
 ### 7. SDK登录（必接）
 ```Java
-int loginMode = Constants.MODE_LOGIN_AUTO;
-AGPManager.eglsLogin(loginMode, new AGPLoginProcessListener() {
-
-    @Override
-    public void onTokenFailure() {
-	// token失效回调，这里需实现游戏返回到登录页面的逻辑
-    }
-
-    @Override
-    public void onLoginProcess(int action, String token, String uid, String accountType, String nickName) {
-	// 登录结果回调，只有当action为0时，示为登录成功
-	// accountType = "0"时，表示游客账号登录
-	// accountType = "1"时，表示EGLS账号登录
-	// accountType = "2"时，表示Google账号登录
-	// accountType = "3"时，表示Facebook账号登录
-    }
-
-    @Override
-    public void onLoginCancel() {
-	// 登录取消回调
-    }
-    
-    @Override
-    public void onAgreement(boolean isAgree){
-        // 游戏通过isAgree参数值来判断用户在“用户协议确认页”的操作
-    }
-});
+AGPManager.eglsLogin(Constants.MODE_LOGIN_AUTO);
 ```
 ### 8. SDK切换账号（必接）
 ```Java
@@ -712,24 +686,7 @@ String productId = "PDT001";// 档位id
 String productName = "钻石";// 档位名称
 String cpOrderInfo = "2SDF34DF12GH0S23234GAER5";// CP订单信息，由接入方生成
 String flag = "";// 额外标记，一般传空字符串即可
-AGPManager.eglsPay(amount, productId, productName, cpOrderInfo, flag, new AGPClientPayProcessListener(){
-	
-    @Override
-    public void onClientPayFinish(String message) {
-	// 客户端支付完成回调
-	// 客户端的支付完成并不能够完全代表支付操作成功，请以服务器的通知为准
-    }
-
-    @Override
-    public void onClientPayError() {
-    	// 客户端支付错误回调
-    }
-
-    @Override
-    public void onClientPayCancel() {
-	// 客户端支付取消回调
-    }
-});
+AGPManager.eglsPay(amount, productId, productName, cpOrderId, flag);
 ```
 ### 10. onEnterGame接口调用（必接）
 ```Java
@@ -744,17 +701,7 @@ String shareText = "";// 分享文本
 String shareImageFilePath = "";// 分享图片（绝对路径）
 String shareLink = "";// 分享链接
 boolean isTimelineCb = false;
-AGPManager.eglsShare(this, type, shareTitle, shareText, shareImageFilePath, shareLink, isTimelineCb, new AGPShareProcessListenter() {
-
-    @Override
-    public void onShareProcess(int type, int action, String message) {
-        // 当type为Constants.TYPE_SHARE_FACEBOOK时，表示Facebook分享
-	// 当type为Constants.TYPE_SHARE_LINE时，表示LINE分享
-        // 当action为0时，表示分享成功
-	// 当action为1时，表示分享取消
-	// 当action为2时，表示分享失败
-    }
-});
+AGPManager.eglsShare(this, type, shareTitle, shareText, shareImageFilePath, shareLink, isTimelineCb);
 ```
 ### 12. Firebase云消息推送（选接）
 当有需要使用Firebase的云消息推送时，首先请在游戏项目的“/res/drawable”目录下，添加一张名为“egls_push_icon”的图片。然后，除了按照对接文档中“3.1”、“3.4”和“4.4”的说明进行配置以外，还需要从Google后台下载一个名为“google-services.json”的文件（该文件由我方运营提供），并将该文件放在当前游戏Module工程目录下，如下图所示：<br/>
