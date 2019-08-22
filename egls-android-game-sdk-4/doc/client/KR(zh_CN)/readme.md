@@ -37,9 +37,9 @@ allprojects {
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.6.46
-EGLS_AGS_VERSION=4.6.46
-EGLS_SUPPORT_VERSION=4.6.46
+EGLS_AGP_VERSION=4.6.53
+EGLS_AGS_VERSION=4.6.53
+EGLS_SUPPORT_VERSION=4.6.53
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -488,48 +488,98 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    String versionCode = "1";
-    AGPManager.initSDK(this, AppUtil.getVersionName(this), new AGPInitProcessListener() {// SDK初始化回调
+    AGPManager.initSDK(this, AppUtil.getVersionName(this), new SDKActionHandler() {
 
         @Override
-        public void onInitProcess(int action, String msg) {
-            if (action == 0) {// 当SDK初始化成功后再做后续的事情
+        public void onHandleInit(int state, String message) {// SDK初始化的結果处理
+            if (state == Constants.SDK_STATE_SUCCESS) {
+                // 初始化成功后的处理
+            } else {
+                // 初始化失败后的处理
+            }
+        }
 
+        @Override
+        public void onHandleAgreement(boolean isAgree) {// SDK是否同意用户协议的結果处理
+            if (isAgree) {
+                // 玩家选择同意协议后的处理
+            } else {
+                // 玩家选择不同意协议后的处理
+            }
+        }
+
+        @Override
+        public void onHandleLogin(int state, String token, String uid, String accountType, String nickName) {// SDK登录的結果处理
+            switch (state) {
+                case Constants.SDK_STATE_SUCCESS:// 登录成功后的处理
+                    // accountType = "0"时，表示游客账号登录
+                    // accountType = "2"时，表示Google账号登录
+                    // accountType = "3"时，表示Facebook账号登录
+                    break;
+                case Constants.SDK_STATE_CANCEL:// 登录取消后的处理
+                    break;
+                case Constants.SDK_STATE_ERROR:// 登录失败后的处理
+                    break;
+                }
+            }
+
+        @Override
+        public void onHandleGuestBind(int state, String accountType, String nickName) {// SDK游客绑定的結果处理
+            switch (state) {
+                case Constants.SDK_STATE_SUCCESS:// 游客绑定成功后的处理
+                    break;
+                case Constants.SDK_STATE_CANCEL:// 游客绑定取消后的处理
+                    break;
+                case Constants.SDK_STATE_ERROR:// 游客绑定失败后的处理
+                    break;
+            }
+        }
+
+        @Override
+        public void onHandleTokenFailure() {// SDK登录token失效的结果处理（需要游戏实现返回到登录页面的逻辑）
+
+        }
+
+        @Override
+        public void onHandlePay(int state, String eglsOrderInfo) {// SDK支付的結果处理
+            switch (state) {
+                case Constants.SDK_STATE_SUCCESS:// 支付完成后的处理（仅表示客户端支付操作完成，最终要以服务器的通知为准）
+                    break;
+                case Constants.SDK_STATE_CANCEL:// 支付取消后的处理
+                    break;
+                case Constants.SDK_STATE_ERROR:// 支付失败后的处理
+                    break;
+            }
+        }
+
+        @Override
+        public void onHandleShare(int state, int type, String message) {// SDK分享的結果处理
+            switch (state) {
+                case Constants.SDK_STATE_SUCCESS:// 分享成功后的处理
+                    // 当type为Constants.TYPE_SHARE_FACEBOOK时，表示Facebook分享
+                    // 当type为Constants.TYPE_SHARE_NAVER时，表示Naver分享
+                    break;
+                case Constants.SDK_STATE_CANCEL:// 分享失成功的处理
+                    break;
+                case Constants.SDK_STATE_ERROR:// 分享失败后的处理
+                    break;
+            }
+        }
+
+        @Override
+        public void onHandleExit(boolean isExit) {// SDK退出游戏的結果处理（该方法只针对游戏调用SDK的"AGPManager.eglsExit()"接口的响应）
+            if (isExit) {
+                // 玩家选择退出后的处理
+            } else {
+                // 玩家选择继续游戏后的处理
             }
         }
     });
-    onNewIntent(getIntent());// 在韩国发行的游戏必须加入此代码
 }
 ```
 ### 7. SDK登录（必接）
 ```Java
-int loginMode = Constants.MODE_LOGIN_AUTO;
-AGPManager.eglsLogin(loginMode, new AGPLoginProcessListener() {
-
-    @Override
-    public void onTokenFailure() {
-	// token失效回调，这里需实现游戏返回到登录页面的逻辑
-    }
-
-    @Override
-    public void onLoginProcess(int action, String token, String uid, String accountType, String nickName) {
-	// 登录结果回调，只有当action为0时，示为登录成功
-	// accountType = "0"时，表示游客账号登录
-	// accountType = "1"时，表示EGLS账号登录
-	// accountType = "2"时，表示Google账号登录
-	// accountType = "3"时，表示Facebook账号登录
-    }
-
-    @Override
-    public void onLoginCancel() {
-	// 登录取消回调
-    }
-    
-    @Override
-    public void onAgreement(boolean isAgree){
-        // 游戏通过isAgree参数值来判断用户在“用户协议确认页”的操作
-    }
-});
+AGPManager.eglsLogin(Constants.MODE_LOGIN_AUTO);
 ```
 ### 8. SDK账号切换（必接）
 ```Java
@@ -542,38 +592,12 @@ String productId = "PDT001";// 档位id
 String productName = "钻石";// 档位名称
 String cpOrderInfo = "2SDF34DF12GH0S23234GAER5";// CP订单号
 String flag = "";// 额外标记，一般传空字符串即可
-AGPManager.eglsPay(amount, productId, productName, cpOrderInfo, flag, new AGPClientPayProcessListener(){
-	
-    @Override
-    public void onClientPayFinish(String message) {
-	// 客户端支付完成回调
-    }
-
-    @Override
-    public void onClientPayError() {
-    	// 客户端支付错误回调
-    }
-
-    @Override
-    public void onClientPayCancel() {
-	// 客户端支付取消回调
-    }
-});
+AGPManager.eglsPay(amount, productId, productName, cpOrderInfo, flag);
 ```
 ### 10. SDK游戏退出接口（必接）
 ```Java
 //当需要退出游戏时，请务必调用该方法
-AGPManager.eglsExit(new AGPExitProcessListener() {
-
-    @Override
-    public void onExitProcess(boolean isExit) {
-  	if (isExit) {
-	    //点击确认
-	} else {
-	    //点击取消
-	}
-    }
-});
+AGPManager.eglsExit();
 ```
 ### 11. onEnterGame接口调用（必接）
 ```Java
@@ -588,16 +612,7 @@ String shareText = "";// 分享文本
 String shareImageFilePath = "";// 分享图片（绝对路径）
 String shareLink = "";// 分享链接
 boolean isTimelineCb = false;
-AGPManager.eglsShare(this, type, shareTitle, shareText, shareImageFilePath, shareLink, isTimelineCb, new AGPShareProcessListenter() {
-
-    @Override
-    public void onShareProcess(int type, int action, String message) {
-        // 当type为Constants.TYPE_SHARE_NAVER时，表示Naver分享
-        // 当action为0时，表示分享成功
-	// 当action为1时，表示分享取消
-	// 当action为2时，表示分享失败
-    }
-});
+AGPManager.eglsShare(this, type, shareTitle, shareText, shareImageFilePath, shareLink, isTimelineCb);
 ```
 ### 13. IGAW数据统计（必接）
 IGAW主要用于韩服地区发行的游戏的数据统计，启用该功能的做法，首先要按照上面所提到的，在AndroidManifest.xml文件中打开对应的配置。对于IGAW统计功能的相关接口调用，其相关初始化部分的逻辑已经嵌入进SDK当中，因此开发者无需关心较为复杂的初始化步骤，只需根据需求，调用对应的接口即可。<br /><br />
