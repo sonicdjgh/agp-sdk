@@ -42,9 +42,9 @@ allprojects {
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.6.46
-EGLS_AGS_VERSION=4.6.46
-EGLS_SUPPORT_VERSION=4.6.46
+EGLS_AGP_VERSION=4.6.53
+EGLS_AGS_VERSION=4.6.53
+EGLS_SUPPORT_VERSION=4.6.53
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -334,13 +334,91 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    boolean isWebMode = false;// 如果是H5游戏请设置为true
-    AGPManager.initSDK(this, AppUtil.getVersionName(this), isWebMode, new AGPInitProcessListener() {// SDK初始化回调
+    AGPManager.initSDK(this, AppUtil.getVersionName(this), new SDKActionHandler() {
 
         @Override
-        public void onInitProcess(int action, String msg) {
-            if (action == 0) {// 当SDK初始化成功后再做后续的事情
-			
+        public void onHandleInit(int state, String message) {// SDK初始化的結果处理
+            if (state == Constants.SDK_STATE_SUCCESS) {
+                // 初始化成功后的处理
+            } else {
+                // 初始化失败后的处理
+            }
+        }
+
+        @Override
+        public void onHandleAgreement(boolean isAgree) {// SDK是否同意用户协议的結果处理
+            if (isAgree) {
+                // 玩家选择同意协议后的处理
+            } else {
+                // 玩家选择不同意协议后的处理
+            }
+        }
+
+        @Override
+        public void onHandleLogin(int state, String token, String uid, String accountType, String nickName) {// SDK登录的結果处理
+            switch (state) {
+                case Constants.SDK_STATE_SUCCESS:// 登录成功后的处理
+                    // accountType = "0"时，表示游客账号登录
+                    // accountType = "1"时，表示EGLS账号登录
+                    // accountType = "4"时，表示微信账号登录
+                    break;
+                case Constants.SDK_STATE_CANCEL:// 登录取消后的处理
+                    break;
+                case Constants.SDK_STATE_ERROR:// 登录失败后的处理
+                    break;
+                }
+            }
+
+        @Override
+        public void onHandleGuestBind(int state, String accountType, String nickName) {// SDK游客绑定的結果处理
+            switch (state) {
+                case Constants.SDK_STATE_SUCCESS:// 游客绑定成功后的处理
+                    break;
+                case Constants.SDK_STATE_CANCEL:// 游客绑定取消后的处理
+                    break;
+                case Constants.SDK_STATE_ERROR:// 游客绑定失败后的处理
+                    break;
+            }
+        }
+
+        @Override
+        public void onHandleTokenFailure() {// SDK登录token失效的结果处理（需要游戏实现返回到登录页面的逻辑）
+
+        }
+
+        @Override
+        public void onHandlePay(int state, String eglsOrderInfo) {// SDK支付的結果处理
+            switch (state) {
+                case Constants.SDK_STATE_SUCCESS:// 支付完成后的处理（仅表示客户端支付操作完成，最终要以服务器的通知为准）
+                    break;
+                case Constants.SDK_STATE_CANCEL:// 支付取消后的处理
+                    break;
+                case Constants.SDK_STATE_ERROR:// 支付失败后的处理
+                    break;
+            }
+        }
+
+        @Override
+        public void onHandleShare(int state, int type, String message) {// SDK分享的結果处理
+            switch (state) {
+                case Constants.SDK_STATE_SUCCESS:// 分享成功后的处理
+                    // 当type为Constants.TYPE_SHARE_WECHAT时，表示微信分享
+		    // 当type为Constants.TYPE_SHARE_WEIBO时，表示微博分享
+		    // 当type为Constants.TYPE_SHARE_QQ时，表示QQ分享
+                    break;
+                case Constants.SDK_STATE_CANCEL:// 分享失成功的处理
+                    break;
+                case Constants.SDK_STATE_ERROR:// 分享失败后的处理
+                    break;
+            }
+        }
+
+        @Override
+        public void onHandleExit(boolean isExit) {// SDK退出游戏的結果处理（该方法只针对游戏调用SDK的"AGPManager.eglsExit()"接口的响应）
+            if (isExit) {
+                // 玩家选择退出后的处理
+            } else {
+                // 玩家选择继续游戏后的处理
             }
         }
     });
@@ -348,32 +426,7 @@ protected void onCreate(Bundle savedInstanceState) {
 ```
 ### 7. SDK登录（必接）
 ```Java
-int loginMode = Constants.MODE_LOGIN_COMMON;
-AGPManager.eglsLogin(loginMode, new AGPLoginProcessListener() {
-
-    @Override
-    public void onTokenFailure() {
-	// token失效回调，这里需实现游戏返回到登录页面的逻辑
-    }
-
-    @Override
-    public void onLoginProcess(int action, String token, String uid, String accountType, String nickName) {
-	// 登录结果回调，只有当action为0时，示为登录成功
-	// accountType = "0"时，表示游客账号登录
-	// accountType = "1"时，表示EGLS账号登录
-	// accountType = "4"时，表示微信账号登录
-    }
-
-    @Override
-    public void onLoginCancel() {
-	// 登录取消回调
-    }
-    
-    @Override
-    public void onAgreement(boolean isAgree){
-        // 游戏通过isAgree参数值来判断用户在“用户协议确认页”的操作
-    }
-});
+AGPManager.eglsLogin(Constants.MODE_LOGIN_COMMON);
 ```
 ### 8. SDK切换账号（选接）
 ```Java
@@ -386,23 +439,7 @@ String productId = "PDT001";// 档位id
 String productName = "钻石";// 档位名称
 String cpOrderInfo = "2SDF34DF12GH0S23234GAER5";// CP订单号
 String flag = "";// 额外标记，一般传空字符串即可
-AGPManager.eglsPay(amount, productId, productName, cpOrderInfo, flag, new AGPClientPayProcessListener(){
-	
-    @Override
-    public void onClientPayFinish(String message) {
-	// 客户端支付完成回调
-    }
-
-    @Override
-    public void onClientPayError() {
-    	// 客户端支付错误回调
-    }
-
-    @Override
-    public void onClientPayCancel() {
-	// 客户端支付取消回调
-    }
-});
+AGPManager.eglsPay(amount, productId, productName, cpOrderInfo, flag);
 ```
 ### 10. onEnterGame接口调用（必接）
 ```Java
@@ -417,18 +454,7 @@ String shareText = "";// 分享文本
 String shareImageFilePath = "";// 分享图片（绝对路径）
 String shareLink = "";// 分享链接
 boolean isTimelineCb = false;// 仅当用于微信分享，当isTimelineCb为true时，SDK启用微信分享到朋友圈，否则启用微信分享到好友
-AGPManager.eglsShare(this, type, shareTitle, shareText, shareImageFilePath, shareLink, isTimelineCb, new AGPShareProcessListenter() {
-
-    @Override
-    public void onShareProcess(int type, int action, String message) {
-        // 当type为Constants.TYPE_SHARE_WECHAT时，表示微信分享
-	// 当type为Constants.TYPE_SHARE_WEIBO时，表示微博分享
-	// 当type为Constants.TYPE_SHARE_QQ时，表示QQ分享
-        // 当action为0时，表示分享成功
-	// 当action为1时，表示分享取消
-	// 当action为2时，表示分享失败
-    }
-});
+AGPManager.eglsShare(this, type, shareTitle, shareText, shareImageFilePath, shareLink, isTimelineCb);
 ```
 ### 12. 关于微信功能的使用
 SDK集成了“微信登录”功能及“微信分享”功能，除了添加相关的AndroidManifest.xml文件配置之外，还需要在项目工程中添加一个以“正式包名.wxapi”的package（以Demo为例，则添加的package为“com.egls.demo.wxapi”），并且在该package中添加一个名为“WXEntryActivity”的Activity类，这个类必须继承SDK中的“com.egls.socialization.wechat.WeChatEntryActivity”类，例如：
