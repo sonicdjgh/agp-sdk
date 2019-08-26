@@ -23,8 +23,9 @@
 地区 | 地址
 ---|---
 中国大陆 | http://cnpassport.eglsgame.com/passport/egls/tokenVerify
-台湾 | http://twpassport.eglsgame.com/passport/egls/tokenVerify
+港澳台地区 | http://twpassport.eglsgame.com/passport/egls/tokenVerify
 韩国 | http://krpassport.eglsgame.com/passport/egls/tokenVerify
+美国 | http://uspassport.eglsgame.com/passport/egls/tokenVerify
 
 ##### 2.1.2 请求参数及实例
 参数名称 | 参数说明 | 必要
