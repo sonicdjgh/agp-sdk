@@ -5,7 +5,7 @@
 ### SDK展示
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/demo-kr-login.gif)
 ### Version：4.6.54
-根据韩国业务的策略变更，弃用IgaWorks SDK，更换成AppsFlyer SDK做事件统计，相关配置及接口请详见对接文档。
+根据韩国业务的策略变更，弃用IGAWorks SDK，更换成AppsFlyer SDK做事件统计，相关配置及接口请详见对接文档。
 ### Version：4.6.53
 整合SDK的回调接口，将过去涉及主要业务方法中的回调统一整合到新的接口“SDKActionHandler”中，并在初始化时带入。具体使用方法请参考对接文档。
 ### Version：4.6.46
