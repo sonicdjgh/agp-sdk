@@ -566,7 +566,7 @@ boolean isTimelineCb = false;
 AGPManager.eglsShare(this, type, shareTitle, shareText, shareImageFilePath, shareLink, isTimelineCb);
 ```
 ### 13. AppsFlyer数据统计（根据运营需求对接）
-AppsFlyer主要用于Global业务的数据统计，启用该功能的做法，首先要按照上面所提到的，在AndroidManifest.xml文件中打开对应的配置。对于AppsFlyer统计功能的相关接口调用，其相关初始化部分的逻辑已经嵌入进SDK当中，因此开发者无需关心较为复杂的初始化步骤，只需根据需求，调用对应的接口即可。<br /><br />
+AppsFlyer主要用于KR业务的数据统计，启用该功能的做法，首先要按照上面所提到的，在AndroidManifest.xml文件中打开对应的配置。对于AppsFlyer统计功能的相关接口调用，其相关初始化部分的逻辑已经嵌入进SDK当中，因此开发者无需关心较为复杂的初始化步骤，只需根据需求，调用对应的接口即可。<br /><br />
 **注**：通过调用AGPManager.getAppsFlyerHelper()来获取接口对象。
 #### 13.1 trackEventOneSplashImage()（必接）
     用于统计首次播放游戏闪屏动画的次数，请在开始播放动画时调用该方法
