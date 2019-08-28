@@ -4,6 +4,8 @@
 从4.x.x版本起，我们采用了新的账号体系，所以并不兼容旧版（即同一个账号在登录后返回的uid与3.x.x版本的不一致）。如果您的游戏曾经接过旧版本的SDK，并且将要使用4.x.x版本的SDK时，请配合我们做游戏的强更及其他必要的更新操作（详情请咨询我方运营）。<br /><br />
 ### SDK展示
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/demo-kr-login.gif)
+### Version：4.6.54
+根据韩国业务的策略变更，弃用IgaWorks SDK，更换成AppsFlyer SDK做事件统计，相关配置及接口请详见对接文档。
 ### Version：4.6.53
 整合SDK的回调接口，将过去涉及主要业务方法中的回调统一整合到新的接口“SDKActionHandler”中，并在初始化时带入。具体使用方法请参考对接文档。
 ### Version：4.6.46
