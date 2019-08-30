@@ -174,7 +174,11 @@ manifestPlaceholders = [
         ]
 ```
 #### 4.2 AGP Permission 配置
-暂无
+```Xml
+<!-- AGP begin -->
+<!-- 暂没有可添加的配置 -->
+<!-- AGP end -->
+```
 #### 4.3 AGS Permission 配置
 ```Xml
 <!-- AGS begin -->
