@@ -42,9 +42,9 @@ apply plugin: 'com.google.gms.google-services'
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.6.55
-EGLS_AGS_VERSION=4.6.55
-EGLS_SUPPORT_VERSION=4.6.55
+EGLS_AGP_VERSION=4.6.62
+EGLS_AGS_VERSION=4.6.62
+EGLS_SUPPORT_VERSION=4.6.62
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -58,7 +58,6 @@ android {
 
 repositories {
     flatDir {
-        dirs project(':AGP').file('libs')
         dirs project(':AGS').file('libs')
     }
 }
@@ -72,7 +71,6 @@ dependencies {
 ```gradle
 repositories {
     flatDir {
-    	dirs 'libs'
         dirs project(':AGS').file('libs')
     }
 }
@@ -82,12 +80,6 @@ dependencies {
     api "com.egls.android:egls-agp-sdk:$EGLS_AGP_VERSION@aar"
     api project(':AGS')
     // base end
-
-
-    // global begin
-    api 'com.appsflyer:af-android-sdk:4+@aar'
-    api 'com.android.installreferrer:installreferrer:1.0'
-    // global end
 }
 ```
 #### 3.4 AGS lib 选择
@@ -106,6 +98,11 @@ dependencies {
     api 'com.android.support.constraint:constraint-layout:1.1.0'
     api 'com.android.support:appcompat-v7:27.0.0'
     // base end
+    
+    // appsflyer begin
+    api 'com.appsflyer:af-android-sdk:4+@aar'
+    api 'com.android.installreferrer:installreferrer:1.0'
+    // appsflyer end
 
     // global begin
     api 'com.google.android.gms:play-services-auth:16.+'
@@ -177,17 +174,16 @@ manifestPlaceholders = [
         ]
 ```
 #### 4.2 AGP Permission 配置
+暂无
+#### 4.3 AGS Permission 配置
 ```Xml
-<!-- AGP begin -->
+<!-- AGS begin -->
 <!-- AppsFlyer begin -->
 <!-- 如果现在接入的安卓包是针对除Google Play以外的其他应用商店，那么此权限一定需要声明，否则要删除该权限声明 -->
 <!-- <uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
 <!-- AppsFlyer end -->
-<!-- AGP end -->
-```
-#### 4.3 AGS Permission 配置
-```Xml
-<!-- AGS begin -->
+
+
 <!-- Google Play begin -->
 <!-- 如果使用Google Play支付功能，请打开以下配置 -->
 <!--
@@ -283,8 +279,8 @@ manifestPlaceholders = [
         android:value="${EGLS_PAY_IS_SANDBOX}" />
     <!-- Base end -->
         
-    
-    <!-- AGP begin -->
+
+    <!-- AGS begin -->
     <!-- AppsFlyer begin -->
     <!-- 为了确保所有Install Referrer监听器可以成功监听由系统播放的referrer参数，请一定在AndroidManifest.xml中将AppsFlyer的监听器置于所有同类监听器第一位，并保证receiver tag在application tag中 -->
     <!-- 如果已经有其他的receiver来监听“INSTALL_REFERRER”， 那么请用“MultipleInstallBroadcastReceiver” -->
@@ -303,10 +299,8 @@ manifestPlaceholders = [
         android:value="${APPS_FLYER_DEV_KEY}" />
     -->
     <!-- AppsFlyer end -->
-    <!-- AGP end -->
 
 
-    <!-- AGS begin -->
     <!-- Google begin -->
     <meta-data
         android:name="CHANNEL_GOOGLE_CLIENT_ID"
