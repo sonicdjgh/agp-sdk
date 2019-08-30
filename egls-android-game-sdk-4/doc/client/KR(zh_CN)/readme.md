@@ -53,8 +53,6 @@ android {
 
 repositories {
     flatDir {
-        dirs project(':AGP').file('libs')
-	dirs project(':AGP').file('libs/kr')
         dirs project(':AGS').file('libs')
         dirs project(':AGS').file('libs/kr')
     }
@@ -69,7 +67,6 @@ dependencies {
 ```gradle
 repositories {
     flatDir {
-        dirs 'libs'
         dirs project(':AGS').file('libs')
         dirs project(':AGS').file('libs/kr')
     }
