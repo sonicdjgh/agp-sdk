@@ -37,9 +37,9 @@ allprojects {
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.6.53
-EGLS_AGS_VERSION=4.6.53
-EGLS_SUPPORT_VERSION=4.6.53
+EGLS_AGP_VERSION=4.6.62
+EGLS_AGS_VERSION=4.6.62
+EGLS_SUPPORT_VERSION=4.6.62
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -53,8 +53,6 @@ android {
 
 repositories {
     flatDir {
-        dirs project(':AGP').file('libs')
-	dirs project(':AGP').file('libs/kr')
         dirs project(':AGS').file('libs')
         dirs project(':AGS').file('libs/kr')
     }
@@ -69,8 +67,6 @@ dependencies {
 ```gradle
 repositories {
     flatDir {
-        dirs 'libs'
-	dirs 'libs/kr'
         dirs project(':AGS').file('libs')
         dirs project(':AGS').file('libs/kr')
     }
@@ -81,12 +77,6 @@ dependencies {
     api "com.egls.android:egls-agp-sdk:$EGLS_AGP_VERSION@aar"
     api project(':AGS')
     // base end
-
-    // kr begin
-    api files('libs/kr/IgawAdbrix_v4.6.0.jar')
-    api files('libs/kr/IgawCommon_v4.6.0.jar')
-    api(name: 'IgawLiveOps_v2.1.0', ext: 'aar')
-    // kr end
 }
 ```
 #### 3.4 AGS lib 选择
@@ -106,7 +96,12 @@ dependencies {
     api 'com.android.support.constraint:constraint-layout:1.1.0'
     api "com.android.support:appcompat-v7:27.0.0"
     // base end
-
+    
+    // appsflyer begin
+    api 'com.appsflyer:af-android-sdk:4+@aar'
+    api 'com.android.installreferrer:installreferrer:1.0'
+    // appsflyer end
+    
     // kr begin
     api 'com.google.android.gms:play-services-auth:16.+'
     api 'com.google.android.gms:play-services-base:16.+'
@@ -168,9 +163,7 @@ manifestPlaceholders = [
 		GOOGLE_WEB_CLIENT_ID     : "",// 用于SDK的Google登录
 		FACEBOOK_APPLICATION_ID  : "",// 用于SDK的Facebook登录
 		
-		IGAW_APP_KEY             : "",// 用于IgaWorks统计功能初始化
-                IGAW_HASH_KEY            : "",// 用于IgaWorks统计功能初始化
-		GAME_ACTIVITY_NAME       : "",// 用于IgaWorks统计功能的DeepLink定位，为游戏Activity的“name”全称
+		// APPS_FLYER_DEV_KEY    : "",// 用于AppsFlyer统计功能初始化，如果运营没有特殊需求，这里无需添加
 		
 		NAVER_LOGIN_CLIENT_ID    : "",// 用于Naver Cafe论坛功能初始化
                 NAVER_LOGIN_CLIENT_SECRET: "",// 用于Naver Cafe论坛功能初始化
@@ -187,24 +180,18 @@ manifestPlaceholders = [
 #### 4.2 AGP Permission 配置
 ```Xml
 <!-- AGP begin -->
-<!-- IGAW begin -->
-<!-- IGAW为韩国地区所使用的统计功能，其他地区发行的游戏请不要使用 -->
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-<uses-permission android:name="android.permission.WAKE_LOCK" />
-<uses-permission android:name="android.permission.VIBRATE" />
-<uses-permission android:name="android.permission.GET_TASKS" />
-<permission
-    android:name="${applicationId}.permission.C2D_MESSAGE"
-    android:protectionLevel="signature" />
-<uses-permission android:name="${applicationId}.permission.C2D_MESSAGE" />
-<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-<!-- IGAW end -->
+<!-- 暂没有可添加的配置 -->
 <!-- AGP end -->
 ```
 #### 4.3 AGS Permission 配置
 ```Xml
 <!-- AGS begin -->
+<!-- AppsFlyer begin -->
+<!-- 如果现在接入的安卓包是针对除Google Play以外的其他应用商店，那么此权限一定需要声明，否则要删除该权限声明 -->
+<!-- <uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
+<!-- AppsFlyer end -->
+
+
 <!-- Google Play begin -->
 <!-- 如果使用Google Play支付功能，请打开以下配置 -->
 <!--
@@ -260,6 +247,18 @@ manifestPlaceholders = [
 
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
+	<!-- DeepLink begin -->
+        <intent-filter>
+            <data
+                android:host="${applicationId}"
+                android:scheme="egls${EGLS_APP_ID}" />
+
+            <action android:name="android.intent.action.VIEW" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+        </intent-filter>
+        <!-- DeepLink end -->
     </activity>
 	
     <!-- Base begin -->
@@ -279,79 +278,29 @@ manifestPlaceholders = [
         android:name="EGLS_PAY_IS_SANDBOX"
         android:value="${EGLS_PAY_IS_SANDBOX}" />
     <!-- Base end -->
-	
-        
-    <!-- AGP begin -->
-    <!-- IGAW begin -->
-    <!-- IGAW为韩国地区所使用的统计功能，其他地区发行的游戏请不要使用 -->
-    <activity
-    	android:name="com.igaworks.IgawDefaultDeeplinkActivity"
-        android:label="@string/app_name"
-        android:launchMode="singleTask"
-        android:noHistory="true"
-        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" >
-	<!-- DeepLink begin -->
-    	<intent-filter android:label="@string/app_name">
-            <action android:name="android.intent.action.VIEW" />
 
-            <category android:name="android.intent.category.DEFAULT" />
-            <category android:name="android.intent.category.BROWSABLE" />
 
-            <data
-                android:host="${applicationId}.dplk"
-                android:scheme="egls${EGLS_APP_ID}" />
-        </intent-filter>
-
-        <meta-data
-            android:name="IgawRedirectActivity"
-            android:value="${GAME_ACTIVITY_NAME}" />
-	<!-- DeepLink end -->
-    </activity>
-
+    <!-- AGS begin -->
+    <!-- AppsFlyer begin -->
+    <!-- 为了确保所有Install Referrer监听器可以成功监听由系统播放的referrer参数，请一定在AndroidManifest.xml中将AppsFlyer的监听器置于所有同类监听器第一位，并保证receiver tag在application tag中 -->
+    <!-- 如果已经有其他的receiver来监听“INSTALL_REFERRER”， 那么请用“MultipleInstallBroadcastReceiver” -->
     <receiver
-        android:name="com.igaworks.IgawReceiver"
+        android:name="com.appsflyer.SingleInstallBroadcastReceiver"
         android:exported="true" >
         <intent-filter>
             <action android:name="com.android.vending.INSTALL_REFERRER" />
         </intent-filter>
     </receiver>
-    <receiver
-        android:name="com.igaworks.liveops.pushservice.LiveOpsGCMBroadcastReceiver"
-        android:permission="com.google.android.c2dm.permission.SEND" >
-        <intent-filter>
-            <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-
-            <category android:name="${applicationId}" />
-        </intent-filter>
-    </receiver>
-    <service
-        android:name="com.igaworks.liveops.pushservice.GCMIntentService"
-        android:enabled="true" />
-    <receiver
-        android:name="com.igaworks.liveops.pushservice.LiveOpsReceiver"
-        android:permission="${applicationId}.permission.C2D_MESSAGE" >
-        <intent-filter>
-            <action android:name="com.igaworks.liveops.pushservice.CLIENT_PUSH_RECEIVE" />
-        </intent-filter>
-    </receiver>
-    <activity
-        android:name="com.igaworks.liveops.pushservice.IgawLiveOpsPushMessageLauncherActivity"
-        android:noHistory="true"
-        android:permission="${applicationId}.permission.C2D_MESSAGE" />
-	
+    
+    <!-- 如果有特殊需求修改devkey时，请打开以下配置 -->	
+    <!--	
     <meta-data
-        android:name="igaworks_app_key"
-        android:value="${IGAW_APP_KEY}" />
-	
-    <meta-data
-        android:name="igaworks_hash_key"
-        android:value="${IGAW_HASH_KEY}" />
+        android:name="CHANNEL_AF_DEV_KEY"
+        android:value="${APPS_FLYER_DEV_KEY}" />
     -->
-    <!-- IGAW end -->
-    <!-- AGP end -->
-
-
-    <!-- AGS begin -->
+    <!-- AppsFlyer end -->
+	
+	
     <!-- Google begin -->
     <meta-data
         android:name="CHANNEL_GOOGLE_CLIENT_ID"
@@ -614,29 +563,25 @@ String shareLink = "";// 分享链接
 boolean isTimelineCb = false;
 AGPManager.eglsShare(this, type, shareTitle, shareText, shareImageFilePath, shareLink, isTimelineCb);
 ```
-### 13. IGAW数据统计（必接）
-IGAW主要用于韩服地区发行的游戏的数据统计，启用该功能的做法，首先要按照上面所提到的，在AndroidManifest.xml文件中打开对应的配置。对于IGAW统计功能的相关接口调用，其相关初始化部分的逻辑已经嵌入进SDK当中，因此开发者无需关心较为复杂的初始化步骤，只需根据需求，调用对应的接口即可。<br /><br />
-**注：通过调用AGPManager.getIgawHelper()来获取接口对象**。
-#### 13.1 eventIgawSplashImage()（根据情况接入）
-    如果游戏有闪屏动画（或首次启动的游戏动画），请在开始播放动画时调用该方法
-#### 13.2 eventIgawCharacterSelect()（必接）
-    请在玩家选择游戏角色后调用该方法（对于首次进入游戏的情况，请在创建角色后调用）
-#### 13.3 eventIgawCharacterName()（必接）
-    请在玩家创建角色并完成角色命名后调用该方法
-#### 13.4 eventIgawTutorialStart()（根据情况接入）
-    如果游戏有新手教学阶段，请在新手教学开始时调用该接口
-#### 13.5 eventIgawtutorialComplete()（根据情况接入）
-    如果游戏有新手教学阶段，请在新手教学结束时调用该接口
-#### 13.6 eventIgawRoleLevelUp(int level)（必接）
-    角色升级时调用该接口（当创建角色后，不必调用该接口）
-#### 13.7 eventIgawVIPLevelUp(int level)（必接）
-    玩家VIP等级提升时调用该接口
-#### 13.8 eventIgawVisitShop()（必接）
-    玩家打开游戏内的商店（指需要玩家真实付费购买的商店）页面时，请调用该接口
-#### 13.9 eventIgawFansite()（根据情况接入）
-    如果在游戏中有加入对Naver论坛的访问链接，请在打开Naver论坛时调用该接口（目前SDK已集成NaverCafeSDK，可以选择不自行添加Naver论坛的访问链接）
-#### 13.10 eventIgawCustom(String eventName, String param)（根据情况介入）
-    如果以上接口都无法满足事件统计需求，可以使用该接口进行自定义事件统计
+### 13. AppsFlyer数据统计（根据运营需求对接）
+AppsFlyer主要用于KR业务的数据统计，启用该功能的做法，首先要按照上面所提到的，在AndroidManifest.xml文件中打开对应的配置。对于AppsFlyer统计功能的相关接口调用，其相关初始化部分的逻辑已经嵌入进SDK当中，因此开发者无需关心较为复杂的初始化步骤，只需根据需求，调用对应的接口即可。<br /><br />
+**注**：通过调用AGPManager.getAppsFlyerHelper()来获取接口对象。
+#### 13.1 trackEventOneSplashImage()（必接）
+    用于统计首次播放游戏闪屏动画的次数，请在开始播放动画时调用该方法
+#### 13.2 trackEventTutorialStart()（必接）
+    用于统计新手任务开始的次数，请在新手任务开始时调用该方法
+#### 13.3 trackEventTutorialComplete()（必接）
+    用于统计新手任务结束的次数，请在新手任务结束时调用该方法
+#### 13.4 trackEventNewCharacter()（必接）
+    用于统计创建角色的次数，请在创建角色成功后调用该方法
+#### 13.5 trackEventLevel()（必接）
+    用于统计角色等级变化，请在角色等级变化时调用该方法
+#### 13.6 trackEventVip()（必接）
+    用于统计玩家vip等级变化，请在玩家vip等级变化时调用该方法
+#### 13.7 trackEventVisitShop()（必接）
+    用于统计玩家打开游戏内商城页面的次数，请在显示游戏商城页面后调用该方法
+#### 13.8 trackEventCustom()（根据需求接入）
+    有时候运营会针对具体的数据分析增加特定的事件统计，那么请调用该接口，传入特定的事件名称
 ### 14. Facebook App Events统计（根据需求接入）
 根据我们市场推广的需求，集成了Facebook应用事件的统计功能。如果想使用该功能，首先要在“AndroidManifest.xml”文件中修改如下配置：
 ```xml

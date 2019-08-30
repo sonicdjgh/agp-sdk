@@ -42,9 +42,9 @@ apply plugin: 'com.google.gms.google-services'
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.6.53
-EGLS_AGS_VERSION=4.6.53
-EGLS_SUPPORT_VERSION=4.6.53
+EGLS_AGP_VERSION=4.6.62
+EGLS_AGS_VERSION=4.6.62
+EGLS_SUPPORT_VERSION=4.6.62
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -58,7 +58,6 @@ android {
 
 repositories {
     flatDir {
-        dirs project(':AGP').file('libs')
         dirs project(':AGS').file('libs')
     }
 }
@@ -72,7 +71,6 @@ dependencies {
 ```gradle
 repositories {
     flatDir {
-    	dirs 'libs'
         dirs project(':AGS').file('libs')
     }
 }
@@ -82,12 +80,6 @@ dependencies {
     api "com.egls.android:egls-agp-sdk:$EGLS_AGP_VERSION@aar"
     api project(':AGS')
     // base end
-
-
-    // global begin
-    api 'com.appsflyer:af-android-sdk:4+@aar'
-    api 'com.android.installreferrer:installreferrer:1.0'
-    // global end
 }
 ```
 #### 3.4 AGS lib 选择
@@ -106,6 +98,11 @@ dependencies {
     api 'com.android.support.constraint:constraint-layout:1.1.0'
     api 'com.android.support:appcompat-v7:27.0.0'
     // base end
+    
+    // appsflyer begin
+    api 'com.appsflyer:af-android-sdk:4+@aar'
+    api 'com.android.installreferrer:installreferrer:1.0'
+    // appsflyer end
 
     // global begin
     api 'com.google.android.gms:play-services-auth:16.+'
@@ -179,15 +176,18 @@ manifestPlaceholders = [
 #### 4.2 AGP Permission 配置
 ```Xml
 <!-- AGP begin -->
-<!-- AppsFlyer begin -->
-<!-- 如果现在接入的安卓包是针对除Google Play以外的其他应用商店，那么此权限一定需要声明，否则要删除该权限声明 -->
-<!-- <uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
-<!-- AppsFlyer end -->
+<!-- 暂没有可添加的配置 -->
 <!-- AGP end -->
 ```
 #### 4.3 AGS Permission 配置
 ```Xml
 <!-- AGS begin -->
+<!-- AppsFlyer begin -->
+<!-- 如果现在接入的安卓包是针对除Google Play以外的其他应用商店，那么此权限一定需要声明，否则要删除该权限声明 -->
+<!-- <uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
+<!-- AppsFlyer end -->
+
+
 <!-- Google Play begin -->
 <!-- 如果使用Google Play支付功能，请打开以下配置 -->
 <!--
@@ -255,7 +255,7 @@ manifestPlaceholders = [
         <intent-filter>
             <data
                 android:host="${applicationId}"
-                android:scheme="egls" />
+                android:scheme="egls${EGLS_APP_ID}" />
 
             <action android:name="android.intent.action.VIEW" />
 
@@ -283,8 +283,8 @@ manifestPlaceholders = [
         android:value="${EGLS_PAY_IS_SANDBOX}" />
     <!-- Base end -->
         
-    
-    <!-- AGP begin -->
+
+    <!-- AGS begin -->
     <!-- AppsFlyer begin -->
     <!-- 为了确保所有Install Referrer监听器可以成功监听由系统播放的referrer参数，请一定在AndroidManifest.xml中将AppsFlyer的监听器置于所有同类监听器第一位，并保证receiver tag在application tag中 -->
     <!-- 如果已经有其他的receiver来监听“INSTALL_REFERRER”， 那么请用“MultipleInstallBroadcastReceiver” -->
@@ -303,10 +303,8 @@ manifestPlaceholders = [
         android:value="${APPS_FLYER_DEV_KEY}" />
     -->
     <!-- AppsFlyer end -->
-    <!-- AGP end -->
 
 
-    <!-- AGS begin -->
     <!-- Google begin -->
     <meta-data
         android:name="CHANNEL_GOOGLE_CLIENT_ID"
@@ -748,7 +746,7 @@ AGPManager.openLINEPromotion(this, new OnSimpleActionCallback() {
 });
 ```
 ### 14. AppsFlyer数据统计（根据运营需求对接）
-AppsFlyer主要用于港澳台地区发行的游戏的数据统计，启用该功能的做法，首先要按照上面所提到的，在AndroidManifest.xml文件中打开对应的配置。对于AppsFlyer统计功能的相关接口调用，其相关初始化部分的逻辑已经嵌入进SDK当中，因此开发者无需关心较为复杂的初始化步骤，只需根据需求，调用对应的接口即可。<br /><br />
+AppsFlyer主要用于Global业务的数据统计，启用该功能的做法，首先要按照上面所提到的，在AndroidManifest.xml文件中打开对应的配置。对于AppsFlyer统计功能的相关接口调用，其相关初始化部分的逻辑已经嵌入进SDK当中，因此开发者无需关心较为复杂的初始化步骤，只需根据需求，调用对应的接口即可。<br /><br />
 **注**：通过调用AGPManager.getAppsFlyerHelper()来获取接口对象。
 #### 14.1 trackEventOneSplashImage()（必接）
     用于统计首次播放游戏闪屏动画的次数，请在开始播放动画时调用该方法
@@ -768,7 +766,6 @@ AppsFlyer主要用于港澳台地区发行的游戏的数据统计，启用该�
     用于统计首次加载游戏资源结束的次数，请在加载游戏资源结束时调用该方法
 #### 14.9 trackEventCustom()（根据需求接入）
     有时候运营会针对具体的数据分析增加特定的事件统计，那么请调用该接口，传入特定的事件名称
-**注**：这里需要强调一下“首次”的概念。我们所说的“首次”，并不是仅仅指游戏第一次调用接口，同时也强调了时机，即游戏第一次安装并启动后的第一次调用，被称为“首次”。相关“首次”的数据统计接口内部已经做了“首次”状态的逻辑判断，只需在对应的事件触发逻辑中调用该接口即可。
 ### 15. 其他注意事项
 1. 凡是游戏项目工程为Android Studio工程，并且在Gradle里配置了productFlavor来控制打包流程的，请务必在调用“AGPManager.initSDK()”接口前，写上如下逻辑代码：
 ```Java
