@@ -24,6 +24,9 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
+	
+	// 如果使用Firebase云消息推送功能，请打开以下配置
+    	// classpath 'com.google.gms:google-services:4.2.0'
     }
 }
 
@@ -34,6 +37,10 @@ allprojects {
 	mavenCentral()
     }
 }
+```
+如果使用Firebase云消息推送功能，请在当前游戏Module工程目录下的build.gradle文件中加上如下配置：
+```gradle
+apply plugin: 'com.google.gms.google-services'
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
@@ -111,6 +118,10 @@ dependencies {
     api 'com.google.android.gms:play-services-gcm:16.+'
     api 'com.google.android.gms:play-services-iid:16.+'
     api 'com.google.android.gms:play-services-tasks:16.+'
+    
+    // 如果使用 Firebase 云消息推送，请打开下面的配置
+    // api 'com.google.firebase:firebase-core:16.0.8'
+    // api 'com.google.firebase:firebase-messaging:18.0.0'
     
     api 'com.facebook.android:facebook-core:5.+'
     api 'com.facebook.android:facebook-login:5.+'
@@ -311,6 +322,33 @@ manifestPlaceholders = [
     <meta-data
         android:name="CHANNEL_GOOGLE_CLIENT_ID"
         android:value="${GOOGLE_WEB_CLIENT_ID}" />
+	
+    <!-- 如果使用Firebase云消息推送，请打开以下配置 -->
+    <!--
+    <service
+        android:name="com.egls.socialization.google.firebase.FirebaseMesgService"
+        android:exported="false">
+        <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+        </intent-filter>
+    </service>
+    -->
+	
+    <!-- 如果使用Firebase云消息推送，请打开以下配置 -->
+    <!-- Firebase云消息推送所使用的icon图案 -->
+    <!--
+    <meta-data
+        android:name="com.google.firebase.messaging.default_notification_icon"
+        android:resource="@drawable/egls_push_icon" />
+    -->
+	
+    <!-- 如果使用Firebase云消息推送，请打开以下配置 -->
+    <!-- Firebase云消息推送所使用的icon底色 -->
+    <!--
+    <meta-data
+        android:name="com.google.firebase.messaging.default_notification_color"
+        android:resource="@color/support_egls" />
+    -->
 				   
     <!-- 如果使用Google Play Game成就功能，请打开以下配置 -->	
     <!--
@@ -569,26 +607,29 @@ String shareLink = "";// 分享链接
 boolean isTimelineCb = false;
 AGPManager.eglsShare(this, type, shareTitle, shareText, shareImageFilePath, shareLink, isTimelineCb);
 ```
-### 13. AppsFlyer数据统计（根据运营需求对接）
+### 13. Firebase云消息推送（选接）
+当有需要使用Firebase的云消息推送时，首先请在游戏项目的“/res/drawable”目录下，添加一张名为“egls_push_icon”的图片。然后，除了按照对接文档中“3.1”、“3.4”和“4.4”的说明进行配置以外，还需要从Google后台下载一个名为“google-services.json”的文件（该文件由我方运营提供），并将该文件放在当前游戏Module工程目录下，如下图所示：<br/>
+![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/S4001.png)<br/>
+### 14. AppsFlyer数据统计（根据运营需求对接）
 AppsFlyer主要用于KR业务的数据统计，启用该功能的做法，首先要按照上面所提到的，在AndroidManifest.xml文件中打开对应的配置。对于AppsFlyer统计功能的相关接口调用，其相关初始化部分的逻辑已经嵌入进SDK当中，因此开发者无需关心较为复杂的初始化步骤，只需根据需求，调用对应的接口即可。<br /><br />
 **注**：通过调用AGPManager.getAppsFlyerHelper()来获取接口对象。
-#### 13.1 trackEventOneSplashImage()（必接）
+#### 14.1 trackEventOneSplashImage()（必接）
     用于统计首次播放游戏闪屏动画的次数，请在开始播放动画时调用该方法
-#### 13.2 trackEventTutorialStart()（必接）
+#### 14.2 trackEventTutorialStart()（必接）
     用于统计新手任务开始的次数，请在新手任务开始时调用该方法
-#### 13.3 trackEventTutorialComplete()（必接）
+#### 14.3 trackEventTutorialComplete()（必接）
     用于统计新手任务结束的次数，请在新手任务结束时调用该方法
-#### 13.4 trackEventNewCharacter()（必接）
+#### 14.4 trackEventNewCharacter()（必接）
     用于统计创建角色的次数，请在创建角色成功后调用该方法
-#### 13.5 trackEventLevel()（必接）
+#### 14.5 trackEventLevel()（必接）
     用于统计角色等级变化，请在角色等级变化时调用该方法
-#### 13.6 trackEventVip()（必接）
+#### 14.6 trackEventVip()（必接）
     用于统计玩家vip等级变化，请在玩家vip等级变化时调用该方法
-#### 13.7 trackEventVisitShop()（必接）
+#### 14.7 trackEventVisitShop()（必接）
     用于统计玩家打开游戏内商城页面的次数，请在显示游戏商城页面后调用该方法
-#### 13.8 trackEventCustom()（根据需求接入）
+#### 14.8 trackEventCustom()（根据需求接入）
     有时候运营会针对具体的数据分析增加特定的事件统计，那么请调用该接口，传入特定的事件名称
-### 14. Facebook App Events统计（根据需求接入）
+### 15. Facebook App Events统计（根据需求接入）
 根据我们市场推广的需求，集成了Facebook应用事件的统计功能。如果想使用该功能，首先要在“AndroidManifest.xml”文件中修改如下配置：
 ```xml
 <!-- 如果要求接入Facebook App Events统计接口，请将value改为true -->
@@ -607,7 +648,7 @@ android {
 }
 ```
 下面就相关接口作简要说明：
-#### 14.1. logSpentCreditsEvent()（必接）
+#### 15.1. logSpentCreditsEvent()（必接）
 ```Java
 // 花费点数：用户在完成交易时花费您公司或应用程序专用的点数，例如应用内货币
 String contentId = System.currentTimeMillis() + "";// 如果无其他需求，可传入一个时间戳作为contentId
@@ -615,26 +656,26 @@ String contentType = "钻石";
 double totalValue = 20;
 AGPManager.getFacebookLogger().logSpentCreditsEvent(contentId, contentType, totalValue);
 ```
-#### 14.2 logAchievedLevelEvent()（必接）
+#### 15.2 logAchievedLevelEvent()（必接）
 ```Java
 // 完成关卡：完成您在应用程序、公司或组织中定义的特定关卡
 String level = "第一关";
 AGPManager.getFacebookLogger().logAchievedLevelEvent(level);
 ```
-#### 14.3 logUnlockedAchievementEvent()（必接）
+#### 15.3 logUnlockedAchievementEvent()（必接）
 ```Java
 // 解锁成就：完成您在应用程序、公司或组织中想要奖励的特定活动或操作。例如，推荐一位好友、完善个人主页等
 String description = "百万富翁";
 AGPManager.getFacebookLogger().logUnlockedAchievementEvent(description);
 ```
-#### 14.4 logCompletedTutorialEvent()（必接）
+#### 15.4 logCompletedTutorialEvent()（必接）
 ```Java
 // 完成教程学习：完成应用中的教程学习
 String contentId = System.currentTimeMillis() + "";// 如果无其他需求，可传入一个时间戳作为contentId
 boolean success = true;
 AGPManager.getFacebookLogger().logCompletedTutorialEvent(contentId, success);
 ``` 
-### 15. 其他注意事项
+### 16. 其他注意事项
 1. 凡是游戏项目工程为Android Studio工程，并且在Gradle里配置了productFlavor来控制打包流程的，请务必在调用“AGPManager.initSDK()”接口前，写上如下逻辑代码：
 ```Java
 AGPManager.addFlavorsBasePackage(BuildConfig.class.getPackage().getName());
