@@ -298,6 +298,12 @@ manifestPlaceholders = [
         android:name="CHANNEL_AF_DEV_KEY"
         android:value="${APPS_FLYER_DEV_KEY}" />
     -->
+	
+    <!-- 如果使用OneStore支付，请打开以下配置
+    <meta-data
+        android:name="CHANNEL"
+        android:value="onestore" />
+    -->
     <!-- AppsFlyer end -->
 	
 	
