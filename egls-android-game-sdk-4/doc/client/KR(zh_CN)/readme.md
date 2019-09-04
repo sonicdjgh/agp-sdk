@@ -335,7 +335,7 @@ manifestPlaceholders = [
     -->
 	
     <!-- 如果使用Firebase云消息推送，请打开以下配置 -->
-    <!-- Firebase云消息推送所使用的icon图案 -->
+    <!-- Firebase云消息推送所使用的icon图案，背景透明，图案部分为白色 -->
     <!--
     <meta-data
         android:name="com.google.firebase.messaging.default_notification_icon"
