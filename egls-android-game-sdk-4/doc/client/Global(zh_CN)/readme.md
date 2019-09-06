@@ -42,9 +42,9 @@ apply plugin: 'com.google.gms.google-services'
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.6.64
-EGLS_AGS_VERSION=4.6.64
-EGLS_SUPPORT_VERSION=4.6.64
+EGLS_AGP_VERSION=4.6.65
+EGLS_AGS_VERSION=4.6.65
+EGLS_SUPPORT_VERSION=4.6.65
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -123,13 +123,20 @@ dependencies {
     api 'com.facebook.android:facebook-share:5.+'
     // global end
     
-    // tw begin
+    // googleplay begin
+    // 如果使用 GooglePlay 支付，请打开下面的配置
+    // api 'com.android.billingclient:billing:2.0.3'
+    // googleplay end
+    
+    // mycard begin
     // 如果使用 MyCard 支付，请打开下面的配置
     // api files('libs/tw/MyCardPaySDK.jar')
+    // mycard end
     
+    // gaash begin
     // 如果使用 Gash 支付，请打开下面的配置
     // api files('libs/tw/clientsdk_product_v2.jar')
-    // tw end
+    // gaash end
 }
 
 ```
@@ -345,14 +352,6 @@ manifestPlaceholders = [
     -->
 
     <!-- 如果使用Google Play支付功能，请打开以下配置 -->
-    <!-- 4.1.0版本以前name属性为“com.egls.socialization.google.play.BillingActivity” -->
-    <!--
-    <activity
-        android:name="com.egls.socialization.google.play.GooglePlayActivity"
-        android:configChanges="fontScale|orientation|keyboardHidden|locale|navigation|screenSize|uiMode"
-        android:screenOrientation="behind"
-        android:theme="@style/EglsTheme.AppCompat.Translucent.NoActionBar.Fullscreen.NoAnimation" />
-
     <meta-data
         android:name="CHANNEL_GOOGLE_PUBLIC_KEY"
         android:value="${GOOGLE_PLAY_PUBLIC_KEY}" />
