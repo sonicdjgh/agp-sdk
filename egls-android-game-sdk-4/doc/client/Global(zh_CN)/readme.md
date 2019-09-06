@@ -97,14 +97,12 @@ dependencies {
     api "com.egls.android:egls-android-support:$EGLS_SUPPORT_VERSION@aar"
     api 'com.android.support.constraint:constraint-layout:1.1.0'
     api 'com.android.support:appcompat-v7:27.0.0'
-    // base end
     
     // appsflyer begin
     api 'com.appsflyer:af-android-sdk:4+@aar'
     api 'com.android.installreferrer:installreferrer:1.0'
     // appsflyer end
 
-    // global begin
     api 'com.google.android.gms:play-services-auth:16.+'
     api 'com.google.android.gms:play-services-base:16.+'
     api 'com.google.android.gms:play-services-basement:16.+'
@@ -121,7 +119,7 @@ dependencies {
     api 'com.facebook.android:facebook-core:5.+'
     api 'com.facebook.android:facebook-login:5.+'
     api 'com.facebook.android:facebook-share:5.+'
-    // global end
+    // base end
     
     // googleplay begin
     // 如果使用 GooglePlay 支付，请打开下面的配置
@@ -133,10 +131,10 @@ dependencies {
     // api files('libs/tw/MyCardPaySDK.jar')
     // mycard end
     
-    // gaash begin
+    // gash begin
     // 如果使用 Gash 支付，请打开下面的配置
     // api files('libs/tw/clientsdk_product_v2.jar')
-    // gaash end
+    // gash end
 }
 
 ```
