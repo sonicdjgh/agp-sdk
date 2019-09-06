@@ -44,9 +44,9 @@ apply plugin: 'com.google.gms.google-services'
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.6.64
-EGLS_AGS_VERSION=4.6.64
-EGLS_SUPPORT_VERSION=4.6.64
+EGLS_AGP_VERSION=4.6.65
+EGLS_AGS_VERSION=4.6.65
+EGLS_SUPPORT_VERSION=4.6.65
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -102,7 +102,6 @@ dependencies {
     api "com.egls.android:egls-android-support:$EGLS_SUPPORT_VERSION@aar"
     api 'com.android.support.constraint:constraint-layout:1.1.0'
     api "com.android.support:appcompat-v7:27.0.0"
-    // base end
     
     // appsflyer begin
     api 'com.appsflyer:af-android-sdk:4+@aar'
@@ -137,10 +136,17 @@ dependencies {
         exclude group: 'com.mcxiaoke.volley', module: 'library'
     }
     api(name: 'cafeSdk-4.2.1', ext: 'aar')
+    // base end
     
-    // 如果使用 OneStore 支付，请打开下面的配置：
+    // googleplay begin
+    // 如果使用 GooglePlay 支付，请打开下面的配置
+    // api 'com.android.billingclient:billing:2.0.3'
+    // googleplay end
+    
+    // onestore begin
+    // 如果使用 OneStore 支付，请打开下面的配置：
     // api files('libs/kr/iap_plugin_v17.01.00_20180206.jar');
-    // kr end
+    // onestore end
 }
 ```
 #### 3.5 关于Unity的SDK接入
@@ -358,14 +364,7 @@ manifestPlaceholders = [
     -->
 
     <!-- 如果使用Google Play支付功能，请打开以下配置 -->	
-    <!-- 4.1.0版本以前name属性为“com.egls.socialization.google.play.BillingActivity” -->
-    <!--
-    <activity
-        android:name="com.egls.socialization.google.play.GooglePlayActivity"
-        android:configChanges="fontScale|orientation|keyboardHidden|locale|navigation|screenSize|uiMode"
-        android:screenOrientation="behind"
-        android:theme="@style/EglsTheme.AppCompat.Translucent.NoActionBar.Fullscreen.NoAnimation" />
-
+    <--
     <meta-data
         android:name="CHANNEL_GOOGLE_PUBLIC_KEY"
         android:value="${GOOGLE_PLAY_PUBLIC_KEY}" />
