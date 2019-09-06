@@ -364,7 +364,7 @@ manifestPlaceholders = [
     -->
 
     <!-- 如果使用Google Play支付功能，请打开以下配置 -->	
-    <--
+    <!--
     <meta-data
         android:name="CHANNEL_GOOGLE_PUBLIC_KEY"
         android:value="${GOOGLE_PLAY_PUBLIC_KEY}" />
