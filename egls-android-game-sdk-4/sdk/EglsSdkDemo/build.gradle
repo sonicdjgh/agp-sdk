@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     buildToolsVersion "28.0.3"
+
     defaultConfig {
         applicationId "com.egls.demo"
         minSdkVersion 17
@@ -10,7 +11,17 @@ android {
         versionCode 1
         versionName "1.0"
         flavorDimensions "versionCode"
+
+        manifestPlaceholders = [
+                // base begin
+                EGLS_APP_ID              : "",
+                EGLS_PUBLISHMENT_AREA    : "",
+                EGLS_PAY_CHANNEL         : "",
+                EGLS_PAY_IS_SANDBOX      : "false",
+                // base end
+        ]
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -21,14 +32,14 @@ android {
 
 repositories {
     flatDir {
-        dirs project(':AGS').file('libs')
-
-        // kr begin
-        // dirs project(':AGS').file('libs/kr')
-        // kr end
+        dirs 'libs/cn'
+        dirs 'libs/tw'
+        dirs 'libs/kr'
     }
 }
 
 dependencies {
-    implementation project(':AGP')
+    implementation "com.egls.android:platform:$EGLS_SDK_VERSION@aar"
+    implementation "com.egls.android:support:$EGLS_SDK_VERSION@aar"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
 }

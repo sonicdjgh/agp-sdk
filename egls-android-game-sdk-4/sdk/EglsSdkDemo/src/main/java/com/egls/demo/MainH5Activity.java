@@ -13,6 +13,8 @@ import com.egls.support.utils.AppUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Map;
+
 public class MainH5Activity extends Activity {
 
     private String jsLoginCallbackMethodName = "";
@@ -86,7 +88,7 @@ public class MainH5Activity extends Activity {
             }
 
             @Override
-            public void onHandleGuestBind(int state, String accountType, String nickName) {// SDK游客绑定的結果处理
+            public void onHandleChannelBind(int state, String accountType, String nickName) {// SDK游客绑定的結果处理
                 switch (state) {
                     case Constants.SDK_STATE_SUCCESS:// 游客绑定成功后的处理
                         break;
@@ -135,6 +137,11 @@ public class MainH5Activity extends Activity {
                 } else {
                     // 玩家选择继续游戏后的处理
                 }
+            }
+
+            @Override
+            public void onHandleAppsFlyerData(int state, int type, Map<String, String> data) {
+
             }
         });
     }
