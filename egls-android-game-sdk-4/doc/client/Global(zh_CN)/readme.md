@@ -33,6 +33,7 @@ allprojects {
         google()
         jcenter()
 	mavenCentral()
+	maven { url "https://dl.bintray.com/sonicdjgh/maven/" }
     }
 }
 ```
