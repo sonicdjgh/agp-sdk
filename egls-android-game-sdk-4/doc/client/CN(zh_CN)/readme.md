@@ -44,44 +44,7 @@ allprojects {
 EGLS_SDK_VERSION=4.6.76
 android.enableAapt2=false
 ```
-#### 3.2 依赖关系
-![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/S4000.png)<br/>
-如上图所示：假设Demo为SDK对接完毕的安卓游戏工程，那么Demo引入Module“AGP”，则需要在Demo中的“build.gradle”里添加如下配置：
-```gradle
-android {
-    buildToolsVersion "28.0.3"
-    compileSdkVersion 28
-}
-
-repositories {
-    flatDir {
-    	dirs project(':AGP').file('libs')
-        dirs project(':AGS').file('libs')
-    }
-}
-
-dependencies {
-    implementation project(':AGP')
-}
-```
-#### 3.3 AGP lib 选择
-针对于在中国大陆地区发行的游戏，请在Module“AGP”的“build.gradle”文件里打开如下图所示的配置：<br/>
-```gradle
-repositories {
-    flatDir {
-        dirs 'libs'
-        dirs project(':AGS').file('libs')
-    }
-}
-
-dependencies {
-    // base begin
-    api "com.egls.android:egls-agp-sdk:$EGLS_AGP_VERSION@aar"
-    api project(':AGS')
-    // base end
-}
-```
-#### 3.4 AGS lib 选择
+#### 3.2 lib 选择
 针对于在中国大陆地区发行的游戏，请在Module“AGS”的“build.gradle”文件里打开如下图所示的配置：<br/>
 ```gradle
 repositories {
@@ -96,16 +59,26 @@ dependencies {
     api "com.egls.android:support:$EGLS_SDK_VERSION@aar"
     api 'com.android.support.constraint:constraint-layout:1.1.0'
     // base 
-
-    // cn begin
-    api files('libs/cn/alipaySdk-20180316.jar')
-    api files('libs/cn/open_sdk_r5781_lite.jar')
+    
+    // wechat begin
     api files('libs/cn/wechat-sdk-android-with-mta.jar')
-    api 'com.sina.weibo.sdk:core:4.3.4:openDefaultRelease@aar'
-    // cn end
+    // wechat end
+    
+    // qq begin
+    api files('libs/cn/open_sdk_r5781_lite.jar')
+    // qq end
+   	
+    // alipay begin
+    api files('libs/cn/alipaySdk-20180316.jar')
+    // alipay end
+
+    // weibo begin
+    // 如果使用新浪微博分享，请打开如下配置
+    // api 'com.sina.weibo.sdk:core:4.3.4:openDefaultRelease@aar'
+    // weibo end
 }
 ```
-#### 3.5 关于Unity的SDK接入
+#### 3.3 关于Unity的SDK接入
 a. 首先使用Android Studio自建一个安卓项目工程后并完成SDK的接入工作；<br/><br/>
 b. 请注意，游戏主Activity需要继承Unity的UnityPlayerActivity；<br/><br/>
 c. Google推荐对危险权限的使用有一定要求，需要加入申请权限的逻辑。但由于Unity会自动申请“AndroidManifest.xml”文件中所配置的危险权限，不便于逻辑控制。如果有需要，请在“AndroidManifest.xml”文件中的“application”标签内加入如下配置：
@@ -114,7 +87,7 @@ c. Google推荐对危险权限的使用有一定要求，需要加入申请权�
     android:name="unityplayer.SkipPermissionsDialog"
     android:value="true" />
 ```
-#### 3.6 其他
+#### 3.4 其他
 minSdkVersion = 17，targetSdkVersion = 28
 ### 4. AndroidManifest.xml文件配置
 #### 4.1 AndroidManifest.xml中的参数配置
@@ -137,22 +110,14 @@ manifestPlaceholders = [
                 // other end
         ]
 ```
-#### 4.2 AGP Permission 配置
+#### 4.2 Permission 配置
 ```Xml
-<!-- AGP begin -->
-<!-- 暂没有可添加的配置 -->
-<!-- AGP end -->
-```
-#### 4.3 AGS Permission 配置
-```Xml
-<!-- AGS begin -->
 <!-- 支付宝 begin -->
 <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 <!-- 支付宝 end -->
-<!-- AGS end -->
 ```
 请注意：以上 Permission 配置中只打开了SDK基础功能相关的配置，如果使用到其他功能，请打开对应的 Permission 配置！
-#### 4.4 Application相关配置
+#### 4.3 Application相关配置
 ```Xml
 <application
     android:allowBackup="false"
@@ -193,19 +158,14 @@ manifestPlaceholders = [
     <!-- Base end -->
 	
 
-    <!-- AGS begin -->
-    <!-- 微信 begin -->
-    <!-- 如果使用微信登录或微信分享功能，请打开以下配置 -->
+    <!-- wechat begin -->
     <!-- 需要在工程里建立一个名为“xxx.wxapi”的package，其中“xxx”为游戏的正式包名 -->	
-    <!--	
     <activity
         android:name="xxx.wxapi.WXEntryActivity"
         android:exported="true"
         android:screenOrientation="portrait"
         android:theme="@android:style/Theme.NoDisplay"/>
-    -->
 	
-    <!-- 微信 begin -->
     <!-- 如果使用微信支付功能，请打开以下配置 -->
     <!-- 需要在工程里建立一个名为“xxx.wxapi”的package，其中“xxx”为游戏的正式包名 -->	
     <!--
@@ -215,37 +175,18 @@ manifestPlaceholders = [
         android:screenOrientation="behind"
         android:theme="@android:style/Theme.NoDisplay" />
     -->    
-
-    <!-- 如果使用微信登录、微信支付或微信分享功能，请打开以下配置 -->	
-    <!--	
+		
     <meta-data
         android:name="wx_app_id"
         android:value="${WX_APP_ID}" />
-    -->
     
-    <!-- 如果使用微信登录、微信支付或微信分享功能，请打开以下配置 -->
-    <!--	
     <meta-data
         android:name="wx_secret"
         android:value="${WX_SECRET}" />
-    -->
-    <!-- 微信 end -->
+    <!-- wechat end -->
+		
 	
-    
-    <!-- 微博 begin -->
-    <!-- 如果使用微博分享功能，请打开以下配置 -->
-    <!-- 替换“MY_WB_APP_KEY”字样为微博平台上分配的应用key -->
-    <!--	
-    <meta-data
-        android:name="wb_app_key"
-        android:value="${WB_APP_KEY}" />
-    -->
-    <!-- 微博 end -->
-	
-	
-    <!-- QQ begin -->
-    <!-- 如果使用QQ登录或QQ分享功能，请打开以下配置 -->	
-    <!--
+    <!-- qq begin -->
     <activity
         android:name="com.tencent.tauth.AuthActivity"
         android:launchMode="singleTask"
@@ -264,18 +205,14 @@ manifestPlaceholders = [
         android:configChanges="orientation|keyboardHidden"
         android:screenOrientation="behind"
         android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
-    -->
-	
-    <!-- 如果使用QQ登录或微信分享功能，请打开以下配置 -->		
-    <!--	
+		
     <meta-data
         android:name="qq_app_id"
         android:value="${QQ_APP_ID}" />
-    -->
-    <!-- QQ end -->
+    <!-- qq end -->
 	
 	
-    <!-- 支付宝 begin -->
+    <!-- alipay begin -->
     <activity
         android:name="com.alipay.sdk.app.H5PayActivity"
         android:screenOrientation="portrait"/>
@@ -283,8 +220,18 @@ manifestPlaceholders = [
     <meta-data
         android:name="alipay_app_id"
         android:value="${ALIPAY_APP_ID}" />
-    <!-- 支付宝 end -->
-    <!-- AGS end -->
+    <!-- alipay end -->
+	
+    
+    <!-- sina weibo begin -->
+    <!-- 如果使用微博分享功能，请打开以下配置 -->
+    <!-- 替换“MY_WB_APP_KEY”字样为微博平台上分配的应用key -->
+    <!--	
+    <meta-data
+        android:name="wb_app_key"
+        android:value="${WB_APP_KEY}" />
+    -->
+    <!-- sina weibo end -->
 </application>
 ```
 ### 5. 基础方法实现（必接）
