@@ -60,6 +60,7 @@ dependencies {
     api "com.egls.android:platform:$EGLS_SDK_VERSION@aar"
     api "com.egls.android:support:$EGLS_SDK_VERSION@aar"
     api 'com.android.support.constraint:constraint-layout:1.1.0'
+    // base 
     
     // appsflyer begin
     api 'com.appsflyer:af-android-sdk:4+@aar'
