@@ -42,47 +42,10 @@ apply plugin: 'com.google.gms.google-services'
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.6.65
-EGLS_AGS_VERSION=4.6.65
-EGLS_SUPPORT_VERSION=4.6.65
+EGLS_SDK_VERSION=4.6.76
 android.enableAapt2=false
 ```
-#### 3.2 依赖关系
-![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/tw/S4TW000.png)<br/>
-如上图所示：假设Demo为SDK对接完毕的安卓游戏工程，那么Demo引入Module“AGP”，则需要在Demo中的“build.gradle”里添加如下配置：
-```gradle
-android {
-    buildToolsVersion "28.0.3"
-    compileSdkVersion 28
-}
-
-repositories {
-    flatDir {
-        dirs project(':AGS').file('libs')
-    }
-}
-
-dependencies {
-    implementation project(':AGP')
-}
-```
-#### 3.3 AGP lib 选择
-针对于在港台地区发行的游戏，请在Module“AGP”的“build.gradle”文件里打开如下图所示的配置：<br/>
-```gradle
-repositories {
-    flatDir {
-        dirs project(':AGS').file('libs')
-    }
-}
-
-dependencies {
-    // base begin
-    api "com.egls.android:egls-agp-sdk:$EGLS_AGP_VERSION@aar"
-    api project(':AGS')
-    // base end
-}
-```
-#### 3.4 AGS lib 选择
+#### 3.2 lib 选择
 针对于在港台地区发行的游戏，请在Module“AGS”的“build.gradle”文件里打开如下图所示的配置：<br/>
 ```gradle
 repositories {
@@ -93,16 +56,16 @@ repositories {
 
 dependencies {
     // base begin
-    api "com.egls.android:egls-ags-sdk:$EGLS_AGS_VERSION@aar"
-    api "com.egls.android:egls-android-support:$EGLS_SUPPORT_VERSION@aar"
+    api "com.egls.android:platform:$EGLS_SDK_VERSION@aar"
+    api "com.egls.android:support:$EGLS_SDK_VERSION@aar"
     api 'com.android.support.constraint:constraint-layout:1.1.0'
-    api 'com.android.support:appcompat-v7:27.0.0'
     
     // appsflyer begin
     api 'com.appsflyer:af-android-sdk:4+@aar'
     api 'com.android.installreferrer:installreferrer:1.0'
     // appsflyer end
 
+    // google begin
     api 'com.google.android.gms:play-services-auth:16.+'
     api 'com.google.android.gms:play-services-base:16.+'
     api 'com.google.android.gms:play-services-basement:16.+'
@@ -112,19 +75,23 @@ dependencies {
     api 'com.google.android.gms:play-services-iid:16.+'
     api 'com.google.android.gms:play-services-tasks:16.+'
     
-    // 如果使用 Firebase 云消息推送，请打开下面的配置
-    // api 'com.google.firebase:firebase-core:16.0.8'
-    // api 'com.google.firebase:firebase-messaging:18.0.0'
-    
-    api 'com.facebook.android:facebook-core:5.+'
-    api 'com.facebook.android:facebook-login:5.+'
-    api 'com.facebook.android:facebook-share:5.+'
-    // base end
-    
     // googleplay begin
     // 如果使用 GooglePlay 支付，请打开下面的配置
     // api 'com.android.billingclient:billing:2.0.3'
     // googleplay end
+    
+    // firebase begin
+    // 如果使用 Firebase 云消息推送，请打开下面的配置
+    // api 'com.google.firebase:firebase-core:16.0.8'
+    // api 'com.google.firebase:firebase-messaging:18.0.0'
+    // firebase end
+    // google end
+    
+    // facebook begin
+    api 'com.facebook.android:facebook-core:5.+'
+    api 'com.facebook.android:facebook-login:5.+'
+    api 'com.facebook.android:facebook-share:5.+'
+    // facebook end
     
     // mycard begin
     // 如果使用 MyCard 支付，请打开下面的配置
@@ -138,7 +105,7 @@ dependencies {
 }
 
 ```
-#### 3.5 关于Unity的SDK接入
+#### 3.3 关于Unity的SDK接入
 a. 首先使用Android Studio自建一个安卓项目工程后并完成SDK的接入工作；<br/><br/>
 b. 请注意，游戏主Activity需要继承Unity的UnityPlayerActivity；<br/><br/>
 c. Google推荐对危险权限的使用有一定要求，需要加入申请权限的逻辑。但由于Unity会自动申请“AndroidManifest.xml”文件中所配置的危险权限，不便于逻辑控制。如果有需要，请在“AndroidManifest.xml”文件中的“application”标签内加入如下配置：
@@ -153,7 +120,7 @@ d. 如果发现SDK的悬浮窗无法响应手势动作，请在“AndroidManifes
     android:name="unityplayer.ForwardNativeEventsToDalvik" 
     android:value="true"/>
 ```
-#### 3.6 其他
+#### 3.4 其他
 minSdkVersion = 17，targetSdkVersion = 28
 ### 4. AndroidManifest.xml文件配置
 #### 4.1 AndroidManifest.xml中的参数配置
@@ -178,15 +145,8 @@ manifestPlaceholders = [
                 // other end
         ]
 ```
-#### 4.2 AGP Permission 配置
+#### 4.2 Permission 配置
 ```Xml
-<!-- AGP begin -->
-<!-- 暂没有可添加的配置 -->
-<!-- AGP end -->
-```
-#### 4.3 AGS Permission 配置
-```Xml
-<!-- AGS begin -->
 <!-- AppsFlyer begin -->
 <!-- 如果现在接入的安卓包是针对除Google Play以外的其他应用商店，那么此权限一定需要声明，否则要删除该权限声明 -->
 <!-- <uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
@@ -233,10 +193,9 @@ manifestPlaceholders = [
 <uses-feature android:name="android.hardware.camera.autofocus" />
 -->
 <!-- Mycard end -->
-<!-- AGS end -->
 ```
 请注意：以上 Permission 配置中只打开了SDK基础功能相关的配置，如果使用到其他功能，请打开对应的 Permission 配置！
-#### 4.4 Application相关配置
+#### 4.3 Application相关配置
 ```Xml
 <!-- 如果用Mycard支付功能，请在application标签内添加属性 android:name="tw.com.mycard.sdk.libs.PSDKApplication" -->
     android:allowBackup="false"
@@ -289,7 +248,6 @@ manifestPlaceholders = [
     <!-- Base end -->
         
 
-    <!-- AGS begin -->
     <!-- AppsFlyer begin -->
     <!-- 为了确保所有Install Referrer监听器可以成功监听由系统播放的referrer参数，请一定在AndroidManifest.xml中将AppsFlyer的监听器置于所有同类监听器第一位，并保证receiver tag在application tag中 -->
     <!-- 如果已经有其他的receiver来监听“INSTALL_REFERRER”， 那么请用“MultipleInstallBroadcastReceiver” -->
