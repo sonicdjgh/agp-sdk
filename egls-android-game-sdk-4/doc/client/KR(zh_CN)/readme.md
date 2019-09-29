@@ -45,9 +45,9 @@ apply plugin: 'com.google.gms.google-services'
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.6.65
-EGLS_AGS_VERSION=4.6.65
-EGLS_SUPPORT_VERSION=4.6.65
+EGLS_AGP_VERSION=4.6.76
+EGLS_AGS_VERSION=4.6.76
+EGLS_SUPPORT_VERSION=4.6.76
 android.enableAapt2=false
 ```
 #### 3.2 lib 选择
@@ -157,15 +157,8 @@ manifestPlaceholders = [
                 // other end
         ]
 ```
-#### 4.2 AGP Permission 配置
+#### 4.2 Permission 配置
 ```Xml
-<!-- AGP begin -->
-<!-- 暂没有可添加的配置 -->
-<!-- AGP end -->
-```
-#### 4.3 AGS Permission 配置
-```Xml
-<!-- AGS begin -->
 <!-- AppsFlyer begin -->
 <!-- 如果现在接入的安卓包是针对除Google Play以外的其他应用商店，那么此权限一定需要声明，否则要删除该权限声明 -->
 <!-- <uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
@@ -202,10 +195,9 @@ manifestPlaceholders = [
 <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 -->
 <!-- OneStore end -->
-<!-- AGS end -->
 ```
 请注意：以上 Permission 配置中只打开了SDK基础功能相关的配置，如果使用到其他功能，请打开对应的 Permission 配置！
-#### 4.4 Application相关配置
+#### 4.3 Application相关配置
 ```Xml
 <application
     android:allowBackup="false"
@@ -260,7 +252,6 @@ manifestPlaceholders = [
     <!-- Base end -->
 
 
-    <!-- AGS begin -->
     <!-- AppsFlyer begin -->
     <!-- 为了确保所有Install Referrer监听器可以成功监听由系统播放的referrer参数，请一定在AndroidManifest.xml中将AppsFlyer的监听器置于所有同类监听器第一位，并保证receiver tag在application tag中 -->
     <!-- 如果已经有其他的receiver来监听“INSTALL_REFERRER”， 那么请用“MultipleInstallBroadcastReceiver” -->
@@ -397,7 +388,6 @@ manifestPlaceholders = [
         android:name="naver_cafe_id"
         android:value="${NAVER_CAFE_ID}" /> 
     <!-- NaverCafe end -->
-    <!-- AGS end -->
 </application>
 ```
 ### 5. 基础方法实现（必接）
@@ -642,35 +632,4 @@ AGPManager.getFacebookLogger().logCompletedTutorialEvent(contentId, success);
 ```Java
 AGPManager.addFlavorsBasePackage(BuildConfig.class.getPackage().getName());
 ```
-2. Google推荐的审核中，会对游戏首次运行时所使用的必要“危险权限”的申请和使用进行检查。SDK会主动申请“android.permission.WRITE_EXTERNAL_STORAGE”权限，但如果游戏还另需申请其他的“危险权限”，可以在调用“AGPManager.initSDK()”接口前，使用“addNecessaryPermission()”接口。例如：
-```Java
-AGPManager.addNecessaryPermission(Manifest.permission.READ_PHONE_STATE);
-AGPManager.addNecessaryPermission(Manifest.permission.RECORD_AUDIO);
-```
-3. 同样也是为了适应Google推荐的审核要求，SDK在游戏第一次安装并启动后，会先弹出一个关于危险权限使用的说明。SDK默认的说明只有关于SD卡权限的使用说明，如果游戏在初始化时有使用到其他的危险权限，那么可以在调用“AGPManager.initSDK()”接口前，使用如下方法来修改提示文本：
-```Java
-// 需要注意的是，该接口是直接替换原默认文本的，所以还需要加上SD卡权限的使用说明。
-String permissionContent = "xxx";
-AGPManager.addPermissionContent(permissionContent);
-```
-### 附表 - publishmentArea
-publishmentArea | value
----|---
-中国大陆 | 1
-港奥台地区 | 2
-韩国 | 3
-日本 | 4
-美国 | 5
-俄罗斯 | 6
-泰国 | 7
-越南 | 8
-印度尼西亚 | 9
-新加坡 | 10
-
-### 附表 - payChannel
-payChannel | value
----|---
-Google Play | 2
-Mycard | 3
-OneStore | 4
-Gash | 5
+2. Google推荐的审核中，会对游戏
