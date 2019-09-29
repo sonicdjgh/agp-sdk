@@ -5,9 +5,9 @@
 ### SDK展示
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/demo-kr-login.gif)
 ### Version：4.6.76
-调整SDK内部结构，将原Module"AGS"并入到“support”支持库中，修改了相关库名，如下：
-“com.egls.android:egls-agp-sdk” 修改为 “com.egls.android:platform”;
-“com.egls.android:egls-agp-sdk” 修改为 “com.egls.android:support”;
+调整SDK内部结构，将原Module"AGS"并入到“support”支持库中，修改了相关库名，如下：<br />
+“com.egls.android:egls-agp-sdk” 修改为 “com.egls.android:platform”;<br />
+“com.egls.android:egls-android-support” 修改为 “com.egls.android:support”;<br />
 ### Version：4.6.65
 根据google最新的官方信息（“Google Play 结算服务 AIDL”已弃用，不久将来会移除），现内部采用“Google Play 结算库”，并更新相关逻辑。相关修改如下：<br />
 1. 删除AndroidMenifest.xml文件中关于“GooglePlayActivity”的配置；<br />
