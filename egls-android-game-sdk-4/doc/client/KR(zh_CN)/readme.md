@@ -63,13 +63,14 @@ dependencies {
     api "com.egls.android:platform:$EGLS_SDK_VERSION@aar"
     api "com.egls.android:support:$EGLS_SDK_VERSION@aar"
     api 'com.android.support.constraint:constraint-layout:1.1.0'
+    // base end
     
     // appsflyer begin
     api 'com.appsflyer:af-android-sdk:4+@aar'
     api 'com.android.installreferrer:installreferrer:1.0'
     // appsflyer end
     
-    // kr begin
+    // google begin
     api 'com.google.android.gms:play-services-auth:16.+'
     api 'com.google.android.gms:play-services-base:16.+'
     api 'com.google.android.gms:play-services-basement:16.+'
@@ -79,14 +80,25 @@ dependencies {
     api 'com.google.android.gms:play-services-iid:16.+'
     api 'com.google.android.gms:play-services-tasks:16.+'
     
+    // googleplay begin
+    // 如果使用 GooglePlay 支付，请打开下面的配置
+    // api 'com.android.billingclient:billing:2.0.3'
+    // googleplay end
+    
+    // firebase begin
     // 如果使用 Firebase 云消息推送，请打开下面的配置
     // api 'com.google.firebase:firebase-core:16.0.8'
     // api 'com.google.firebase:firebase-messaging:18.0.0'
+    // firebase end
+    // google end
     
+    // facebook begin
     api 'com.facebook.android:facebook-core:5.+'
     api 'com.facebook.android:facebook-login:5.+'
     api 'com.facebook.android:facebook-share:5.+'
+    // facebook end
     
+    // navercafe begin
     api files('libs/kr/gson-2.8.0.jar');
     api files('libs/kr/3rdparty_login_library_android_4.1.4.jar')
     api files('libs/kr/api-gateway-hmac-2.3.1.jar')
@@ -97,12 +109,7 @@ dependencies {
         exclude group: 'com.mcxiaoke.volley', module: 'library'
     }
     api(name: 'cafeSdk-4.2.1', ext: 'aar')
-    // base end
-    
-    // googleplay begin
-    // 如果使用 GooglePlay 支付，请打开下面的配置
-    // api 'com.android.billingclient:billing:2.0.3'
-    // googleplay end
+    // navercafe end
     
     // onestore begin
     // 如果使用 OneStore 支付，请打开下面的配置：
