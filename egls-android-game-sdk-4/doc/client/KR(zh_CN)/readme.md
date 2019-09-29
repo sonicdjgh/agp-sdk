@@ -14,7 +14,7 @@
 #### 2.5 CHANNEL_ONESTORE_APP_ID
 在OneStore后台生成的应用id。
 ### 3. 环境搭建
-#### 3.1 gradle版本及设置
+#### 3.1 gradle版本及库引用地址设置
 gradle版本为4.1，并且需要在当前Project根目录下的build.gralde文件中加上如下配置：
 ```gradle
 buildscript {
@@ -35,6 +35,7 @@ allprojects {
     	google()
         jcenter()
 	mavenCentral()
+	maven { url "https://dl.bintray.com/sonicdjgh/maven/" }
     }
 }
 ```
@@ -49,45 +50,8 @@ EGLS_AGS_VERSION=4.6.65
 EGLS_SUPPORT_VERSION=4.6.65
 android.enableAapt2=false
 ```
-#### 3.2 依赖关系
-![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/kr/S4KR000.png)<br/>
-如上图所示：假设Demo为SDK对接完毕的安卓游戏工程，那么Demo引入Module“AGP”，则需要在Demo中的“build.gradle”里添加如下配置：
-```gradle
-android {
-    buildToolsVersion "28.0.3"
-    compileSdkVersion 28
-}
-
-repositories {
-    flatDir {
-        dirs project(':AGS').file('libs')
-        dirs project(':AGS').file('libs/kr')
-    }
-}
-
-dependencies {
-    implementation project(':AGP')
-}
-```
-#### 3.3 AGP lib 选择
-针对于在韩国地区发行的游戏，请在Module“AGP”的“build.gradle”文件里打开如下图所示的配置：<br/>
-```gradle
-repositories {
-    flatDir {
-        dirs project(':AGS').file('libs')
-        dirs project(':AGS').file('libs/kr')
-    }
-}
-
-dependencies {
-    // base begin
-    api "com.egls.android:egls-agp-sdk:$EGLS_AGP_VERSION@aar"
-    api project(':AGS')
-    // base end
-}
-```
-#### 3.4 AGS lib 选择
-针对于在韩国地区发行的游戏，请在Module“AGS”的“build.gradle”文件里打开如下图所示的配置：<br/>
+#### 3.2 lib 选择
+针对于在韩国地区发行的游戏，请在游戏工程的“build.gradle”文件里打开如下图所示的配置：<br/>
 ```gradle
 repositories {
     flatDir {
@@ -98,10 +62,9 @@ repositories {
 
 dependencies {
     // base begin
-    api "com.egls.android:egls-ags-sdk:$EGLS_AGS_VERSION@aar"
-    api "com.egls.android:egls-android-support:$EGLS_SUPPORT_VERSION@aar"
+    api "com.egls.android:platform:$EGLS_SDK_VERSION@aar"
+    api "com.egls.android:support:$EGLS_SDK_VERSION@aar"
     api 'com.android.support.constraint:constraint-layout:1.1.0'
-    api "com.android.support:appcompat-v7:27.0.0"
     
     // appsflyer begin
     api 'com.appsflyer:af-android-sdk:4+@aar'
@@ -149,7 +112,7 @@ dependencies {
     // onestore end
 }
 ```
-#### 3.5 关于Unity的SDK接入
+#### 3.3 关于Unity的SDK接入
 a. 首先使用Android Studio自建一个安卓项目工程后并完成SDK的接入工作；<br/><br/>
 b. 请注意，游戏主Activity需要继承Unity的UnityPlayerActivity；<br/><br/>
 c. Google推荐对危险权限的使用有一定要求，需要加入申请权限的逻辑。但由于Unity会自动申请“AndroidManifest.xml”文件中所配置的危险权限，不便于逻辑控制。如果有需要，请在“AndroidManifest.xml”文件中的“application”标签内加入如下配置：
@@ -164,7 +127,7 @@ d. 如果发现SDK的悬浮窗无法响应手势动作，请在“AndroidManifes
     android:name="unityplayer.ForwardNativeEventsToDalvik" 
     android:value="true"/>
 ```
-#### 3.6 其他
+#### 3.4 其他
 minSdkVersion = 17，targetSdkVersion = 28
 ### 4. AndroidManifest.xml文件配置
 #### 4.1 AndroidManifest.xml中的参数配置
