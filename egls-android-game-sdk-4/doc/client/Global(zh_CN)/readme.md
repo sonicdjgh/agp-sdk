@@ -12,7 +12,7 @@
 #### 2.4 com.facebook.sdk.ApplicationId
 在Facebook后台生成的应用id。
 ### 3. 环境搭建
-#### 3.1 gradle版本及设置
+#### 3.1 gradle版本及库引用地址设置
 gradle版本为4.1，并且需要在当前Project根目录下的build.gralde文件中加上如下配置：
 ```gradle
 buildscript {
