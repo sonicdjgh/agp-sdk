@@ -14,7 +14,7 @@
 #### 2.5 alipay_app_id
 在支付宝平台上分配的应用标识，用于支付宝支付
 ### 3. 环境搭建
-#### 3.1 gradle版本及设置
+#### 3.1 gradle版本及库引用地址设置
 gradle版本为4.1，并且需要在当前Project根目录下的build.gralde文件中加上如下配置：
 ```gradle
 buildscript {
@@ -32,19 +32,16 @@ allprojects {
     	google()
         jcenter()
 	mavenCentral()
+	maven { url "https://dl.bintray.com/sonicdjgh/maven/" }
 	
 	// 如果使用新浪微博分享，请打开以下配置
-        // maven {
-        //     url "https://dl.bintray.com/thelasterstar/maven/"
-        // }
+        // maven { url "https://dl.bintray.com/thelasterstar/maven/" }
     }
 }
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_AGP_VERSION=4.6.65
-EGLS_AGS_VERSION=4.6.65
-EGLS_SUPPORT_VERSION=4.6.65
+EGLS_SDK_VERSION=4.6.76
 android.enableAapt2=false
 ```
 #### 3.2 依赖关系
@@ -95,11 +92,10 @@ repositories {
 
 dependencies {
     // base begin
-    api "com.egls.android:egls-ags-sdk:$EGLS_AGS_VERSION@aar"
-    api "com.egls.android:egls-android-support:$EGLS_SUPPORT_VERSION@aar"
+    api "com.egls.android:platform:$EGLS_SDK_VERSION@aar"
+    api "com.egls.android:support:$EGLS_SDK_VERSION@aar"
     api 'com.android.support.constraint:constraint-layout:1.1.0'
-    api "com.android.support:appcompat-v7:27.0.0"
-    // base end
+    // base 
 
     // cn begin
     api files('libs/cn/alipaySdk-20180316.jar')
