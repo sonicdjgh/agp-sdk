@@ -543,6 +543,7 @@ public void onCreate() {
 }
 ```
 ```Java
+// 请在游戏的主Activity类中，按照如下进行接口的调用：
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
