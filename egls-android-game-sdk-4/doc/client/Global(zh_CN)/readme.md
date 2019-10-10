@@ -43,7 +43,7 @@ apply plugin: 'com.google.gms.google-services'
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_SDK_VERSION=4.6.76
+EGLS_SDK_VERSION=4.6.78
 android.enableAapt2=false
 ```
 #### 3.2 lib 选择
@@ -261,10 +261,14 @@ manifestPlaceholders = [
         </intent-filter>
     </receiver>
     
+    <meta-data
+        android:name="appsflyer_enable"
+        android:value="true" />
+    
     <!-- 如果有特殊需求修改devkey时，请打开以下配置 -->	
     <!--	
     <meta-data
-        android:name="CHANNEL_AF_DEV_KEY"
+        android:name="appsflyer_dev_key"
         android:value="${APPS_FLYER_DEV_KEY}" />
     -->
     <!-- AppsFlyer end -->
@@ -272,7 +276,7 @@ manifestPlaceholders = [
 
     <!-- Google begin -->
     <meta-data
-        android:name="CHANNEL_GOOGLE_CLIENT_ID"
+        android:name="google_client_id"
         android:value="${GOOGLE_WEB_CLIENT_ID}" />
 	
     <!-- 如果使用Firebase云消息推送，请打开以下配置 -->
@@ -312,7 +316,7 @@ manifestPlaceholders = [
     <!-- 如果使用Google Play支付功能，请打开以下配置 -->
     <!--
     <meta-data
-        android:name="CHANNEL_GOOGLE_PUBLIC_KEY"
+        android:name="google_public_key"
         android:value="${GOOGLE_PLAY_PUBLIC_KEY}" />
     -->
     <!-- Google end -->
@@ -322,15 +326,11 @@ manifestPlaceholders = [
     <meta-data
         android:name="com.facebook.sdk.ApplicationId"
         android:value="\0${FACEBOOK_APPLICATION_ID}" />
-						    
-    <meta-data
-        android:name="CNANNEL_PERMISSION_EMAIL"
-        android:value="true" />
 
     <!--如果游戏需要开启Facebook的“USER_FRIEND”权限，请打开以下配置 -->
     <!--
     <meta-data
-        android:name="CNANNEL_PERMISSION_USER_FRIEND"
+        android:name="facebook_user_friends_enable"
         android:value="true" />
     -->
 						    
@@ -491,7 +491,6 @@ manifestPlaceholders = [
         android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
     -->
     <!-- Gash end -->
-    <!-- AGS end -->
 </application>
 ```
 ### 5. 基础方法实现（必接）
@@ -533,6 +532,14 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 }
 ```
 ### 6. SDK初始化（必接）
+```Java
+\\ 如果游戏工程中有需要自定义Application的需求，那么请在自定义的Application类中，按照如下进行接口的调用：
+@Override
+public void onCreate() {
+    super.onCreate();
+    AGPManager.initApplication(this);
+}
+```
 ```Java
 @Override
 protected void onCreate(Bundle savedInstanceState) {
