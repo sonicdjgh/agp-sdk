@@ -41,7 +41,7 @@ allprojects {
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_SDK_VERSION=4.6.76
+EGLS_SDK_VERSION=4.6.78
 android.enableAapt2=false
 ```
 #### 3.2 lib 选择
@@ -120,6 +120,7 @@ manifestPlaceholders = [
 #### 4.3 Application相关配置
 ```Xml
 <application
+    android:name="com.egls.support.components.EglsApplication"
     android:allowBackup="false"
     android:icon="@drawable/icon"
     android:label="AGSDK Demo"
@@ -158,7 +159,7 @@ manifestPlaceholders = [
     <!-- Base end -->
 	
 
-    <!-- wechat begin -->
+    <!-- Wechat begin -->
     <!-- 需要在工程里建立一个名为“xxx.wxapi”的package，其中“xxx”为游戏的正式包名 -->	
     <activity
         android:name="xxx.wxapi.WXEntryActivity"
@@ -183,10 +184,10 @@ manifestPlaceholders = [
     <meta-data
         android:name="wx_secret"
         android:value="${WX_SECRET}" />
-    <!-- wechat end -->
+    <!-- Wechat end -->
 		
 	
-    <!-- qq begin -->
+    <!-- QQ begin -->
     <activity
         android:name="com.tencent.tauth.AuthActivity"
         android:launchMode="singleTask"
@@ -209,10 +210,10 @@ manifestPlaceholders = [
     <meta-data
         android:name="qq_app_id"
         android:value="${QQ_APP_ID}" />
-    <!-- qq end -->
+    <!-- QQ end -->
 	
 	
-    <!-- alipay begin -->
+    <!-- Alipay begin -->
     <activity
         android:name="com.alipay.sdk.app.H5PayActivity"
         android:screenOrientation="portrait"/>
@@ -220,10 +221,10 @@ manifestPlaceholders = [
     <meta-data
         android:name="alipay_app_id"
         android:value="${ALIPAY_APP_ID}" />
-    <!-- alipay end -->
+    <!-- Alipay end -->
 	
     
-    <!-- sina weibo begin -->
+    <!-- Sina Weibo begin -->
     <!-- 如果使用微博分享功能，请打开以下配置 -->
     <!-- 替换“MY_WB_APP_KEY”字样为微博平台上分配的应用key -->
     <!--	
@@ -231,7 +232,7 @@ manifestPlaceholders = [
         android:name="wb_app_key"
         android:value="${WB_APP_KEY}" />
     -->
-    <!-- sina weibo end -->
+    <!-- Sina Weibo end -->
 </application>
 ```
 ### 5. 基础方法实现（必接）
@@ -274,6 +275,15 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 ```
 ### 6. SDK初始化（必接）
 ```Java
+// 如果游戏工程中有需要自定义Application的需求，那么请在自定义的Application类中，按照如下进行接口的调用：
+@Override
+public void onCreate() {
+    super.onCreate();
+    AGPManager.initApplication(this);
+}
+```
+```Java
+// 请在游戏的主Activity类中，按照如下进行接口的调用：
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
