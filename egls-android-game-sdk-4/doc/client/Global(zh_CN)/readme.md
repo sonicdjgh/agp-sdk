@@ -3,11 +3,11 @@
 欢迎使用 ELive Android Game SDK，这篇SDK对接文档说明适用于在**全球**（**但不包含中国大陆及韩国**）地区发行的游戏。<br/><br/>
 从4.x.x版本起，我们采用了新的账号体系，所以并不兼容旧版（即同一个账号在登录后返回的uid与3.x.x版本的不一致）。如果您的游戏曾经接过旧版本的SDK，并且将要使用4.x.x版本的SDK时，请配合我们做游戏的强更及其他必要的更新操作（详情请咨询我方运营）。
 ### 2. 所需参数
-#### 2.1 eglsAppId
+#### 2.1 EGLS_APP_ID
 由我方给游戏分配的应用id，一个游戏对应一个。
-#### 2.2 CHANNEL_GOOGLE_PUBLIC_KEY
+#### 2.2 google_public_key
 在Goole Play后台生成的支付公钥。
-#### 2.3 CHANNEL_GOOGLE_CLIENT_ID
+#### 2.3 google_client_id
 在Google API后台“OAuth 2.0 客户端 ID”配置的列表中，关于“Web Client”项对应的“Client ID”参数值。
 #### 2.4 com.facebook.sdk.ApplicationId
 在Facebook后台生成的应用id。
