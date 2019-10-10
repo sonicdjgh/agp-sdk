@@ -200,6 +200,8 @@ manifestPlaceholders = [
 #### 4.3 Application相关配置
 ```Xml
 <!-- 如果用Mycard支付功能，请在application标签内添加属性 android:name="tw.com.mycard.sdk.libs.PSDKApplication" -->
+</application
+    android:name="com.egls.support.components.EglsApplication"
     android:allowBackup="false"
     android:icon="@drawable/icon"
     android:label="AGSDK Demo"
@@ -533,7 +535,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 ```
 ### 6. SDK初始化（必接）
 ```Java
-\\ 如果游戏工程中有需要自定义Application的需求，那么请在自定义的Application类中，按照如下进行接口的调用：
+// 如果游戏工程中有需要自定义Application的需求，那么请在自定义的Application类中，按照如下进行接口的调用：
 @Override
 public void onCreate() {
     super.onCreate();
@@ -712,25 +714,44 @@ AGPManager.openLINEPromotion(this, new OnSimpleActionCallback() {
 ```
 ### 14. AppsFlyer数据统计（根据运营需求对接）
 AppsFlyer主要用于Global业务的数据统计，启用该功能的做法，首先要按照上面所提到的，在AndroidManifest.xml文件中打开对应的配置。对于AppsFlyer统计功能的相关接口调用，其相关初始化部分的逻辑已经嵌入进SDK当中，因此开发者无需关心较为复杂的初始化步骤，只需根据需求，调用对应的接口即可。<br /><br />
-**注**：通过调用AGPManager.getAppsFlyerHelper()来获取接口对象。
-#### 14.1 trackEventOneSplashImage()（必接）
-    用于统计首次播放游戏闪屏动画的次数，请在开始播放动画时调用该方法
-#### 14.2 trackEventTutorialStart()（必接）
-    用于统计新手任务开始的次数，请在新手任务开始时调用该方法
-#### 14.3 trackEventTutorialComplete()（必接）
-    用于统计新手任务结束的次数，请在新手任务结束时调用该方法
-#### 14.4 trackEventNewCharacter()（必接）
-    用于统计创建角色的次数，请在创建角色成功后调用该方法
-#### 14.5 trackEventOneUpdateStart()（必接）
-    用于统计首次下载游戏资源开始的次数，请在下载游戏资源开始时调用该方法
-#### 14.6 trackEventOneUpdateComplete()（必接）
-    用于统计首次下载游戏资源结束的次数，请在下载游戏资源结束时调用该方法
-#### 14.7 trackEventOneLoadStart()（必接）
-    用于统计首次加载游戏资源开始的次数，请在加载游戏资源开始时调用该方法
-#### 14.8 trackEventOneLoadComplete()（必接）
-    用于统计首次加载游戏资源结束的次数，请在加载游戏资源结束时调用该方法
-#### 14.9 trackEventCustom()（根据需求接入）
-    有时候运营会针对具体的数据分析增加特定的事件统计，那么请调用该接口，传入特定的事件名称
+#### 14.1 闪屏动画首次启动事件追踪（必接）
+```Java
+AGPManager.trackEventCustom(EglsTracker.EVENT_ONE_SPLASH_IMAGE, null);
+```
+#### 14.2 新手任务开始事件追踪（必接）
+```Java
+AGPManager.trackEventCustom(EglsTracker.EVENT_TUTORIAL_START, null);
+```
+#### 14.3 新手任务完成事件追踪（必接）
+```Java
+AGPManager.trackEventCustom(EglsTracker.EVENT_TUTORIAL_COMPLETE, null);
+```
+#### 14.4 创建新角色事件追踪（必接）
+```Java
+AGPManager.trackEventCustom(EglsTracker.EVENT_NEW_CHARACTER, null);
+```
+#### 14.5 游戏资源首次更新开始事件追踪（必接）
+```Java
+AGPManager.trackEventCustom(EglsTracker.EVENT_ONE_UPDATE_START, null);
+```
+#### 14.6 游戏资源首次更新完成事件追踪（必接）
+```Java
+AGPManager.trackEventCustom(EglsTracker.EVENT_ONE_UPDATE_COMPLETE, null);
+```
+#### 14.7 游戏资源首次加载开始事件追踪（必接）
+```Java
+AGPManager.trackEventCustom(EglsTracker.EVENT_ONE_LOAD_START, null);
+```
+#### 14.8 游戏资源首次加载完成事件追踪（必接）
+```Java
+AGPManager.trackEventCustom(EglsTracker.EVENT_ONE_LOAD_COMPLETE, null);
+```
+#### 14.9 自定义事件追踪()（根据需求接入）
+```Java
+// 有时候运营会针对具体的数据分析增加特定的事件统计，那么请调用该接口，传入特定的事件名称
+// trackData的格式为json字符串，形如：{key:value,key:value,key:value...}
+AGPManager.trackEventCustom(trackEvent, trackData);
+```
 ### 15. 其他注意事项
 1. 凡是游戏项目工程为Android Studio工程，并且在Gradle里配置了productFlavor来控制打包流程的，请务必在调用“AGPManager.initSDK()”接口前，写上如下逻辑代码：
 ```Java
