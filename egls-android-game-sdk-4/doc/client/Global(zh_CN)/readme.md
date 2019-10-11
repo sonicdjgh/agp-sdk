@@ -199,7 +199,7 @@ manifestPlaceholders = [
 请注意：以上 Permission 配置中只打开了SDK基础功能相关的配置，如果使用到其他功能，请打开对应的 Permission 配置！
 #### 4.3 Application相关配置
 ```Xml
-<!-- 如果用Mycard支付功能，请在application标签内添加属性 android:name="tw.com.mycard.sdk.libs.PSDKApplication" -->
+<!-- 如果用Mycard支付功能，请在application标签内修改属性为 android:name="com.egls.support.mycard.MyCardApplication" -->
 </application
     android:name="com.egls.support.components.EglsApplication"
     android:allowBackup="false"
