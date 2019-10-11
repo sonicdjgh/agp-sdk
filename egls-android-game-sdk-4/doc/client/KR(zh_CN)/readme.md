@@ -209,8 +209,7 @@ manifestPlaceholders = [
     android:allowBackup="false"
     android:icon="@drawable/icon"
     android:label="AGSDK Demo"
-    android:networkSecurityConfig="@xml/network_security_config"	
-    android:theme="@style/AppTheme" >
+    android:networkSecurityConfig="@xml/network_security_config" >
 	
     <!-- 游戏Activity -->
     <!-- 这里须注意的是，游戏主Activity的“launchMode”属性值必须为“standard” -->
