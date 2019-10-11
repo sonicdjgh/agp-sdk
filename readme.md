@@ -6,7 +6,8 @@
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/demo-kr-login.gif)
 ### Version：4.6.79
 1. 调整SDK初始化在AndroidMenifest.xml文件中所配置的参数名称，详见对接文档（旧的参数名称依旧兼容）；
-2. 相关追踪统计接口有变化，详见对接文档。
+2. 相关追踪统计接口有变化，详见对接文档；
+3. 添加“com.egls.support.components.EglsApplication”的引用，详见对接文档。
 ### Version：4.6.76
 调整SDK内部结构，将原Module"AGS"并入到“support”支持库中，修改了相关库名，如下：<br />
 “com.egls.android:egls-agp-sdk” 修改为 “com.egls.android:platform”;<br />
