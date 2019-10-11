@@ -4,7 +4,7 @@
 从4.x.x版本起，我们采用了新的账号体系，所以并不兼容旧版（即同一个账号在登录后返回的uid与3.x.x版本的不一致）。如果您的游戏曾经接过旧版本的SDK，并且将要使用4.x.x版本的SDK时，请配合我们做游戏的强更及其他必要的更新操作（详情请咨询我方运营）。<br /><br />
 ### SDK展示
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/demo-kr-login.gif)
-### Version：4.6.78
+### Version：4.6.79
 1. 调整SDK初始化在AndroidMenifest.xml文件中所配置的参数名称，详见对接文档（旧的参数名称依旧兼容）；
 2. 相关追踪统计接口有变化，详见对接文档。
 ### Version：4.6.76
