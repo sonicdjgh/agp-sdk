@@ -41,7 +41,7 @@ allprojects {
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_SDK_VERSION=4.6.78
+EGLS_SDK_VERSION=4.6.79
 android.enableAapt2=false
 ```
 #### 3.2 lib 选择
