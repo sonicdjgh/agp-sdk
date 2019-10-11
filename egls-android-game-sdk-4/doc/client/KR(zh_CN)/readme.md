@@ -3,15 +3,15 @@
 欢迎使用 EGLS Android Game SDK，这篇SDK对接文档说明适用于在**韩国**发行的游戏。<br/><br/>
 从4.x.x版本起，我们采用了新的账号体系，所以并不兼容旧版（即同一个账号在登录后返回的uid与3.x.x版本的不一致）。如果您的游戏曾经接过旧版本的SDK，并且将要使用4.x.x版本的SDK时，请配合我们做游戏的强更及其他必要的更新操作（详情请咨询我方运营）。
 ### 2. 所需参数
-#### 2.1 eglsAppId
+#### 2.1 EGLS_APP_ID
 由我方给游戏分配的应用id，一个游戏对应一个
-#### 2.2 CHANNEL_GOOGLE_PUBLIC_KEY
+#### 2.2 google_public_key
 在Goole Play后台生成的支付公钥。
-#### 2.3 CHANNEL_GOOGLE_CLIENT_ID
+#### 2.3 google_client_id
 在Google API后台“OAuth 2.0 客户端 ID”配置的列表中，关于“Web Client”项对应的“Client ID”参数值。
 #### 2.4 com.facebook.sdk.ApplicationId
 在Facebook后台生成的应用id。
-#### 2.5 CHANNEL_ONESTORE_APP_ID
+#### 2.5 onestore_app_id
 在OneStore后台生成的应用id。
 ### 3. 环境搭建
 #### 3.1 gradle版本及库引用地址设置
@@ -45,7 +45,7 @@ apply plugin: 'com.google.gms.google-services'
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_SDK_VERSION=4.6.76
+EGLS_SDK_VERSION=4.6.78
 android.enableAapt2=false
 ```
 #### 3.2 lib 选择
@@ -205,6 +205,7 @@ manifestPlaceholders = [
 #### 4.3 Application相关配置
 ```Xml
 <application
+    android:name="com.egls.support.components.EglsApplication"
     android:allowBackup="false"
     android:icon="@drawable/icon"
     android:label="AGSDK Demo"
@@ -214,6 +215,7 @@ manifestPlaceholders = [
     <!-- 游戏Activity -->
     <!-- 这里须注意的是，游戏主Activity的“launchMode”属性值必须为“standard” -->
     <activity
+	android:name="com.egls.support.components.EglsApplication"
         android:name="com.egls.sdk.demo.GameActivity"
         android:configChanges="fontScale|orientation|keyboardHidden|locale|navigation|screenSize|uiMode"
 	android:launchMode="standard"
@@ -271,11 +273,12 @@ manifestPlaceholders = [
     <!-- 如果有特殊需求修改devkey时，请打开以下配置 -->	
     <!--	
     <meta-data
-        android:name="CHANNEL_AF_DEV_KEY"
+        android:name="appsflyer_dev_key"
         android:value="${APPS_FLYER_DEV_KEY}" />
     -->
 	
-    <!-- 如果使用OneStore支付，请打开以下配置
+    <!-- 如果使用OneStore支付，请打开以下配置 -->
+    <!--
     <meta-data
         android:name="CHANNEL"
         android:value="onestore" />
@@ -285,7 +288,7 @@ manifestPlaceholders = [
 	
     <!-- Google begin -->
     <meta-data
-        android:name="CHANNEL_GOOGLE_CLIENT_ID"
+        android:name="google_client_id"
         android:value="${GOOGLE_WEB_CLIENT_ID}" />
 	
     <!-- 如果使用Firebase云消息推送，请打开以下配置 -->
@@ -325,7 +328,7 @@ manifestPlaceholders = [
     <!-- 如果使用Google Play支付功能，请打开以下配置 -->	
     <!--
     <meta-data
-        android:name="CHANNEL_GOOGLE_PUBLIC_KEY"
+        android:name="google_public_key"
         android:value="${GOOGLE_PLAY_PUBLIC_KEY}" />
     -->										
     <!-- Google end -->
@@ -336,19 +339,14 @@ manifestPlaceholders = [
         android:name="com.facebook.sdk.ApplicationId"
         android:value="\0${FACEBOOK_APPLICATION_ID}" />
 	
-    <!-- 如果要求接入Facebook App Events统计接口，请将value改为true -->
     <meta-data
-        android:name="CHANNEL_FACEBOOK_LOGGER_ENABLE"
-        android:value="false" />
-						    
-    <meta-data
-        android:name="CNANNEL_PERMISSION_EMAIL"
+        android:name="facebook_logger_enable"
         android:value="true" />
 
     <!--如果游戏需要开启Facebook的“USER_FRIEND”权限，请打开以下配置 -->
     <!--
     <meta-data
-        android:name="CNANNEL_PERMISSION_USER_FRIEND"
+        android:name="facebook_user_friends_enable"
         android:value="true" />
     -->
 						    
@@ -374,7 +372,7 @@ manifestPlaceholders = [
             android:value="popup" />
 				 
     <meta-data
-        android:name="CHANNEL_ONESTORE_APP_ID"
+        android:name="onestore_app_id"
         android:value="${ONE_STORE_APP_ID}"/>
     -->
     <!-- OneStore end -->
@@ -435,6 +433,15 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 ```
 ### 6. SDK初始化（必接）
 ```Java
+// 如果游戏工程中有需要自定义Application的需求，那么请在自定义的Application类中，按照如下进行接口的调用：
+@Override
+public void onCreate() {
+    super.onCreate();
+    AGPManager.initApplication(this);
+}
+```
+```Java
+// 请在游戏的主Activity类中，按照如下进行接口的调用：
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
