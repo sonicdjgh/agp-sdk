@@ -615,7 +615,7 @@ AGPManager.trackEventCustom(trackEvent, trackData);
 ```xml
 <!-- 如果要求接入Facebook App Events统计接口，请将value改为true -->
     <meta-data
-        android:name="CHANNEL_FACEBOOK_LOGGER_ENABLE"
+        android:name="facebook_logger_enable"
         android:value="true" />
 ```
 其次，需要在游戏Module下的“build.gralde”文件中的“defaultConfig”里添加如下配置：
