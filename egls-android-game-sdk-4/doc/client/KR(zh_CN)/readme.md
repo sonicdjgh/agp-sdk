@@ -267,6 +267,10 @@ manifestPlaceholders = [
             <action android:name="com.android.vending.INSTALL_REFERRER" />
         </intent-filter>
     </receiver>
+	
+    <meta-data
+        android:name="appsflyer_enable"
+        android:value="true" />
     
     <!-- 如果有特殊需求修改devkey时，请打开以下配置 -->	
     <!--	
