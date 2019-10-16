@@ -618,9 +618,9 @@ AGPManager.trackEventCustom(trackEvent, trackData);
 根据我们市场推广的需求，集成了Facebook应用事件的统计功能。如果想使用该功能，首先要在“AndroidManifest.xml”文件中修改如下配置：
 ```xml
 <!-- 如果要求接入Facebook App Events统计接口，请将value改为true -->
-    <meta-data
-        android:name="facebook_logger_enable"
-        android:value="true" />
+<meta-data
+    android:name="facebook_logger_enable"
+    android:value="true" />
 ```
 其次，需要在游戏Module下的“build.gralde”文件中的“defaultConfig”里添加如下配置：
 ```gradle
