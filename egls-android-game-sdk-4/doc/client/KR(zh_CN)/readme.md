@@ -574,23 +574,42 @@ AGPManager.eglsShare(this, type, shareTitle, shareText, shareImageFilePath, shar
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/S4001.png)<br/>
 ### 14. AppsFlyer数据统计（根据运营需求对接）
 AppsFlyer主要用于KR业务的数据统计，启用该功能的做法，首先要按照上面所提到的，在AndroidManifest.xml文件中打开对应的配置。对于AppsFlyer统计功能的相关接口调用，其相关初始化部分的逻辑已经嵌入进SDK当中，因此开发者无需关心较为复杂的初始化步骤，只需根据需求，调用对应的接口即可。<br /><br />
-**注**：通过调用AGPManager.getAppsFlyerHelper()来获取接口对象。
-#### 14.1 trackEventOneSplashImage()（必接）
-    用于统计首次播放游戏闪屏动画的次数，请在开始播放动画时调用该方法
-#### 14.2 trackEventTutorialStart()（必接）
-    用于统计新手任务开始的次数，请在新手任务开始时调用该方法
-#### 14.3 trackEventTutorialComplete()（必接）
-    用于统计新手任务结束的次数，请在新手任务结束时调用该方法
-#### 14.4 trackEventNewCharacter()（必接）
-    用于统计创建角色的次数，请在创建角色成功后调用该方法
-#### 14.5 trackEventLevel()（必接）
-    用于统计角色等级变化，请在角色等级变化时调用该方法
-#### 14.6 trackEventVip()（必接）
-    用于统计玩家vip等级变化，请在玩家vip等级变化时调用该方法
-#### 14.7 trackEventVisitShop()（必接）
-    用于统计玩家打开游戏内商城页面的次数，请在显示游戏商城页面后调用该方法
-#### 14.8 trackEventCustom()（根据需求接入）
-    有时候运营会针对具体的数据分析增加特定的事件统计，那么请调用该接口，传入特定的事件名称
+#### 14.1 闪屏动画首次启动事件追踪（必接）
+```Java
+AGPManager.trackEventCustom(EglsTracker.EVENT_ONE_SPLASH_IMAGE, null);
+```
+#### 14.2 新手任务开始事件追踪（必接）
+```Java
+AGPManager.trackEventCustom(EglsTracker.EVENT_TUTORIAL_START, null);
+```
+#### 14.3 新手任务完成事件追踪（必接）
+```Java
+AGPManager.trackEventCustom(EglsTracker.EVENT_TUTORIAL_COMPLETE, null);
+```
+#### 14.4 创建新角色事件追踪（必接）
+```Java
+AGPManager.trackEventCustom(EglsTracker.EVENT_NEW_CHARACTER, null);
+```
+#### 14.5 角色等级变化事件追踪（必接）
+```Java
+int roleLevel = 1;
+getMessage();AGPManager.trackEventCustom(EglsTracker.EVENT_LEVEL + roleLevel, null);
+```
+#### 14.6 vip等级变化事件追踪（必接）
+```Java
+int vipLevel = 1;
+getMessage();AGPManager.trackEventCustom(EglsTracker.EVENT_VIP + vipLevel, null);
+```
+#### 14.7 打开游戏内购商店事件追踪()（必接）
+```Java
+AGPManager.trackEventCustom(EglsTracker.EVENT_VISIT_SHOP, null);
+```
+#### 14.8 自定义事件追踪()（根据需求接入）
+```Java
+// 有时候运营会针对具体的数据分析增加特定的事件统计，那么请调用该接口，传入特定的事件名称
+// trackData的格式为json字符串，形如：{key:value,key:value,key:value...}
+AGPManager.trackEventCustom(trackEvent, trackData);
+```
 ### 15. Facebook App Events统计（根据需求接入）
 根据我们市场推广的需求，集成了Facebook应用事件的统计功能。如果想使用该功能，首先要在“AndroidManifest.xml”文件中修改如下配置：
 ```xml
