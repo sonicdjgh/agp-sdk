@@ -43,7 +43,7 @@ apply plugin: 'com.google.gms.google-services'
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_SDK_VERSION=4.6.79
+EGLS_SDK_VERSION=4.7.0
 android.enableAapt2=false
 ```
 #### 3.2 lib 选择
@@ -499,37 +499,37 @@ manifestPlaceholders = [
 @Override
 protected void onResume() {
     super.onResume();
-    AGPManager.onResume();
+    EglsPlatform.onResume();
 }
     
 @Override
 protected void onPause() {
     super.onPause();
-    AGPManager.onPause();
+    EglsPlatform.onPause();
 }
 	
 @Override
 protected void onDestroy() {
     super.onDestroy();
-    AGPManager.onDestroy();
+    EglsPlatform.onDestroy();
 }
 	
 @Override
 protected void onNewIntent(Intent intent) {
     super.onNewIntent(intent);
-    AGPManager.onNewIntent(intent);
+    EglsPlatform.onNewIntent(intent);
 }
 	
 @Override
 public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
     super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    AGPManager.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+    EglsPlatform.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
 }
 	
 @Override
 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
-    AGPManager.onActivityResult(requestCode, resultCode, data);
+    EglsPlatform.onActivityResult(requestCode, resultCode, data);
 }
 ```
 ### 6. SDK初始化（必接）
@@ -538,7 +538,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 @Override
 public void onCreate() {
     super.onCreate();
-    AGPManager.initApplication(this);
+    EglsPlatform.initApplication(this);
 }
 ```
 ```Java
@@ -546,7 +546,7 @@ public void onCreate() {
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    AGPManager.initSDK(this, AppUtil.getVersionName(this), new SDKActionHandler() {
+    EglsPlatform.initActivity(this, AppUtil.getVersionName(this), new SDKActionHandler() {
 
         @Override
         public void onHandleInit(int state, String message) {// SDK初始化的結果处理
@@ -638,11 +638,11 @@ protected void onCreate(Bundle savedInstanceState) {
 ```
 ### 7. SDK登录（必接）
 ```Java
-AGPManager.eglsLogin(Constants.MODE_LOGIN_AUTO);
+EglsPlatform.eglsLogin(Constants.MODE_LOGIN_AUTO);
 ```
 ### 8. SDK切换账号（必接）
 ```Java
-AGPManager.eglsSwitch();
+EglsPlatform.eglsSwitch();
 ```
 ### 9. SDK支付（必接）
 ```Java
@@ -651,12 +651,12 @@ String productId = "PDT001";// 档位id
 String productName = "钻石";// 档位名称
 String cpOrderInfo = "2SDF34DF12GH0S23234GAER5";// CP订单信息，由接入方生成
 String flag = "";// 额外标记，一般传空字符串即可
-AGPManager.eglsPay(amount, productId, productName, cpOrderInfo, flag);
+EglsPlatform.eglsPay(amount, productId, productName, cpOrderInfo, flag);
 ```
 ### 10. onEnterGame接口调用（必接）
 ```Java
 //当玩家登录进入到游戏服务器之后，请务必调用该方法
-AGPManager.onEnterGame();
+EglsPlatform.onEnterGame();
 ```
 ### 11. SDK分享功能（选接）
 ```Java
@@ -666,7 +666,7 @@ String shareText = "";// 分享文本
 String shareImageFilePath = "";// 分享图片（绝对路径）
 String shareLink = "";// 分享链接
 boolean isTimelineCb = false;
-AGPManager.eglsShare(this, type, shareTitle, shareText, shareImageFilePath, shareLink, isTimelineCb);
+EglsPlatform.eglsShare(this, type, shareTitle, shareText, shareImageFilePath, shareLink, isTimelineCb);
 ```
 ### 12. Firebase云消息推送（选接）
 当有需要使用Firebase的云消息推送时，首先请在游戏项目的“/res/drawable”目录下，添加一张名为“egls_push_icon”的图片。然后，除了按照对接文档中“3.1”、“3.4”和“4.4”的说明进行配置以外，还需要从Google后台下载一个名为“google-services.json”的文件（该文件由我方运营提供），并将该文件放在当前游戏Module工程目录下，如下图所示：<br/>
@@ -678,7 +678,7 @@ SDK的“运营活动”接口，主要是为游戏提供了相关操作页面�
 关于“五星评价”、“Facebook运营活动”以及“LINE推广”的运营活动功能接口，在使用前，需要配合我方运营在后台上配置相关展示所需的图片。“五星评价”的图片宽高比为**3:1**，其他则为**5:2**。
 ```Java
 // 五星评价
-AGPManager.openFiveStarReview(this, new OnSimpleActionCallback() {
+EglsPlatform.openFiveStarReview(this, new OnSimpleActionCallback() {
 
     @Override
     public void onFinish() {
@@ -689,7 +689,7 @@ AGPManager.openFiveStarReview(this, new OnSimpleActionCallback() {
 // Facebook运营活动（加入粉丝团、分享）
 boolean isEnableJoin = true;
 boolean isEnableShare = true;
-AGPManager.openFacebookOperation(this, isEnableJoin, isEnableShare, new OnSimpleActionCallback() {
+EglsPlatform.openFacebookOperation(this, isEnableJoin, isEnableShare, new OnSimpleActionCallback() {
 
     @Override
     public void onFinish() {
@@ -704,7 +704,7 @@ AGPManager.openFacebookOperation(this, isEnableJoin, isEnableShare, new OnSimple
 });
 
 // LINE推广
-AGPManager.openLINEPromotion(this, new OnSimpleActionCallback() {
+EglsPlatform.openLINEPromotion(this, new OnSimpleActionCallback() {
 
     @Override
     public void onFinish() {
@@ -716,57 +716,57 @@ AGPManager.openLINEPromotion(this, new OnSimpleActionCallback() {
 AppsFlyer主要用于Global业务的数据统计，启用该功能的做法，首先要按照上面所提到的，在AndroidManifest.xml文件中打开对应的配置。对于AppsFlyer统计功能的相关接口调用，其相关初始化部分的逻辑已经嵌入进SDK当中，因此开发者无需关心较为复杂的初始化步骤，只需根据需求，调用对应的接口即可。<br /><br />
 #### 14.1 闪屏动画首次启动事件追踪（必接）
 ```Java
-AGPManager.trackEventCustom(EglsTracker.EVENT_ONE_SPLASH_IMAGE, null);
+EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_ONE_SPLASH_IMAGE, null);
 ```
 #### 14.2 新手任务开始事件追踪（必接）
 ```Java
-AGPManager.trackEventCustom(EglsTracker.EVENT_TUTORIAL_START, null);
+EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_TUTORIAL_START, null);
 ```
 #### 14.3 新手任务完成事件追踪（必接）
 ```Java
-AGPManager.trackEventCustom(EglsTracker.EVENT_TUTORIAL_COMPLETE, null);
+EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_TUTORIAL_COMPLETE, null);
 ```
 #### 14.4 创建新角色事件追踪（必接）
 ```Java
-AGPManager.trackEventCustom(EglsTracker.EVENT_NEW_CHARACTER, null);
+EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_NEW_CHARACTER, null);
 ```
 #### 14.5 游戏资源首次更新开始事件追踪（必接）
 ```Java
-AGPManager.trackEventCustom(EglsTracker.EVENT_ONE_UPDATE_START, null);
+EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_ONE_UPDATE_START, null);
 ```
 #### 14.6 游戏资源首次更新完成事件追踪（必接）
 ```Java
-AGPManager.trackEventCustom(EglsTracker.EVENT_ONE_UPDATE_COMPLETE, null);
+EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_ONE_UPDATE_COMPLETE, null);
 ```
 #### 14.7 游戏资源首次加载开始事件追踪（必接）
 ```Java
-AGPManager.trackEventCustom(EglsTracker.EVENT_ONE_LOAD_START, null);
+EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_ONE_LOAD_START, null);
 ```
 #### 14.8 游戏资源首次加载完成事件追踪（必接）
 ```Java
-AGPManager.trackEventCustom(EglsTracker.EVENT_ONE_LOAD_COMPLETE, null);
+EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_ONE_LOAD_COMPLETE, null);
 ```
 #### 14.9 自定义事件追踪()（根据需求接入）
 ```Java
 // 有时候运营会针对具体的数据分析增加特定的事件统计，那么请调用该接口，传入特定的事件名称
 // trackData的格式为json字符串，形如：{key:value,key:value,key:value...}
-AGPManager.trackEventCustom(trackEvent, trackData);
+EglsTracker.getInstance().trackEventCustom(trackEvent, trackData);
 ```
 ### 15. 其他注意事项
 1. 凡是游戏项目工程为Android Studio工程，并且在Gradle里配置了productFlavor来控制打包流程的，请务必在调用“AGPManager.initSDK()”接口前，写上如下逻辑代码：
 ```Java
-AGPManager.addFlavorsBasePackage(BuildConfig.class.getPackage().getName());
+EglsPlatform.addFlavorsBasePackage(BuildConfig.class.getPackage().getName());
 ```
 2. Google推荐的审核中，会对游戏首次运行时所使用的必要“危险权限”的申请和使用进行检查。SDK会主动申请“android.permission.WRITE_EXTERNAL_STORAGE”权限，但如果游戏还另需申请其他的“危险权限”，可以在调用“AGPManager.initSDK()”接口前，使用“addNecessaryPermission()”接口。例如：
 ```Java
-AGPManager.addNecessaryPermission(Manifest.permission.READ_PHONE_STATE);
-AGPManager.addNecessaryPermission(Manifest.permission.RECORD_AUDIO);
+EglsPlatform.addNecessaryPermission(Manifest.permission.READ_PHONE_STATE);
+EglsPlatform.addNecessaryPermission(Manifest.permission.RECORD_AUDIO);
 ```
 3. 同样也是为了适应Google推荐的审核要求，SDK在游戏第一次安装并启动后，会先弹出一个关于危险权限使用的说明。SDK默认的说明只有关于SD卡权限的使用说明，如果游戏在初始化时有使用到其他的危险权限，那么可以在调用“AGPManager.initSDK()”接口前，使用如下方法来修改提示文本：
 ```Java
 // 需要注意的是，该接口是直接替换原默认文本的，所以还需要加上SD卡权限的使用说明。
 String permissionContent = "xxx";
-AGPManager.addPermissionContent(permissionContent);
+EglsPlatform.addPermissionContent(permissionContent);
 ```
 ### 附表 - publishmentArea
 publishmentArea | value
