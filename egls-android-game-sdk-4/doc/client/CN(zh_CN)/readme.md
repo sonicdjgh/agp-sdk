@@ -41,7 +41,7 @@ allprojects {
 ```
 另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_SDK_VERSION=4.6.79
+EGLS_SDK_VERSION=4.7.0
 android.enableAapt2=false
 ```
 #### 3.2 lib 选择
@@ -239,37 +239,37 @@ manifestPlaceholders = [
 @Override
 protected void onResume() {
     super.onResume();
-    AGPManager.onResume();
+    EglsPlatform.onResume();
 }
     
 @Override
 protected void onPause() {
     super.onPause();
-    AGPManager.onPause();
+    EglsPlatform.onPause();
 }
 	
 @Override
 protected void onDestroy() {
     super.onDestroy();
-    AGPManager.onDestory();
+    EglsPlatform.onDestory();
 }
 	
 @Override
 protected void onNewIntent(Intent intent) {
     super.onNewIntent(intent);
-    AGPManager.onNewIntent(intent);
+    EglsPlatform.onNewIntent(intent);
 }
 	
 @Override
 public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
     super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    AGPManager.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+    EglsPlatform.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
 }
 	
 @Override
 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
-    AGPManager.onActivityResult(requestCode, resultCode, data);
+    EglsPlatform.onActivityResult(requestCode, resultCode, data);
 }
 ```
 ### 6. SDK初始化（必接）
@@ -278,7 +278,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 @Override
 public void onCreate() {
     super.onCreate();
-    AGPManager.initApplication(this);
+    EglsPlatform.initApplication(this);
 }
 ```
 ```Java
@@ -286,7 +286,7 @@ public void onCreate() {
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    AGPManager.initSDK(this, AppUtil.getVersionName(this), new SDKActionHandler() {
+    EglsPlatform.initActivity(this, AppUtil.getVersionName(this), new SDKActionHandler() {
 
         @Override
         public void onHandleInit(int state, String message) {// SDK初始化的結果处理
@@ -378,11 +378,11 @@ protected void onCreate(Bundle savedInstanceState) {
 ```
 ### 7. SDK登录（必接）
 ```Java
-AGPManager.eglsLogin(Constants.MODE_LOGIN_COMMON);
+EglsPlatform.eglsLogin(Constants.MODE_LOGIN_COMMON);
 ```
 ### 8. SDK切换账号（选接）
 ```Java
-AGPManager.eglsSwitch();
+EglsPlatform.eglsSwitch();
 ```
 ### 9. SDK支付（必接）
 ```Java
@@ -391,12 +391,12 @@ String productId = "PDT001";// 档位id
 String productName = "钻石";// 档位名称
 String cpOrderInfo = "2SDF34DF12GH0S23234GAER5";// CP订单号
 String flag = "";// 额外标记，一般传空字符串即可
-AGPManager.eglsPay(amount, productId, productName, cpOrderInfo, flag);
+EglsPlatform.eglsPay(amount, productId, productName, cpOrderInfo, flag);
 ```
 ### 10. onEnterGame接口调用（必接）
 ```Java
 //当玩家登录进入到游戏服务器之后，请务必调用该方法
-AGPManager.onEnterGame();
+EglsPlatform.onEnterGame();
 ```
 ### 11. SDK分享功能（选接）
 ```Java
