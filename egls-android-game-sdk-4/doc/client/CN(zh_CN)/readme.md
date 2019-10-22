@@ -406,7 +406,7 @@ String shareText = "";// 分享文本
 String shareImageFilePath = "";// 分享图片（绝对路径）
 String shareLink = "";// 分享链接
 boolean isTimelineCb = false;// 仅当用于微信分享，当isTimelineCb为true时，SDK启用微信分享到朋友圈，否则启用微信分享到好友
-AGPManager.eglsShare(this, type, shareTitle, shareText, shareImageFilePath, shareLink, isTimelineCb);
+EglsPlatform.eglsShare(this, type, shareTitle, shareText, shareImageFilePath, shareLink, isTimelineCb);
 ```
 ### 12. 关于微信功能的使用
 SDK集成了“微信登录”功能及“微信分享”功能，除了添加相关的AndroidManifest.xml文件配置之外，还需要在项目工程中添加一个以“正式包名.wxapi”的package（以Demo为例，则添加的package为“com.egls.demo.wxapi”），并且在该package中添加一个名为“WXEntryActivity”的Activity类，这个类必须继承SDK中的“com.egls.socialization.wechat.WeChatEntryActivity”类，例如：
@@ -424,12 +424,12 @@ public class WXEntryActivity extends WeChatEntryActivity {
 ### 14. 其他注意事项
 1. 凡是游戏项目工程为Android Studio工程，并且在Gradle里配置了productFlavor来控制打包流程的，请务必在调用“AGPManager.initSDK()”接口前，写上如下逻辑代码：
 ```Java
-AGPManager.addFlavorsBasePackage(BuildConfig.class.getPackage().getName());
+EglsPlatform.addFlavorsBasePackage(BuildConfig.class.getPackage().getName());
 ```
 2. SDK会主动申请“android.permission.WRITE_EXTERNAL_STORAGE”权限，但如果游戏还另需申请其他的“危险权限”，可以在调用“AGPManager.initSDK()”接口前，使用“addNecessaryPermission()”接口。例如：
 ```Java
-AGPManager.addNecessaryPermission(Manifest.permission.READ_PHONE_STATE);
-AGPManager.addNecessaryPermission(Manifest.permission.RECORD_AUDIO);
+EglsPlatform.addNecessaryPermission(Manifest.permission.READ_PHONE_STATE);
+EglsPlatform.addNecessaryPermission(Manifest.permission.RECORD_AUDIO);
 ```
 ### 附表 - publishmentArea
 publishmentArea | value
