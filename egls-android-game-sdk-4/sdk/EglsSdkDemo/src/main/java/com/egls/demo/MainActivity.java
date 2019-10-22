@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.egls.platform.components.AGPManager;
+import com.egls.platform.components.EglsPlatform;
 import com.egls.support.base.Constants;
 import com.egls.support.interfaces.SDKActionHandler;
 import com.egls.support.utils.AppUtil;
@@ -16,7 +16,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AGPManager.initSDK(this, AppUtil.getVersionName(this), new SDKActionHandler() {
+        EglsPlatform.initActivity(this, AppUtil.getVersionName(this), new SDKActionHandler() {
 
             @Override
             public void onHandleInit(int state, String message) {// SDK初始化的結果处理
@@ -114,41 +114,41 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        AGPManager.onResume();
+        EglsPlatform.onResume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        AGPManager.onPause();
+        EglsPlatform.onPause();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        AGPManager.onDestroy();
+        EglsPlatform.onDestroy();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        AGPManager.onActivityResult(requestCode, resultCode, data);
+        EglsPlatform.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        AGPManager.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+        EglsPlatform.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        AGPManager.onNewIntent(intent);
+        EglsPlatform.onNewIntent(intent);
     }
 
     private void requestLogin() {
-        AGPManager.eglsLogin(Constants.MODE_LOGIN_AUTO);
+        EglsPlatform.eglsLogin(Constants.MODE_LOGIN_AUTO);
     }
 
     private void requestPurchase() {
@@ -157,10 +157,10 @@ public class MainActivity extends Activity {
         String productName = "";
         String cpOrderInfo = "";
         String flag = "";
-        AGPManager.eglsPay(amount, productId, productName, cpOrderInfo, flag);
+        EglsPlatform.eglsPay(amount, productId, productName, cpOrderInfo, flag);
     }
 
     private void onEnterGame() {
-        AGPManager.onEnterGame();
+        EglsPlatform.onEnterGame();
     }
 }

@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.webkit.JavascriptInterface;
 
-import com.egls.platform.components.AGPManager;
+import com.egls.platform.components.EglsPlatform;
 import com.egls.support.base.Constants;
 import com.egls.support.interfaces.SDKActionHandler;
 import com.egls.support.utils.AppUtil;
@@ -22,7 +22,7 @@ public class MainH5Activity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AGPManager.initSDK(this, AppUtil.getVersionName(this), new SDKActionHandler() {
+        EglsPlatform.initActivity(this, AppUtil.getVersionName(this), new SDKActionHandler() {
 
             @Override
             public void onHandleInit(int state, String message) {// SDK初始化的結果处理
@@ -53,7 +53,7 @@ public class MainH5Activity extends Activity {
                             json.put("uid", uid);
                             json.put("accountType", accountType);
                             json.put("nickName", nickName);
-                            AGPManager.callJSMethodWithJsonStr(jsLoginCallbackMethodName, json.toString());
+                            EglsPlatform.callJSMethodWithJsonStr(jsLoginCallbackMethodName, json.toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -66,7 +66,7 @@ public class MainH5Activity extends Activity {
                             json.put("uid", "");
                             json.put("accountType", "");
                             json.put("nickName", "");
-                            AGPManager.callJSMethodWithJsonStr(jsLoginCallbackMethodName, json.toString());
+                            EglsPlatform.callJSMethodWithJsonStr(jsLoginCallbackMethodName, json.toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -79,7 +79,7 @@ public class MainH5Activity extends Activity {
                             json.put("uid", "");
                             json.put("accountType", "");
                             json.put("nickName", "");
-                            AGPManager.callJSMethodWithJsonStr(jsLoginCallbackMethodName, json.toString());
+                            EglsPlatform.callJSMethodWithJsonStr(jsLoginCallbackMethodName, json.toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -149,37 +149,37 @@ public class MainH5Activity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        AGPManager.onResume();
+        EglsPlatform.onResume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        AGPManager.onPause();
+        EglsPlatform.onPause();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        AGPManager.onDestroy();
+        EglsPlatform.onDestroy();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        AGPManager.onActivityResult(requestCode, resultCode, data);
+        EglsPlatform.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        AGPManager.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+        EglsPlatform.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        AGPManager.onNewIntent(intent);
+        EglsPlatform.onNewIntent(intent);
     }
 
     /**
@@ -214,15 +214,15 @@ public class MainH5Activity extends Activity {
 
     private void requestLogin(final int loginMode, final String callback) {
         jsLoginCallbackMethodName = callback;
-        AGPManager.eglsLogin(loginMode);
+        EglsPlatform.eglsLogin(loginMode);
     }
 
     private void requestPurchase(final String amount, final String productId, final String productName, final String cpOrderId) {
-        AGPManager.eglsPay(amount, productId, productName, cpOrderId, "");
+        EglsPlatform.eglsPay(amount, productId, productName, cpOrderId, "");
     }
 
     private void onEnterGame() {
-        AGPManager.onEnterGame();
+        EglsPlatform.onEnterGame();
     }
 
 }
