@@ -108,6 +108,26 @@ public class MainActivity extends Activity {
             public void onHandleAppsFlyerData(int state, int type, Map<String, String> data) {
 
             }
+
+            @Override
+            public void onAdShow() {
+
+            }
+
+            @Override
+            public void onAdSkip() {
+
+            }
+
+            @Override
+            public void onAdClose() {
+
+            }
+
+            @Override
+            public void onAdError() {
+
+            }
         });
     }
 
