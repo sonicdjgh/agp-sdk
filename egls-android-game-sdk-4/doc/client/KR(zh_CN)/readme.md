@@ -296,7 +296,7 @@ manifestPlaceholders = [
     <!-- 如果使用Firebase云消息推送，请打开以下配置 -->
     <!--
     <service
-        android:name="com.egls.socialization.google.firebase.FirebaseMesgService"
+        android:name="com.egls.support.google.firebase.FirebaseMesgService"
         android:exported="false">
         <intent-filter>
             <action android:name="com.google.firebase.MESSAGING_EVENT" />
