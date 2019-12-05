@@ -15,7 +15,7 @@
 在支付宝平台上分配的应用标识，用于支付宝支付
 ### 3. 环境搭建
 #### 3.1 gradle版本及库引用地址设置
-gradle版本为4.1，并且需要在当前Project根目录下的build.gralde文件中加上如下配置：
+gradle版本为4.1，并且请在当前Project目录下的build.gralde文件中加上如下配置：
 ```gradle
 buildscript {
     repositories {
@@ -39,13 +39,13 @@ allprojects {
     }
 }
 ```
-另外，还需要在当前Project根目录下的gradle.properties文件中加上如下配置：
+另外，还需要在当前Project目录下的gradle.properties文件中加上如下配置：
 ```gradle
 EGLS_SDK_VERSION=4.7.27
 android.enableAapt2=false
 ```
 #### 3.2 lib 选择
-针对于在中国大陆地区发行的游戏，请在Module“AGS”的“build.gradle”文件里打开如下图所示的配置：<br/>
+针对于在中国大陆地区发行的游戏，请在当前Module目录下的“build.gradle”文件里打开如下图所示的配置：<br/>
 ```gradle
 repositories {
     flatDir {
