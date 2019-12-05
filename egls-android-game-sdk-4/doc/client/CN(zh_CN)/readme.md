@@ -322,13 +322,13 @@ protected void onCreate(Bundle savedInstanceState) {
             }
 
         @Override
-        public void onHandleGuestBind(int state, String accountType, String nickName) {// SDK游客绑定的結果处理
+        public void onHandleChannelBind(int state, String accountType, String nickName) {// SDK绑定的結果处理
             switch (state) {
-                case Constants.SDK_STATE_SUCCESS:// 游客绑定成功后的处理
+                case Constants.SDK_STATE_SUCCESS:// 绑定成功后的处理
                     break;
-                case Constants.SDK_STATE_CANCEL:// 游客绑定取消后的处理
+                case Constants.SDK_STATE_CANCEL:// 绑定取消后的处理
                     break;
-                case Constants.SDK_STATE_ERROR:// 游客绑定失败后的处理
+                case Constants.SDK_STATE_ERROR:// 绑定失败后的处理
                     break;
             }
         }
