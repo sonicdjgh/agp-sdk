@@ -47,7 +47,7 @@ EGLS_SDK_VERSION=4.7.27
 android.enableAapt2=false
 ```
 #### 3.2 lib 选择
-针对于在港台地区发行的游戏，请在当前游戏Module目录下的的“build.gradle”文件里打开如下图所示的配置：<br/>
+针对于在港台地区发行的游戏，请在当前游戏Module目录下的“build.gradle”文件里打开如下图所示的配置：<br/>
 ```gradle
 repositories {
     flatDir {
