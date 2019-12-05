@@ -583,7 +583,7 @@ protected void onCreate(Bundle savedInstanceState) {
             }
 
         @Override
-        public void onHandleChannelBind(int state, String accountType, String nickName) {// SDK游客绑定的結果处理
+        public void onHandleChannelBind(int state, String accountType, String nickName) {// SDK绑定的結果处理
             switch (state) {
                 case Constants.SDK_STATE_SUCCESS:// 绑定成功后的处理
                     break;
