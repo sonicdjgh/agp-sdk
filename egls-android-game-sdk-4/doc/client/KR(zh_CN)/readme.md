@@ -218,7 +218,7 @@ manifestPlaceholders = [
         android:configChanges="fontScale|orientation|keyboardHidden|locale|navigation|screenSize|uiMode"
 	android:launchMode="standard"
         android:screenOrientation="landscape"
-        android:theme="@style/EglsTheme.AppCompat.Translucent.NoActionBar.Fullscreen.NoAnimation" >
+        android:theme="@style/EglsTheme.NoTitleBar.Fullscreen.NoAnimation" >
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
