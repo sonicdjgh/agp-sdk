@@ -753,11 +753,11 @@ EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_ONE_LOAD_COMPLETE, 
 EglsTracker.getInstance().trackEventCustom(trackEvent, trackData);
 ```
 ### 15. 其他注意事项
-1. 凡是游戏项目工程为Android Studio工程，并且在Gradle里配置了productFlavor来控制打包流程的，请务必在调用“AGPManager.initSDK()”接口前，写上如下逻辑代码：
+1. 凡是游戏项目工程为Android Studio工程，并且在Gradle里配置了productFlavor来控制打包流程的，请务必在调用“EglsPlatform.initActivity()”接口前，写上如下逻辑代码：
 ```Java
 EglsPlatform.addFlavorsBasePackage(BuildConfig.class.getPackage().getName());
 ```
-2. Google推荐的审核中，会对游戏首次运行时所使用的必要“危险权限”的申请和使用进行检查。SDK会主动申请“android.permission.WRITE_EXTERNAL_STORAGE”权限，但如果游戏还另需申请其他的“危险权限”，可以在调用“AGPManager.initSDK()”接口前，使用“addNecessaryPermission()”接口。例如：
+2. Google推荐的审核中，会对游戏首次运行时所使用的必要“危险权限”的申请和使用进行检查。SDK会主动申请“android.permission.WRITE_EXTERNAL_STORAGE”权限，但如果游戏还另需申请其他的“危险权限”，可以在调用“EglsPlatform.initActivity()”接口前，使用“addNecessaryPermission()”接口。例如：
 ```Java
 EglsPlatform.addNecessaryPermission(Manifest.permission.READ_PHONE_STATE);
 EglsPlatform.addNecessaryPermission(Manifest.permission.RECORD_AUDIO);
