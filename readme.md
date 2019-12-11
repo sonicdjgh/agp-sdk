@@ -5,7 +5,8 @@
 ### SDK展示
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/demo-kr-login.gif)
 ### Version: 4.7.33
-1. 调整SDK内部结构，将第三方支付的部分独立成一个库，在游戏工程的Module目录下的“build.gradle”添加对该库的引用：implementation "com.egls.android:payment:$EGLS_SDK_VERSION@aar"
+1. 调整SDK内部结构，将第三方支付的部分独立成一个库，需在游戏工程的Module目录下的“build.gradle”文件中，添加对该库的引用：implementation "com.egls.android:payment:$EGLS_SDK_VERSION@aar"；
+2. 修复已知bug。
 ### Version: 4.7.27
 1. 修复已知bug；
 2. 更正对接文档中Firebase服务的名称为：“com.egls.support.google.firebase.FirebaseMesgService”。
