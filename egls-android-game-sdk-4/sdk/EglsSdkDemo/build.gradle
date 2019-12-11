@@ -40,6 +40,7 @@ repositories {
 
 dependencies {
     implementation "com.egls.android:platform:$EGLS_SDK_VERSION@aar"
+    implementation "com.egls.android:payment:$EGLS_SDK_VERSION@aar"
     implementation "com.egls.android:support:$EGLS_SDK_VERSION@aar"
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
 }
