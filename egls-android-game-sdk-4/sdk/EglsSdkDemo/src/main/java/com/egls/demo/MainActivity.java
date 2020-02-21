@@ -28,6 +28,11 @@ public class MainActivity extends Activity {
             }
 
             @Override
+            public void onHandleProfile(int state, String message) {
+
+            }
+
+            @Override
             public void onHandleAgreement(boolean isAgree) {// SDK是否同意用户协议的結果处理
                 if (isAgree) {
                     // 玩家选择同意协议后的处理

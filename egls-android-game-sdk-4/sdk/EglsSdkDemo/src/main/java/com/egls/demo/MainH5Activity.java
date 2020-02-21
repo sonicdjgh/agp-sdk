@@ -34,6 +34,11 @@ public class MainH5Activity extends Activity {
             }
 
             @Override
+            public void onHandleProfile(int state, String message) {
+
+            }
+
+            @Override
             public void onHandleAgreement(boolean isAgree) {// SDK是否同意用户协议的結果处理
                 if (isAgree) {
                     // 玩家选择同意协议后的处理
@@ -141,6 +146,26 @@ public class MainH5Activity extends Activity {
 
             @Override
             public void onHandleAppsFlyerData(int state, int type, Map<String, String> data) {
+
+            }
+
+            @Override
+            public void onAdShow() {
+
+            }
+
+            @Override
+            public void onAdSkip() {
+
+            }
+
+            @Override
+            public void onAdClose() {
+
+            }
+
+            @Override
+            public void onAdError() {
 
             }
         });
