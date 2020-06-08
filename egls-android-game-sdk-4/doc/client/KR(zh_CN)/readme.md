@@ -100,16 +100,15 @@ dependencies {
     // facebook end
     
     // navercafe begin
+    api files('libs/kr/3rdparty_login_library_android_4.1.4.jar');
+    api files('libs/kr/api-gateway-hmac-2.3.1.jar');
+    api(name: 'cafeSdk-4.4.8', ext: 'aar')
+    api files('libs/kr/glide-3.7.0.jar');
     api files('libs/kr/gson-2.8.0.jar');
-    api files('libs/kr/3rdparty_login_library_android_4.1.4.jar')
-    api files('libs/kr/api-gateway-hmac-2.3.1.jar')
-    api files('libs/kr/library-1.0.0.jar')
-    api 'com.github.bumptech.glide:glide:3.7.0'
-    api 'com.squareup:otto:1.3.8'
-    api 'com.navercorp.volleyextensions:volleyer:2.0.1', {
-        exclude group: 'com.mcxiaoke.volley', module: 'library'
-    }
-    api(name: 'cafeSdk-4.2.1', ext: 'aar')
+    api files('libs/kr/library-1.0.0.jar');
+    api files('libs/kr/otto-1.3.8.jar');
+    api(name: 'sos_library-1.1.3.4', ext: 'aar')
+    api files('libs/kr/volleyer-2.0.1.jar');
     // navercafe end
     
     // onestore begin
