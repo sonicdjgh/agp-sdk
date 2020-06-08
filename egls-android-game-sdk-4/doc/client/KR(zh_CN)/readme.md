@@ -469,7 +469,7 @@ protected void onCreate(Bundle savedInstanceState) {
         }
 
         @Override
-        public void onHandleLogin(int state, String token, String uid, String accountType, String nickName) {// SDK登录的結果处理
+        public void onHandleLogin(int state, String token, String uid, String accountType, String nickName, String message) {// SDK登录的結果处理
             switch (state) {
                 case Constants.SDK_STATE_SUCCESS:// 登录成功后的处理
                     // accountType = "0"时，表示游客账号登录
@@ -501,7 +501,7 @@ protected void onCreate(Bundle savedInstanceState) {
         }
 
         @Override
-        public void onHandlePay(int state, String eglsOrderInfo) {// SDK支付的結果处理
+        public void onHandlePay(int state, TradeInfo tradeInfo) {// SDK支付的結果处理
             switch (state) {
                 case Constants.SDK_STATE_SUCCESS:// 支付完成后的处理（仅表示客户端支付操作完成，最终要以服务器的通知为准）
                     break;
