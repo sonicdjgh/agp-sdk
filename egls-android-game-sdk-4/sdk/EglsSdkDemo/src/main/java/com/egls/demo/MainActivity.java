@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.egls.platform.components.EglsPlatform;
 import com.egls.support.base.Constants;
+import com.egls.support.beans.TradeInfo;
 import com.egls.support.interfaces.SDKActionHandler;
 import com.egls.support.utils.AppUtil;
 
@@ -42,13 +43,13 @@ public class MainActivity extends Activity {
             }
 
             @Override
-            public void onHandleLogin(int state, String token, String uid, String accountType, String nickName) {// SDK登录的結果处理
+            public void onHandleLogin(int state, String token, String uid, String accountType, String nickName, String messsage) {// SDK登录的結果处理
                 switch (state) {
                     case Constants.SDK_STATE_SUCCESS:// 登录成功后的处理
                         // accountType = "0"时，表示游客账号登录
-                        // accountType = "1"时，表示EGLS账号登录
-                        // accountType = "2"时，表示Google账号登录
-                        // accountType = "3"时，表示Facebook账号登录
+                        //                        // accountType = "1"时，表示EGLS账号登录
+                        //                        // accountType = "2"时，表示Google账号登录
+                        //                        // accountType = "3"时，表示Facebook账号登录
                         break;
                     case Constants.SDK_STATE_CANCEL:// 登录取消后的处理
                         break;
@@ -75,7 +76,7 @@ public class MainActivity extends Activity {
             }
 
             @Override
-            public void onHandlePay(int state, String eglsOrderInfo) {// SDK支付的結果处理
+            public void onHandlePay(int state, TradeInfo tradeInfo) {// SDK支付的結果处理
                 switch (state) {
                     case Constants.SDK_STATE_SUCCESS:// 支付完成后的处理（仅表示客户端支付操作完成，最终要以服务器的通知为准）
                         break;
@@ -173,7 +174,7 @@ public class MainActivity extends Activity {
     }
 
     private void requestLogin() {
-        EglsPlatform.eglsLogin(Constants.MODE_LOGIN_AUTO);
+        EglsPlatform.eglsLogin(Constants.MODE_LOGIN_COMMON);
     }
 
     private void requestPurchase() {
