@@ -80,7 +80,7 @@ dependencies {
     
     // googleplay begin
     // 如果使用 GooglePlay 支付，请打开下面的配置
-    // api 'com.android.billingclient:billing:2.0.3'
+    // api 'com.android.billingclient:billing:2.+'
     // googleplay end
     
     // firebase begin
