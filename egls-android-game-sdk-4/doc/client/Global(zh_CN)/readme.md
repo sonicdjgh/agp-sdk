@@ -643,7 +643,9 @@ EglsPlatform.eglsLogin(Constants.MODE_LOGIN_AUTO);
 
 \\ 目前，SDK提供了一个LightLy的登录接口，即不提供SDK集成的登录UI展示。
 \\ 当接口中的账号类型为“null”时，首次登录时采取游客登录，再次调用时，选择最近的一次账号进行登录。
+
 EglsPlatform.eglsLoginLightly(null);
+EglsPlatform.eglsLoginLightly(Constants.TYPE_USER_ACCOUNT_GUEST);
 EglsPlatform.eglsLoginLightly(Constants.TYPE_USER_ACCOUNT_GOOGLE);
 EglsPlatform.eglsLoginLightly(Constants.TYPE_USER_ACCOUNT_FACEBOOK);
 ```
