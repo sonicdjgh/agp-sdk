@@ -641,8 +641,8 @@ protected void onCreate(Bundle savedInstanceState) {
 ```Java
 EglsPlatform.eglsLogin(Constants.MODE_LOGIN_AUTO);
 
-\\ 目前，SDK提供了一个LightLy的登录接口，即不提供SDK集成的登录UI展示；
-\\ 当接口中的账号类型为“null”时，首次登录时采取游客登录;当有了账号记录后，选择最近一次登录的账号进行登录：
+\\ 目前，SDK提供了一套LightLy级别的登录业务接口，即不提供SDK集成的登录业务UI展示；
+\\ 当Lightly登录接口中的账号类型为“null”时，首次登录时采取游客登录;当有了账号记录后，选择最近一次登录的账号进行登录：
 EglsPlatform.eglsLoginLightly(null);
 
 \\ 以下为指定账号类型的Lightly登录：
@@ -654,7 +654,7 @@ EglsPlatform.eglsLoginLightly(Constants.TYPE_USER_ACCOUNT_FACEBOOK);
 EglsPlatform.eglsBindLightly(Constants.TYPE_USER_ACCOUNT_GOOGLE);
 EglsPlatform.eglsBindLightly(Constants.TYPE_USER_ACCOUNT_FACEBOOK);
 ```
-### 8 SDK登出（选接）
+### 8 SDK注销（选接）
 ```Java
 \\ 一般情况下是不需要调用的，该接口主要用来配合Lightly登录而进行账号切换：
 EglsPlatform.eglsLogout();
