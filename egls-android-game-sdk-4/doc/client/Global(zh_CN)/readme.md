@@ -649,10 +649,6 @@ EglsPlatform.eglsLoginLightly(null);
 EglsPlatform.eglsLoginLightly(Constants.TYPE_USER_ACCOUNT_GUEST);
 EglsPlatform.eglsLoginLightly(Constants.TYPE_USER_ACCOUNT_GOOGLE);
 EglsPlatform.eglsLoginLightly(Constants.TYPE_USER_ACCOUNT_FACEBOOK);
-
-// 如果您的应用确认使用“游客”账号进行登录，可以为该账号提供Lightly绑定功能：
-EglsPlatform.eglsBindLightly(Constants.TYPE_USER_ACCOUNT_GOOGLE);
-EglsPlatform.eglsBindLightly(Constants.TYPE_USER_ACCOUNT_FACEBOOK);
 ```
 ### 8. SDK注销（选接）
 ```Java
