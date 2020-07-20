@@ -641,30 +641,30 @@ protected void onCreate(Bundle savedInstanceState) {
 ```Java
 EglsPlatform.eglsLogin(Constants.MODE_LOGIN_AUTO);
 
-\\ 目前，SDK提供了一套LightLy级别的登录业务接口，即不提供SDK集成的登录业务UI展示；
-\\ 当Lightly登录接口中的账号类型为“null”时，首次登录时采取游客登录;当有了账号记录后，选择最近一次登录的账号进行登录：
+// 目前，SDK提供了一套LightLy级别的登录业务接口，即不提供SDK集成的登录业务UI展示；
+// 当Lightly登录接口中的账号类型为“null”时，首次登录时采取游客登录;当有了账号记录后，选择最近一次登录的账号进行登录：
 EglsPlatform.eglsLoginLightly(null);
 
-\\ 以下为指定账号类型的Lightly登录：
+// 以下为指定账号类型的Lightly登录：
 EglsPlatform.eglsLoginLightly(Constants.TYPE_USER_ACCOUNT_GUEST);
 EglsPlatform.eglsLoginLightly(Constants.TYPE_USER_ACCOUNT_GOOGLE);
 EglsPlatform.eglsLoginLightly(Constants.TYPE_USER_ACCOUNT_FACEBOOK);
 
-\\ 如果您的应用确认使用“游客”账号进行登录，可以为该账号提供Lightly绑定功能：
+// 如果您的应用确认使用“游客”账号进行登录，可以为该账号提供Lightly绑定功能：
 EglsPlatform.eglsBindLightly(Constants.TYPE_USER_ACCOUNT_GOOGLE);
 EglsPlatform.eglsBindLightly(Constants.TYPE_USER_ACCOUNT_FACEBOOK);
 ```
 ### 8 SDK注销（选接）
 ```Java
-\\ 一般情况下是不需要调用的，该接口主要用来配合Lightly登录而进行账号切换：
+// 一般情况下是不需要调用的，该接口主要用来配合Lightly登录而进行账号切换：
 EglsPlatform.eglsLogout();
 ```
 
-### 10. SDK切换账号（必接）
+### 9. SDK切换账号（必接）
 ```Java
 EglsPlatform.eglsSwitch();
 ```
-### 11. SDK支付（必接）
+### 10. SDK支付（必接）
 ```Java
 String amount = "1.0";// 总金额
 String productId = "PDT001";// 档位id
@@ -673,12 +673,12 @@ String cpOrderInfo = "2SDF34DF12GH0S23234GAER5";// CP订单信息，由接入方
 String flag = "";// 额外标记，一般传空字符串即可
 EglsPlatform.eglsPay(amount, productId, productName, cpOrderInfo, flag);
 ```
-### 12. onEnterGame接口调用（必接）
+### 11. onEnterGame接口调用（必接）
 ```Java
 //当玩家登录进入到游戏服务器之后，请务必调用该方法
 EglsPlatform.onEnterGame();
 ```
-### 13. SDK分享功能（选接）
+### 12. SDK分享功能（选接）
 ```Java
 int type = Constants.TYPE_SHARE_FACEBOOK;
 String shareTitle = "";// 分享标题
@@ -688,11 +688,11 @@ String shareLink = "";// 分享链接
 boolean isTimelineCb = false;
 EglsPlatform.eglsShare(this, type, shareTitle, shareText, shareImageFilePath, shareLink, isTimelineCb);
 ```
-### 14. Firebase云消息推送（选接）
+### 13. Firebase云消息推送（选接）
 当有需要使用Firebase的云消息推送时，首先请在游戏项目的“/res/drawable”目录下，添加一张名为“egls_push_icon”的图片。然后，除了按照对接文档中“3.1”、“3.4”和“4.4”的说明进行配置以外，还需要从Google后台下载一个名为“google-services.json”的文件（该文件由我方运营提供），并将该文件放在当前游戏Module工程目录下，如下图所示：<br/>
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/S4001.png)<br/>
 
-### 15. SDK运营活动（根据运营需求）
+### 14. SDK运营活动（根据运营需求）
 SDK的“运营活动”接口，主要是为游戏提供了相关操作页面以及SDK功能接口的实现。在这之前，为了实现这些运营活动，都需要游戏来承担相关页面的开发、第三方SDK的功能对接以及奖励发放的逻辑开发等等。而现在，游戏可以通过调用SDK的“运营活动”功能接口就可以轻松地展示相关操作页面，并通过回调方法的响应来处理奖励发放的相关逻辑。
 
 关于“五星评价”、“Facebook运营活动”以及“LINE推广”的运营活动功能接口，在使用前，需要配合我方运营在后台上配置相关展示所需的图片。“五星评价”的图片宽高比为**3:1**，其他则为**5:2**。
@@ -732,47 +732,47 @@ EglsPlatform.openLINEPromotion(this, new OnSimpleActionCallback() {
     }
 });
 ```
-### 16. AppsFlyer数据统计（根据运营需求对接）
+### 15. AppsFlyer数据统计（根据运营需求对接）
 AppsFlyer主要用于Global业务的数据统计，启用该功能的做法，首先要按照上面所提到的，在AndroidManifest.xml文件中打开对应的配置。对于AppsFlyer统计功能的相关接口调用，其相关初始化部分的逻辑已经嵌入进SDK当中，因此开发者无需关心较为复杂的初始化步骤，只需根据需求，调用对应的接口即可。<br /><br />
-#### 16.1 闪屏动画首次启动事件追踪（必接）
+#### 15.1 闪屏动画首次启动事件追踪（必接）
 ```Java
 EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_ONE_SPLASH_IMAGE, null);
 ```
-#### 16.2 新手任务开始事件追踪（必接）
+#### 15.2 新手任务开始事件追踪（必接）
 ```Java
 EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_TUTORIAL_START, null);
 ```
-#### 16.3 新手任务完成事件追踪（必接）
+#### 15.3 新手任务完成事件追踪（必接）
 ```Java
 EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_TUTORIAL_COMPLETE, null);
 ```
-#### 16.4 创建新角色事件追踪（必接）
+#### 15.4 创建新角色事件追踪（必接）
 ```Java
 EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_NEW_CHARACTER, null);
 ```
-#### 16.5 游戏资源首次更新开始事件追踪（必接）
+#### 15.5 游戏资源首次更新开始事件追踪（必接）
 ```Java
 EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_ONE_UPDATE_START, null);
 ```
-#### 16.6 游戏资源首次更新完成事件追踪（必接）
+#### 15.6 游戏资源首次更新完成事件追踪（必接）
 ```Java
 EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_ONE_UPDATE_COMPLETE, null);
 ```
-#### 16.7 游戏资源首次加载开始事件追踪（必接）
+#### 15.7 游戏资源首次加载开始事件追踪（必接）
 ```Java
 EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_ONE_LOAD_START, null);
 ```
-#### 16.8 游戏资源首次加载完成事件追踪（必接）
+#### 15.8 游戏资源首次加载完成事件追踪（必接）
 ```Java
 EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_ONE_LOAD_COMPLETE, null);
 ```
-#### 16.9 自定义事件追踪()（根据需求接入）
+#### 15.9 自定义事件追踪()（根据需求接入）
 ```Java
 // 有时候运营会针对具体的数据分析增加特定的事件统计，那么请调用该接口，传入特定的事件名称
 // trackData的格式为json字符串，形如：{key:value,key:value,key:value...}
 EglsTracker.getInstance().trackEventCustom(trackEvent, trackData);
 ```
-### 17. 其他注意事项
+### 16. 其他注意事项
 1. 凡是游戏项目工程为Android Studio工程，并且在Gradle里配置了productFlavor来控制打包流程的，请务必在调用“EglsPlatform.initActivity()”接口前，写上如下逻辑代码：
 ```Java
 EglsPlatform.addFlavorsBasePackage(BuildConfig.class.getPackage().getName());
