@@ -654,7 +654,7 @@ EglsPlatform.eglsLoginLightly(Constants.TYPE_USER_ACCOUNT_FACEBOOK);
 EglsPlatform.eglsBindLightly(Constants.TYPE_USER_ACCOUNT_GOOGLE);
 EglsPlatform.eglsBindLightly(Constants.TYPE_USER_ACCOUNT_FACEBOOK);
 ```
-### 8 SDK注销（选接）
+### 8. SDK注销（选接）
 ```Java
 // 一般情况下是不需要调用的，该接口主要用来配合Lightly登录而进行账号切换：
 EglsPlatform.eglsLogout();
