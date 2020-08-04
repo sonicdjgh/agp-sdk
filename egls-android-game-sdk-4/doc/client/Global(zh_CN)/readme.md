@@ -640,15 +640,6 @@ protected void onCreate(Bundle savedInstanceState) {
 ### 7. SDK登录（必接）
 ```Java
 EglsPlatform.eglsLogin(Constants.MODE_LOGIN_AUTO);
-
-// 目前，SDK提供了一套LightLy级别的登录业务接口，即不提供SDK集成的登录业务UI展示；
-// 当Lightly登录接口中的账号类型为“null”时，首次登录时采取游客登录;当有了账号记录后，选择最近一次登录的账号进行登录：
-EglsPlatform.eglsLoginLightly(null);
-
-// 以下为指定账号类型的Lightly登录：
-EglsPlatform.eglsLoginLightly(Constants.TYPE_USER_ACCOUNT_GUEST);
-EglsPlatform.eglsLoginLightly(Constants.TYPE_USER_ACCOUNT_GOOGLE);
-EglsPlatform.eglsLoginLightly(Constants.TYPE_USER_ACCOUNT_FACEBOOK);
 ```
 ### 8. SDK注销（选接）
 ```Java
@@ -768,17 +759,21 @@ EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_ONE_LOAD_COMPLETE, 
 // trackData的格式为json字符串，形如：{key:value,key:value,key:value...}
 EglsTracker.getInstance().trackEventCustom(trackEvent, trackData);
 ```
-### 16. 其他注意事项
-1. 凡是游戏项目工程为Android Studio工程，并且在Gradle里配置了productFlavor来控制打包流程的，请务必在调用“EglsPlatform.initActivity()”接口前，写上如下逻辑代码：
+#### 16. 轻量级业务功能接口的说明与对接####
+对于部分应用的业务需求，这些应用需要自己实现UI，不希望使用SDK集成的相关UI（不包含第三方SDK的UI）。那么针对此类情况，SDK从4.8.0版本开始，正式上线轻量级（Lightly）的功能接口。这些接口的接口名都带有“Lightly”词缀，以便对接技术人员方便识别，且功能并无二致，所以放心使用。
+##### 16.1 手机登录 #####
 ```Java
-EglsPlatform.addFlavorsBasePackage(BuildConfig.class.getPackage().getName());
+\\
+mobileLoginLightly(Activity activity, String userAccount, String userPassword)
 ```
-2. Google推荐的审核中，会对游戏首次运行时所使用的必要“危险权限”的申请和使用进行检查。SDK会主动申请“android.permission.WRITE_EXTERNAL_STORAGE”权限，但如果游戏还另需申请其他的“危险权限”，可以在调用“EglsPlatform.initActivity()”接口前，使用“addNecessaryPermission()”接口。例如：
+
+### 17. 其他注意事项
+1. Google推荐的审核中，会对游戏首次运行时所使用的必要“危险权限”的申请和使用进行检查。SDK会主动申请“android.permission.WRITE_EXTERNAL_STORAGE”权限，但如果游戏还另需申请其他的“危险权限”，可以在调用“EglsPlatform.initActivity()”接口前，使用“addNecessaryPermission()”接口。例如：
 ```Java
 EglsPlatform.addNecessaryPermission(Manifest.permission.READ_PHONE_STATE);
 EglsPlatform.addNecessaryPermission(Manifest.permission.RECORD_AUDIO);
 ```
-3. 同样也是为了适应Google推荐的审核要求，SDK在游戏第一次安装并启动后，会先弹出一个关于危险权限使用的说明。SDK默认的说明只有关于SD卡权限的使用说明，如果游戏在初始化时有使用到其他的危险权限，那么可以在调用“EglsPlatform.initActivity()”接口前，使用如下方法来修改提示文本：
+2. 同样也是为了适应Google推荐的审核要求，SDK在游戏第一次安装并启动后，会先弹出一个关于危险权限使用的说明。SDK默认的说明只有关于SD卡权限的使用说明，如果游戏在初始化时有使用到其他的危险权限，那么可以在调用“EglsPlatform.initActivity()”接口前，使用如下方法来修改提示文本：
 ```Java
 // 需要注意的是，该接口是直接替换原默认文本的，所以还需要加上SD卡权限的使用说明。
 String permissionContent = "xxx";
