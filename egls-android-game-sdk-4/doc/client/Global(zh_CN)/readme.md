@@ -807,6 +807,7 @@ mailRegisterRequestLightly(String mail, String verificationCode, String password
 ```Java
 // 即根据传入的账号类型来调用对应的渠道注销，当再次请求该渠道登录时，用户可以重新选择账号
 // 需要注意的是，有些渠道SDK是不提供主动注销的逻辑接口的（比如Facebook的app登录，如果此时手机上装有Facebook应用，那么需要先在应用里切换账号）
+// 另外，当accountType为空时，将采取默认注销，即注销当前所有的渠道登录
 channelLogoutLightly(String accountType) 
 ```
 
