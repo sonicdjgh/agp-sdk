@@ -59,7 +59,7 @@ public class MainH5Activity extends Activity {
                             json.put("uid", uid);
                             json.put("accountType", accountType);
                             json.put("nickName", nickName);
-                            EglsPlatform.callJSMethodWithJsonStr(jsLoginCallbackMethodName, json.toString());
+                            EglsPlatform.Web.callJSMethodWithJsonStr(jsLoginCallbackMethodName, json.toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -72,7 +72,7 @@ public class MainH5Activity extends Activity {
                             json.put("uid", "");
                             json.put("accountType", "");
                             json.put("nickName", "");
-                            EglsPlatform.callJSMethodWithJsonStr(jsLoginCallbackMethodName, json.toString());
+                            EglsPlatform.Web.callJSMethodWithJsonStr(jsLoginCallbackMethodName, json.toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -85,7 +85,7 @@ public class MainH5Activity extends Activity {
                             json.put("uid", "");
                             json.put("accountType", "");
                             json.put("nickName", "");
-                            EglsPlatform.callJSMethodWithJsonStr(jsLoginCallbackMethodName, json.toString());
+                            EglsPlatform.Web.callJSMethodWithJsonStr(jsLoginCallbackMethodName, json.toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -94,7 +94,7 @@ public class MainH5Activity extends Activity {
             }
 
             @Override
-            public void onHandleChannelBind(int state, String accountType, String nickName) {// SDK游客绑定的結果处理
+            public void onHandleChannelBind(int state, String accountType, String nickName, String message) {// SDK游客绑定的結果处理
                 switch (state) {
                     case Constants.SDK_STATE_SUCCESS:// 游客绑定成功后的处理
                         break;
@@ -111,7 +111,7 @@ public class MainH5Activity extends Activity {
             }
 
             @Override
-            public void onHandlePay(int state, TradeInfo tradeInfo) {// SDK支付的結果处理
+            public void onHandlePurchase(int state, TradeInfo tradeInfo) {// SDK支付的結果处理
                 switch (state) {
                     case Constants.SDK_STATE_SUCCESS:// 支付完成后的处理（仅表示客户端支付操作完成，最终要以服务器的通知为准）
                         break;
@@ -230,7 +230,7 @@ public class MainH5Activity extends Activity {
                     String cpOrderId = json.optString("cpOrderId", "");
                     requestPurchase(amount, productId, productName, cpOrderId);
                 } else if (method.equals("onEnterGame")) {// 进入游戏后需调用该接口
-                    onEnterGame();
+                    onAccountEnter();
                 }
             }
         } catch (JSONException e) {
@@ -244,11 +244,11 @@ public class MainH5Activity extends Activity {
     }
 
     private void requestPurchase(final String amount, final String productId, final String productName, final String cpOrderId) {
-        EglsPlatform.eglsPay(amount, productId, productName, cpOrderId, "");
+        EglsPlatform.eglsPurchase(amount, productId, productName, cpOrderId);
     }
 
-    private void onEnterGame() {
-        EglsPlatform.onEnterGame();
+    private void onAccountEnter() {
+        EglsPlatform.onAccountEnter();
     }
 
 }
