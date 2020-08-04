@@ -584,7 +584,7 @@ protected void onCreate(Bundle savedInstanceState) {
             }
 
         @Override
-        public void onHandleChannelBind(int state, String accountType, String nickName) {// SDK绑定的結果处理
+        public void onHandleChannelBind(int state, String accountType, String nickName, String message) {// SDK绑定的結果处理
             switch (state) {
                 case Constants.SDK_STATE_SUCCESS:// 绑定成功后的处理
                     break;
@@ -601,7 +601,7 @@ protected void onCreate(Bundle savedInstanceState) {
         }
 
         @Override
-        public void onHandlePay(int state, TradeInfo tradeInfo) {// SDK支付的結果处理
+        public void onHandlePurchase(int state, TradeInfo tradeInfo) {// SDK支付的結果处理
             switch (state) {
                 case Constants.SDK_STATE_SUCCESS:// 支付完成后的处理（仅表示客户端支付操作完成，最终要以服务器的通知为准）
                     break;
