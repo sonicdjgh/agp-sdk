@@ -759,12 +759,48 @@ EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_ONE_LOAD_COMPLETE, 
 // trackData的格式为json字符串，形如：{key:value,key:value,key:value...}
 EglsTracker.getInstance().trackEventCustom(trackEvent, trackData);
 ```
-#### 16. 轻量级业务功能接口的说明与对接####
+### 16. 轻量级业务功能接口的说明与对接
 对于部分应用的业务需求，这些应用需要自己实现UI，不希望使用SDK集成的相关UI（不包含第三方SDK的UI）。那么针对此类情况，SDK从4.8.0版本开始，正式上线轻量级（Lightly）的功能接口。这些接口的接口名都带有“Lightly”词缀，以便对接技术人员方便识别，且功能并无二致，所以放心使用。
-##### 16.1 手机登录 #####
+#### 16.1 手机登录 
 ```Java
-\\
-mobileLoginLightly(Activity activity, String userAccount, String userPassword)
+// 即传入手机号、密码后进行登录
+// 响应登录回调，账号类型为：Constants.TYPE_USER_ACCOUNT_EGLS
+mobileLoginLightly(Activity activity, String mobile, String password)
+```
+#### 16.2 邮箱登录
+```Java
+// 即传入电子邮箱、密码后进行登录
+// 响应登录回调，账号类型为：Constants.TYPE_USER_ACCOUNT_EGLS
+mailLoginLightly(Activity activity, String mail, String password)
+```
+#### 16.3 渠道登录
+```Java
+// 即根据传入的账号类型来调用对应的渠道登录，这里支持谷歌、Facebook登录
+// 响应登录回调，返回登录的账号类型
+// 另外，当accountType为空时，将采取默认登录，如果没有最近一次的登录记录，则进行游客登录；否则选择最近一次的登录账号进行登录
+channelLoginLightly(Activity activity, String accountType)
+```
+
+#### 16.4 手机注册
+```Java
+// 手机注册第一步为“手机注册验证”，即传入手机号后，发送验证码到手机上
+// 响应接口里传入的回调，根据state状态来识别是否发送成功，message可用于消息提示
+mobileRegisterVerifyLightly(String mobile, OnSimpleActionCallback callback)
+
+// 手机注册第二步为“手机注册请求”，即传入手机号、验证码及密码后，请求注册
+// 响应登录回调，账号类型为：Constants.TYPE_USER_ACCOUNT_EGLS
+mobileRegisterRequestLightly(String mobile, String verificationCode, String password)
+```
+
+#### 16.5 邮箱注册
+```Java
+// 邮箱注册第一步为“邮箱注册验证”，即传入电子邮箱后，发送验证码到电子邮箱上
+// 响应接口里传入的回调，根据state状态来识别是否发送成功，message可用于消息提示
+mailRegisterVerifyLightly(String mail, OnSimpleActionCallback callback)
+
+// 邮箱注册第二步为“邮箱注册请求”，即传入电子邮箱、验证码及密码后，请求注册
+// 响应登录回调，账号类型为：Constants.TYPE_USER_ACCOUNT_EGLS
+mailRegisterRequestLightly(String mail, String verificationCode, String password)
 ```
 
 ### 17. 其他注意事项
