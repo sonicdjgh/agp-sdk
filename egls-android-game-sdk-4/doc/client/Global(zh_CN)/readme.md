@@ -43,7 +43,7 @@ apply plugin: 'com.google.gms.google-services'
 ```
 另外，还需要在当前Project目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_SDK_VERSION=4.7.74
+EGLS_SDK_VERSION=4.8.1
 android.enableAapt2=false
 ```
 #### 3.2 lib 选择
