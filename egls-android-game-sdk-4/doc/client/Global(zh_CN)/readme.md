@@ -803,6 +803,78 @@ mailRegisterVerifyLightly(String mail, OnSimpleActionCallback callback)
 mailRegisterRequestLightly(String mail, String verificationCode, String password)
 ```
 
+#### 16.6 渠道注销
+```Java
+// 即根据传入的账号类型来调用对应的渠道注销，当再次请求该渠道登录时，用户可以重新选择账号
+// 需要注意的是，有些渠道SDK是不提供主动注销的逻辑接口的（比如Facebook的app登录，如果此时手机上装有Facebook应用，那么需要先在应用里切换账号）
+channelLogoutLightly(String accountType) 
+```
+
+#### 16.7 手机绑定
+```Java
+// 手机绑定第一步为“手机绑定验证”，即传入手机号后，发送验证码到手机上
+// 响应接口里传入的回调，根据state状态来识别是否发送成功，message可用于消息提示
+mobileBindVerifyLightly(String mobile, OnSimpleActionCallback callback)
+
+// 手机绑定第二步为“手机绑定请求”，即传入手机号、验证码及密码后，请求绑定
+// 响应绑定回调
+// 需要注意的是，若为游客账号请求的绑定，在绑定成功后，游客账号变为手机账号（uid、token不变）；否则即添加了一个手机登录方式，当前登录的账号类型不变
+// 目前，传入的密码对于非游客账号进行的绑定，是无效的
+mobileBindRequestLightly(String mobile, String verificationCode, String password) 
+```
+
+#### 16.8 邮箱绑定
+```Java
+// 邮箱绑定第一步为“邮箱绑定验证”，即传入电子邮箱后，发送验证码到电子邮箱上
+// 响应接口里传入的回调，根据state状态来识别是否发送成功，message可用于消息提示
+mailBindVerifyLightly(String mail, OnSimpleActionCallback callback) 
+
+// 邮箱绑定第二步为“邮箱绑定请求”，即传入电子邮箱、验证码及密码后，请求绑定
+// 响应绑定回调
+// 需要注意的是，若为游客账号请求的绑定，在绑定成功后，游客账号变为邮箱账号（uid、token不变）；否则即添加了一个邮箱登录方式，当前登录的账号类型不变
+// 目前，传入的密码对于非游客账号进行的绑定，是无效的
+mailBindRequestLightLy(String mail, String verificationCode, String password)
+```
+
+#### 16.9 渠道绑定
+```Java
+// 即根据传入的账号类型来调用对应的渠道绑定，这里支持谷歌、Facebook登录
+// 响应绑定回调
+// 需要注意的是，若为游客账号请求的绑定，在绑定成功后，游客账号变为渠道账号（uid、token不变）；否则即添加了一个渠道登录方式，当前登录的账号类型不变
+channelBindLightly(Activity activity, String accountType)
+```
+
+#### 16.10 密码修改
+```Java
+// 即修改当前通过手机或邮箱登录的账号的登录密码
+// 响应接口里传入的回调，根据state状态来识别是否修改成功，message可用于消息提示
+pwdModifyLightly(String password, OnSimpleActionCallback callback)
+```
+
+#### 16.11 密码重置
+```Java
+// 密码重置第一步为“密码重置鉴权”，即传入手机号或电子邮箱后，发送验证码到手机或电子邮箱上
+// 响应接口里传入的回调，根据state状态来识别是否发送成功，message可用于消息提示
+pwdResetCaptchaLightly(String userAccount, OnSimpleActionCallback callback) 
+
+// 密码重置第二步为“密码重置请求”，即传入手机号或电子邮箱、鉴权码后，请求密码重置
+// 响应接口里传入的回调，根据state状态来识别是否重置成功，message可用于消息提示
+pwdResetRequestLightly(String userAccount, String captcha, OnSimpleActionCallback callback)
+```
+
+#### 16.12 渠道支付
+```Java
+// 即传入金额、档位编号、档位名称、订单号信息后，调用渠道支付
+channelPurchaseLightly(String amount, String productId, String productName, String cpOrderInfo, int flag)
+```
+
+#### 16.13 渠道订阅
+```Java
+// 即传入金额、档位编号、档位名称、订单号信息后，调用渠道订阅
+// 目前，仅支持google订阅
+channelSubscribeLightly(String amount, String productId, String productName, String cpOrderInfo)
+```
+
 ### 17. 其他注意事项
 1. Google推荐的审核中，会对游戏首次运行时所使用的必要“危险权限”的申请和使用进行检查。SDK会主动申请“android.permission.WRITE_EXTERNAL_STORAGE”权限，但如果游戏还另需申请其他的“危险权限”，可以在调用“EglsPlatform.initActivity()”接口前，使用“addNecessaryPermission()”接口。例如：
 ```Java
