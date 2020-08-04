@@ -660,10 +660,10 @@ String cpOrderInfo = "2SDF34DF12GH0S23234GAER5";// CP订单信息，由接入方
 String flag = "";// 额外标记，一般传空字符串即可
 EglsPlatform.eglsPay(amount, productId, productName, cpOrderInfo, flag);
 ```
-### 11. onEnterGame接口调用（必接）
+### 11. onAccountEnter接口调用（必接）
 ```Java
 //当玩家登录进入到游戏服务器之后，请务必调用该方法
-EglsPlatform.onEnterGame();
+EglsPlatform.onAccountEnter();
 ```
 ### 12. SDK分享功能（选接）
 ```Java
