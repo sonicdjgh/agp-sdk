@@ -30,12 +30,12 @@
 ##### 2.1.2 请求参数及实例
 参数名称 | 参数说明 | 必要
 ---|---|---
-uid | EGLS用户Id | 是
+uid | EGLS用户ID,由32位字符组成  | 是
 ticket | 用户会话验证票 | 是
 appId | 商户Id，由EGLS分配 | 	是
 sign | 大写化的签名串，MD5(appId+uid+ticket+密钥) | 是
 
-**示例**：http://twpassport.eglsgame.com/passport/egls/tokenVerify?uid=123456&ticket=abcdefggg&appId=1&sign=E866C08C984405C3DBD39ECAE1ED5224
+**示例**：http://twpassport.eglsgame.com/passport/egls/tokenVerify?uid=7cc1d5bb4e9844eab0e31f9021&ticket=abcdefggg&appId=1&sign=E866C08C984405C3DBD39ECAE1ED5224
 
 ##### 2.1.3 响应参数
 {“code”:0,“message”:”响应信息”}
@@ -52,7 +52,7 @@ appId | 商户id | 是
 cpOrder | CP自定义数据（建议值为CP订单号）,调用SDK的支付接口时由CP传入。注：不可含有“&#124;”，“=”，“@” | 是
 money | 充值金额,浮点值 | 是
 payTime | 支付时间 | 是
-order | EGLS订单号 | 是
+order | EGLS订单号,由30位字符组成 | 是
 currency | 货币种类 | 是
 sandbox | 是否为测试环境, true或者false | 是
 sign | 大写化的签名数据：对所有不为空的参数按参数名升序排列(除sign外)，通过”&”连接各参数值，拼装成签名串，并签名串末尾追加appSecret（由EGLS分配）。示例：MD5(value1&value2…appSecret) | 是
