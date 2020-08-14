@@ -51,7 +51,8 @@ sign | 大写化的签名串，MD5(appId+uid+ticket+密钥) | 是
 appId | 商户id | 是
 cpOrder | CP自定义数据（建议值为CP订单号）,调用SDK的支付接口时由CP传入。注：不可含有“&#124;”，“=”，“@” | 是
 money | 充值金额,浮点值 | 是
-payTime | 支付时间 | 是
+payTime | 支付时间，毫秒值 | 是
+expiryTime | 订阅过期时间，毫秒值 | 否 
 order | EGLS订单号,由30位字符组成 | 是
 currency | 货币种类 | 是
 sandbox | 是否为测试环境, true或者false | 是
