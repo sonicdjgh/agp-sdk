@@ -43,7 +43,7 @@ apply plugin: 'com.google.gms.google-services'
 ```
 另外，还需要在当前Project目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_SDK_VERSION=4.8.9
+EGLS_SDK_VERSION=4.8.14
 android.enableAapt2=false
 ```
 #### 3.2 lib 选择
@@ -202,7 +202,7 @@ manifestPlaceholders = [
 ```Xml
 <!-- 如果用Mycard支付功能，请在application标签内修改属性为 android:name="com.egls.support.mycard.MyCardApplication" -->
 </application
-    android:name="com.egls.support.components.EglsApplication"
+    android:name="com.egls.sdk.demo.DemoApplication"
     android:allowBackup="false"
     android:icon="@drawable/icon"
     android:label="AGSDK Demo"
@@ -210,7 +210,7 @@ manifestPlaceholders = [
 	
     <!-- 游戏Activity -->	
     <activity
-        android:name="com.egls.sdk.demo.MainActivity"
+        android:name="com.egls.sdk.demo.DemoMyActivity"
         android:configChanges="fontScale|orientation|keyboardHidden|locale|navigation|screenSize|uiMode"
         android:screenOrientation="landscape"
         android:theme="@style/EglsTheme.NoTitleBar.Fullscreen.NoAnimation" >
@@ -498,6 +498,12 @@ manifestPlaceholders = [
 ### 5. 基础方法实现（必接）
 ```Java 
 @Override
+protected void onCreate() {
+    super.onCreate();
+    EglsPlatform.onCreate();
+}
+
+@Override
 protected void onResume() {
     super.onResume();
     EglsPlatform.onResume();
@@ -514,28 +520,10 @@ protected void onDestroy() {
     super.onDestroy();
     EglsPlatform.onDestroy();
 }
-	
-@Override
-protected void onNewIntent(Intent intent) {
-    super.onNewIntent(intent);
-    EglsPlatform.onNewIntent(intent);
-}
-	
-@Override
-public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    EglsPlatform.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
-}
-	
-@Override
-protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    super.onActivityResult(requestCode, resultCode, data);
-    EglsPlatform.onActivityResult(requestCode, resultCode, data);
-}
 ```
 ### 6. SDK初始化（必接）
 ```Java
-// 如果游戏工程中有需要自定义Application的需求，那么请在自定义的Application类中，按照如下进行接口的调用：
+// 请在你的Application类中，按照如下进行接口的调用：
 @Override
 public void onCreate() {
     super.onCreate();
@@ -543,11 +531,11 @@ public void onCreate() {
 }
 ```
 ```Java
-// 请在游戏的主Activity类中，按照如下进行接口的调用：
+// 请在你的Activity类中，按照如下进行接口的调用：
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    EglsPlatform.initActivity(this, AppUtil.getVersionName(this), new SDKActionHandler() {
+    EglsPlatform.setSDKActionHandler(new SDKActionHandler() {
 
         @Override
         public void onHandleInit(int state, String message) {// SDK初始化的結果处理
@@ -627,7 +615,7 @@ protected void onCreate(Bundle savedInstanceState) {
         }
 
         @Override
-        public void onHandleExit(boolean isExit) {// SDK退出游戏的結果处理（该方法只针对游戏调用SDK的"AGPManager.eglsExit()"接口的响应）
+        public void onHandleExit(boolean isExit) {// SDK退出游戏的結果处理（该方法只针对游戏调用SDK的"EglsPlatform.Support.exit()"接口的响应）
             if (isExit) {
                 // 玩家选择退出后的处理
             } else {
