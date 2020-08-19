@@ -4,6 +4,9 @@
 从4.x.x版本起，我们采用了新的账号体系，所以并不兼容旧版（即同一个账号在登录后返回的uid与3.x.x版本的不一致）。如果您的游戏曾经接过旧版本的SDK，并且将要使用4.x.x版本的SDK时，请配合我们做游戏的强更及其他必要的更新操作（详情请咨询我方运营）。<br /><br />
 ### SDK展示
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/demo-kr-login.gif)
+### Version: 4.8.14
+1. 根据最新的业务指示，为了适应原生app开发的对接需求，特将SDK内部逻辑做了一次较大的调整；
+2. 由于“EglsPlatform”对外接口类中的方法越来越多，特此在这次的版本中进行分化，详细改动请详见对接文档。
 ### Version: 4.8.6
 修复SDK初始化异常问题。
 ### Version: 4.8.3
