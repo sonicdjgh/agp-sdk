@@ -791,9 +791,9 @@ String cpOrderInfo = "2SDF34DF12GH0S23234GAER6";// CP订单信息，由接入方
 EglsPlatform.Payment.channelPurchaseLightly(this， amount, productId, productName, cpOrderInfo);
 ```
 
-
-
-### 12. SDK分享功能（选接）
+### 9. Social模块接口
+“Social”模块中包含了与社交相关的功能接口。
+#### 9.1 渠道分享
 ```Java
 int type = Constants.TYPE_SHARE_FACEBOOK;
 String shareTitle = "";// 分享标题
@@ -801,8 +801,24 @@ String shareText = "";// 分享文本
 String shareImageFilePath = "";// 分享图片（绝对路径）
 String shareLink = "";// 分享链接
 boolean isTimelineCb = false;
-EglsPlatform.eglsShare(this, type, shareTitle, shareText, shareImageFilePath, shareLink, isTimelineCb);
+EglsPlatform.Social.channelShare(this, type, shareTitle, shareText, shareImageFilePath, shareLink, isTimelineCb);
 ```
+#### 9.2 五星评价
+```Java
+// 在使用前，需要配合我方运营在后台上配置相关展示所需的图片。“五星评价”的图片宽高比为**3:1**，其他则为**5:2**。
+EglsPlatform.Social.openFiveStarReview(this, new OnSimpleActionCallback() {
+
+    @Override
+    public void onFinish() {
+        //评价操作完成，可根据此回调做之后的逻辑处理
+    }
+});
+```
+#### 9.3 Facebook运营活动
+```Java
+// 在使用前，需要配合我方运营在后台上配置相关展示所需的图片。“五星评价”的图片宽高比为**3:1**，其他则为**5:2**。
+```
+
 ### 13. Firebase云消息推送（选接）
 当有需要使用Firebase的云消息推送时，首先请在游戏项目的“/res/drawable”目录下，添加一张名为“egls_push_icon”的图片。然后，除了按照对接文档中“3.1”、“3.4”和“4.4”的说明进行配置以外，还需要从Google后台下载一个名为“google-services.json”的文件（该文件由我方运营提供），并将该文件放在当前游戏Module工程目录下，如下图所示：<br/>
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/S4001.png)<br/>
@@ -812,14 +828,7 @@ SDK的“运营活动”接口，主要是为游戏提供了相关操作页面�
 
 关于“五星评价”、“Facebook运营活动”以及“LINE推广”的运营活动功能接口，在使用前，需要配合我方运营在后台上配置相关展示所需的图片。“五星评价”的图片宽高比为**3:1**，其他则为**5:2**。
 ```Java
-// 五星评价
-EglsPlatform.openFiveStarReview(this, new OnSimpleActionCallback() {
 
-    @Override
-    public void onFinish() {
-        //评价操作完成，可根据此回调做之后的逻辑处理
-    }
-});
 	
 // Facebook运营活动（加入粉丝团、分享）
 boolean isEnableJoin = true;
