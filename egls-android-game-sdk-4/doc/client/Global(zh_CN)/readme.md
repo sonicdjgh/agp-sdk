@@ -625,10 +625,127 @@ protected void onCreate(Bundle savedInstanceState) {
     });
 }
 ```
-### 7. SDK登录（必接）
+### 7. Account模块接口
+“Account”模块中包含了与账号相关的功能接口。
+#### 7.1 SDK UI Interface
+在“Account”模块里所包含的接口名称中，带有“egls”词缀的接口，在调用时，会根据业务功能自身需求，来展示所需要的UI。
+#### 7.1.1 egls登录
 ```Java
-EglsPlatform.eglsLogin(Constants.MODE_LOGIN_AUTO);
+EglsPlatform.Account.eglsLogin(this, Constants.MODE_LOGIN_AUTO);
 ```
+#### 7.1.2 egls切换账号
+```Java
+EglsPlatform.Account.eglsSwitch(this);
+```
+#### 7.1.3 egls用户中心
+```Java
+EglsPlatform.Account.eglsUserCenter(this);
+```
+#### 7.2 SDK Lightly Interface
+在“Account”模块里所包含的接口名称中，带有“Lightly”词缀的接口，在调用时，不会显示SDK自身集成的相关UI。
+#### 7.2.1 手机登录 
+```Java
+// 即传入手机号、密码后进行登录
+// 响应登录回调，账号类型为：Constants.TYPE_USER_ACCOUNT_EGLS
+EglsPlatform.Account.mobileLoginLightly(Activity activity, String mobile, String password)
+```
+#### 7.2.2 邮箱登录
+```Java
+// 即传入电子邮箱、密码后进行登录
+// 响应登录回调，账号类型为：Constants.TYPE_USER_ACCOUNT_EGLS
+EglsPlatform.Account.mailLoginLightly(Activity activity, String mail, String password)
+```
+#### 7.2.3 渠道登录
+```Java
+// 即根据传入的账号类型来调用对应的渠道登录，这里支持谷歌、Facebook登录
+// 响应登录回调，返回登录的账号类型
+// 另外，当accountType为空时，将采取默认登录，如果没有最近一次的登录记录，则进行游客登录；否则选择最近一次的登录账号进行登录
+EglsPlatform.Account.channelLoginLightly(Activity activity, String accountType)
+```
+
+#### 7.2.4 手机注册
+```Java
+// 手机注册第一步为“手机注册验证”，即传入手机号后，发送验证码到手机上
+// 响应接口里传入的回调，根据state状态来识别是否发送成功，message可用于消息提示
+EglsPlatform.Account.mobileRegisterVerifyLightly(String mobile, OnSimpleActionCallback callback)
+
+// 手机注册第二步为“手机注册请求”，即传入手机号、验证码及密码后，请求注册
+// 响应登录回调，账号类型为：Constants.TYPE_USER_ACCOUNT_EGLS
+EglsPlatform.Account.mobileRegisterRequestLightly(String mobile, String verificationCode, String password)
+```
+
+#### 7.2.5 邮箱注册
+```Java
+// 邮箱注册第一步为“邮箱注册验证”，即传入电子邮箱后，发送验证码到电子邮箱上
+// 响应接口里传入的回调，根据state状态来识别是否发送成功，message可用于消息提示
+EglsPlatform.Account.mailRegisterVerifyLightly(String mail, OnSimpleActionCallback callback)
+
+// 邮箱注册第二步为“邮箱注册请求”，即传入电子邮箱、验证码及密码后，请求注册
+// 响应登录回调，账号类型为：Constants.TYPE_USER_ACCOUNT_EGLS
+EglsPlatform.Account.mailRegisterRequestLightly(String mail, String verificationCode, String password)
+```
+
+#### 7.2.6 渠道注销
+```Java
+// 即根据传入的账号类型来调用对应的渠道注销，当再次请求该渠道登录时，用户可以重新选择账号
+// 需要注意的是，有些渠道SDK是不提供主动注销的逻辑接口的（比如Facebook的app登录，如果此时手机上装有Facebook应用，那么需要先在应用里切换账号）
+// 另外，当accountType为空时，将采取默认注销，即注销当前所有的渠道登录
+EglsPlatform.Account.channelLogoutLightly(String accountType) 
+```
+
+#### 7.2.7 手机绑定
+```Java
+// 手机绑定第一步为“手机绑定验证”，即传入手机号后，发送验证码到手机上
+// 响应接口里传入的回调，根据state状态来识别是否发送成功，message可用于消息提示
+EglsPlatform.Account.mobileBindVerifyLightly(String mobile, OnSimpleActionCallback callback)
+
+// 手机绑定第二步为“手机绑定请求”，即传入手机号、验证码及密码后，请求绑定
+// 响应绑定回调
+// 需要注意的是，若为游客账号请求的绑定，在绑定成功后，游客账号变为手机账号（uid、token不变）；否则即添加了一个手机登录方式，当前登录的账号类型不变
+// 目前，传入的密码对于非游客账号进行的绑定，是无效的
+EglsPlatform.Account.mobileBindRequestLightly(String mobile, String verificationCode, String password) 
+```
+
+#### 7.2.8 邮箱绑定
+```Java
+// 邮箱绑定第一步为“邮箱绑定验证”，即传入电子邮箱后，发送验证码到电子邮箱上
+// 响应接口里传入的回调，根据state状态来识别是否发送成功，message可用于消息提示
+EglsPlatform.Account.mailBindVerifyLightly(String mail, OnSimpleActionCallback callback) 
+
+// 邮箱绑定第二步为“邮箱绑定请求”，即传入电子邮箱、验证码及密码后，请求绑定
+// 响应绑定回调
+// 需要注意的是，若为游客账号请求的绑定，在绑定成功后，游客账号变为邮箱账号（uid、token不变）；否则即添加了一个邮箱登录方式，当前登录的账号类型不变
+// 目前，传入的密码对于非游客账号进行的绑定，是无效的
+EglsPlatform.Account.mailBindRequestLightLy(String mail, String verificationCode, String password)
+```
+
+#### 7.2.9 渠道绑定
+```Java
+// 即根据传入的账号类型来调用对应的渠道绑定，这里支持谷歌、Facebook登录
+// 响应绑定回调
+// 需要注意的是，若为游客账号请求的绑定，在绑定成功后，游客账号变为渠道账号（uid、token不变）；否则即添加了一个渠道登录方式，当前登录的账号类型不变
+EglsPlatform.Account.channelBindLightly(Activity activity, String accountType)
+```
+
+#### 7.2.10 密码修改
+```Java
+// 即修改当前通过手机或邮箱登录的账号的登录密码
+// 响应接口里传入的回调，根据state状态来识别是否修改成功，message可用于消息提示
+EglsPlatform.Account.pwdModifyLightly(String password, OnSimpleActionCallback callback)
+```
+
+#### 7.2.11 密码重置
+```Java
+// 密码重置第一步为“密码重置鉴权”，即传入手机号或电子邮箱后，发送验证码到手机或电子邮箱上
+// 响应接口里传入的回调，根据state状态来识别是否发送成功，message可用于消息提示
+EglsPlatform.Account.pwdResetCaptchaLightly(String userAccount, OnSimpleActionCallback callback) 
+
+// 密码重置第二步为“密码重置请求”，即传入手机号或电子邮箱、鉴权码后，请求密码重置
+// 响应接口里传入的回调，根据state状态来识别是否重置成功，message可用于消息提示
+EglsPlatform.Account.pwdResetRequestLightly(String userAccount, String captcha, OnSimpleActionCallback callback)
+```
+
+
 ### 8. SDK注销（选接）
 ```Java
 // 一般情况下是不需要调用的，该接口主要用来配合Lightly登录而进行账号切换：
@@ -749,107 +866,7 @@ EglsTracker.getInstance().trackEventCustom(trackEvent, trackData);
 ```
 ### 16. 轻量级业务功能接口的说明与对接
 对于部分应用的业务需求，这些应用需要自己实现UI，不希望使用SDK集成的相关UI（不包含第三方SDK的UI）。那么针对此类情况，SDK从4.8.0版本开始，正式上线轻量级（Lightly）的功能接口。这些接口的接口名都带有“Lightly”词缀，以便对接技术人员方便识别，且功能并无二致，所以放心使用。
-#### 16.1 手机登录 
-```Java
-// 即传入手机号、密码后进行登录
-// 响应登录回调，账号类型为：Constants.TYPE_USER_ACCOUNT_EGLS
-EglsPlatform.mobileLoginLightly(Activity activity, String mobile, String password)
-```
-#### 16.2 邮箱登录
-```Java
-// 即传入电子邮箱、密码后进行登录
-// 响应登录回调，账号类型为：Constants.TYPE_USER_ACCOUNT_EGLS
-EglsPlatform.mailLoginLightly(Activity activity, String mail, String password)
-```
-#### 16.3 渠道登录
-```Java
-// 即根据传入的账号类型来调用对应的渠道登录，这里支持谷歌、Facebook登录
-// 响应登录回调，返回登录的账号类型
-// 另外，当accountType为空时，将采取默认登录，如果没有最近一次的登录记录，则进行游客登录；否则选择最近一次的登录账号进行登录
-EglsPlatform.channelLoginLightly(Activity activity, String accountType)
-```
 
-#### 16.4 手机注册
-```Java
-// 手机注册第一步为“手机注册验证”，即传入手机号后，发送验证码到手机上
-// 响应接口里传入的回调，根据state状态来识别是否发送成功，message可用于消息提示
-EglsPlatform.mobileRegisterVerifyLightly(String mobile, OnSimpleActionCallback callback)
-
-// 手机注册第二步为“手机注册请求”，即传入手机号、验证码及密码后，请求注册
-// 响应登录回调，账号类型为：Constants.TYPE_USER_ACCOUNT_EGLS
-EglsPlatform.mobileRegisterRequestLightly(String mobile, String verificationCode, String password)
-```
-
-#### 16.5 邮箱注册
-```Java
-// 邮箱注册第一步为“邮箱注册验证”，即传入电子邮箱后，发送验证码到电子邮箱上
-// 响应接口里传入的回调，根据state状态来识别是否发送成功，message可用于消息提示
-EglsPlatform.mailRegisterVerifyLightly(String mail, OnSimpleActionCallback callback)
-
-// 邮箱注册第二步为“邮箱注册请求”，即传入电子邮箱、验证码及密码后，请求注册
-// 响应登录回调，账号类型为：Constants.TYPE_USER_ACCOUNT_EGLS
-EglsPlatform.mailRegisterRequestLightly(String mail, String verificationCode, String password)
-```
-
-#### 16.6 渠道注销
-```Java
-// 即根据传入的账号类型来调用对应的渠道注销，当再次请求该渠道登录时，用户可以重新选择账号
-// 需要注意的是，有些渠道SDK是不提供主动注销的逻辑接口的（比如Facebook的app登录，如果此时手机上装有Facebook应用，那么需要先在应用里切换账号）
-// 另外，当accountType为空时，将采取默认注销，即注销当前所有的渠道登录
-EglsPlatform.channelLogoutLightly(String accountType) 
-```
-
-#### 16.7 手机绑定
-```Java
-// 手机绑定第一步为“手机绑定验证”，即传入手机号后，发送验证码到手机上
-// 响应接口里传入的回调，根据state状态来识别是否发送成功，message可用于消息提示
-EglsPlatform.mobileBindVerifyLightly(String mobile, OnSimpleActionCallback callback)
-
-// 手机绑定第二步为“手机绑定请求”，即传入手机号、验证码及密码后，请求绑定
-// 响应绑定回调
-// 需要注意的是，若为游客账号请求的绑定，在绑定成功后，游客账号变为手机账号（uid、token不变）；否则即添加了一个手机登录方式，当前登录的账号类型不变
-// 目前，传入的密码对于非游客账号进行的绑定，是无效的
-EglsPlatform.mobileBindRequestLightly(String mobile, String verificationCode, String password) 
-```
-
-#### 16.8 邮箱绑定
-```Java
-// 邮箱绑定第一步为“邮箱绑定验证”，即传入电子邮箱后，发送验证码到电子邮箱上
-// 响应接口里传入的回调，根据state状态来识别是否发送成功，message可用于消息提示
-EglsPlatform.mailBindVerifyLightly(String mail, OnSimpleActionCallback callback) 
-
-// 邮箱绑定第二步为“邮箱绑定请求”，即传入电子邮箱、验证码及密码后，请求绑定
-// 响应绑定回调
-// 需要注意的是，若为游客账号请求的绑定，在绑定成功后，游客账号变为邮箱账号（uid、token不变）；否则即添加了一个邮箱登录方式，当前登录的账号类型不变
-// 目前，传入的密码对于非游客账号进行的绑定，是无效的
-EglsPlatform.mailBindRequestLightLy(String mail, String verificationCode, String password)
-```
-
-#### 16.9 渠道绑定
-```Java
-// 即根据传入的账号类型来调用对应的渠道绑定，这里支持谷歌、Facebook登录
-// 响应绑定回调
-// 需要注意的是，若为游客账号请求的绑定，在绑定成功后，游客账号变为渠道账号（uid、token不变）；否则即添加了一个渠道登录方式，当前登录的账号类型不变
-EglsPlatform.channelBindLightly(Activity activity, String accountType)
-```
-
-#### 16.10 密码修改
-```Java
-// 即修改当前通过手机或邮箱登录的账号的登录密码
-// 响应接口里传入的回调，根据state状态来识别是否修改成功，message可用于消息提示
-EglsPlatform.pwdModifyLightly(String password, OnSimpleActionCallback callback)
-```
-
-#### 16.11 密码重置
-```Java
-// 密码重置第一步为“密码重置鉴权”，即传入手机号或电子邮箱后，发送验证码到手机或电子邮箱上
-// 响应接口里传入的回调，根据state状态来识别是否发送成功，message可用于消息提示
-EglsPlatform.pwdResetCaptchaLightly(String userAccount, OnSimpleActionCallback callback) 
-
-// 密码重置第二步为“密码重置请求”，即传入手机号或电子邮箱、鉴权码后，请求密码重置
-// 响应接口里传入的回调，根据state状态来识别是否重置成功，message可用于消息提示
-EglsPlatform.pwdResetRequestLightly(String userAccount, String captcha, OnSimpleActionCallback callback)
-```
 
 #### 16.12 渠道支付
 ```Java
