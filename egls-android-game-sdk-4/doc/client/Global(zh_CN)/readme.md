@@ -627,7 +627,7 @@ protected void onCreate(Bundle savedInstanceState) {
 ```
 ### 7. Account模块接口
 “Account”模块中包含了与账号相关的功能接口。
-#### 7.1 SDK UI Interface
+#### 7.1 SDK UI Interface （主要适用于游戏）
 在“Account”模块里所包含的接口名称中，带有“egls”词缀的接口，在调用时，会根据业务功能自身需求，来展示所需要的UI。
 #### 7.1.1 egls登录
 ```Java
@@ -641,7 +641,7 @@ EglsPlatform.Account.eglsSwitch(this);
 ```Java
 EglsPlatform.Account.eglsUserCenter(this);
 ```
-#### 7.2 SDK Lightly Interface
+#### 7.2 SDK Lightly Interface （主要适用于应用）
 在“Account”模块里所包含的接口名称中，带有“Lightly”词缀的接口，在调用时，不会显示SDK自身集成的相关UI。
 #### 7.2.1 手机登录 
 ```Java
@@ -745,31 +745,54 @@ EglsPlatform.Account.pwdResetCaptchaLightly(String userAccount, OnSimpleActionCa
 EglsPlatform.Account.pwdResetRequestLightly(String userAccount, String captcha, OnSimpleActionCallback callback)
 ```
 
-
-### 8. SDK注销（选接）
+### 7.3 Other Interface
+#### 7.3.1 账号进入
 ```Java
-// 一般情况下是不需要调用的，该接口主要用来配合Lightly登录而进行账号切换：
-EglsPlatform.eglsLogout();
+//在完成登录后，当玩家角色进入到服务器或是应用用户进入到主页面时，需要调用该方法
+EglsPlatform.Account.onAccountEnter(this);
 ```
 
-### 9. SDK切换账号（必接）
-```Java
-EglsPlatform.eglsSwitch();
-```
-### 10. SDK支付（必接）
+### 8 Payment模块接口
+“Payment”模块中包含了与支付相关的功能接口。
+#### 8.1 SDK UI Interface （主要适用于游戏）
+在“Payment模块接口”模块里所包含的接口名称中，带有“egls”词缀的接口，在调用时，会根据业务功能自身需求，来展示所需要的UI。
+#### 8.1.1 egls支付
 ```Java
 String amount = "1.0";// 总金额
 String productId = "PDT001";// 档位id
 String productName = "钻石";// 档位名称
 String cpOrderInfo = "2SDF34DF12GH0S23234GAER5";// CP订单信息，由接入方生成
-String flag = "";// 额外标记，一般传空字符串即可
-EglsPlatform.eglsPay(amount, productId, productName, cpOrderInfo, flag);
+EglsPlatform.Payment.eglsPurchase(amount, productId, productName, cpOrderInfo, Constants.FLAG_PURCHASE_DEFAULT);
 ```
-### 11. onAccountEnter接口调用（必接）
+#### 8.1.2 egls订阅
 ```Java
-//当玩家登录进入到游戏服务器之后，请务必调用该方法
-EglsPlatform.onAccountEnter();
+String amount = "1.0";// 总金额
+String productId = "PDT002";// 档位id
+String productName = "月卡";// 档位名称
+String cpOrderInfo = "2SDF34DF12GH0S23234GAER6";// CP订单信息，由接入方生成
+EglsPlatform.Payment.eglsSubscribe(amount, productId, productName, cpOrderInfo);
 ```
+#### 8.2 SDK Lightly Interface （主要适用于应用）
+在“Payment模块接口”模块里所包含的接口名称中，带有“Lightly”词缀的接口，在调用时，不会显示SDK自身集成的相关UI。
+#### 8.2.1 渠道支付
+```Java
+String amount = "1.0";// 总金额
+String productId = "PDT001";// 档位id
+String productName = "钻石";// 档位名称
+String cpOrderInfo = "2SDF34DF12GH0S23234GAER5";// CP订单信息，由接入方生成
+EglsPlatform.Payment.channelPurchaseLightly(this, amount, productId, productName, cpOrderInfo, Constants.FLAG_PURCHASE_DEFAULT);
+```
+#### 8.2.2 渠道订阅
+```Java
+String amount = "1.0";// 总金额
+String productId = "PDT002";// 档位id
+String productName = "月卡";// 档位名称
+String cpOrderInfo = "2SDF34DF12GH0S23234GAER6";// CP订单信息，由接入方生成
+EglsPlatform.Payment.channelPurchaseLightly(this， amount, productId, productName, cpOrderInfo);
+```
+
+
+
 ### 12. SDK分享功能（选接）
 ```Java
 int type = Constants.TYPE_SHARE_FACEBOOK;
