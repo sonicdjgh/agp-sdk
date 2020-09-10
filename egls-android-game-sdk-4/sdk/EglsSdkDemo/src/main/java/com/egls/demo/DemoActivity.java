@@ -1,23 +1,22 @@
 package com.egls.demo;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.egls.platform.components.EglsPlatform;
 import com.egls.support.base.Constants;
 import com.egls.support.beans.TradeInfo;
 import com.egls.support.interfaces.SDKActionHandler;
-import com.egls.support.utils.AppUtil;
 
 import java.util.Map;
 
-public class MainActivity extends Activity {
+public class DemoActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EglsPlatform.initActivity(this, AppUtil.getVersionName(this), new SDKActionHandler() {
+        EglsPlatform.onCreate(this);
+        EglsPlatform.setSDKActionHandler(new SDKActionHandler() {
 
             @Override
             public void onHandleInit(int state, String message) {// SDK初始化的結果处理
@@ -46,10 +45,10 @@ public class MainActivity extends Activity {
             public void onHandleLogin(int state, String token, String uid, String accountType, String nickName, String messsage) {// SDK登录的結果处理
                 switch (state) {
                     case Constants.SDK_STATE_SUCCESS:// 登录成功后的处理
-                        // accountType = "0"时，表示游客账号登录
-                        //                        // accountType = "1"时，表示EGLS账号登录
-                        //                        // accountType = "2"时，表示Google账号登录
-                        //                        // accountType = "3"时，表示Facebook账号登录
+                        // accountType = "0" 时，表示游客账号登录
+                        // accountType = "1"时，表示EGLS账号登录
+                        // accountType = "2"时，表示Google账号登录
+                        // accountType = "3"时，表示Facebook账号登录
                         break;
                     case Constants.SDK_STATE_CANCEL:// 登录取消后的处理
                         break;
@@ -140,41 +139,23 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        EglsPlatform.onResume();
+        EglsPlatform.onResume(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        EglsPlatform.onPause();
+        EglsPlatform.onPause(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        EglsPlatform.onDestroy();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        EglsPlatform.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        EglsPlatform.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
-    }
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        EglsPlatform.onNewIntent(intent);
+        EglsPlatform.onDestroy(this);
     }
 
     private void requestLogin() {
-        EglsPlatform.eglsLogin(Constants.MODE_LOGIN_COMMON);
+        EglsPlatform.Account.eglsLogin(this, Constants.MODE_LOGIN_COMMON);
     }
 
     private void requestPurchase() {
@@ -182,10 +163,10 @@ public class MainActivity extends Activity {
         String productId = "";
         String productName = "";
         String cpOrderInfo = "";
-        EglsPlatform.eglsPurchase(amount, productId, productName, cpOrderInfo);
+        EglsPlatform.Payment.eglsPurchase(this, amount, productId, productName, cpOrderInfo, Constants.FLAG_PURCHASE_DEFAULT);
     }
 
     private void onAccountEnter() {
-        EglsPlatform.onAccountEnter();
+        EglsPlatform.Account.onAccountEnter(this);
     }
 }

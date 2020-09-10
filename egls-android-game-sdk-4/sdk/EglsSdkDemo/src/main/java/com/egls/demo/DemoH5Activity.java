@@ -1,7 +1,6 @@
 package com.egls.demo;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.webkit.JavascriptInterface;
 
@@ -9,21 +8,21 @@ import com.egls.platform.components.EglsPlatform;
 import com.egls.support.base.Constants;
 import com.egls.support.beans.TradeInfo;
 import com.egls.support.interfaces.SDKActionHandler;
-import com.egls.support.utils.AppUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Map;
 
-public class MainH5Activity extends Activity {
+public class DemoH5Activity extends Activity {
 
     private String jsLoginCallbackMethodName = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EglsPlatform.initActivity(this, AppUtil.getVersionName(this), new SDKActionHandler() {
+        EglsPlatform.onCreate(this);
+        EglsPlatform.setSDKActionHandler(new SDKActionHandler() {
 
             @Override
             public void onHandleInit(int state, String message) {// SDK初始化的結果处理
@@ -175,37 +174,19 @@ public class MainH5Activity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        EglsPlatform.onResume();
+        EglsPlatform.onResume(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        EglsPlatform.onPause();
+        EglsPlatform.onPause(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        EglsPlatform.onDestroy();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        EglsPlatform.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        EglsPlatform.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
-    }
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        EglsPlatform.onNewIntent(intent);
+        EglsPlatform.onDestroy(this);
     }
 
     /**
@@ -240,15 +221,15 @@ public class MainH5Activity extends Activity {
 
     private void requestLogin(final int loginMode, final String callback) {
         jsLoginCallbackMethodName = callback;
-        EglsPlatform.eglsLogin(loginMode);
+        EglsPlatform.Account.eglsLogin(this, loginMode);
     }
 
     private void requestPurchase(final String amount, final String productId, final String productName, final String cpOrderId) {
-        EglsPlatform.eglsPurchase(amount, productId, productName, cpOrderId);
+        EglsPlatform.Payment.eglsPurchase(this, amount, productId, productName, cpOrderId, Constants.FLAG_PURCHASE_DEFAULT);
     }
 
     private void onAccountEnter() {
-        EglsPlatform.onAccountEnter();
+        EglsPlatform.Account.onAccountEnter(this);
     }
 
 }
