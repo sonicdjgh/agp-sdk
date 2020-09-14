@@ -10,7 +10,7 @@ import com.egls.support.interfaces.SDKActionHandler;
 
 import java.util.Map;
 
-public class DemoActivity extends Activity {
+public class GameActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,7 +155,7 @@ public class DemoActivity extends Activity {
     }
 
     private void requestLogin() {
-        EglsPlatform.Account.eglsLogin(this, Constants.MODE_LOGIN_COMMON);
+        EglsPlatform.Account.eglsLogin(this, Constants.MODE_LOGIN_AUTO);
     }
 
     private void requestPurchase() {
