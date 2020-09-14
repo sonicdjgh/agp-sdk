@@ -401,25 +401,25 @@ manifestPlaceholders = [
 @Override
 protected void onCreate() {
     super.onCreate();
-    EglsPlatform.onCreate();
+    EglsPlatform.onCreate(this);
 }
 
 @Override
 protected void onResume() {
     super.onResume();
-    EglsPlatform.onResume();
+    EglsPlatform.onResume(this);
 }
     
 @Override
 protected void onPause() {
     super.onPause();
-    EglsPlatform.onPause();
+    EglsPlatform.onPause(this);
 }
 	
 @Override
 protected void onDestroy() {
     super.onDestroy();
-    EglsPlatform.onDestroy();
+    EglsPlatform.onDestroy(this);
 }
 ```
 ### 6. SDK初始化（必接）
