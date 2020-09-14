@@ -45,7 +45,7 @@ apply plugin: 'com.google.gms.google-services'
 ```
 另外，还需要在当前Project目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_SDK_VERSION=4.7.70
+EGLS_SDK_VERSION=4.8.22
 android.enableAapt2=false
 ```
 #### 3.2 lib 选择
@@ -62,6 +62,7 @@ dependencies {
     // base begin
     api "com.egls.android:platform:$EGLS_SDK_VERSION@aar"
     api "com.egls.android:payment:$EGLS_SDK_VERSION@aar"
+    api "com.egls.android:native:$EGLS_SDK_VERSION@aar"
     api "com.egls.android:support:$EGLS_SDK_VERSION@aar"
     api 'com.android.support.constraint:constraint-layout:1.1.0'
     // base end
@@ -205,7 +206,7 @@ manifestPlaceholders = [
 #### 4.3 Application相关配置
 ```Xml
 <application
-    android:name="com.egls.support.components.EglsApplication"
+    android:name="com.egls.demo.GameApplication"
     android:allowBackup="false"
     android:icon="@drawable/icon"
     android:label="AGSDK Demo"
@@ -214,7 +215,7 @@ manifestPlaceholders = [
     <!-- 游戏Activity -->
     <!-- 这里须注意的是，游戏主Activity的“launchMode”属性值必须为“standard” -->
     <activity
-        android:name="com.egls.sdk.demo.GameActivity"
+        android:name="com.egls.demo.GameActivity"
         android:configChanges="fontScale|orientation|keyboardHidden|locale|navigation|screenSize|uiMode"
 	android:launchMode="standard"
         android:screenOrientation="landscape"
@@ -398,47 +399,36 @@ manifestPlaceholders = [
 ### 5. 基础方法实现（必接）
 ```Java 
 @Override
+protected void onCreate() {
+    super.onCreate();
+    EglsPlatform.onCreate(this);
+}
+
+@Override
 protected void onResume() {
     super.onResume();
-    EglsPlatform.onResume();
+    EglsPlatform.onResume(this);
 }
     
 @Override
 protected void onPause() {
     super.onPause();
-    EglsPlatform.onPause();
+    EglsPlatform.onPause(this);
 }
 	
 @Override
 protected void onDestroy() {
     super.onDestroy();
-    EglsPlatform.onDestroy();
-}
-	
-@Override
-protected void onNewIntent(Intent intent) {
-    super.onNewIntent(intent);
-    EglsPlatform.onNewIntent(intent);
-}
-	
-@Override
-public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    EglsPlatform.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
-}
-	
-@Override
-protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    super.onActivityResult(requestCode, resultCode, data);
-    EglsPlatform.onActivityResult(requestCode, resultCode, data);
+    EglsPlatform.onDestroy(this);
 }
 ```
 ### 6. SDK初始化（必接）
 ```Java
-// 如果游戏工程中有需要自定义Application的需求，那么请在自定义的Application类中，按照如下进行接口的调用：
+// 请在你的Application类中，按照如下进行接口的调用：
 @Override
 public void onCreate() {
     super.onCreate();
+    EglsTracker.initApplication(this);
     EglsPlatform.initApplication(this);
 }
 ```
@@ -447,7 +437,7 @@ public void onCreate() {
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    EglsPlatform.initActivity(this, AppUtil.getVersionName(this), new SDKActionHandler() {
+    EglsPlatform.setSDKActionHandler(new SDKActionHandler() {
 
         @Override
         public void onHandleInit(int state, String message) {// SDK初始化的結果处理
@@ -536,85 +526,97 @@ protected void onCreate(Bundle savedInstanceState) {
     });
 }
 ```
-### 7. SDK登录（必接）
+### 7. Account模块接口
+“Account”模块中包含了与账号相关的功能接口。
+#### 7.1 SDK UI Interface （主要适用于游戏）
+在“Account”模块里所包含的接口名称中，带有“egls”词缀的接口，在调用时，会根据业务功能自身需求，来展示所需要的UI。
+#### 7.1.1 egls登录
 ```Java
-EglsPlatform.eglsLogin(Constants.MODE_LOGIN_AUTO);
+EglsPlatform.Account.eglsLogin(this, Constants.MODE_LOGIN_AUTO);
 ```
-### 8. SDK账号切换（必接）
+#### 7.1.2 egls切换账号
 ```Java
-EglsPlatform.eglsSwitch();
+EglsPlatform.Account.eglsSwitch(this);
 ```
-### 9. SDK支付（必接）
+#### 7.1.3 egls用户中心
 ```Java
-String amount = "1";// 总金额
+EglsPlatform.Account.eglsUserCenter(this);
+```
+### 7.2 Other Interface
+#### 7.2.1 账号进入
+```Java
+//在完成登录后，当玩家角色进入到服务器或是应用用户进入到主页面时，需要调用该方法
+EglsPlatform.Account.onAccountEnter(this);
+```
+### 8. Payment模块接口
+“Payment”模块中包含了与支付相关的功能接口。
+#### 8.1 SDK UI Interface （主要适用于游戏）
+在“Payment模块接口”模块里所包含的接口名称中，带有“egls”词缀的接口，在调用时，会根据业务功能自身需求，来展示所需要的UI。
+#### 8.1.1 egls支付
+```Java
+String amount = "1.0";// 总金额
 String productId = "PDT001";// 档位id
 String productName = "钻石";// 档位名称
-String cpOrderInfo = "2SDF34DF12GH0S23234GAER5";// CP订单号
-String flag = "";// 额外标记，一般传空字符串即可
-EglsPlatform.eglsPay(amount, productId, productName, cpOrderInfo, flag);
+String cpOrderInfo = "2SDF34DF12GH0S23234GAER5";// CP订单信息，由接入方生成
+EglsPlatform.Payment.eglsPurchase(amount, productId, productName, cpOrderInfo, Constants.FLAG_PURCHASE_DEFAULT);
 ```
-### 10. SDK游戏退出接口（必接）
+#### 8.1.2 egls订阅（仅支持Google订阅）
 ```Java
-//当需要退出游戏时，请务必调用该方法
-EglsPlatform.eglsExit();
+String amount = "1.0";// 总金额
+String productId = "PDT002";// 档位id
+String productName = "月卡";// 档位名称
+String cpOrderInfo = "2SDF34DF12GH0S23234GAER6";// CP订单信息，由接入方生成
+EglsPlatform.Payment.eglsSubscribe(amount, productId, productName, cpOrderInfo);
 ```
-### 11. onEnterGame接口调用（必接）
+ ### 9. Support模块接口
+ “Support”模块中包含了辅助相关的功能接口。
+ #### 9.1 游戏退出
 ```Java
-//当玩家登录进入到游戏服务器之后，请务必调用该方法
-EglsPlatform.onEnterGame();
+//
+EglsPlatform.Support.exit();
 ```
-### 12. SDK分享功能（选接）
-```Java
-int type = Constants.TYPE_SHARE_NAVER;
-String shareTitle = "";// 分享标题
-String shareText = "";// 分享文本
-String shareImageFilePath = "";// 分享图片（绝对路径）
-String shareLink = "";// 分享链接
-boolean isTimelineCb = false;
-EglsPlatform.eglsShare(this, type, shareTitle, shareText, shareImageFilePath, shareLink, isTimelineCb);
-```
-### 13. Firebase云消息推送（选接）
+### 10. Firebase云消息推送（选接）
 当有需要使用Firebase的云消息推送时，首先请在游戏项目的“/res/drawable”目录下，添加一张名为“egls_push_icon”的图片。然后，除了按照对接文档中“3.1”、“3.4”和“4.4”的说明进行配置以外，还需要从Google后台下载一个名为“google-services.json”的文件（该文件由我方运营提供），并将该文件放在当前游戏Module工程目录下，如下图所示：<br/>
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/S4001.png)<br/>
-### 14. AppsFlyer数据统计（根据运营需求对接）
+### 11. AppsFlyer数据统计（根据运营需求对接）
 AppsFlyer主要用于KR业务的数据统计，启用该功能的做法，首先要按照上面所提到的，在AndroidManifest.xml文件中打开对应的配置。对于AppsFlyer统计功能的相关接口调用，其相关初始化部分的逻辑已经嵌入进SDK当中，因此开发者无需关心较为复杂的初始化步骤，只需根据需求，调用对应的接口即可。<br /><br />
-#### 14.1 闪屏动画首次启动事件追踪（必接）
+#### 11.1 闪屏动画首次启动事件追踪（必接）
 ```Java
-EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_ONE_SPLASH_IMAGE, null);
+EglsTracker.trackEventCustom(EglsTracker.EVENT_ONE_SPLASH_IMAGE, null);
 ```
-#### 14.2 新手任务开始事件追踪（必接）
+#### 11.2 新手任务开始事件追踪（必接）
 ```Java
-EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_TUTORIAL_START, null);
+EglsTracker.trackEventCustom(EglsTracker.EVENT_TUTORIAL_START, null);
 ```
-#### 14.3 新手任务完成事件追踪（必接）
+#### 11.3 新手任务完成事件追踪（必接）
 ```Java
-EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_TUTORIAL_COMPLETE, null);
+EglsTracker.trackEventCustom(EglsTracker.EVENT_TUTORIAL_COMPLETE, null);
 ```
-#### 14.4 创建新角色事件追踪（必接）
+#### 11.4 创建新角色事件追踪（必接）
 ```Java
-EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_NEW_CHARACTER, null);
+EglsTracker.trackEventCustom(EglsTracker.EVENT_NEW_CHARACTER, null);
 ```
-#### 14.5 角色等级变化事件追踪（必接）
+#### 11.5 角色等级变化事件追踪（必接）
 ```Java
 int roleLevel = 1;
-EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_LEVEL + roleLevel, null);
+EglsTracker.trackEventCustom(EglsTracker.EVENT_LEVEL + roleLevel, null);
 ```
-#### 14.6 vip等级变化事件追踪（必接）
+#### 11.6 vip等级变化事件追踪（必接）
 ```Java
 int vipLevel = 1;
-EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_VIP + vipLevel, null);
+EglsTracker.trackEventCustom(EglsTracker.EVENT_VIP + vipLevel, null);
 ```
-#### 14.7 打开游戏内购商店事件追踪()（必接）
+#### 11.7 打开游戏内购商店事件追踪()（必接）
 ```Java
-EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_VISIT_SHOP, null);
+EglsTracker.trackEventCustom(EglsTracker.EVENT_VISIT_SHOP, null);
 ```
-#### 14.8 自定义事件追踪()（根据需求接入）
+#### 11.8 自定义事件追踪()（根据需求接入）
 ```Java
 // 有时候运营会针对具体的数据分析增加特定的事件统计，那么请调用该接口，传入特定的事件名称
 // trackData的格式为json字符串，形如：{key:value,key:value,key:value...}
-EglsTracker.getInstance().trackEventCustom(trackEvent, trackData);
+EglsTracker.trackEventCustom(trackEvent, trackData);
 ```
-### 15. Facebook App Events统计（根据需求接入）
+### 12. Facebook App Events统计（根据需求接入）
 根据我们市场推广的需求，集成了Facebook应用事件的统计功能。如果想使用该功能，首先要在“AndroidManifest.xml”文件中修改如下配置：
 ```xml
 <!-- 如果要求接入Facebook App Events统计接口，请将value改为true -->
@@ -633,48 +635,48 @@ android {
 }
 ```
 下面就相关接口作简要说明：
-#### 15.1. logSpentCreditsEvent()（必接）
+#### 12.1. logSpentCreditsEvent()（必接）
 ```Java
 // 花费点数：用户在完成交易时花费您公司或应用程序专用的点数，例如应用内货币
 String contentId = System.currentTimeMillis() + "";// 如果无其他需求，可传入一个时间戳作为contentId
 String contentType = "钻石";
 double totalValue = 20;
-EglsPlatform.getFacebookLogger().logSpentCreditsEvent(contentId, contentType, totalValue);
+EglsPlatform.Support.getFacebookLogger().logSpentCreditsEvent(contentId, contentType, totalValue);
 ```
-#### 15.2 logAchievedLevelEvent()（必接）
+#### 12.2 logAchievedLevelEvent()（必接）
 ```Java
 // 完成关卡：完成您在应用程序、公司或组织中定义的特定关卡
 String level = "第一关";
-EglsPlatform.getFacebookLogger().logAchievedLevelEvent(level);
+EglsPlatform.Support.getFacebookLogger().logAchievedLevelEvent(level);
 ```
-#### 15.3 logUnlockedAchievementEvent()（必接）
+#### 12.3 logUnlockedAchievementEvent()（必接）
 ```Java
 // 解锁成就：完成您在应用程序、公司或组织中想要奖励的特定活动或操作。例如，推荐一位好友、完善个人主页等
 String description = "百万富翁";
-EglsPlatform.getFacebookLogger().logUnlockedAchievementEvent(description);
+EglsPlatform.Support.getFacebookLogger().logUnlockedAchievementEvent(description);
 ```
-#### 15.4 logCompletedTutorialEvent()（必接）
+#### 12.4 logCompletedTutorialEvent()（必接）
 ```Java
 // 完成教程学习：完成应用中的教程学习
 String contentId = System.currentTimeMillis() + "";// 如果无其他需求，可传入一个时间戳作为contentId
 boolean success = true;
-EglsPlatform.getFacebookLogger().logCompletedTutorialEvent(contentId, success);
+EglsPlatform.Support.getFacebookLogger().logCompletedTutorialEvent(contentId, success);
 ``` 
-### 16. 其他注意事项
+### 13. 其他注意事项
 1. 凡是游戏项目工程为Android Studio工程，并且在Gradle里配置了productFlavor来控制打包流程的，请务必在调用“AGPManager.initSDK()”接口前，写上如下逻辑代码：
 ```Java
-EglsPlatform.addFlavorsBasePackage(BuildConfig.class.getPackage().getName());
+EglsPlatform.Config.addFlavorsBasePackage(BuildConfig.class.getPackage().getName());
 ```
 2. Google推荐的审核中，会对游戏首次运行时所使用的必要“危险权限”的申请和使用进行检查。SDK会主动申请“android.permission.WRITE_EXTERNAL_STORAGE”权限，但如果游戏还另需申请其他的“危险权限”，可以在调用“AGPManager.initSDK()”接口前，使用“addNecessaryPermission()”接口。例如：
 ```Java
-EglsPlatform.addNecessaryPermission(Manifest.permission.READ_PHONE_STATE);
-EglsPlatform.addNecessaryPermission(Manifest.permission.RECORD_AUDIO);
+EglsPlatform.Config.addNecessaryPermission(Manifest.permission.READ_PHONE_STATE);
+EglsPlatform.Config.addNecessaryPermission(Manifest.permission.RECORD_AUDIO);
 ```
 3. 同样也是为了适应Google推荐的审核要求，SDK在游戏第一次安装并启动后，会先弹出一个关于危险权限使用的说明。SDK默认的说明只有关于SD卡权限的使用说明，如果游戏在初始化时有使用到其他的危险权限，那么可以在调用“AGPManager.initSDK()”接口前，使用如下方法来修改提示文本：
 ```Java
 // 需要注意的是，该接口是直接替换原默认文本的，所以还需要加上SD卡权限的使用说明。
 String permissionContent = "xxx";
-EglsPlatform.addPermissionContent(permissionContent);
+EglsPlatform.Config.setPermissionContent(permissionContent);
 ```
 ### 附表 - publishmentArea
 publishmentArea | value
