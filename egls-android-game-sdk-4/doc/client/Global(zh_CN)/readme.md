@@ -203,7 +203,7 @@ manifestPlaceholders = [
 ```Xml
 <!-- 如果用Mycard支付功能，请在application标签内修改属性为 android:name="com.egls.support.mycard.MyCardApplication" -->
 </application
-    android:name="com.egls.sdk.demo.DemoApplication"
+    android:name="com.egls.demo.GameApplication"
     android:allowBackup="false"
     android:icon="@drawable/icon"
     android:label="AGSDK Demo"
@@ -211,7 +211,7 @@ manifestPlaceholders = [
 	
     <!-- 游戏Activity -->	
     <activity
-        android:name="com.egls.sdk.demo.DemoMyActivity"
+        android:name="com.egls.demo.GameActivity"
         android:configChanges="fontScale|orientation|keyboardHidden|locale|navigation|screenSize|uiMode"
         android:screenOrientation="landscape"
         android:theme="@style/EglsTheme.NoTitleBar.Fullscreen.NoAnimation" >
