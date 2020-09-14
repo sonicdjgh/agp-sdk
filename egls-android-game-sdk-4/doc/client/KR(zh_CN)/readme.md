@@ -206,7 +206,7 @@ manifestPlaceholders = [
 #### 4.3 Application相关配置
 ```Xml
 <application
-    android:name="com.egls.support.components.EglsApplication"
+    android:name="com.egls.sdk.demo.GameApplication"
     android:allowBackup="false"
     android:icon="@drawable/icon"
     android:label="AGSDK Demo"
