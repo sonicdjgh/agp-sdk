@@ -548,7 +548,7 @@ EglsPlatform.Account.eglsUserCenter(this);
 //在完成登录后，当玩家角色进入到服务器或是应用用户进入到主页面时，需要调用该方法
 EglsPlatform.Account.onAccountEnter(this);
 ```
-### 8 Payment模块接口
+### 8. Payment模块接口
 “Payment”模块中包含了与支付相关的功能接口。
 #### 8.1 SDK UI Interface （主要适用于游戏）
 在“Payment模块接口”模块里所包含的接口名称中，带有“egls”词缀的接口，在调用时，会根据业务功能自身需求，来展示所需要的UI。
@@ -560,7 +560,7 @@ String productName = "钻石";// 档位名称
 String cpOrderInfo = "2SDF34DF12GH0S23234GAER5";// CP订单信息，由接入方生成
 EglsPlatform.Payment.eglsPurchase(amount, productId, productName, cpOrderInfo, Constants.FLAG_PURCHASE_DEFAULT);
 ```
-#### 8.1.2 egls订阅
+#### 8.1.2 egls订阅（仅支持Google订阅）
 ```Java
 String amount = "1.0";// 总金额
 String productId = "PDT002";// 档位id
@@ -568,8 +568,8 @@ String productName = "月卡";// 档位名称
 String cpOrderInfo = "2SDF34DF12GH0S23234GAER6";// CP订单信息，由接入方生成
 EglsPlatform.Payment.eglsSubscribe(amount, productId, productName, cpOrderInfo);
 ```
- ### 9 Support模块接口
- “Support模块接口”模块中包含了其他功能接口。
+ ### 9. Support模块接口
+ “Support”模块中包含了辅助相关的功能接口。
  #### 9.1 游戏退出
 ```Java
 //
