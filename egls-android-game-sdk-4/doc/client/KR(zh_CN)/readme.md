@@ -206,7 +206,7 @@ manifestPlaceholders = [
 #### 4.3 Application相关配置
 ```Xml
 <application
-    android:name="com.egls.sdk.demo.GameApplication"
+    android:name="com.egls.demo.GameApplication"
     android:allowBackup="false"
     android:icon="@drawable/icon"
     android:label="AGSDK Demo"
@@ -215,7 +215,7 @@ manifestPlaceholders = [
     <!-- 游戏Activity -->
     <!-- 这里须注意的是，游戏主Activity的“launchMode”属性值必须为“standard” -->
     <activity
-        android:name="com.egls.sdk.demo.GameActivity"
+        android:name="com.egls.demo.GameActivity"
         android:configChanges="fontScale|orientation|keyboardHidden|locale|navigation|screenSize|uiMode"
 	android:launchMode="standard"
         android:screenOrientation="landscape"
