@@ -831,113 +831,79 @@ EglsPlatform.Support.getFacebookHelper().requestGameInvitation(this, title, text
     }
 });
 ```
+#### 10.3 Facebook用户好友信息获取
+所谓“Facebook用户好友”，就是指使用相同app的Facebook好友，并不只是Facebook好友。目前，如果游戏里没有相关功能的需求，则不建议使用该接口（该接口的使用，需要通过Facebook的登录审核）。
+```Java
+EglsPlatform.Support.getFacebookHelper().getUserFriends(this, new FacebookHelper.FacebookGetUserFriendsCallback() {
 
+    @Override
+    public void onResponse(List<FacebookUserFriend> facebookUserFriends) {
+	for (FacebookUserFriend friend : facebookUserFriends) {
+	    // friend.getNickName() 用户好友的昵称
+	    // friend.getUid() 用户好友的uid
+     	    // friend.getPicUrl() 用户好友的头像地址
+	}
+    }
+});
+```
 
-### 13. Firebase云消息推送（选接）
+### 11. Firebase云消息推送（选接）
 当有需要使用Firebase的云消息推送时，首先请在游戏项目的“/res/drawable”目录下，添加一张名为“egls_push_icon”的图片。然后，除了按照对接文档中“3.1”、“3.4”和“4.4”的说明进行配置以外，还需要从Google后台下载一个名为“google-services.json”的文件（该文件由我方运营提供），并将该文件放在当前游戏Module工程目录下，如下图所示：<br/>
 ![image](https://github.com/sonicdjgh/egls-android-game-sdk-release-studio/blob/master/res/S4001.png)<br/>
 
-### 14. SDK运营活动（根据运营需求）
-SDK的“运营活动”接口，主要是为游戏提供了相关操作页面以及SDK功能接口的实现。在这之前，为了实现这些运营活动，都需要游戏来承担相关页面的开发、第三方SDK的功能对接以及奖励发放的逻辑开发等等。而现在，游戏可以通过调用SDK的“运营活动”功能接口就可以轻松地展示相关操作页面，并通过回调方法的响应来处理奖励发放的相关逻辑。
 
-关于“五星评价”、“Facebook运营活动”以及“LINE推广”的运营活动功能接口，在使用前，需要配合我方运营在后台上配置相关展示所需的图片。“五星评价”的图片宽高比为**3:1**，其他则为**5:2**。
-```Java
-
-	
-// Facebook运营活动（加入粉丝团、分享）
-boolean isEnableJoin = true;
-boolean isEnableShare = true;
-EglsPlatform.openFacebookOperation(this, isEnableJoin, isEnableShare, new OnSimpleActionCallback() {
-
-    @Override
-    public void onFinish() {
-        //加入操作完成，可根据此回调做之后的逻辑处理
-    }
-}, new OnSimpleActionCallback() {
-
-    @Override
-    public void onFinish() {
-        //分享操作完成，可根据此回调做之后的逻辑处理
-    }
-});
-
-// LINE推广
-EglsPlatform.openLINEPromotion(this, new OnSimpleActionCallback() {
-
-    @Override
-    public void onFinish() {
-        //操作完成，可根据此回调做之后的逻辑处理
-    }
-});
-```
-### 15. AppsFlyer数据统计（根据运营需求对接）
+### 12. AppsFlyer数据统计（根据运营需求对接）
 AppsFlyer主要用于Global业务的数据统计，启用该功能的做法，首先要按照上面所提到的，在AndroidManifest.xml文件中打开对应的配置。对于AppsFlyer统计功能的相关接口调用，其相关初始化部分的逻辑已经嵌入进SDK当中，因此开发者无需关心较为复杂的初始化步骤，只需根据需求，调用对应的接口即可。<br /><br />
-#### 15.1 闪屏动画首次启动事件追踪（必接）
+#### 12.1 闪屏动画首次启动事件追踪（必接）
 ```Java
-EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_ONE_SPLASH_IMAGE, null);
+EglsTracker.trackEventCustom(EglsTracker.EVENT_ONE_SPLASH_IMAGE, null);
 ```
-#### 15.2 新手任务开始事件追踪（必接）
+#### 12.2 新手任务开始事件追踪（必接）
 ```Java
-EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_TUTORIAL_START, null);
+EglsTracker.trackEventCustom(EglsTracker.EVENT_TUTORIAL_START, null);
 ```
-#### 15.3 新手任务完成事件追踪（必接）
+#### 12.3 新手任务完成事件追踪（必接）
 ```Java
-EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_TUTORIAL_COMPLETE, null);
+EglsTracker.trackEventCustom(EglsTracker.EVENT_TUTORIAL_COMPLETE, null);
 ```
-#### 15.4 创建新角色事件追踪（必接）
+#### 12.4 创建新角色事件追踪（必接）
 ```Java
-EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_NEW_CHARACTER, null);
+EglsTracker.trackEventCustom(EglsTracker.EVENT_NEW_CHARACTER, null);
 ```
-#### 15.5 游戏资源首次更新开始事件追踪（必接）
+#### 12.5 游戏资源首次更新开始事件追踪（必接）
 ```Java
-EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_ONE_UPDATE_START, null);
+EglsTracker.trackEventCustom(EglsTracker.EVENT_ONE_UPDATE_START, null);
 ```
-#### 15.6 游戏资源首次更新完成事件追踪（必接）
+#### 12.6 游戏资源首次更新完成事件追踪（必接）
 ```Java
-EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_ONE_UPDATE_COMPLETE, null);
+EglsTracker.trackEventCustom(EglsTracker.EVENT_ONE_UPDATE_COMPLETE, null);
 ```
-#### 15.7 游戏资源首次加载开始事件追踪（必接）
+#### 12.7 游戏资源首次加载开始事件追踪（必接）
 ```Java
-EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_ONE_LOAD_START, null);
+EglsTracker.trackEventCustom(EglsTracker.EVENT_ONE_LOAD_START, null);
 ```
-#### 15.8 游戏资源首次加载完成事件追踪（必接）
+#### 12.8 游戏资源首次加载完成事件追踪（必接）
 ```Java
-EglsTracker.getInstance().trackEventCustom(EglsTracker.EVENT_ONE_LOAD_COMPLETE, null);
+EglsTracker.trackEventCustom(EglsTracker.EVENT_ONE_LOAD_COMPLETE, null);
 ```
-#### 15.9 自定义事件追踪()（根据需求接入）
+#### 12.9 自定义事件追踪()（根据需求接入）
 ```Java
 // 有时候运营会针对具体的数据分析增加特定的事件统计，那么请调用该接口，传入特定的事件名称
 // trackData的格式为json字符串，形如：{key:value,key:value,key:value...}
-EglsTracker.getInstance().trackEventCustom(trackEvent, trackData);
-```
-### 16. 轻量级业务功能接口的说明与对接
-对于部分应用的业务需求，这些应用需要自己实现UI，不希望使用SDK集成的相关UI（不包含第三方SDK的UI）。那么针对此类情况，SDK从4.8.0版本开始，正式上线轻量级（Lightly）的功能接口。这些接口的接口名都带有“Lightly”词缀，以便对接技术人员方便识别，且功能并无二致，所以放心使用。
-
-
-#### 16.12 渠道支付
-```Java
-// 即传入金额、档位编号、档位名称、订单号信息后，调用渠道支付
-EglsPlatform.channelPurchaseLightly(String amount, String productId, String productName, String cpOrderInfo, int flag)
+EglsTracker.trackEventCustom(trackEvent, trackData);
 ```
 
-#### 16.13 渠道订阅
-```Java
-// 即传入金额、档位编号、档位名称、订单号信息后，调用渠道订阅
-// 目前，仅支持google订阅
-EglsPlatform.channelSubscribeLightly(String amount, String productId, String productName, String cpOrderInfo)
-```
-
-### 17. 其他注意事项
+### 13. 其他注意事项
 1. Google推荐的审核中，会对游戏首次运行时所使用的必要“危险权限”的申请和使用进行检查。SDK会主动申请“android.permission.WRITE_EXTERNAL_STORAGE”权限，但如果游戏还另需申请其他的“危险权限”，可以在调用“EglsPlatform.initActivity()”接口前，使用“addNecessaryPermission()”接口。例如：
 ```Java
-EglsPlatform.addNecessaryPermission(Manifest.permission.READ_PHONE_STATE);
-EglsPlatform.addNecessaryPermission(Manifest.permission.RECORD_AUDIO);
+EglsPlatform.Config.addNecessaryPermission(Manifest.permission.READ_PHONE_STATE);
+EglsPlatform.Config.addNecessaryPermission(Manifest.permission.RECORD_AUDIO);
 ```
 2. 同样也是为了适应Google推荐的审核要求，SDK在游戏第一次安装并启动后，会先弹出一个关于危险权限使用的说明。SDK默认的说明只有关于SD卡权限的使用说明，如果游戏在初始化时有使用到其他的危险权限，那么可以在调用“EglsPlatform.initActivity()”接口前，使用如下方法来修改提示文本：
 ```Java
 // 需要注意的是，该接口是直接替换原默认文本的，所以还需要加上SD卡权限的使用说明。
 String permissionContent = "xxx";
-EglsPlatform.addPermissionContent(permissionContent);
+EglsPlatform.Config.setPermissionContent(permissionContent);
 ```
 ### 附表 - publishmentArea
 publishmentArea | value
