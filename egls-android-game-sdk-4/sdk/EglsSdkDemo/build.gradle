@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "28.0.3"
+    buildToolsVersion = "29.0.3"
+    compileSdkVersion = 29
 
     defaultConfig {
         applicationId "com.egls.demo"
@@ -14,9 +14,9 @@ android {
 
         manifestPlaceholders = [
                 // base begin
-                EGLS_APP_ID              : " ",
-                EGLS_PUBLISHMENT_AREA    : " ",
-                EGLS_PAY_CHANNEL         : " ",
+                EGLS_APP_ID              : "",
+                EGLS_PUBLISHMENT_AREA    : "",
+                EGLS_PAY_CHANNEL         : "",
                 EGLS_PAY_IS_SANDBOX      : "false",
                 // base end
         ]
