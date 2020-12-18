@@ -562,11 +562,14 @@ protected void onCreate(Bundle savedInstanceState) {
     EglsPlatform.setSDKActionHandler(new SDKActionHandler() {
 
         @Override
-        public void onHandleInit(int state, String message) {// SDK初始化的結果处理
-            if (state == Constants.SDK_STATE_SUCCESS) {
-                // 初始化成功后的处理
-            } else {
-                // 初始化失败后的处理
+        public void onHandleInit(int state, String message) {
+            if (state == Constants.SDK_STATE_SUCCESS) {// 初始化成功后的处理
+                // 如果需要使用LINE登录，请调用如下接口
+		// EglsPlatform.Config.setEnableLineSignIn(true);
+		// 如果需要使用SDK悬浮窗导航栏中的登出，请调用如下接口
+		// EglsPlatform.Config.setEnableFloateMenuLogout(true);
+            } else {// 初始化失败后的处理
+                
             }
         }
 
