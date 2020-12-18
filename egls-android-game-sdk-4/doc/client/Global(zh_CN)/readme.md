@@ -41,7 +41,7 @@ allprojects {
 ```gradle
 apply plugin: 'com.google.gms.google-services'
 ```
-如果使用 LINE 登录，请在：
+如果使用 LINE 登录，请在当前Project目录下的gradle.properties文件中加上如下配置：
 ```gradle
 android.enableD8.desugaring=true
 ```
