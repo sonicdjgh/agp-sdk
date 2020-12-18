@@ -37,9 +37,13 @@ allprojects {
     }
 }
 ```
-如果使用Firebase云消息推送功能，请在当前游戏工程目录下的build.gradle文件中加上如下配置：
+如果使用 Firebase 云消息推送功能，请在当前游戏工程目录下的build.gradle文件中加上如下配置：
 ```gradle
 apply plugin: 'com.google.gms.google-services'
+```
+如果使用 LINE 登录，请在：
+```gradle
+android.enableD8.desugaring=true
 ```
 另外，还需要在当前Project目录下的gradle.properties文件中加上如下配置：
 ```gradle
@@ -143,6 +147,7 @@ manifestPlaceholders = [
 		
 		GOOGLE_WEB_CLIENT_ID     : "",// 用于SDK的Google登录
 		FACEBOOK_APPLICATION_ID  : "",// 用于SDK的Facebook登录
+		LINE_CHANNEL_ID          : "",// 用于SDK的LINE登录
 		
 		// APPS_FLYER_DEV_KEY    : "",// 用于AppsFlyer统计功能初始化，如果运营没有特殊需求，这里无需添加
                 // base end
@@ -349,6 +354,16 @@ manifestPlaceholders = [
         android:exported="true" />
     -->
     <!-- Facebook end  -->
+
+
+    <!-- LINE begin -->
+    <!-- 如果使用 LINE 登入，请打开以下配置 -->
+    <!--
+    <meta-data
+        android:name="line_channel_id"
+        android:value="${LINE_CHANNEL_ID}" />
+    -->
+    <!-- LINE end -->
 
 
     <!-- Mycard begin -->
