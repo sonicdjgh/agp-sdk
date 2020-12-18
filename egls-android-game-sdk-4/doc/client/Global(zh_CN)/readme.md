@@ -793,7 +793,9 @@ String productName = "月卡";// 档位名称
 String cpOrderInfo = "2SDF34DF12GH0S23234GAER6";// CP订单信息，由接入方生成
 EglsPlatform.Payment.eglsSubscribe(amount, productId, productName, cpOrderInfo);
 ```
-#### 8.2 SDK Lightly Interface （主要适用于应用）
+<details>
+<summary>8.2 SDK Lightly Interface （主要适用于应用）</summary><br />
+	
 在“Payment模块接口”模块里所包含的接口名称中，带有“Lightly”词缀的接口，在调用时，不会显示SDK自身集成的相关UI。
 #### 8.2.1 渠道支付
 ```Java
@@ -811,6 +813,7 @@ String productName = "月卡";// 档位名称
 String cpOrderInfo = "2SDF34DF12GH0S23234GAER6";// CP订单信息，由接入方生成
 EglsPlatform.Payment.channelPurchaseLightly(this， amount, productId, productName, cpOrderInfo);
 ```
+</details>
 
 ### 9. Social模块接口
 “Social”模块中包含了与社交相关的功能接口。
