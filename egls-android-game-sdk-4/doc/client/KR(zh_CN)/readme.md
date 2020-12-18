@@ -15,7 +15,7 @@
 在OneStore后台生成的应用id。
 ### 3. 环境搭建
 #### 3.1 gradle版本及库引用地址设置
-gradle版本为4.1，并请在当前Project目录下的build.gralde文件中加上如下配置：
+gradle版本为4.4，并请在当前Project目录下的build.gralde文件中加上如下配置：
 ```gradle
 buildscript {
     repositories {
@@ -23,7 +23,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.1.2'
 	
 	// 如果使用Firebase云消息推送功能，请打开以下配置
     	// classpath 'com.google.gms:google-services:4.2.0'
@@ -45,7 +45,7 @@ apply plugin: 'com.google.gms.google-services'
 ```
 另外，还需要在当前Project目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_SDK_VERSION=4.8.24
+EGLS_SDK_VERSION=4.8.61
 android.enableAapt2=false
 ```
 #### 3.2 lib 选择
