@@ -667,7 +667,9 @@ EglsPlatform.Account.eglsSwitch(this);
 EglsPlatform.Account.eglsUserCenter(this);
 ```
 <details>
-<summary>#### 7.2 SDK Lightly Interface （主要适用于应用）</summary>
+	
+<summary> 7.2 SDK Lightly Interface （主要适用于应用）</summary>
+	
 在“Account”模块里所包含的接口名称中，带有“Lightly”词缀的接口，在调用时，不会显示SDK自身集成的相关UI。
 #### 7.2.1 手机登录 
 ```Java
