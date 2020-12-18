@@ -616,7 +616,7 @@ EglsTracker.trackEventCustom(EglsTracker.EVENT_VISIT_SHOP, null);
 // trackData的格式为json字符串，形如：{key:value,key:value,key:value...}
 EglsTracker.trackEventCustom(trackEvent, trackData);
 ```
-### 12. Facebook App Events统计（根据需求接入）
+### 12. Facebook App Events统计（根据运营需求对接）
 根据我们市场推广的需求，集成了Facebook应用事件的统计功能。如果想使用该功能，首先要在“AndroidManifest.xml”文件中修改如下配置：
 ```xml
 <!-- 如果要求接入Facebook App Events统计接口，请将value改为true -->
