@@ -96,6 +96,11 @@ dependencies {
     api 'com.facebook.android:facebook-share:5.+'
     // facebook end
     
+    // LINE begin
+    // 如果使用 LINE 登录，请打开下面的配置
+    // api 'com.linecorp:linesdk:5.0.1'
+    // LINE begin
+    
     // mycard begin
     // 如果使用 MyCard 支付，请打开下面的配置
     // api files('libs/tw/MyCardPaySDK.jar')
