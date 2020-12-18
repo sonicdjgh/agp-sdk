@@ -649,6 +649,11 @@ protected void onCreate(Bundle savedInstanceState) {
     });
 }
 ```
+<details>
+<summary>点击查看详细内容</summary>
+展开的内容
+</details>
+
 ### 7. Account模块接口
 “Account”模块中包含了与账号相关的功能接口。
 #### 7.1 SDK UI Interface （主要适用于游戏）
