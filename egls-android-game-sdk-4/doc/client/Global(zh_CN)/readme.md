@@ -649,10 +649,6 @@ protected void onCreate(Bundle savedInstanceState) {
     });
 }
 ```
-<details>
-<summary>点击查看详细内容</summary>
-展开的内容
-</details>
 
 ### 7. Account模块接口
 “Account”模块中包含了与账号相关的功能接口。
@@ -670,7 +666,8 @@ EglsPlatform.Account.eglsSwitch(this);
 ```Java
 EglsPlatform.Account.eglsUserCenter(this);
 ```
-#### 7.2 SDK Lightly Interface （主要适用于应用）
+<details>
+<summary>#### 7.2 SDK Lightly Interface （主要适用于应用）</summary>
 在“Account”模块里所包含的接口名称中，带有“Lightly”词缀的接口，在调用时，不会显示SDK自身集成的相关UI。
 #### 7.2.1 手机登录 
 ```Java
@@ -765,6 +762,9 @@ EglsPlatform.Account.pwdResetCaptchaLightly(String userAccount, OnSimpleActionCa
 // 响应接口里传入的回调，根据state状态来识别是否重置成功，message可用于消息提示
 EglsPlatform.Account.pwdResetRequestLightly(String userAccount, String captcha, OnSimpleActionCallback callback)
 ```
+</details>
+
+
 ### 7.3 Other Interface
 #### 7.3.1 账号进入
 ```Java
