@@ -316,7 +316,7 @@ manifestPlaceholders = [
     <!--
     <meta-data
         android:name="com.google.firebase.messaging.default_notification_color"
-        android:resource="@color/support_egls" />
+        android:resource="@color/egls_push_color" />
     -->
 	
     <!-- 如果使用Google Play Game成就功能，请打开以下配置 -->
