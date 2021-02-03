@@ -125,15 +125,15 @@ manifestPlaceholders = [
     android:allowBackup="false"
     android:icon="@drawable/icon"
     android:label="AGSDK Demo"
-    android:networkSecurityConfig="@xml/network_security_config" >
+    android:networkSecurityConfig="@xml/network_security_config"
+    android:requestLegacyExternalStorage="true">
 
     <!-- 游戏Activity -->
     <activity
         android:name="com.egls.demo.GameActivity"
         android:configChanges="fontScale|orientation|keyboardHidden|locale|navigation|screenSize|uiMode"
         android:screenOrientation="landscape"
-        android:theme="@style/EglsTheme.NoTitleBar.Fullscreen.NoAnimation"
-	android:requestLegacyExternalStorage="true">
+        android:theme="@style/EglsTheme.NoTitleBar.Fullscreen.NoAnimation">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
@@ -276,10 +276,11 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 ```
 ### 6. SDK初始化（必接）
 ```Java
-// 如果游戏工程中有需要自定义Application的需求，那么请在自定义的Application类中，按照如下进行接口的调用：
+// 请在你的Application类中，按照如下进行接口的调用：
 @Override
 public void onCreate() {
     super.onCreate();
+    EglsTracker.initApplication(this);
     EglsPlatform.initApplication(this);
 }
 ```
