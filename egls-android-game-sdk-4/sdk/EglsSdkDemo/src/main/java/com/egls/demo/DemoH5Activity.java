@@ -93,6 +93,11 @@ public class DemoH5Activity extends Activity {
             }
 
             @Override
+            public void onHandleLogout() {
+
+            }
+
+            @Override
             public void onHandleChannelBind(int state, String accountType, String nickName, String message) {// SDK游客绑定的結果处理
                 switch (state) {
                     case Constants.SDK_STATE_SUCCESS:// 游客绑定成功后的处理
@@ -110,7 +115,7 @@ public class DemoH5Activity extends Activity {
             }
 
             @Override
-            public void onHandlePurchase(int state, TradeInfo tradeInfo) {// SDK支付的結果处理
+            public void onHandlePurchase(int state, TradeInfo tradeInfo, String message) {// SDK支付的結果处理
                 switch (state) {
                     case Constants.SDK_STATE_SUCCESS:// 支付完成后的处理（仅表示客户端支付操作完成，最终要以服务器的通知为准）
                         break;
