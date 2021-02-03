@@ -47,7 +47,7 @@ android.enableD8.desugaring=true
 ```
 另外，还需要在当前Project目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_SDK_VERSION=4.8.62
+EGLS_SDK_VERSION=4.8.80
 ```
 #### 3.2 lib 选择
 针对于在港台地区发行的游戏，请在当前Module目录下的“build.gradle”文件里打开如下图所示的配置：<br/>
@@ -595,8 +595,13 @@ protected void onCreate(Bundle savedInstanceState) {
                     break;
                 case Constants.SDK_STATE_ERROR:// 登录失败后的处理
                     break;
-                }
             }
+        }
+	
+	@Override
+        public void onHandleLogout() {
+	    // 只有当点击悬浮窗中登出按钮后才会触发
+        }
 
         @Override
         public void onHandleChannelBind(int state, String accountType, String nickName, String message) {// SDK绑定的結果处理
