@@ -239,39 +239,27 @@ manifestPlaceholders = [
 ### 5. 基础方法实现（必接）
 ```Java 
 @Override
+protected void onCreate() {
+    super.onCreate();
+    EglsPlatform.onCreate(this);
+}
+
+@Override
 protected void onResume() {
     super.onResume();
-    EglsPlatform.onResume();
+    EglsPlatform.onResume(this);
 }
     
 @Override
 protected void onPause() {
     super.onPause();
-    EglsPlatform.onPause();
+    EglsPlatform.onPause(this);
 }
 	
 @Override
 protected void onDestroy() {
     super.onDestroy();
-    EglsPlatform.onDestory();
-}
-	
-@Override
-protected void onNewIntent(Intent intent) {
-    super.onNewIntent(intent);
-    EglsPlatform.onNewIntent(intent);
-}
-	
-@Override
-public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    EglsPlatform.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
-}
-	
-@Override
-protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    super.onActivityResult(requestCode, resultCode, data);
-    EglsPlatform.onActivityResult(requestCode, resultCode, data);
+    EglsPlatform.onDestroy(this);
 }
 ```
 ### 6. SDK初始化（必接）
