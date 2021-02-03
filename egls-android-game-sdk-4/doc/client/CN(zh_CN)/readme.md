@@ -121,7 +121,7 @@ manifestPlaceholders = [
 #### 4.3 Application相关配置
 ```Xml
 <application
-    android:name="com.egls.support.components.EglsApplication"
+    android:name="com.egls.demo.GameApplication"
     android:allowBackup="false"
     android:icon="@drawable/icon"
     android:label="AGSDK Demo"
@@ -132,7 +132,8 @@ manifestPlaceholders = [
         android:name="com.egls.demo.GameActivity"
         android:configChanges="fontScale|orientation|keyboardHidden|locale|navigation|screenSize|uiMode"
         android:screenOrientation="landscape"
-        android:theme="@style/EglsTheme.NoTitleBar.Fullscreen.NoAnimation" >
+        android:theme="@style/EglsTheme.NoTitleBar.Fullscreen.NoAnimation"
+	android:requestLegacyExternalStorage="true">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
