@@ -33,7 +33,6 @@ allprojects {
         google()
         jcenter()
 	mavenCentral()
-	maven { url "https://dl.bintray.com/sonicdjgh/maven/" }
     }
 }
 ```
@@ -47,7 +46,7 @@ android.enableD8.desugaring=true
 ```
 另外，还需要在当前Project目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_SDK_VERSION=4.8.89
+EGLS_SDK_VERSION=4.8.91
 ```
 #### 3.2 lib 选择
 针对于在港台地区发行的游戏，请在当前Module目录下的“build.gradle”文件里打开如下图所示的配置：<br/>
@@ -60,10 +59,10 @@ repositories {
 
 dependencies {
     // base begin
-    api "com.egls.android:platform:$EGLS_SDK_VERSION@aar"
-    api "com.egls.android:payment:$EGLS_SDK_VERSION@aar"
-    api "com.egls.android:native:$EGLS_SDK_VERSION@aar"
-    api "com.egls.android:support:$EGLS_SDK_VERSION@aar"
+    api "io.github.sonicdjgh:platform:$EGLS_SDK_VERSION@aar"
+    api "io.github.sonicdjgh:payment:$EGLS_SDK_VERSION@aar"
+    api "io.github.sonicdjgh:native:$EGLS_SDK_VERSION@aar"
+    api "io.github.sonicdjgh:support:$EGLS_SDK_VERSION@aar"
     api 'com.android.support.constraint:constraint-layout:1.1.0'
     // base 
     
