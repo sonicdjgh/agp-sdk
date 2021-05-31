@@ -12,9 +12,9 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
+//        jcenter()
         mavenCentral()
-        maven { url "https://dl.bintray.com/sonicdjgh/maven/" }
+//        maven { url "https://dl.bintray.com/sonicdjgh/maven/" }
 
         // 如果使用新浪微博分享，请打开以下配置
         // maven { url "https://dl.bintray.com/thelasterstar/maven/" }

@@ -48,10 +48,10 @@ repositories {
 }
 
 dependencies {
-    api "com.egls.android:platform:$EGLS_SDK_VERSION@aar"
-    api "com.egls.android:payment:$EGLS_SDK_VERSION@aar"
-    api "com.egls.android:native:$EGLS_SDK_VERSION@aar"
-    api "com.egls.android:support:$EGLS_SDK_VERSION@aar"
+//    api "io.github.sonicdjgh:platform:$EGLS_SDK_VERSION"
+//    api "io.github.sonicdjgh:payment:$EGLS_SDK_VERSION"
+    api "io.github.sonicdjgh:native:$EGLS_SDK_VERSION"
+    api "io.github.sonicdjgh:support:$EGLS_SDK_VERSION"
     api 'com.android.support.constraint:constraint-layout:1.1.0'
 
     // appsflyer begin
