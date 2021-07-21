@@ -46,7 +46,7 @@ android.enableD8.desugaring=true
 ```
 另外，还需要在当前Project目录下的gradle.properties文件中加上如下配置：
 ```gradle
-EGLS_SDK_VERSION=4.8.91
+EGLS_SDK_VERSION=4.8.92
 ```
 #### 3.2 lib 选择
 针对于在港台地区发行的游戏，请在当前Module目录下的“build.gradle”文件里打开如下图所示的配置：<br/>
