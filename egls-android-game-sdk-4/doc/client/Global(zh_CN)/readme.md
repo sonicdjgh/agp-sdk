@@ -259,6 +259,10 @@ manifestPlaceholders = [
     <meta-data
         android:name="EGLS_PAY_IS_SANDBOX"
         android:value="${EGLS_PAY_IS_SANDBOX}" />
+
+    <meta-data
+        android:name="EGLS_DOMAIN"
+        android:value="passport.elive.com.tw" />
     <!-- Base end -->
         
 
